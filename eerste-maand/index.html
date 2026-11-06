@@ -492,6 +492,10 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
 .esc-found li{display:flex;flex-direction:column;padding:6px 0;border-bottom:1px solid var(--line)}.esc-found li span{color:var(--muted);font-size:13.5px}
 .esc-lock{border-radius:18px;gap:14px}
 .esc-dial{display:flex;gap:10px}
+/* D34 stop flow: the pupils' "We stoppen" bar, the time-up notice and the teacher's stop steps on the board */
+.esc-stopbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:22px 0 6px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:14.5px}.esc-stopbar p{margin:0}
+.esc-timeup{margin:14px 0}
+details.t-fold>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px}details.t-fold>summary::-webkit-details-marker{display:none}details.t-fold>summary::before{content:'';flex:0 0 auto;width:10px;height:10px;border-right:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(-45deg);transition:transform .15s}details.t-fold[open]>summary::before{transform:rotate(45deg)}details.t-fold>summary h2{margin:0}details.t-fold>summary:focus-visible{outline:3px solid var(--focus,#1a5fb4);outline-offset:3px;border-radius:6px}.esc-stopv .esc-dial{margin:14px 0}.t-stop{margin-top:14px}.t-stop ol{margin:8px 0 0 1.2em;padding:0}
 .esc-digit{flex:1 1 0;max-width:84px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13.5px;font-weight:700;color:var(--muted)}
 .esc-digit input{width:100%;aspect-ratio:4/5;text-align:center;font:600 clamp(30px,6vw,44px)/1 var(--mono);border-radius:14px;border:3px solid var(--sun);border-bottom-width:7px;background:var(--panel);color:var(--ink);padding:0}
 .esc-digit input:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
@@ -960,6 +964,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   .tplan th,.tplan td{text-align:left;vertical-align:top;padding:2pt 6pt 2pt 0;border-bottom:.5pt solid #bbb}
   .tplan th{white-space:nowrap;font:600 9.2pt/1.3 var(--mono);width:4.5em}
   .tplan td{font-size:8.8pt;line-height:1.18}.tplan th,.tplan td{padding-top:.6pt;padding-bottom:.6pt} /* F1: six plan rows instead of four on page 1 */
+  .tplan .tp-wide td,.tplan .tp-wide th{line-height:1.1;padding-top:.3pt;padding-bottom:.3pt} /* D34: eight plan rows (stop moment and reserve), still page 1 */
   .tp-code{font:700 20pt/1 var(--mono)!important;letter-spacing:.2em;margin:1pt 0 3pt!important}
   .tp-url{font:600 9pt/1.3 var(--mono);overflow-wrap:anywhere}
   .tp-rooms{display:grid;grid-template-columns:1fr 1fr;gap:5pt 16pt}.tp-rooms>div{break-inside:avoid}
@@ -1008,7 +1013,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
 (function (g) {
   'use strict';
   const E18 = g.E18 = g.E18 || {};
-  const VERSIONS = { build: 'E18-D33', content: 'C21', save: 1 }; // D33 (6 Nov): fixes from the 4 November adult and teacher tests (room 2 comparison line, numerus fixus and selectie in room 4's word line, a closing question, a one-page answer sheet, the rooms on paper) and anonymous results logging (src/e18log.js, LOGGING_SPEC.md v2, off unless config.js sets an endpoint). Texts only in the rooms; no question, option id, answer key, digit or the code 1725 changed and no action was added, so content stays C21 (as F7 and D30 did for texts, D-023). D32-candidate (3 Nov): D31b-candidate plus F10 (funder views in the pilot report tool), F9 (Herhaling na 4 weken, its own question set H1) and F8 (Eerst lezen), merged in that order (INTEGRATION.md, "D32"); no room, answer key, option id or the code 1725 changed, so content stays C21. D31b-candidate (3 Nov): D31-candidate plus F7, merged afterwards (INTEGRATION.md, "F7 merge"); content stays C21. D31-f8 (3 Nov, FEATURE_F8.md): Eerst lezen: in the escape the answers wait until the pair opened the question's document and read it a few seconds; "Waar staat dat?" marks the line after a wrong answer; the teacher screen and Projectiemodus get "Welke zin verraadde het?" per room and the lesverslag an optional show-of-hands count. Screen memory only, nothing in the action log, saves or storage; no room, question, answer key, option id, digit or the code 1725 changed, so content stays C21. D31-f9 (3 Nov, feature F9, FEATURE_F9.md): Herhaling na 4 weken (src/herhaling.js), additive: no room, answer key, option id or code changes and nothing enters a run or a save, so content stays C21 and save format 1; the follow-up's own question set is versioned apart as H1 (DECISIONS.md D-031-f9). D31-candidate (3 Nov): integration build of the feature branches (INTEGRATION.md); content stays C21 because no feature changes a room, answer key, option id or the code 1725. D31-f7 (3 Nov, F7): readability pass on ESC-MAAND (tools/readability.js, READABILITY.md): 15 flagged strings rewritten in plain Dutch, one-line 'Moeilijke woorden' hints under the letter, payslip, sms and Studielink list, and zorgtoeslag explained where it first shows; texts only, answer keys, option ids, digits and code 1725 unchanged, so content stays C21 (D-023). D31-f3 (3 Nov, feature F3): the close becomes "Mijn 18-plan" (src/plan18.js), an if-then plan per pupil after the lock with a card and an optional calendar file; screen memory only, nothing stored or sent. D31-f4 (3 Nov, FEATURE_F4.md): teacher screen only: "Klaar in 5 minuten" (five preparation steps, a bereidingstijd that can go into the lesverslag), "Probleem?", the Projectiemodus and a quick-start box on the printed plan; no pupil content change, so C21 stays. D31-f1 (3 Nov, feature branch F1, FEATURE_F1.md): a Startcheck before room 1 and an Eindcheck after the lock, made of existing room questions (same ids, options and answers). The check is a new optional action in the ESC-MAAND log: every C21 run without it replays exactly, so content stays C21 (as D24 did for the short lesson, D-023); a run with a check cannot be loaded by E18-D30 (unknown action), which fails loudly and is never rescored. D31-f2 (3 Nov): source freshness (src/freshness.js): every source of De les has a check date, the pupil's source links say when they were checked, the teacher screen lists every rule with its sources, the next check (January or July) and a printable upkeep checklist; tools/source-freshness.js fails on a rule with fewer than two sources or a check older than 7 months. No room, answer key or option id changed, so content stays C21. D30 (27 Oct): fixes from an AI persona walkthrough, each checked in the code first: room 3 asks for all signals in the plural and its digit names the first question (pupils counted the foreign number); room 2 digit text simplified; room 1 says 'Kies' not 'Tik'; numerus fixus explained on the list; the vwo curriculum fit no longer claims 4.5 eigen risico. Clue and prompt texts changed; answer keys, option ids and rooms unchanged, so content stays C21 (D-023). D29 merges an outside code review of D28 (ChatGPT, 25-26 Oct; every fix reproduced and retested here): Herhaling answers stayed visible because display:flex beat [hidden]; the short-lesson timer started at 30; a stale #les= kept a short lesson; a damaged save counter could overwrite progress; premium wording qualified (parents may pay). No answer key, option id or room changes, so C21 stays. D27 adds the Over en privacy screen and the fact-check link checker (no content change). D26 adds Nibud-competence fits on the teacher screen (no pupil content change). D25 embeds the fonts (no request to another server); no content change, so C21 stays. Before: D24 adds the short lesson as new ESC-MAAND variants and teacher-screen parts; no answer key or option id changed, so content stays C21 (D-023).
+  const VERSIONS = { build: 'E18-D34', content: 'C21', save: 1 }; // D34 (6 Nov): lesson 1 to the round-2 classroom standard (stop flow, plan with stop and reserve, check forms A and B; DECISIONS.md D-036). D33 (6 Nov): fixes from the 4 November adult and teacher tests (room 2 comparison line, numerus fixus and selectie in room 4's word line, a closing question, a one-page answer sheet, the rooms on paper) and anonymous results logging (src/e18log.js, LOGGING_SPEC.md v2, off unless config.js sets an endpoint). Texts only in the rooms; no question, option id, answer key, digit or the code 1725 changed and no action was added, so content stays C21 (as F7 and D30 did for texts, D-023). D32-candidate (3 Nov): D31b-candidate plus F10 (funder views in the pilot report tool), F9 (Herhaling na 4 weken, its own question set H1) and F8 (Eerst lezen), merged in that order (INTEGRATION.md, "D32"); no room, answer key, option id or the code 1725 changed, so content stays C21. D31b-candidate (3 Nov): D31-candidate plus F7, merged afterwards (INTEGRATION.md, "F7 merge"); content stays C21. D31-f8 (3 Nov, FEATURE_F8.md): Eerst lezen: in the escape the answers wait until the pair opened the question's document and read it a few seconds; "Waar staat dat?" marks the line after a wrong answer; the teacher screen and Projectiemodus get "Welke zin verraadde het?" per room and the lesverslag an optional show-of-hands count. Screen memory only, nothing in the action log, saves or storage; no room, question, answer key, option id, digit or the code 1725 changed, so content stays C21. D31-f9 (3 Nov, feature F9, FEATURE_F9.md): Herhaling na 4 weken (src/herhaling.js), additive: no room, answer key, option id or code changes and nothing enters a run or a save, so content stays C21 and save format 1; the follow-up's own question set is versioned apart as H1 (DECISIONS.md D-031-f9). D31-candidate (3 Nov): integration build of the feature branches (INTEGRATION.md); content stays C21 because no feature changes a room, answer key, option id or the code 1725. D31-f7 (3 Nov, F7): readability pass on ESC-MAAND (tools/readability.js, READABILITY.md): 15 flagged strings rewritten in plain Dutch, one-line 'Moeilijke woorden' hints under the letter, payslip, sms and Studielink list, and zorgtoeslag explained where it first shows; texts only, answer keys, option ids, digits and code 1725 unchanged, so content stays C21 (D-023). D31-f3 (3 Nov, feature F3): the close becomes "Mijn 18-plan" (src/plan18.js), an if-then plan per pupil after the lock with a card and an optional calendar file; screen memory only, nothing stored or sent. D31-f4 (3 Nov, FEATURE_F4.md): teacher screen only: "Klaar in 5 minuten" (five preparation steps, a bereidingstijd that can go into the lesverslag), "Probleem?", the Projectiemodus and a quick-start box on the printed plan; no pupil content change, so C21 stays. D31-f1 (3 Nov, feature branch F1, FEATURE_F1.md): a Startcheck before room 1 and an Eindcheck after the lock, made of existing room questions (same ids, options and answers). The check is a new optional action in the ESC-MAAND log: every C21 run without it replays exactly, so content stays C21 (as D24 did for the short lesson, D-023); a run with a check cannot be loaded by E18-D30 (unknown action), which fails loudly and is never rescored. D31-f2 (3 Nov): source freshness (src/freshness.js): every source of De les has a check date, the pupil's source links say when they were checked, the teacher screen lists every rule with its sources, the next check (January or July) and a printable upkeep checklist; tools/source-freshness.js fails on a rule with fewer than two sources or a check older than 7 months. No room, answer key or option id changed, so content stays C21. D30 (27 Oct): fixes from an AI persona walkthrough, each checked in the code first: room 3 asks for all signals in the plural and its digit names the first question (pupils counted the foreign number); room 2 digit text simplified; room 1 says 'Kies' not 'Tik'; numerus fixus explained on the list; the vwo curriculum fit no longer claims 4.5 eigen risico. Clue and prompt texts changed; answer keys, option ids and rooms unchanged, so content stays C21 (D-023). D29 merges an outside code review of D28 (ChatGPT, 25-26 Oct; every fix reproduced and retested here): Herhaling answers stayed visible because display:flex beat [hidden]; the short-lesson timer started at 30; a stale #les= kept a short lesson; a damaged save counter could overwrite progress; premium wording qualified (parents may pay). No answer key, option id or room changes, so C21 stays. D27 adds the Over en privacy screen and the fact-check link checker (no content change). D26 adds Nibud-competence fits on the teacher screen (no pupil content change). D25 embeds the fonts (no request to another server); no content change, so C21 stays. Before: D24 adds the short lesson as new ESC-MAAND variants and teacher-screen parts; no answer key or option id changed, so content stays C21 (D-023).
   const COMPATIBLE_CONTENT = ['C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C20', 'C21']; // In order, oldest first. C21 changes the escape ESC-MAAND after review D22 (answer keys, option ids, room order, code 7135 became 1725): a mission that declares contentSince refuses its runs from an older content version loudly, like C12 did for every mission, and is never rescored silently (D-022); saves of C12 to C20 without an ESC-MAAND run still load. C20 adds the escape run ESC-MAAND and the one-retry rule in practice exercises (a retry is only sent with retry: true, so older practice saves replay unchanged). C12 changed answer keys after the content review (D-015); older saves are refused, never silently rescored. C13 only skips F01's pressure scene when the order is already done (a C12 run that answered it there fails loudly on import). C14 only adds Life Mode chapter 1. C16 adds Life Mode chapters 2 and 3; chapter 1 replays unchanged. C19 adds six practice exercises; C18 only adds the practice bank (new missions); both read older saves unchanged. C17 adds three starting profiles as chapter-1 variants; basis runs replay unchanged and carried data without a profile continues as basis. C15 adds its optional dating thread and review fixes (a C14 payslip answer that reported a missing shift after choosing 'nothing missing' now fails loudly).
   const MISSIONS = E18.MISSIONS = E18.MISSIONS || {};
   // D31-f2: the date this build was made; bump it with VERSIONS.build. The page computes the source status (op tijd / controle nodig) from it,
@@ -5020,17 +5025,36 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   const CHECK = { brief: 'digid', sms: 'doen', aanmeld: 'fixus' };
   const CHECK_LABEL = { digid: 'DigiD en zorgtoeslag', doen: 'Twijfel over een sms', fixus: 'Aanmelden met numerus fixus' };
   // Startcheck in room order; the Eindcheck in reverse order with each question's options turned one place, so no answer sits where it sat before.
-  const checkOf = (variant = 'basis', set = 'start') => { const qs = (roomsOf(variant) || []).filter(R => own(CHECK, R.id)).map(R => BYQ[CHECK[R.id]]); return set === 'eind' ? qs.reverse() : qs; };
-  const checkOptions = (Q, set) => set === 'eind' ? Q.options.slice(1).concat(Q.options.slice(0, 1)) : Q.options.slice();
+  // D34 (DECISIONS.md D-036): two parallel forms, A and B (src/herhaling.js FORMS), one question per room on the room's rule but with a new case,
+  // so the eindcheck no longer repeats a room question. Each run gets form A or B first at random (action "form", chosen by the UI with
+  // crypto.getRandomValues, so it is in the run and replays); the eindcheck is the other form. A run without that action is a D31 to D33 run:
+  // it keeps the old check of room questions above (CHECK), so every older save replays exactly.
+  const H9 = () => E18.herhaling || (typeof require === 'function' ? require('./herhaling.js') : null);
+  const FORMS = ['A', 'B'], otherForm = f => f === 'A' ? 'B' : 'A';
+  const legacyCheck = ms => !!ms && !ms.forms;
+  const legacyOf = (variant, set) => { const qs = (roomsOf(variant) || []).filter(R => own(CHECK, R.id)).map(R => BYQ[CHECK[R.id]]); return set === 'eind' ? qs.reverse() : qs; };
+  // checkOf(variant, set, ms): the questions of this check. Without a run: form A (both forms have as many questions).
+  // LAST: the forms of the run that took its "form" action last (the page plays one run at a time), for callers that know only the variant.
+  let LAST = null;
+  const checkOf = (variant = 'basis', set = 'start', ms = null) => {
+    if (legacyCheck(ms)) return legacyOf(variant, set);
+    const forms = ms && ms.forms ? ms.forms : LAST, form = forms ? forms[set] : set === 'eind' ? 'B' : 'A';
+    return H9().formOf(form, variant);
+  };
+  const formOfRun = (ms, set) => ms && ms.forms ? ms.forms[set] : null;
+  const checkOptions = (Q, set, ms = null) => legacyCheck(ms) ? (set === 'eind' ? Q.options.slice(1).concat(Q.options.slice(0, 1)) : Q.options.slice()) : Q.options.slice();
   const checkAnswers = (ms, set) => (ms.check && ms.check[set]) || {};
-  const checkNext = (ms, set) => checkOf(ms.variant, set).find(Q => !own(checkAnswers(ms, set), Q.id)) || null;
-  const checkDone = (ms, set) => !!ms.check && checkOf(ms.variant, set).every(Q => own(ms.check[set], Q.id));
-  // Per question: right or wrong at the start and at the end (null while not answered), and the number right per check (null until complete).
+  const checkNext = (ms, set) => checkOf(ms.variant, set, ms).find(Q => !own(checkAnswers(ms, set), Q.id)) || null;
+  const checkDone = (ms, set) => !!ms.check && checkOf(ms.variant, set, ms).every(Q => own(ms.check[set], Q.id));
+  // Per room: right or wrong at the start and at the end (null while not answered), and the number right per check (null until complete).
+  // items: per check the logged list [{q, right}] (LOGGING_SPEC.md, type check).
   function checkResult(ms) {
-    const rows = checkOf(ms.variant, 'start').map(Q => { const s = checkAnswers(ms, 'start')[Q.id], e = checkAnswers(ms, 'eind')[Q.id];
-      return { id: Q.id, room: Q.room, label: CHECK_LABEL[Q.id], prompt: Q.prompt, answer: labelOf(Q, Q.correct), start: s ? s.ok : null, eind: e ? e.ok : null }; });
+    const S = checkOf(ms.variant, 'start', ms), E = checkOf(ms.variant, 'eind', ms);
+    const rows = S.map(Q => { const s = checkAnswers(ms, 'start')[Q.id], Z = E.find(x => x.room === Q.room) || Q, e = checkAnswers(ms, 'eind')[Z.id];
+      return { id: Q.id, endId: Z.id, room: Q.room, label: Q.label || CHECK_LABEL[Q.id], prompt: Q.prompt, answer: labelOf(Q, Q.correct), start: s ? s.ok : null, eind: e ? e.ok : null }; });
     const right = k => rows.every(r => r[k] != null) ? rows.filter(r => r[k]).length : null;
-    return { of: rows.length, start: right('start'), eind: right('eind'), rows };
+    const items = (list, set) => list.filter(Q => own(checkAnswers(ms, set), Q.id)).map(Q => ({ q: Q.id, right: checkAnswers(ms, set)[Q.id].ok }));
+    return { of: rows.length, start: right('start'), eind: right('eind'), rows, forms: ms.forms || null, items: { start: items(S, 'start'), eind: items(E, 'eind') } };
   }
 
   // ----- answers -----
@@ -5109,8 +5133,27 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
       ms.pausedMs += at - ms.paused; ms.paused = null; ms.lastAt = at; ms.seq++;
       return { ok: true, ms };
     }
-    if (ms.paused != null) return bad('De les staat op pauze. Ga eerst verder.');
+    if (ms.paused != null && a.t !== 'stop') return bad('De les staat op pauze. Ga eerst verder.');
     switch (a.t) {
+      // D34: which form comes first (A or B); once, before the first check answer. The UI draws it at random.
+      case 'form':
+        if (ms.phase !== 'intro' || ms.forms || ms.check) return bad('De vorm van de check ligt al vast.');
+        if (!FORMS.includes(a.form)) return bad('Onbekende vorm.');
+        ms.forms = { start: a.form, eind: otherForm(a.form) }; LAST = ms.forms; ms.lastAt = at; ms.seq++;
+        return { ok: true, ms };
+      // D34: "We stoppen" (DECISIONS.md D-036): the teacher stops the escape (minute 33) before the lock is open. The pair types the digits
+      // the teacher reads out (how 'code', only the right code is accepted and a wrong one is not stored) or goes straight on (how 'skip').
+      // The escape time stops here; then the eindcheck (after a startcheck) and the end screen, as after the lock.
+      case 'stop': {
+        if (ms.phase !== 'play' && ms.phase !== 'lock') return bad(ms.phase === 'intro' ? 'Start eerst de klok.' : 'Het slot is al open.');
+        const how = a.how === 'code' ? 'code' : a.how === 'skip' ? 'skip' : null;
+        if (!how) return bad('Onbekende keuze.');
+        if (how === 'code' && a.code !== codeOf(ms.variant)) return bad('Deze cijfers kloppen niet. Kijk ze na of ga meteen verder.');
+        if (ms.paused != null) { ms.pausedMs += at - ms.paused; ms.paused = null; }
+        ms.stopped = how; ms.endedAt = at; ms.lastAt = at; ms.seq++;
+        ms.phase = checkDone(ms, 'start') ? 'eind' : 'done';
+        return { ok: true, ms, stopped: how };
+      }
       case 'begin':
         if (ms.phase !== 'intro') return bad('De klok loopt al.');
         if (ms.check && !checkDone(ms, 'start')) return bad('Maak eerst de startcheck af.'); // all or nothing: a half check measures nothing
@@ -5122,7 +5165,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
         const set = a.set;
         if (set !== 'start' && set !== 'eind') return bad('Onbekende check.');
         if (set === 'start' && ms.phase !== 'intro') return bad('De startcheck kan alleen voordat de klok start.');
-        if (set === 'eind' && ms.phase !== 'eind') return bad('De eindcheck komt als het slot open is.');
+        if (set === 'eind' && ms.phase !== 'eind') return bad('De eindcheck komt als het slot open is of als jullie stoppen.');
         const Q = checkNext(ms, set);
         if (!Q) return bad('Deze check is al af.');
         if (a.q !== Q.id) return bad(typeof a.q === 'string' && own(checkAnswers(ms, set), a.q) ? 'Deze vraag is al beantwoord.' : 'Deze vraag is nu niet aan de beurt.');
@@ -5203,9 +5246,11 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     const end = ms.endedAt != null ? ms.endedAt : ms.lastAt, penalty = ms.hints.length * HINT_MS;
     const raw = ms.startedAt == null ? 0 : end - ms.startedAt - (ms.pausedMs || 0) - (ms.paused != null ? end - ms.paused : 0);
     const rooms = roomsOf(ms.variant) || ROOMS, qs = rooms.flatMap(R => R.qs);
-    const out = { escaped: ms.phase === 'done' || ms.phase === 'eind', raw, penalty, time: raw + penalty, hints: ms.hints.length, wrongAnswers, wrongCodes, wrong: wrongAnswers + wrongCodes,
+    const out = { escaped: (ms.phase === 'done' || ms.phase === 'eind') && !ms.stopped, raw, penalty, time: raw + penalty, hints: ms.hints.length, wrongAnswers, wrongCodes, wrong: wrongAnswers + wrongCodes,
       firstTry: qs.filter(Q => ms.answers[Q.id] && ms.answers[Q.id].ok && !ms.answers[Q.id].wrong).length, shown: qs.filter(Q => ms.answers[Q.id] && !ms.answers[Q.id].ok).length, questions: qs.length,
       remember: rooms.map(R => R.remember) };
+    // D34: only for a stopped run, so every run that was not stopped gives exactly the result it gave before (the D28 saves).
+    if (ms.stopped) { out.stopped = ms.stopped; out.answered = qs.filter(Q => ms.answers[Q.id]).length; }
     if (ms.check) out.check = checkResult(ms); // F1: only for a run with a Startcheck, so a run without one gives exactly the result it gave before
     return out;
   }
@@ -5223,12 +5268,12 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   // contentSince: C21 changed answer keys, option ids, the room order and the code, so core.importSave refuses an ESC-MAAND run from an older
   // content version loudly instead of replaying it with other answers (DECISIONS.md D-022).
   // variants: "basis" is the four-room lesson; the six "kort-..." variants are the short lessons (D-023). A "basis" run replays exactly as in D23.
-  const m = { id: ID, lab: 'les', kind: 'escaperun', noScore: true, title: 'Je eerste maand als 18-jarige', minutes: 'ongeveer 30', stage: 'De les', contentSince: 'C21',
+  const m = { id: ID, lab: 'les', kind: 'escaperun', noScore: true, title: 'Je eerste maand als 18-jarige', minutes: 'ongeveer 28', stage: 'De les', contentSince: 'C21',
     variants: VARIANTS, init, apply, pos, feedback, result, debrief: { likes: [] },
     score: ms => ms.phase === 'done' ? { dims: {}, total: 0, withHelp: ms.hints.length > 0 } : null };
   if (core) core.MISSIONS[ID] = m;
   const escaperun = { ID, HINT_MS, VALID_UNTIL, STALE, staleAt, SRC, RULES, FIC, ROOMS, QS, BYQ, BYROOM, CODE, SHORT_MIN, SHORT_DEFAULT, PAIRS, roomsOf, qsOf, codeOf, isShort, shortId, minutesOf,
-    CHECK, CHECK_LABEL, checkOf, checkOptions, checkNext, checkDone, checkResult,
+    CHECK, CHECK_LABEL, FORMS, STOP_AT: 33, BUFFER: 3, otherForm, legacyCheck, formOfRun, checkOf, checkOptions, checkNext, checkDone, checkResult,
     read, money, clock, clockStart, firstWrong, labelOf, mission: m, data: { ROSTER, MISSING, WORKED, PAID, WAGE, LH, PAY, FIX, SHORT, LETTER, SMS, NUMMER, SIGNS, RED } };
   E18.escaperun = escaperun;
   if (typeof module === 'object' && module.exports) module.exports = escaperun;
@@ -5464,10 +5509,12 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
 
   // ----- the four micro-checks. "rules" are ids of src/escaperun.js RULES; "sources" may only come from those rules. -----
   const RULE = Object.fromEntries(X.RULES.map(r => [r.id, r]));
-  function build(set = SET) {
-    const F = facts(set), B = F.brief, L = F.loon, S = F.sms, A = F.aanmeld, sid = q => ID + ':' + set + ':' + q;
+  // D34: build(set, given, pre): "given" are hand-written facts (form A of the start- and eindcheck, FORM_A_FACTS below) instead of a seeded draw;
+  // "pre" is the id prefix, so the questions of form A and form B never share an id. The templates, rules and sources are the same for every set.
+  function build(set = SET, given = null, pre = 'h9') {
+    const F = given || facts(set), B = F.brief, L = F.loon, S = F.sms, A = F.aanmeld, sid = q => ID + ':' + set + ':' + q;
     const list = [
-      { id: 'h9-brief', room: 'brief', label: 'Premie na je verjaardag', situ: `Je vriend${B.friend === 'Sem' ? '' : 'in'} ${B.friend} krijgt een brief van Zorgverzekeraar ${B.insurer}. ${B.friend} vraagt jou om hulp.`,
+      { id: pre + '-brief', room: 'brief', label: 'Premie na je verjaardag', situ: `Je vriend${B.friend === 'Sem' ? '' : 'in'} ${B.friend} krijgt een brief van Zorgverzekeraar ${B.insurer}. ${B.friend} vraagt jou om hulp.`,
         prompt: `Vanaf welke datum moet er premie betaald worden voor ${B.friend}?`,
         docs: { brief: { type: 'letter', from: 'Zorgverzekeraar ' + B.insurer, place: 'Zeestad, ' + nl(B.letter), greeting: 'Beste verzekerde,',
           sentences: [['s1', `Op ${nl(B.bday)} word je 18. Gefeliciteerd alvast!`], ['s2', 'Je blijft bij ons verzekerd, tenzij je zelf een andere verzekeraar kiest.'],
@@ -5475,7 +5522,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
         options: [['jarig', nl(B.bday) + ', de verjaardag'], ['doorgeven', nl(B.deadline)], ['later', nl(B.later)], ['goed', nl(B.start)]], correct: 'goed',
         explain: `Er moet premie betaald worden vanaf de 1e van de maand na je 18e verjaardag. ${B.friend} wordt 18 op ${nl(B.bday)}, dus vanaf ${nl(B.start)}. Ouders mogen de premie betalen. Op ${nl(B.deadline)} geeft ${B.friend} alleen door hoe er betaald wordt.`,
         rules: ['premie'], sources: ['dt18', 'cbZorg'], pair: null },
-      { id: 'h9-loon', room: 'loon', label: 'Brutoloon met een gemiste dienst', situ: `Je werkt bij ${L.employer} voor ${fmt(L.wage)} per uur. Je werkte precies volgens je rooster.`,
+      { id: pre + '-loon', room: 'loon', label: 'Brutoloon met een gemiste dienst', situ: `Je werkt bij ${L.employer} voor ${fmt(L.wage)} per uur. Je werkte precies volgens je rooster.`,
         prompt: 'Hoeveel brutoloon had er op je loonstrook moeten staan?',
         docs: { rooster: { type: 'rows', title: 'Je rooster, januari 2027', rows: L.rows.map(x => [`${x.wd} ${x.d} jan`, x.h + ' uur']) },
           loonstrook: { type: 'slip', title: 'Loonstrook januari 2027', from: L.employer, rows: [['Gewerkte uren', String(L.paid)], ['Uurloon', fmt(L.wage)], ['Brutoloon', fmt(L.slip)]],
@@ -5483,13 +5530,13 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
         options: [['strook', fmt(L.slip)], ['dienst', fmt(L.shift)], ['vakantie', fmt(L.holiday)], ['goed', fmt(L.bruto)]], correct: 'goed',
         explain: `Leg je loonstrook naast je rooster. Je werkte ${L.worked} uur, maar er staan er ${L.paid}. Brutoloon is uren × uurloon: ${L.worked} × ${fmt(L.wage)} = ${fmt(L.bruto)}.`,
         rules: ['brutoloon'], sources: ['fnvLoon', 'bdBruto'], pair: null },
-      { id: 'h9-sms', room: 'sms', label: 'Twijfel over een nieuw bericht', situ: `Een ander bericht, nu over ${S.firm}. Je bent klant bij ${S.firm}.`,
+      { id: pre + '-sms', room: 'sms', label: 'Twijfel over een nieuw bericht', situ: `Je krijgt een sms over ${S.firm}. Je bent klant bij ${S.firm}.`,
         prompt: `Je twijfelt of dit bericht echt van ${S.firm} komt. Wat doe je?`,
         docs: { sms: { type: 'chat', from: S.number, sub: 'onbekend nummer', time: S.time, text: S.text, note: 'Het nummer en de link zijn verzonnen. De link werkt niet.' } },
         options: [['klik', 'Op de link tikken, maar niets invullen'], ['bel', 'Bellen naar het nummer dat het bericht stuurde'], ['vraag', 'Terug-sms\'en met de vraag of het echt is'], ['zelf', `Zelf de site van ${S.firm} opzoeken`]], correct: 'zelf',
         explain: 'Tik niet op de link en antwoord niet. Check het via een weg die je zelf opzoekt, zoals de officiële site. Gebruik niets uit het bericht zelf.',
         rules: ['zelf-checken'], sources: ['viSmishing', 'rijkPhishing', 'viHelpdesk'], pair: 'doen' }, // the same rule as the lesson's check question "doen"
-      { id: 'h9-aanmeld', room: 'aanmeld', label: 'Aanmelden voor het mbo', situ: `Je wilt na de zomer naar het mbo: ${A.programme} bij het ${A.school}.`,
+      { id: pre + '-aanmeld', room: 'aanmeld', label: 'Aanmelden voor het mbo', situ: `Je wilt na de zomer naar het mbo: ${A.programme} bij het ${A.school}.`,
         prompt: `Uiterlijk wanneer meld je je aan voor ${A.programme}?`,
         docs: { lijst: { type: 'list', title: 'Je aanmeldlijstje', today: 'Vandaag: ' + nlDay(A.today), rows: [[A.programme, A.school, 'mbo-opleiding']] } },
         options: [['fixus', nl(DEADLINE.fixus)], ['open', nl(DEADLINE.open)], ['sep', nl(D(2027, 9, 1))], ['goed', nl(DEADLINE[A.kind])]], correct: 'goed',
@@ -5501,6 +5548,27 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   }
   const H1 = build(SET);
   const CHECKS = H1.checks, BYID = Object.fromEntries(CHECKS.map(Q => [Q.id, Q]));
+
+  // ----- D34: the two parallel forms of the lesson's start- and eindcheck (DECISIONS.md D-036) -----
+  // Form B is set H1 itself: the same question objects as the herhaling (new cases on the rules of the four rooms, never a room question).
+  // Form A is written for D34 with the same four templates, so the same rule, document type, options and sum per room; only the fictional
+  // people, firms, dates, hours and wage differ. No new fact: every answer is computed from the rules in src/escaperun.js RULES and their
+  // sources (FACT_SOURCES.md), exactly as in H1. Hand-written, not drawn, so a reviewer can read every fact here; tests/d34.test.js checks
+  // that every fact differs from H1 and from the rooms, and that the sums are as hard (four shifts, 2 to 6 hours, a wage from WAGES).
+  const bdayA = D(2027, 4, 19);
+  const FORM_A_FACTS = {
+    set: 'A1',
+    brief: { friend: 'Sem', insurer: 'Vuurtoren', bday: bdayA, letter: plus(bdayA, -10), deadline: plus(bdayA, 5), start: firstAfter(bdayA, 1), later: firstAfter(bdayA, 2) },
+    loon: (() => { const wage = 1290, rows = [{ d: 2, wd: 'za', h: 4 }, { d: 9, wd: 'za', h: 5 }, { d: 13, wd: 'wo', h: 3 }, { d: 23, wd: 'za', h: 4 }], miss = 2;
+      const worked = rows.reduce((s, x) => s + x.h, 0), paid = worked - rows[miss].h;
+      return { employer: 'Fietsenwinkel De Ketting', wage, rows, miss, worked, paid, bruto: worked * wage, slip: paid * wage, holiday: Math.round(worked * wage * 108 / 100), shift: rows[miss].h * wage }; })(),
+    sms: { firm: MSGS[0].firm, text: MSGS[0].text, number: '+44 7700 900247', time: '20:12' },
+    aanmeld: { kind: 'mbo', programme: MBO[0][0], school: MBO[0][1], today: D(2027, 1, 7) }
+  };
+  const FORM_A = build('A1', FORM_A_FACTS, 'ca');
+  const FORMS = { A: FORM_A, B: H1 };
+  // The questions of one form for a lesson, in its room order: four for the whole lesson, two for a short lesson.
+  const formOf = (form, variant = 'basis') => own(FORMS, form) ? (X.roomsOf(variant) || []).map(R => FORMS[form].byRoom[R.id]).filter(Boolean) : [];
   const LETTERS = ['A', 'B', 'C', 'D', 'E'];
   // The micro-checks of a lesson, in its room order: four for the whole lesson, two for a short lesson.
   const checksOf = (variant = 'basis') => (X.roomsOf(variant) || []).map(R => H1.byRoom[R.id]).filter(Boolean);
@@ -5588,7 +5656,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     const web = /^https?:\/\/\S+$/i.test(String(pupilLink || '').trim());
     const desc = [`${MIN} minuten herhaling van Escape 18: ${X.mission.title}.`, l ? `De les was op ${nl(l)}.` : null,
       `Leerlingen openen de link van de herhaling (op het docentenscherm, met QR-code)${web ? ': ' + String(pupilLink).trim() : ''}.`,
-      `Elke leerling beantwoordt ${n === 4 ? 'vier' : 'twee'} nieuwe vragen. Tel daarna met handopsteken wie het goed had en wie het 18-plan deed.`,
+      `Elke leerling beantwoordt ${n === 4 ? 'vier' : 'twee'} vragen: vorm B van de check in de les. Tel daarna met handopsteken wie het goed had en wie het 18-plan deed.`,
       'Zet de telling in het lesverslag, bij Herhaling.'].filter(Boolean).join('\n');
     const title = 'Herhaling Escape 18 (' + MIN + ' minuten)';
     const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Escape 18//Herhaling//NL', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'BEGIN:VEVENT',
@@ -5601,7 +5669,10 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   // ----- the lesverslag "Herhaling" lines: class-level counts only, typed by the teacher after a show of hands -----
   // input: { date, unit: 'leerling' | 'tweetal', n, right: { <room>: count }, plan: { ja, deels, nog, nvt } }.
   // ctx: { pupils, lessonIso, check } with check the F1 result of src/teacher.js (Eindcheck totals and rows) for the comparison.
-  const NOTE = 'Ruwe telling zonder oordeel: andere vragen dan de eindcheck en een paar weken later. Vooraf is geen norm vastgesteld.';
+  // D34: set H1 is also form B of the lesson's start- and eindcheck, so the herhaling repeats the questions of form B a few weeks later.
+  // The teacher-facing line on the herhaling card (coordinator, 6 Nov): the follow-up shows recall of questions some pupils have seen.
+  const REPEAT_NOTE = 'Let op: deze vragen zijn vorm B van de start- en eindcheck. De helft van de tweetallen zag ze al in de les. De herhaling laat dus zien wat leerlingen nog weten van vragen die sommigen al kenden.';
+  const NOTE = 'Ruwe telling zonder oordeel: dezelfde vragen als vorm B van de start- en eindcheck, nu een paar weken later. Vooraf is geen norm vastgesteld.';
   const UNITS = { leerling: ['leerling', 'leerlingen', 60], tweetal: ['tweetal', 'tweetallen', 30] };
   const pct = (a, b) => b ? Math.round(100 * a / b) + '%' : '?';
   const whole = (v, lo, hi) => { const s = String(v == null ? '' : v).trim(); if (!/^\d{1,3}$/.test(s)) return null; const n = parseInt(s, 10); return n >= lo && n <= hi ? n : null; };
@@ -5634,8 +5705,9 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     // The comparison with the lesson's Eindcheck (F1), only when both are complete; and the one question with the same rule, side by side.
     const C = ctx.check || {};
     if (all && C.eind != null && C.eindOf) out.lines.push(`Vergelijking: Eindcheck in de les ${C.eind} van ${C.eindOf} goed (${pct(C.eind, C.eindOf)}), herhaling ${out.right} van ${out.of} goed (${pct(out.right, out.of)}).`);
-    out.rows.filter(r => r.pair && r.n != null).forEach(r => { const e = (C.rows || []).find(x => x.id === r.pair);
-      if (e && e.eind != null && C.pairsEnd) out.lines.push(`Zelfde regel als eindcheckvraag "${X.CHECK_LABEL[r.pair]}": eind ${e.eind} van ${C.pairsEnd} (${pct(e.eind, C.pairsEnd)}), herhaling ${r.n} van ${n} (${pct(r.n, n)}).`); });
+    // D34: the eindcheck rows are per room (form A or B); before D34 they were room questions, so "pair" named one ("doen").
+    out.rows.filter(r => r.pair && r.n != null).forEach(r => { const e = (C.rows || []).find(x => x.id === r.pair || x.room === r.room);
+      if (e && e.eind != null && C.pairsEnd) out.lines.push(`Zelfde regel als eindcheckvraag "${e.label || X.CHECK_LABEL[r.pair]}": eind ${e.eind} van ${C.pairsEnd} (${pct(e.eind, C.pairsEnd)}), herhaling ${r.n} van ${n} (${pct(r.n, n)}).`); });
     const P = PLAN_OPTS.map(([k, l]) => { const s = raw(plan[k]); let v = null; if (s) { v = whole(s, 0, n); if (v == null) errors.push(`Bij het 18-plan, "${l}": vul 0 tot en met ${n} in.`); } return [k, l, v]; });
     if (P.some(p => raw(plan[p[0]]))) {
       const sum = P.reduce((s, p) => s + (p[2] || 0), 0);
@@ -5647,8 +5719,8 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     return out;
   }
 
-  const herhaling = { ID, SET, MIN, GAP, FIC, MONTHS, facts, build, CHECKS, BYID, LETTERS, checksOf, labelOf, letterOf, sourcesOf, start, next, answer, result,
-    PLAN_Q, PLAN_OPTS, PLAN_ASK, PLAN_NOT_YET, PLAN, planFor, progress, suggest, gapOf, daysBetween, link, fromUrl, ics, icsText, fold, fileName, NOTE, UNITS, lines, nl, parse };
+  const herhaling = { ID, SET, MIN, GAP, FIC, MONTHS, facts, build, FORM_A_FACTS, FORM_A, FORMS, formOf, CHECKS, BYID, LETTERS, checksOf, labelOf, letterOf, sourcesOf, start, next, answer, result,
+    PLAN_Q, PLAN_OPTS, PLAN_ASK, PLAN_NOT_YET, REPEAT_NOTE, PLAN, planFor, progress, suggest, gapOf, daysBetween, link, fromUrl, ics, icsText, fold, fileName, NOTE, UNITS, lines, nl, parse };
   E18.herhaling = herhaling;
   if (typeof module === 'object' && module.exports) module.exports = herhaling;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
@@ -5666,20 +5738,25 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
 
   // ----- the lesson, from the escape's own data -----
   const ESC_MIN = parseInt(/\d+/.exec(X.mission.minutes)[0], 10); // "ongeveer 30" in escaperun.js
-  const TIMES = [20, 30, 40]; // class timer choices in minutes; the default is the escape's own duration
+  const TIMES = [20, 28, 40]; // class timer choices in minutes; the default is the escape's own duration
   // F1 (FEATURE_F1.md): a Startcheck before the clock and an Eindcheck after the lock, 3 minutes together. The lesson stays one 45-minute slot:
   // the explanation goes from 5 to 3 minutes (as in the short lesson) and the talk from 8 to 7. The escape keeps its 30 minutes.
   const nVragen = n => n === 1 ? 'één vraag' : n + ' vragen';
   // Short texts: each row fits one printed line, so the plan stays on one A4 page with "Voor de docent" on the second.
-  const startRow = (min, n) => ({ min, title: 'Startcheck', text: `Elk tweetal beantwoordt ${nVragen(n)} voordat de klok start en ziet nog niet wat goed is. Geef geen hints.` });
-  const endRow = (min, n) => ({ min, title: 'Eindcheck', text: `${n === 1 ? 'Na het slot komt dezelfde vraag nog een keer.' : `Na het slot dezelfde ${n} vragen in een andere volgorde.`} Daarna ziet elk tweetal wat het goed had, voor en na.` });
+  const startRow = (min, n) => ({ min, title: 'Startcheck', text: `Elk tweetal beantwoordt ${nVragen(n)} (vorm A of B) voordat de klok start. Geef geen hints.` });
+  const endRow = (min, n) => ({ min, title: 'Eindcheck', text: `De andere vorm: ${nVragen(n)} over dezelfde regels. Daarna ziet elk tweetal wat het goed had, voor en na.` });
+  // D34 (gate round 2, DECISIONS.md D-036): a stop moment at minute 33 and 3 minutes reserve. 3 + 2 + 28 = 33, so the escape is 28 minutes
+  // (escaperun.js "ongeveer 28", the class timer's default). A moment row has "at" and no length; it never prints the digits of the lock.
+  const STOP_ROW = { min: 0, at: X.STOP_AT, title: 'Stop', text: 'Druk op Stop de escape. Iedereen tikt op We stoppen. Lees de cijfers voor van je geprinte antwoordblad.' };
   const PLAN = [
     { min: 3, title: 'Uitleg', text: 'Laat dit scherm zien. Leerlingen openen de link en werken met z\'n tweeën op één scherm.' },
     startRow(2, X.checkOf('basis').length),
     { min: ESC_MIN, title: 'Escape', text: 'Start de klastimer. Tweetallen spelen vier kamers en schrijven elk cijfer op.' },
-    endRow(1, X.checkOf('basis').length),
-    { min: 7, title: 'Nabespreken', text: 'Tel met handopsteken per vraag de start- en eindcheck (één hand per tweetal) en welke kamer lastig was. Begin bij die kamer. Gebruik de twee vragen per kamer. Vraag naar ervaringen en twijfels, niet naar punten.' },
-    { min: 2, title: 'Afsluiten', text: 'Na het slot maakt elk tweetal Mijn 18-plan: elke leerling kiest één check en maakt een als-dan-plan, eventueel met een datum in de agenda. Zeg het plan tegen je buur. Plan de herhaling over 3 tot 5 weken.' }
+    STOP_ROW,
+    endRow(2, X.checkOf('basis').length),
+    { min: 5, title: 'Nabespreken', text: 'Vraag met handopsteken: wie had bij de startcheck alles goed? En bij de eindcheck? Begin bij de lastigste kamer.' }, // the review's wording, shortened to one printed line
+    { min: 2, title: 'Afsluiten', text: 'Elke leerling zegt zijn als-dan-plan uit Mijn 18-plan tegen de buur. Plan de herhaling over 3 tot 5 weken.' },
+    { min: X.BUFFER, title: 'Reserve', text: 'Voor inloggen dat uitloopt of een langer gesprek. De escape stopt altijd op minuut 33.' }
   ];
   // F3 (E18-D31-f3): the close is now a step in the pupil's screen, "Mijn 18-plan" (src/plan18.js): one if-then plan per pupil from fixed
   // choices, a card to screenshot or print and an optional calendar file (Gollwitzer & Sheeran 2006; Sheeran et al. 2025; Milkman et al. 2011).
@@ -5772,7 +5849,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   function answerKey(rooms = X.ROOMS) {
     return rooms.map((R, i) => ({ id: R.id, n: i + 1, title: R.title, digit: R.digit, discuss: DISCUSS[R.id] || [],
       aim: (AIMS[R.id] || {}).aim || '', fits: fitsOf(R.id), nofit: (AIMS[R.id] || {}).nofit || '', teach: (TEACH[R.id] || []).map(t => ({ text: t.text, sources: t.sources.map(srcOf) })),
-      qs: R.qs.map(Q => ({ id: Q.id, short: Q.short, prompt: Q.prompt, answer: X.labelOf(Q, Q.correct), check: X.CHECK[R.id] === Q.id })) })); // check: F1, also in the start- and eindcheck
+      qs: R.qs.map(Q => ({ id: Q.id, short: Q.short, prompt: Q.prompt, answer: X.labelOf(Q, Q.correct), check: false })) })); // check: F1 marked room questions also in the check; since D34 the check has its own forms A and B
   }
   const code = (rooms = X.ROOMS) => rooms.map(R => String(R.digit)).join('');
   const isWebLink = s => typeof s === 'string' && /^https?:\/\/[^\s]+$/i.test(s.trim());
@@ -5787,7 +5864,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     startRow(1, X.checkOf(X.shortId(X.SHORT_DEFAULT)).length),
     { min: X.SHORT_MIN, title: 'Escape', text: 'Start de klastimer. Tweetallen spelen twee kamers en schrijven elk cijfer op.' },
     endRow(1, X.checkOf(X.shortId(X.SHORT_DEFAULT)).length),
-    { min: 7, title: 'Nabespreken', text: 'Tel met handopsteken de start- en eindcheck (één hand per tweetal) en welke kamer lastig was. Begin bij die kamer. Gebruik de vragen bij de twee kamers. Houd de laatste 2 minuten voor Mijn 18-plan: één als-dan-plan per leerling.' }
+    { min: 7, title: 'Nabespreken', text: 'Vraag met handopsteken: wie had bij de start- en eindcheck alles goed? Vraag welke kamer het lastigst was en begin daar. Houd de laatste 2 minuten voor Mijn 18-plan: één als-dan-plan per leerling.' }
   ];
   const planFor = variant => { if (!X.isShort(variant)) return PLAN; const n = X.checkOf(variant).length;
     return PLAN_SHORT.map(p => p.title === 'Startcheck' ? startRow(p.min, n) : p.title === 'Eindcheck' ? endRow(p.min, n) : p); };
@@ -5863,11 +5940,12 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   // Devices are separate and send nothing, so the teacher asks per question who had it right at the start and at the end, and types the counts.
   // Raw counts, no verdict. The one pass rule on record (the class-trial kit's C2: a mean gain of at least 1.0 of 6 points per pupil passes,
   // 0.25 or less fails) belongs to a paper case scored per pupil by the team with a blind second scorer, not to taps per pair counted by hand.
-  // "Tweetallen met eindcheck" may be lower: a pair that does not open the lock in time gets no Eindcheck. Empty means as many as at the start.
+  // "Tweetallen met eindcheck" may be lower when a pair leaves early. Since D34 every pair gets the Eindcheck, also after "We stoppen".
+  // D34: one row per room (forms A and B ask the same rule per room), keyed by the room id; labels from src/herhaling.js.
   const CHECK_NOTE = 'Ruwe telling zonder oordeel: voor deze check is vooraf geen norm vastgesteld.';
   const CHECK_ASK = 'Vraag per vraag: steek je hand op als jullie hem goed hadden bij de start. En aan het eind? Eén hand per tweetal. Op hun scherm zien tweetallen wat ze goed hadden.';
   function checkLines(input, variant, pupils, errors) {
-    const qs = X.checkOf(variant, 'start'), n = qs.length, cin = input.check || {}, raw = v => String(v == null ? '' : v).trim(), cap = pupils || 30;
+    const qs = H.formOf('A', variant), n = qs.length, cin = input.check || {}, raw = v => String(v == null ? '' : v).trim(), cap = pupils || 30;
     const out = { lines: [], pairs: null, pairsEnd: null, rows: [], start: null, startOf: null, eind: null, eindOf: null };
     if (!n) return out;
     const pairsRaw = raw(input.pairs), endRaw = raw(input.pairsEnd), pairs = whole(pairsRaw, 1, cap);
@@ -5875,7 +5953,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     const pairsEnd = endRaw ? whole(endRaw, 0, pairs || cap) : pairs;
     if (endRaw && pairsEnd == null) errors.push(`Bij tweetallen met eindcheck: vul 0 tot en met ${pairs || cap} in, niet meer dan bij de start.`);
     let typed = !!(pairsRaw || endRaw);
-    out.rows = qs.map(Q => { const c = cin[Q.id] || {}, row = { id: Q.id, label: X.CHECK_LABEL[Q.id], start: null, eind: null };
+    out.rows = qs.map(Q => { const c = cin[Q.room] || cin[Q.id] || {}, row = { id: Q.id, room: Q.room, label: Q.label, start: null, eind: null };
       for (const [k, max, when] of [['start', pairs, 'bij de start'], ['eind', pairsEnd, 'aan het eind']]) {
         const s = raw(c[k]), top = max == null ? cap : max; if (!s) continue; typed = true; row[k] = whole(s, 0, top);
         if (row[k] == null) errors.push(`Bij "${row.label}", goed ${when}: vul 0 tot en met ${top} in, niet meer dan het aantal tweetallen.`);
@@ -5925,7 +6003,10 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     { n: 5, id: 'timer', go: 't-timer-h', title: 'Start de timer', print: 'Start de timer',
       text: 'In de les: leerlingen openen de link en doen eerst de startcheck. Dan start jij de klastimer. Zet het bord in Projectiemodus: groot, met de klok en per kamer een richttijd.' }
   ];
-  const QUICK_LEAD = `Vijf stappen om de les voor te bereiden. Doel: klaar in minder dan ${PREP_MAX} minuten. De bereidingstijd loopt mee, zodat je hem in het lesverslag kunt zetten.`;
+  // D34 (gate round 2): the card said "Klaar in 5 minuten" and "Doel: klaar in minder dan 20 minuten". Heading now QUICK_TITLE (15 minutes,
+  // the mentor's time); PREP_MAX (20) stays the test kit's pass line for the lesverslag and is no longer named on the card.
+  const QUICK_MIN = 15, QUICK_TITLE = `Klaar in ${QUICK_MIN} minuten`;
+  const QUICK_LEAD = 'Vijf stappen om de les voor te bereiden. De bereidingstijd loopt mee, zodat je hem in het lesverslag kunt zetten.';
   const QUICK_LOCAL = 'De bereidingstijd blijft alleen op dit scherm. Er wordt niets bewaard of verstuurd.';
   // What to do when something goes wrong in class. Each line restates the lesson's own behaviour: the page loads nothing after it opened
   // (tests/requests.js), one retry per question, a hint costs HINT_S seconds, the lock names a room from the 2nd wrong code (ui.js escLockHelp).
@@ -6146,16 +6227,19 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   const dayAfter = iso => { const d = new Date(iso + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + 1); return d.toISOString().slice(0, 10); };
   // Deviation from the spec's wording (DECISIONS.md D-035): the spec's full date is the answer of room 1's premium question, and this footer is on
   // the teacher screen, which is often on the board. So the footer names the year, not the day; the banner date is VALID_UNTIL itself.
-  const disclaimer = () => `Educatief materiaal, geen financieel of juridisch advies. Bedragen gecontroleerd op ${dateNl(checkedOldest())}; ze kunnen vanaf ${dayAfter(X.VALID_UNTIL).slice(0, 4)} veranderen.`;
+  // D34 (gate round 2): the footer said only the oldest check (17 Oct) while the source panel shows checks up to 6 Nov. Both dates are
+  // recorded checks (FACT_SOURCES.md), so the footer names the range; it never claims that every source was read on the newest date.
+  const checkedNewest = () => Object.values(X.SRC).concat(Object.values(NSRC)).map(s => s.checked).filter(Boolean).sort().slice(-1)[0];
+  const disclaimer = () => `Educatief materiaal, geen financieel of juridisch advies. Bronnen gecontroleerd tussen ${dateNl(checkedOldest())} en ${dateNl(checkedNewest())}; bedragen kunnen vanaf ${dayAfter(X.VALID_UNTIL).slice(0, 4)} veranderen.`;
   // Lesverslag feedback (spec type "feedback"): how much of the lesson was given; the default follows "Welke les?".
   const USED = [['heel', 'De hele les'], ['kort', 'De korte les'], ['deels', 'Een deel van de les']];
   const FB_NOTE = 'Noem geen namen van leerlingen of collega\'s.';
   const FB_MAX = 500;
   const teacher = { ESC_MIN, TIMES, PLAN, TOTAL, GOAL, START, MATERIALS, PRIVACY, NOTES, DISCUSS, TEACH, AIMS, CUR, PLAN_SHORT, LEVELS, VERSLAG_NOTE, CHECK_NOTE, CHECK_ASK, HOME_Q, HOME_INTRO, HOME_ONE, homeCard,
     HSRC, HERHAAL, HERHAAL_STEPS, HERHAAL_PLAN, HERHAAL_MIN, herhaal, HRULES, NSRC, NEWS,
-    PREP_MAX, PREP_LIMIT, prepLine, AGAIN, HINT_S, quick, QUICK_LEAD, QUICK_LOCAL, problems, PROJ_RULES, PROJ_NOTE, progress,
+    PREP_MAX, PREP_LIMIT, prepLine, AGAIN, HINT_S, quick, QUICK_MIN, QUICK_TITLE, QUICK_LEAD, STOP_ROW, QUICK_LOCAL, problems, PROJ_RULES, PROJ_NOTE, progress,
     answerKey, code, isWebLink, planFor, totalFor, goalFor, withLes, lesFrom, report, dateNl, qr, qrPath,
-    CLOSE_EG, closing, answerSheet, SHARE_ASK, SHARE_WHAT, SHARE_NEE, SHARE_JA, SHARE_LOCKED, PRIVACY_SHARE, checkedOldest, disclaimer, USED, FB_NOTE, FB_MAX };
+    CLOSE_EG, closing, answerSheet, SHARE_ASK, SHARE_WHAT, SHARE_NEE, SHARE_JA, SHARE_LOCKED, PRIVACY_SHARE, checkedOldest, checkedNewest, disclaimer, USED, FB_NOTE, FB_MAX };
   E18.teacher = teacher;
   if (typeof module === 'object' && module.exports) module.exports = teacher;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
@@ -6540,7 +6624,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   const TYPES = {
     teacher_start: { variant, rooms: v => Array.isArray(v) && v.length >= 1 && v.length <= 8 && v.every(isId) },
     start: { variant },
-    check: { phase: oneOf(['start', 'end']), score: int(0, 20), max: int(1, 20) },
+    check: { phase: oneOf(['start', 'end']), form: oneOf(['A', 'B']), score: int(0, 20), max: int(1, 20), items: v => Array.isArray(v) && v.length >= 1 && v.length <= 20 && v.every(x => x && typeof x === 'object' && Object.keys(x).length === 2 && isId(x.q) && bool(x.right)) },
     answer: { room: isId, q: isId, choice, first: bool, tries: int(1, 20), hint: bool, sec: SEC },
     room: { room: isId, sec: SEC },
     lock: { opened: bool, sec: SEC },
@@ -6568,6 +6652,8 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     if (dk.length !== want.length || !want.every(k => own(d, k))) bad.push('data-velden: ' + dk.join(','));
     want.forEach(k => { if (own(d, k) && !T[k](d[k])) bad.push('data.' + k); });
     if (ev.type === 'check' && Number.isInteger(d.score) && Number.isInteger(d.max) && d.score > d.max) bad.push('score > max');
+    // D34: forms A and B with per-item results (LOGGING_SPEC.md): one item per question, as many right as the score.
+    if (ev.type === 'check' && Array.isArray(d.items) && Number.isInteger(d.max) && Number.isInteger(d.score) && (d.items.length !== d.max || d.items.filter(x => x && x.right === true).length !== d.score)) bad.push('items passen niet bij score en max');
     return bad;
   }
 
@@ -6878,7 +6964,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     return `<section class="front" aria-labelledby="front-h"><div class="front-top"><h1 id="front-h" class="front-title">Escape 18</h1><p class="front-lead">Je wordt 18. Ineens regel je alles zelf.</p></div>
       <div class="gates">
         <button type="button" class="gate les" data-action="start:${ESC_ID}:${v}"><span class="gate-lock" aria-hidden="true">${slots}</span><span class="gate-t">${open ? 'Verder met de les' : short ? 'Start de korte les' : 'Start de les'}</span><span class="gate-s">${open ? esc(where) : `Je eerste maand als 18-jarige. ${short ? 'Twee kamers' : 'Vier kamers'}, één code.`}</span><span class="gate-m">met z'n tweeën, ${ESCR ? ESCR.minutesOf(v) : 30} minuten</span></button>
-        <button type="button" class="gate self" data-action="view:practice"><span class="gate-deck" aria-hidden="true"><i></i><i></i><i></i></span><span class="gate-t">Zelf oefenen</span><span class="gate-s">Oefeningen en Life Mode, in je eigen tempo.</span></button>
+        <button type="button" class="gate self" data-action="view:practice"><span class="gate-deck" aria-hidden="true"><i></i><i></i><i></i></span><span class="gate-t">Zelf oefenen</span><span class="gate-s">Oefeningen en verhalen, in je eigen tempo.</span></button>
       </div>
       <div class="front-links">${btn('Ik ben docent', 'view:teach', 'ghost small')}${ESCR && !short ? btn('Korte les', 'view:kort', 'ghost small') : ''}${ESCR && E18.herhaling ? btn('Herhaling', 'view:herh', 'ghost small') : ''}${btn('Bibliotheek', 'view:library', 'ghost small')}${open ? btn('De les opnieuw beginnen', 'esc-restart', 'ghost small') : ''}</div></section>
       <footer><span>${FIC_LINE}</span><span>${privateMode ? 'Je voortgang wordt bewaard op dit apparaat.' : 'Gastmodus: niets wordt bewaard.'} <button type="button" class="btn ghost small" data-action="view:save">Opslaan en laden</button></span><span class="sub">Build ${core.VERSIONS.build} · inhoud ${core.VERSIONS.content} <button type="button" class="btn ghost small" data-action="view:about">Over en privacy</button></span></footer>`;
@@ -7621,7 +7707,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   const tVar = () => tLes === 'full' ? 'basis' : ESCR.shortId(tPick); // null while a short lesson has fewer than two rooms
   const tRooms = () => tLes === 'full' ? ESCR.ROOMS : ESCR.ROOMS.filter(R => tPick.includes(R.id));
   const tMin = () => tLes === 'full' ? ESCR.minutesOf('basis') : ESCR.SHORT_MIN;
-  let tDur = TCH && ESCR ? tMin() : 30, tLeft = tDur * 60000, tEnd = null, tShow = false;
+  let tDur = TCH && ESCR ? tMin() : 30, tLeft = tDur * 60000, tEnd = null, tShow = false, tStopped = false; // tStopped: D34 "Stop de escape"
   const tClock = ms => ESCR.clock(Math.ceil(Math.max(0, ms) / 1000) * 1000);
   const tLeftNow = () => tEnd != null ? Math.max(0, tEnd - Date.now()) : tLeft;
   const tFramed = (() => { try { return window.top !== window.self; } catch (e) { return true; } })();
@@ -7637,6 +7723,17 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   const tPupilLog = () => tChosen() ? LG.withKlas(tPupil(), tLog.klas, tLog.share) : tPupil();
   const tCtx = () => ({ class: tLog.klas, session: tLog.sess, off: tLog.share !== true });
   const tPrivacy = () => !logOn() ? TCH.PRIVACY : TCH.PRIVACY_SHARE[tLog.share === true ? 'ja' : tLog.share === false ? 'nee' : 'open'];
+  // D34 stop flow: what the board shows after "Stop de escape". No digit of the lock: the teacher reads them from the printed answer sheet.
+  const T_STOP_STEPS = ['Tik op We stoppen, onderaan je scherm.', 'Typ de cijfers die je docent voorleest. Of ga meteen naar de eindcheck.', 'Maak daarna de eindcheck en Mijn 18-plan.'];
+  const tStopBox = () => tStopped ? `<section class="t-stop" id="t-stop-h" tabindex="-1" aria-live="polite"><h3 class="h4">De escape is gestopt</h3><ol>${T_STOP_STEPS.map(x => `<li>${esc(x)}</li>`).join('')}</ol><p class="t-note">Lees de cijfers voor van je geprinte antwoordblad. Of open Toon antwoorden als het bord uit staat.</p></section>` : '';
+  const tStopBtn = () => btn(tStopped ? 'Verder met de escape' : 'Stop de escape', 't-stop', 'ghost', `aria-pressed="${tStopped}"`);
+  // D34 (gate round 2): four long teacher sections fold shut by default (details), so the screen fits 15 minutes of preparation. Which ones the
+  // teacher opened is kept for this tab only (sessionStorage, a per-viewer convenience); it never holds anything about pupils.
+  const T_FOLD_KEY = 'e18-tfold';
+  // window.E18_TEST_FOLDS_OPEN: the test switch for the browser suites written before D34 (tests/folds-open.js), like E18_TEST_NO_READ_GATE.
+  const tFold = window.E18_TEST_FOLDS_OPEN ? { aims: 1, vs: 1, f9: 1, fr: 1 } : (() => { try { const o = JSON.parse(sessionStorage.getItem(T_FOLD_KEY) || '{}'); return o && typeof o === 'object' ? o : {}; } catch (e) { return {}; } })();
+  const tFoldSave = () => { try { sessionStorage.setItem(T_FOLD_KEY, JSON.stringify(tFold)); } catch (e) { /* the folds just start shut */ } };
+  const tFoldOpen = k => `<details class="t-fold" data-fold="${k}" ${tFold[k] ? 'open' : ''}>`;
   const tFoot = () => `<p class="t-privacy">${esc(tPrivacy())}</p><p class="t-disc">${esc(TCH.disclaimer())}</p>`;
   function teachShare() {
     if (!logOn()) return '';
@@ -7672,11 +7769,11 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   // Leerdoelen en aansluiting: all four rooms, so a teacher sees which room fits the current topic; each fit names its source and page.
   function teachAims() {
     const inLes = new Set(tRooms().map(R => R.id));
-    return `<section class="t-aims-sec" aria-labelledby="t-aims-h"><h2 id="t-aims-h" tabindex="-1">Leerdoelen en aansluiting</h2>
+    return `<section class="t-aims-sec" aria-labelledby="t-aims-h">${tFoldOpen('aims')}<summary><h2 id="t-aims-h" tabindex="-1">Leerdoelen en aansluiting</h2></summary>
       <p class="t-lead">Per kamer wat een leerling na afloop kan, en bij welk vak het past. Bij elk vak staat waar je het kunt nakijken.</p>
       <div class="t-aims">${TCH.answerKey().map(K => `<article class="t-aim ${tLes === 'short' && inLes.has(K.id) ? 'in' : ''}" aria-labelledby="t-aim-${K.id}"><h3 id="t-aim-${K.id}">${esc(K.title)}${tLes === 'short' && inLes.has(K.id) ? ' <span class="tag ok">in deze les</span>' : ''}</h3>
         <p class="t-k">Leerdoel</p><p class="t-aimtext">${esc(K.aim)}</p>
-        <p class="t-k">Past bij</p>${K.fits.length ? `<ul class="t-fits">${K.fits.map(f => `<li><b>${esc(f.subject)}:</b> ${esc(f.part)}. <span class="t-src">Bron: ${tSrc(f.sources)}, ${esc(f.where)}</span></li>`).join('')}</ul>` : `<p class="t-nofit">${esc(K.nofit)}</p>`}</article>`).join('')}</div></section>`;
+        <p class="t-k">Past bij</p>${K.fits.length ? `<ul class="t-fits">${K.fits.map(f => `<li><b>${esc(f.subject)}:</b> ${esc(f.part)}. <span class="t-src">Bron: ${tSrc(f.sources)}, ${esc(f.where)}</span></li>`).join('')}</ul>` : `<p class="t-nofit">${esc(K.nofit)}</p>`}</article>`).join('')}</div></details></section>`;
   }
   function teachRoom(K) {
     return `<article class="t-room" aria-labelledby="t-room-${K.id}"><h3 id="t-room-${K.id}"><span class="t-rn">Kamer ${K.n}</span> ${esc(K.title)}</h3>
@@ -7697,7 +7794,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   const tVsInput = () => ({ school: val('t-vs-school', ''), level: val('t-vs-level', ''), year: val('t-vs-year', ''), pupils: val('t-vs-pupils', ''), date: val('t-vs-date', tToday()), note: val('t-vs-note', ''), prep: val('t-vs-prep', qsMinText()), again: val('t-vs-again', ''),
     hard: Object.fromEntries(ESCR.ROOMS.map(R => [R.id, val('t-vs-hard-' + R.id, '')])),
     readFirst: { read: val('t-vs-rd-read', ''), click: val('t-vs-rd-click', '') },
-    pairs: val('t-vs-pairs', ''), pairsEnd: val('t-vs-pairs-end', ''), check: Object.fromEntries(ESCR.QS.map(Q => [Q.id, { start: val(`t-vs-chk-${Q.id}-start`, ''), eind: val(`t-vs-chk-${Q.id}-eind`, '') }])),
+    pairs: val('t-vs-pairs', ''), pairsEnd: val('t-vs-pairs-end', ''), check: Object.fromEntries(ESCR.ROOMS.map(R => [R.id, { start: val(`t-vs-chk-${R.id}-start`, ''), eind: val(`t-vs-chk-${R.id}-eind`, '') }])), // D34: one row per room (forms A and B)
     herh: { date: val('t-vs-h9-date', ''), unit: val('t-vs-h9-unit', 'leerling'), n: val('t-vs-h9-n', ''), right: Object.fromEntries(ESCR.ROOMS.map(R => [R.id, val('t-vs-h9-right-' + R.id, '')])),
       plan: Object.fromEntries((H9 ? H9.PLAN_OPTS : []).map(([k]) => [k, val('t-vs-h9-plan-' + k, '')])) } });
   const tReport = () => TCH.report(tVsInput(), tVar() || 'basis');
@@ -7708,7 +7805,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   function teachVerslag() {
     if (tLes === 'short' && !tVar()) return `<section class="t-card t-vs" aria-labelledby="t-vs-h"><h2 id="t-vs-h">Lesverslag</h2><p class="t-note">Kies eerst twee kamers bij Welke les.</p></section>`;
     const field = (id, label, input) => `<label class="field" for="${id}">${label}${input}</label>`, opts = (id, list, d = '') => list.map(([v, l]) => `<option value="${v}" ${val(id, d) === v ? 'selected' : ''}>${l}</option>`).join('');
-    return `<section class="t-card t-vs" aria-labelledby="t-vs-h"><h2 id="t-vs-h">Lesverslag</h2>
+    return `<section class="t-card t-vs" aria-labelledby="t-vs-h">${tFoldOpen('vs')}<summary><h2 id="t-vs-h">Lesverslag</h2></summary>
       <p class="t-lead">Na de les. Vul in wat je weet, dan maakt dit scherm een kort verslag om te kopiëren of af te drukken. ${logOn() ? 'Het verslag zelf wordt niet verstuurd of bewaard.' : 'Er wordt niets verstuurd of bewaard.'}</p>
       <div class="t-vs-grid">${field('t-vs-school', 'School (mag leeg blijven)', `<input id="t-vs-school" maxlength="80" autocomplete="off" value="${esc(val('t-vs-school', ''))}">`)}
         ${field('t-vs-date', 'Datum', `<input id="t-vs-date" type="date" value="${esc(val('t-vs-date', tToday()))}">`)}
@@ -7725,7 +7822,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
       <div id="t-vs-out">${teachVsOut()}</div>
       ${teachVsFeedback(field, opts)}
       <div class="row-acts">${logOn() ? btn('Verslag opslaan', 't-vs-save') : ''}${btn('Kopieer verslag', 't-vs-copy', logOn() ? 'ghost' : '')}${btn('Verslag afdrukken', 't-vs-print', 'ghost')}</div>
-      <p class="t-privacy">${logOn() ? 'Dit verslag blijft op deze pagina. Sluit je de pagina, dan is het weg. Alleen de vragen voor het Escape 18-team gaan anoniem naar het team, en alleen als deze klas deelt.' : 'Dit verslag blijft op deze pagina. Sluit je de pagina, dan is het weg. Er gaat niets naar een server.'}</p></section>`;
+      <p class="t-privacy">${logOn() ? 'Dit verslag blijft op deze pagina. Sluit je de pagina, dan is het weg. Alleen de vragen voor het Escape 18-team gaan anoniem naar het team, en alleen als deze klas deelt.' : 'Dit verslag blijft op deze pagina. Sluit je de pagina, dan is het weg. Er gaat niets naar een server.'}</p></details></section>`;
   }
   // D33: the teacher's feedback for the team (spec type "feedback"): not part of the report text (the pilot report reads that), sent with
   // "Verslag opslaan" only when this class shares. "Zou je deze les opnieuw geven?" above is reused as "again".
@@ -7745,11 +7842,11 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   // F1: the start- and eindcheck by show of hands, one hand per pair: how many pairs, and per question how many had it right before and after.
   // The labels are the ones the pairs see on their win screen. Only numbers; nothing about a pupil.
   function teachVsCheck(field) {
-    const qs = ESCR.checkOf(tVar() || 'basis'), num = (id, max) => `<input id="${id}" type="number" inputmode="numeric" min="0" max="${max}" value="${esc(val(id, ''))}">`;
+    const qs = H9.formOf('A', tVar() || 'basis'), num = (id, max) => `<input id="${id}" type="number" inputmode="numeric" min="0" max="${max}" value="${esc(val(id, ''))}">`;
     if (!qs.length) return '';
     return `<fieldset class="t-vs-chk"><legend>Start- en eindcheck. ${esc(TCH.CHECK_ASK)}</legend>
       <div class="t-vs-grid">${field('t-vs-pairs', 'Tweetallen bij de start', num('t-vs-pairs', 30))}${field('t-vs-pairs-end', 'Tweetallen met eindcheck (leeg: evenveel)', num('t-vs-pairs-end', 30))}</div>
-      ${qs.map(Q => `<div class="t-vs-q"><p class="t-k">${esc(ESCR.CHECK_LABEL[Q.id])}</p><div class="t-vs-grid">${field(`t-vs-chk-${Q.id}-start`, `<span class="sr">${esc(ESCR.CHECK_LABEL[Q.id])}: </span>Goed bij de start`, num(`t-vs-chk-${Q.id}-start`, 30))}${field(`t-vs-chk-${Q.id}-eind`, `<span class="sr">${esc(ESCR.CHECK_LABEL[Q.id])}: </span>Goed aan het eind`, num(`t-vs-chk-${Q.id}-eind`, 30))}</div></div>`).join('')}</fieldset>`;
+      ${qs.map(Q => `<div class="t-vs-q"><p class="t-k">${esc(Q.label)}</p><div class="t-vs-grid">${field(`t-vs-chk-${Q.room}-start`, `<span class="sr">${esc(Q.label)}: </span>Goed bij de start`, num(`t-vs-chk-${Q.room}-start`, 30))}${field(`t-vs-chk-${Q.room}-eind`, `<span class="sr">${esc(Q.label)}: </span>Goed aan het eind`, num(`t-vs-chk-${Q.room}-eind`, 30))}</div></div>`).join('')}</fieldset>`;
   }
   // F8: Eerst lezen of doorklikken, by show of hands, one hand per pair. Class level only: the page records nothing about who read.
   function teachVsRead(field) {
@@ -7801,7 +7898,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     if (!P18) return '';
     const plan = TCH.planFor(v || ESCR.shortId(ESCR.SHORT_DEFAULT)), short = tLes === 'short', closing = tEnd == null && tDur === P18.MIN;
     const name = p => p.title === 'Afsluiten' ? 'Afsluiten: Mijn 18-plan' : short && p.title === 'Nabespreken' ? `Nabespreken, de laatste ${P18.MIN} min Mijn 18-plan` : p.title;
-    return `<div class="t-flowbox"><p class="t-k" id="t-flow-h">Lesverloop</p><ol class="t-flow" aria-labelledby="t-flow-h">${plan.map(p => `<li class="${/Mijn 18-plan/.test(name(p)) ? 'p18' : ''}"><b>${p.min} min</b> ${esc(name(p))}</li>`).join('')}</ol>
+    return `<div class="t-flowbox"><p class="t-k" id="t-flow-h">Lesverloop</p><ol class="t-flow" aria-labelledby="t-flow-h">${plan.map(p => `<li class="${/Mijn 18-plan/.test(name(p)) ? 'p18' : ''}"><b>${p.at != null ? 'min ' + p.at : p.min + ' min'}</b> ${esc(name(p))}</li>`).join('')}</ol>
       <div class="row-acts">${btn(`Klastimer op ${P18.MIN} min: Mijn 18-plan`, 't-close', 'ghost small', `aria-pressed="${closing}" ${tEnd != null ? 'disabled' : ''}`)}</div></div>`;
   }
   function teachPlan18(rooms) {
@@ -7840,8 +7937,9 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   function teachHerhaalCard() {
     if (!H9) return '';
     const v = tVar(), S = H9.suggest(h9Les()), n = v ? H9.checksOf(v).length : 0;
-    return `<section class="t-card h-card h9-card" aria-labelledby="h-card-h"><h2 id="h-card-h" tabindex="-1">Herhaling na 4 weken</h2>
-      <p class="t-lead">${H9.MIN} minuten, 3 tot 5 weken na de les. Elke leerling beantwoordt op het eigen scherm ${n === 2 ? 'twee' : 'vier'} nieuwe vragen, één per kamer, met nieuwe datums en bedragen. Daarna tel je met handopsteken: wie had het goed, wie deed het 18-plan?</p>
+    return `<section class="t-card h-card h9-card" aria-labelledby="h-card-h">${tFoldOpen('f9')}<summary><h2 id="h-card-h" tabindex="-1">Herhaling na 4 weken</h2></summary>
+      <p class="t-lead">${H9.MIN} minuten, 3 tot 5 weken na de les. Elke leerling beantwoordt op het eigen scherm ${n === 2 ? 'twee' : 'vier'} vragen, één per kamer. Daarna tel je met handopsteken: wie had het goed, wie deed het 18-plan?</p>
+      <p class="h9-repeat" id="h9-repeat"><b>${esc(H9.REPEAT_NOTE)}</b></p>
       <p class="h9-why">Waarom: één les zakt weg. Na een paar weken nog eens ophalen, met nieuwe voorbeelden, helpt het meest om het te onthouden. Het onderzoek: Rowland (2014), Yang e.a. (2021), Cepeda e.a. (2008).</p>
       ${v ? `<div class="h9-plan"><h3>Plan de herhaling</h3><div class="t-vs-grid">
           <label class="field" for="h9-les">Datum van de les<input id="h9-les" type="date" value="${esc(h9Les())}"></label>
@@ -7853,7 +7951,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
         <p class="sub2">Nieuwe datums en bedragen, dezelfde regels en bronnen als in de kamers (vragenset ${H9.SET}). Alles is verzonnen, behalve de regels.</p></details>` : '<p class="t-note">Kies eerst twee kamers voor de korte les.</p>'}
       <p class="t-privacy">Leerlingen antwoorden op hun eigen scherm. Er wordt niets bewaard of verstuurd: jij telt met handopsteken. De telling zet je in het lesverslag, bij Herhaling.</p>
       <div class="h9-paper"><h3>Geen schermen? De ronde op papier</h3><p>${TCH.HERHAAL_MIN} minuten met ${TCH.HERHAAL.length} open vragen op het bord: een brief, een loonstrook, twee berichten, iemand die je pinpas wil lenen en twee opleidingen. Leerlingen schrijven hun antwoord op papier.</p>
-        <div class="row-acts">${btn('Start de ronde op papier', 'view:herhaal', 'ghost small')}</div></div></section>`;
+        <div class="row-acts">${btn('Start de ronde op papier', 'view:herhaal', 'ghost small')}</div></div></details></section>`;
   }
   // The board during the follow-up: the class timer at 10 minutes, the steps, the link and QR code, and slides: each question (for a class
   // without screens, or to go over the answers), the hand count per question and the 18-plan. The count fields are the lesverslag's own.
@@ -7907,11 +8005,11 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     const curSrc = [...new Map(key.flatMap(K => K.fits.flatMap(f => f.sources)).map(s => [s.url, s])).values()];
     const fitLine = K => K.fits.length ? 'Past bij: ' + K.fits.map(f => `${f.subject} ${f.short} (${f.where})`).join('; ') + '.' : K.nofit;
     return `<section class="tplan" aria-label="Lesplan om af te drukken"><header class="tp-head"><div><p class="tp-k">Escape 18 · lesplan</p><h2>${esc(ESCR.mission.title)}${short ? ' · korte les' : ''}</h2><p>${total} minuten · tweetallen · ${short ? 'twee' : 'vier'} kamers, één code</p></div>
-        <div class="tp-quick"><p class="tp-qh"><b>Klaar in 5 minuten</b> <span>doel: minder dan ${TCH.PREP_MAX} minuten</span></p>${(() => { const Q = TCH.quick(), li = q => `<li><span class="tp-box" aria-hidden="true"></span>${q.n} ${esc(q.print)}</li>`;
+        <div class="tp-quick"><p class="tp-qh"><b>${esc(TCH.QUICK_TITLE)}</b></p>${(() => { const Q = TCH.quick(), li = q => `<li><span class="tp-box" aria-hidden="true"></span>${q.n} ${esc(q.print)}</li>`;
           return `<ol>${Q.slice(0, 3).map(li).join('')}</ol><div><ol start="4">${Q.slice(3).map(li).join('')}</ol><p class="tp-qt">Bereidingstijd: <span class="tp-line"></span> min</p></div>`; })()}</div></header>
       <div class="tp-grid"><div><h3>Doel</h3><p>${esc(TCH.goalFor(v))}</p></div>
         <div><h3>Materialen</h3><ul>${TCH.MATERIALS.map(m => `<li>${esc(m)}</li>`).join('')}</ul></div>
-        <div class="tp-wide"><h3>Lesverloop · ${total} minuten</h3><table><tbody>${plan.map(p => `<tr><th scope="row">${p.min} min</th><td><b>${esc(p.title)}</b> ${esc(p.text)}</td></tr>`).join('')}</tbody></table></div>
+        <div class="tp-wide"><h3>Lesverloop · ${total} minuten</h3><table><tbody>${plan.map(p => `<tr><th scope="row">${p.at != null ? 'minuut ' + p.at : p.min + ' min'}</th><td><b>${esc(p.title)}</b> ${esc(p.text)}</td></tr>`).join('')}</tbody></table></div>
         <div><h3>Zo beginnen leerlingen</h3><ol>${TCH.START.map(s => `<li>${esc(s)}</li>`).join('')}</ol>${TCH.isWebLink(link) ? `<p class="tp-url">${esc(link)}</p>` : ''}${short ? '<p>Werkt de link niet? Kies op het startscherm Korte les.</p>' : ''}</div>
         <div><h3>Code van het slot</h3><p class="tp-code">${code.split('').join(' ')}</p><p>Eén cijfer per kamer, in de volgorde van de kamers.</p></div>
         <div class="tp-wide"><h3>Per kamer · leerdoel, nabespreken en antwoorden</h3><div class="tp-rooms">${key.map(K => `<div class="tp-room"><h4>Kamer ${K.n} · ${esc(K.title)} · cijfer ${K.digit}</h4>
@@ -7934,7 +8032,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     <p class="t-fr-meta">Laatste controle ${esc(FR.shortDate(r.last))} · volgende controle ${esc(r.next.label)} ${frTag(r.status)}</p></div>`;
   function teachFresh() {
     const R = FR.report(core.BUILD_DATE), N = R.news;
-    return `<section class="t-card t-fr" aria-labelledby="t-fr-h"><h2 id="t-fr-h">Bronnen en controle</h2>
+    return `<section class="t-card t-fr" aria-labelledby="t-fr-h">${tFoldOpen('fr')}<summary><h2 id="t-fr-h">Bronnen en controle</h2></summary>
       <p class="t-lead">Elke regel in de les heeft minstens twee bronnen. We lezen ze na in januari en juli. De status hoort bij deze versie van ${esc(FR.longDate(R.date))}.</p>
       <dl class="t-fr-sum"><div><dt>Regels</dt><dd>${R.rules.length}</dd></div><div><dt>Bronnen</dt><dd>${R.sourceCount}</dd></div><div><dt>Volgende controle</dt><dd>${esc(R.next.label)}</dd></div>
         <div><dt>Status</dt><dd>${R.due ? `<span class="tag due">${R.due} keer controle nodig</span>` : frTag('op tijd')}</dd></div></dl>
@@ -7943,7 +8041,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
         ${R.groups.map(G => `<div class="t-fr-group"><h3>${esc(G.title)}</h3>${G.rules.map(frRule).join('')}</div>`).join('')}
         <div class="t-fr-group"><h3>Bronnen bij de leerdoelen</h3><ul class="t-fr-srcs">${R.curriculum.map(frSrc).join('')}</ul></div></details>
       ${N.map(n => `<div class="t-fr-news"><h3>Wat is er veranderd: ${esc(n.title.toLowerCase())}</h3><p>${esc(n.text)}</p><p>${esc(n.lesson)}</p>
-        <ul class="t-fr-srcs">${n.sources.map(frSrc).join('')}</ul><p class="t-fr-only">Alleen voor de docent. Leerlingen zien dit niet.</p></div>`).join('')}</section>`;
+        <ul class="t-fr-srcs">${n.sources.map(frSrc).join('')}</ul><p class="t-fr-only">Alleen voor de docent. Leerlingen zien dit niet.</p></div>`).join('')}</details></section>`;
   }
   // The upkeep checklist: one row per rule and source, with boxes to tick and room for a date and initials. Links are written out (paper).
   const frBox = '<span class="tfr-box"></span>';
@@ -7978,7 +8076,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     if (on) qsDone.add(n); else qsDone.delete(n);
     if (qsDone.size === QS_N && qsFin == null) { qsFin = qsMs(); qsAt = null;
       const min = Math.max(1, Math.round(qsFin / 60000));
-      return ` Klaar: bereidingstijd ${min} ${min === 1 ? 'minuut' : 'minuten'}${min < TCH.PREP_MAX ? `, minder dan ${TCH.PREP_MAX}` : ''}.`; }
+      return ` Klaar: bereidingstijd ${min} ${min === 1 ? 'minuut' : 'minuten'}${min <= TCH.QUICK_MIN ? `, binnen ${TCH.QUICK_MIN} minuten` : ''}.`; }
     if (qsDone.size < QS_N && qsFin != null) { qsAcc = qsFin; qsFin = null; qsAt = Date.now(); }
     const next = qsNow(), Q = TCH.quick()[next - 1];
     return on ? ` Stap ${n} is gedaan.${Q ? ` Nu stap ${next}: ${Q.title}.` : ''}` : ` Stap ${n} staat weer open.`;
@@ -7997,8 +8095,8 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   }
   function teachQuick() {
     const steps = TCH.quick(), now = qsNow(), fin = qsFin != null, ms = qsMs(), min = Math.max(1, Math.round(ms / 60000));
-    const status = !qsOn ? 'Druk op Start als je begint.' : fin ? `Klaar in ${min} ${min === 1 ? 'minuut' : 'minuten'}. ${min < TCH.PREP_MAX ? `Dat is minder dan ${TCH.PREP_MAX} minuten.` : `Dat is ${TCH.PREP_MAX} minuten of meer: schrijf in het lesverslag wat tijd kostte.`} De tijd staat in het lesverslag.`
-      : qsAt == null ? 'De tijd staat stil.' : `Stap ${now} van ${QS_N}. Doel: minder dan ${TCH.PREP_MAX} minuten.`;
+    const status = !qsOn ? 'Druk op Start als je begint.' : fin ? `Klaar in ${min} ${min === 1 ? 'minuut' : 'minuten'}. ${min <= TCH.QUICK_MIN ? `Dat is binnen ${TCH.QUICK_MIN} minuten.` : `Dat is meer dan ${TCH.QUICK_MIN} minuten: schrijf in het lesverslag wat tijd kostte.`} De tijd staat in het lesverslag.`
+      : qsAt == null ? 'De tijd staat stil.' : `Stap ${now} van ${QS_N}. Doel: klaar in ${TCH.QUICK_MIN} minuten.`;
     const acts = Q => {
       if (Q.id === 'les') return btn('Naar Welke les?', 't-goto:choose', 'ghost small');
       if (Q.id === 'link') return tVar() ? `<a class="btn ghost small" href="${esc(tPupilLog())}" target="_blank" rel="noopener" data-action="qs-link">Open de leerlinglink<span class="sr">, opent in een nieuw tabblad</span></a>${btn('Naar de link en QR-code', 't-goto:start', 'ghost small')}` : `<p class="qs-wait">Kies eerst twee kamers voor de korte les.</p>`;
@@ -8012,7 +8110,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
         ? `<input type="checkbox" class="qs-box" id="qs-done-${Q.n}" ${done ? 'checked' : ''}><label for="qs-done-${Q.n}"><span class="qs-n">Stap ${Q.n}</span> ${esc(Q.title)}</label>`
         : `<span class="qs-n">Stap ${Q.n}</span> <span class="qs-t">${esc(Q.title)}</span>`}
         ${cur ? `<div class="qs-body"><p>${esc(Q.text)}</p><div class="row-acts">${acts(Q)}</div></div>` : ''}</li>`; };
-    return `<section class="t-card qs ${qsOn ? 'on' : ''} ${fin ? 'fin' : ''}" aria-labelledby="qs-h"><div class="qs-top"><div class="qs-intro"><h2 id="qs-h" tabindex="-1">Klaar in 5 minuten</h2><p class="t-lead">${esc(TCH.QUICK_LEAD)}</p></div>
+    return `<section class="t-card qs ${qsOn ? 'on' : ''} ${fin ? 'fin' : ''}" aria-labelledby="qs-h"><div class="qs-top"><div class="qs-intro"><h2 id="qs-h" tabindex="-1">${esc(TCH.QUICK_TITLE)}</h2><p class="t-lead">${esc(TCH.QUICK_LEAD)}</p></div>
       <div class="qs-clock"><p class="qs-k" id="qs-time-k">Bereidingstijd</p><p class="qs-time"><span id="qs-time" role="timer" aria-labelledby="qs-time-k">${qsClock(ms)}</span></p><p class="qs-status">${esc(status)}</p>
         <div class="row-acts">${!qsOn ? btn('Start', 'qs-start', 'esc-go') : fin ? '' : btn(qsAt == null ? 'Verder' : 'Pauze', 'qs-pause', 'ghost small')}${qsOn ? btn('Opnieuw', 'qs-reset', 'ghost small') : ''}</div></div></div>
       <ol class="qs-steps" aria-label="Vijf stappen">${steps.map(li).join('')}</ol>
@@ -8065,7 +8163,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     return `<div class="p-view">${head}
       <div class="p-main"><section class="t-timer p-timer ${run ? 'run' : ''} ${over ? 'over' : ''}" aria-labelledby="p-timer-h"><h2 id="p-timer-h" class="sr">Klastimer</h2>
           <p class="t-clock p-clock"><span id="t-clock" role="timer">${tClock(left)}</span></p>
-          <div class="row-acts">${btn(label, 't-run', 'esc-go big')}${btn('Opnieuw', 't-reset', 'ghost')}</div></section>
+          <div class="row-acts">${btn(label, 't-run', 'esc-go big')}${btn('Opnieuw', 't-reset', 'ghost')}${tStopBtn()}</div>${tStopBox()}</section>
         ${pTell != null ? projTell() : `<section class="p-prog" id="p-prog" aria-labelledby="p-prog-h">${projProg()}</section>`}</div>
       ${pTell != null ? '' : `<section class="p-join" aria-label="Zo doe je mee">${M ? `<div class="p-qr"><svg viewBox="0 0 ${n} ${n}" role="img" aria-label="QR-code met de link naar deze les" shape-rendering="crispEdges"><rect width="${n}" height="${n}" fill="#fff"/><path d="${TCH.qrPath(M)}" fill="#000"/></svg></div>` : ''}
         <div class="p-start"><ol class="p-steps">${TCH.START.map(s => `<li>${esc(s)}</li>`).join('')}</ol>${wait ? '' : `<p class="p-url"><span class="sr">Link: </span>${esc(link)}</p>`}${klas}</div>
@@ -8087,7 +8185,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
         <section class="t-card t-timer ${run ? 'run' : ''} ${over ? 'over' : ''}" aria-labelledby="t-timer-h"><h2 id="t-timer-h">Klastimer</h2>
           <p class="t-clock"><span id="t-clock" role="timer">${tClock(left)}</span></p>${over ? '<p class="t-over">De tijd is om.</p>' : ''}
           <div class="t-durs" role="group" aria-label="Duur van de escape">${TCH.TIMES.map(m => `<button type="button" class="t-dur" data-action="t-dur:${m}" aria-pressed="${m === tDur}" ${run ? 'disabled' : ''}>${m} min</button>`).join('')}</div>
-          <div class="row-acts">${btn(label, 't-run', 'esc-go big')}${btn('Opnieuw', 't-reset', 'ghost')}</div>
+          <div class="row-acts">${btn(label, 't-run', 'esc-go big')}${btn('Opnieuw', 't-reset', 'ghost')}${tStopBtn()}</div>${tStopBox()}
           ${teachFlow(v)}</section></div>
       ${teachProblems()}
       ${teachAims()}
@@ -8156,7 +8254,9 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     't-run': () => { if (tEnd == null && tChosen() && !tLog.started && tVar()) { tLog.started = true; tLogSave(); LOG.send(tCtx(), 'teacher_start', { variant: tVar(), rooms: tRooms().map(R => R.id) }); logFlush(); }
       if (tEnd != null) { tLeft = Math.max(0, tEnd - Date.now()); tEnd = null; flash = { kind: 'info', title: 'Klastimer gepauzeerd op ' + tClock(tLeft) + '.' }; }
       else { if (tLeft <= 0) tLeft = tDur * 60000; tEnd = Date.now() + tLeft; flash = { kind: 'info', title: 'De klastimer loopt: ' + tClock(tLeft) + '.' + qsSet(5, true) }; } render(); },
-    't-reset': () => { tEnd = null; tLeft = tDur * 60000; flash = { kind: 'info', title: `Klastimer opnieuw: ${tDur} minuten.` }; render(); },
+    't-stop': () => { tStopped = !tStopped; if (tStopped && tEnd != null) { tLeft = Math.max(0, tEnd - Date.now()); tEnd = null; }
+      flash = { kind: 'info', title: tStopped ? 'De escape is gestopt. Leerlingen tikken op We stoppen.' : 'Verder met de escape.' }; pendingFocus = { key: tStopped ? '#t-stop-h' : '[data-action="t-stop"]' }; render(); },
+    't-reset': () => { tStopped = false; tEnd = null; tLeft = tDur * 60000; flash = { kind: 'info', title: `Klastimer opnieuw: ${tDur} minuten.` }; render(); },
     // F3: the close. The class timer goes to the 2 minutes of "Mijn 18-plan" (not while it runs, like the durations).
     't-close': () => { if (tEnd == null && P18) { tDur = P18.MIN; tLeft = tDur * 60000; flash = { kind: 'info', title: `Klastimer op ${P18.MIN} minuten: Mijn 18-plan.` }; } render(); },
     't-dur': el => { const m = parseInt(el.dataset.action.split(':')[1], 10); if (TCH.TIMES.includes(m) && tEnd == null) { tDur = m; tLeft = m * 60000; flash = { kind: 'info', title: `Klastimer op ${m} minuten.` }; } render(); },
@@ -8199,7 +8299,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     'qs-pause': () => { if (!qsOn || qsFin != null) return render(); if (qsAt != null) { qsAcc += Date.now() - qsAt; qsAt = null; flash = { kind: 'info', title: 'De bereidingstijd staat stil op ' + qsClock(qsMs()) + '.' }; }
       else { qsAt = Date.now(); flash = { kind: 'info', title: 'De bereidingstijd loopt weer.' }; } render(); },
     'qs-reset': () => { qsOn = false; qsAt = null; qsAcc = 0; qsFin = null; qsDone = new Set(); qsPrinted = { v: null, set: new Set() }; delete drafts['t-vs-prep'];
-      flash = { kind: 'info', title: 'Klaar in 5 minuten staat weer aan het begin.' }; pendingFocus = { key: '[data-action="qs-start"]' }; render(); },
+      flash = { kind: 'info', title: TCH.QUICK_TITLE + ' staat weer aan het begin.' }; pendingFocus = { key: '[data-action="qs-start"]' }; render(); },
     // The pupil link opens in a new tab as a normal link; step 2 is ticked after the click, so the click itself is not disturbed.
     'qs-link': () => { setTimeout(() => { const said = qsSet(2, true); if (said) { flash = { kind: 'info', title: said.trim() }; render(); } }, 0); },
     'qs-offline': () => { let ok = false;
@@ -8226,7 +8326,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   }, 250);
   // F4: a step ticked by hand; the open/closed state of the "Probleem?" items survives a new render.
   document.addEventListener('change', e => { const m = /^qs-done-(\d)$/.exec(e.target.id || ''); if (!m) return; e.stopImmediatePropagation();
-    const said = qsSet(+m[1], e.target.checked); flash = { kind: 'info', title: said.trim() || 'Klaar in 5 minuten.' }; render(); }, true);
+    const said = qsSet(+m[1], e.target.checked); flash = { kind: 'info', title: said.trim() || TCH.QUICK_TITLE + '.' }; render(); }, true);
   document.addEventListener('toggle', e => { const d = e.target; if (!d.dataset || !d.dataset.pb) return; if (d.open) pbOpen.add(d.dataset.pb); else pbOpen.delete(d.dataset.pb); }, true);
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && view === 'proj') { e.preventDefault(); view = 'teach'; pProb = false; pTell = null; flash = null; render(); window.scrollTo(0, 0); } });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && view === 'h9proj') { e.preventDefault(); TEACH_HANDLERS['h9-back'](); } });
@@ -8309,7 +8409,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   // ---------- De les: the escape "Je eerste maand als 18-jarige" (src/escaperun.js) ----------
   // Presentation only (never in the action log): the feedback of the last answer, a room looked at again from the lock, multi toggles,
   // whether the balance already counted up and whether the last answer was just wrong (for one shake).
-  let escFb = null, escRev = null, escPick = { q: null, set: new Set() }, escShake = null, escChk = null; // escChk: the run whose Startcheck was opened from the start screen (F1)
+  let escFb = null, escRev = null, escPick = { q: null, set: new Set() }, escShake = null, escChk = null, escStop = null; // escStop: the run whose stop view is open (D34). escChk: the run whose Startcheck was opened from the start screen (F1)
   const escBalDone = new Set();
   // ---------- F8 "Eerst lezen" (src/readfirst.js, FEATURE_F8.md): open the document, read a few seconds, then choose ----------
   // Screen memory only: when this run opened which document, and which "Waar staat dat?" is shown. Never in the action log, a save or storage.
@@ -8499,11 +8599,12 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   // F1: the Startcheck (before the clock) and the Eindcheck (after the lock): one tap per question, no hint, no retry and no feedback until
   // the win screen. The question, its options and its document are the room's own; the Eindcheck shows the options turned one place.
   function escCheck(r, ms, set, Q) {
-    const list = ESCR.checkOf(ms.variant, set), i = list.indexOf(Q), R = escRoomOf(Q), start = set === 'start';
-    const docs = Q.docs.map(id => escDoc(R, id, ms, null, false)).join(''), opts = ESCR.checkOptions(Q, set), long = opts.some(o => o[1].length > 30);
-    const head = `<section class="esc-hud esc-chkhud" aria-label="Je voortgang"><div class="esc-hud-t"><p class="esc-kicker">${start ? 'Startcheck' : 'Eindcheck'} · vraag ${i + 1} van ${list.length}</p><h1 class="esc-h1">${start ? 'Voordat de klok start' : 'Het slot is open!'}</h1></div>
+    const legacy = ESCR.legacyCheck(ms), list = ESCR.checkOf(ms.variant, set, ms), i = list.indexOf(Q), R = legacy ? escRoomOf(Q) : ESCR.BYROOM[Q.room], start = set === 'start';
+    // D34: forms A and B carry their own documents (src/herhaling.js), drawn like the herhaling; a D31 to D33 run keeps the room's documents.
+    const docs = legacy ? Q.docs.map(id => escDoc(R, id, ms, null, false)).join('') : h9Docs(Q), opts = ESCR.checkOptions(Q, set, ms), long = opts.some(o => o[1].length > 30);
+    const head = `<section class="esc-hud esc-chkhud" aria-label="Je voortgang"><div class="esc-hud-t"><p class="esc-kicker">${start ? 'Startcheck' : 'Eindcheck'} · vraag ${i + 1} van ${list.length}</p><h1 class="esc-h1">${start ? 'Voordat de klok start' : ms.stopped ? 'Jullie zijn gestopt' : 'Het slot is open!'}</h1></div>
       <ol class="esc-prog" aria-hidden="true">${list.map((x, j) => `<li class="${j < i ? 'done' : j === i ? 'now' : ''}"></li>`).join('')}</ol></section>`;
-    const lead = start ? 'Kies wat jullie nu denken. Pas aan het eind zie je wat goed was.' : 'De klok staat stil. Dezelfde vragen als bij de start, in een andere volgorde.';
+    const lead = start ? 'Kies wat jullie nu denken. Pas aan het eind zie je wat goed was.' : legacy ? 'De klok staat stil. Dezelfde vragen als bij de start, in een andere volgorde.' : 'De klok staat stil. Nieuwe vragen over dezelfde regels als in de kamers.';
     const a = `<div class="card act esc-q esc-chk"><p class="esc-chk-lead">${esc(lead)}</p><p class="esc-situ">${esc(Q.situ || R.intro)}</p><h2 id="esc-prompt" class="esc-prompt">${esc(Q.prompt)}</h2></div>`;
     const b = `<div class="esc-cards ${long ? 'one' : ''}" role="group" aria-labelledby="esc-prompt">${opts.map(([v, l]) => `<button type="button" class="esc-card" data-action="esc-chk:${set}:${Q.id}:${v}">${esc(l)}</button>`).join('')}</div>${flash && flash.kind === 'warn' ? flashBox() : ''}`;
     return head + `<div class="esc-stage ${docs ? '' : 'nodocs'}"><div class="esc-a">${a}</div>${docs ? `<div class="esc-docs">${docs}</div>` : ''}<div class="esc-b">${b}</div></div>`;
@@ -8524,8 +8625,8 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   }
   function escWin(r, ms) {
     const res = ESCR.mission.result(ms), code = ESCR.codeOf(ms.variant);
-    return `<section class="esc-win"><div class="esc-lockbig" aria-hidden="true">${code.split('').map((c, i) => `<i style="--i:${i}">${c}</i>`).join('')}</div><h1 class="esc-won" tabindex="-1">Ontsnapt!</h1>
-      <p class="esc-lead">Jullie kraakten de code ${code.split('').join(' ')}.</p>
+    return `<section class="esc-win">${res.stopped === 'skip' ? '' : `<div class="esc-lockbig" aria-hidden="true">${code.split('').map((c, i) => `<i style="--i:${i}">${c}</i>`).join('')}</div>`}<h1 class="esc-won" tabindex="-1">${res.stopped ? 'Goed gewerkt!' : 'Ontsnapt!'}</h1>
+      <p class="esc-lead">${res.stopped === 'skip' ? 'De tijd was om, dus jullie zijn eerder gestopt. Kijk hieronder wat je meeneemt.' : res.stopped ? `De tijd was om. Met de cijfers van je docent ging het slot open: ${code.split('').join(' ')}.` : `Jullie kraakten de code ${code.split('').join(' ')}.`}</p>
       <dl class="esc-stats"><div><dt>Tijd</dt><dd>${ESCR.clock(res.time)}</dd>${res.penalty ? `<dd class="sub2">waarvan ${ESCR.clock(res.penalty)} voor hints</dd>` : ''}</div><div><dt>Hints</dt><dd>${res.hints}</dd></div><div><dt>Foute pogingen</dt><dd>${res.wrong}</dd>${res.wrongCodes ? `<dd class="sub2">waarvan ${res.wrongCodes} op het slot</dd>` : ''}</div></dl>
       ${res.check ? escCheckResult(res.check) : ''}
       ${escClosing(r)}
@@ -8549,6 +8650,28 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     if (p.step === 'intro') { const Q = ESCR.checkNext(ms, 'start'); return Q && ((ms.check && Object.keys(ms.check.start).length) || escChk === r.id) ? escCheck(r, ms, 'start', Q) : escIntro(r, ms); }
     if (p.step === 'eind') return escCheck(r, ms, 'eind', ESCR.checkNext(ms, 'eind'));
     if (p.step === 'done') return p18Live(r) ? p18View(r, ms) : escWin(r, ms);
+    if (escStop === r.id) return escStopView(r, ms);
+    return escPlay(r, ms, p) + escStopBar(r, ms);
+  }
+  // D34 stop flow (gate round 2; kamers-engine README "Stopping"): every escape view ends with "We stoppen"; when the pupil clock reaches the
+  // escape time a calm notice says the time is up. The stop view fills in the digits found so far; the pair types the rest or goes on.
+  const escTijd = () => { try { const v = parseInt(new URLSearchParams(location.search).get('tijd'), 10); return v >= 5 && v <= 90 ? v : null; } catch (e) { return null; } };
+  function escStopBar(r, ms) {
+    const start = ESCR.clockStart(ms), min = escTijd() || ESCR.minutesOf(ms.variant), up = start != null && ms.paused == null && Date.now() - start >= min * 60000;
+    return `${up ? `<div class="card esc-timeup" role="status" id="esc-timeup"><p><b>De tijd is om.</b> Rustig afronden. Tik op We stoppen als je docent dat zegt.</p>${btn('We stoppen', 'esc-stop', 'esc-go')}</div>` : ''}
+      <div class="esc-stopbar"><p>Zegt je docent dat de tijd om is?</p>${btn('We stoppen', 'esc-stop', 'ghost small')}</div>`;
+  }
+  function escStopView(r, ms) {
+    const rooms = escRooms(ms), ins = rooms.map((R, i) => { const own = escOwn(ms.notes, R.id) ? String(ms.notes[R.id]) : '', v = escOwn(drafts, 'esc-s' + i) ? drafts['esc-s' + i] : own;
+      return `<label class="esc-digit" for="esc-s${i}"><span>Cijfer ${i + 1}</span><input id="esc-s${i}" inputmode="numeric" maxlength="1" autocomplete="off" value="${esc(v)}"></label>`; }).join('');
+    const chk = ESCR.checkDone(ms, 'start');
+    return `<section class="card act esc-stopv" aria-labelledby="esc-stop-h"><h1 class="esc-h1" id="esc-stop-h" tabindex="-1">Jullie stoppen met de escape</h1>
+      <p class="esc-cluetext">Goed gewerkt! Je docent leest de cijfers van het slot voor. Typ de cijfers die jullie nog niet hebben.</p>
+      <div class="esc-dial" role="group" aria-label="De cijfers van het slot">${ins}</div>${flash && flash.kind === 'warn' ? flashBox() : ''}
+      <div class="row-acts">${btn('Open het slot', 'esc-stop-code', 'esc-go')}</div>
+      <p>Geen cijfers? Ga dan meteen verder.</p><div class="row-acts">${btn(chk ? 'Naar de eindcheck' : 'Naar het eindscherm', 'esc-stop-skip', '')}${btn('Terug naar de escape', 'esc-stop-back', 'ghost')}</div></section>`;
+  }
+  function escPlay(r, ms, p) {
     const rooms = escRooms(ms), N = rooms.length;
     const rev = escRev && escRev.run === r.id ? rooms.find(x => x.id === escRev.room) : null;
     if (rev && rev.qs.every(Q => escOwn(ms.answers, Q.id)) && escOwn(ms.notes, rev.id)) return escHud(ms, rev, `Kamer ${escN(ms, rev)} nog eens bekijken`) + escReview(ms, rev);
@@ -8576,14 +8699,34 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     render();
   }
   const escArgs = el => el.dataset.action.split(':').slice(1);
+  // D34: stopped before the lock opened: one lock event {opened:false}, then the eindcheck (after a startcheck) and the end screen.
+  function escStopExit(action) {
+    const res = escAct(action); if (!res.ok) { pendingFocus = { key: '#esc-s0' }; return; }
+    escStop = null; logSend(run(), 'lock', { opened: false, sec: logSec(ESCR.mission.result(res.ms).raw) });
+    if (res.ms.phase === 'done') logEnd(run(), res.ms); else logFlush();
+    flash = { kind: 'ok', title: 'Goed gewerkt!', text: res.ms.phase === 'eind' ? 'Nog de eindcheck: nieuwe vragen over dezelfde regels.' : 'Kijk hieronder wat je meeneemt.' };
+    render(); window.scrollTo(0, 0);
+  }
   const ESC_HANDLERS = {
-    'esc-chk-go': () => { if (!logStart(run())) return; escChk = runId; flash = null; render(); window.scrollTo(0, 0); },
+    'esc-chk-go': () => { if (!logStart(run())) return; const ms0 = msOf(run());
+      // D34: form A or B first, drawn at random per run (crypto), once; the eindcheck is the other form.
+      if (!ms0.forms && !ms0.check) { let f = 'A'; try { f = crypto.getRandomValues(new Uint8Array(1))[0] % 2 ? 'B' : 'A'; } catch (e) { f = Math.random() < 0.5 ? 'A' : 'B'; } if (!escAct({ t: 'form', form: f }).ok) return; }
+      escChk = runId; flash = null; render(); window.scrollTo(0, 0); },
+    // D34 stop flow: "We stoppen" opens the stop view; the pair types the digits the teacher reads out, or goes straight on.
+    'esc-stop': () => { escStop = runId; escFb = null; escRev = null; flash = null; render(); window.scrollTo(0, 0); },
+    'esc-stop-back': () => { escStop = null; flash = null; render(); window.scrollTo(0, 0); },
+    'esc-stop-code': () => { const ms = msOf(run()), rooms = escRooms(ms), code = rooms.map((R, i) => String(val('esc-s' + i, escOwn(ms.notes, R.id) ? String(ms.notes[R.id]) : '')).trim()).join('');
+      if (!new RegExp('^\\d{' + rooms.length + '}$').test(code)) { pendingFocus = { key: '#esc-s0' }; return need('Vul in elk vakje één cijfer in. Of ga meteen verder.'); }
+      escStopExit({ t: 'stop', how: 'code', code }); },
+    'esc-stop-skip': () => escStopExit({ t: 'stop', how: 'skip' }),
     'esc-chk': el => { const [set, q, v] = escArgs(el), res = escAct({ t: 'check', set, q, value: v }); if (!res.ok) return;
-      if (res.complete) { const C = ESCR.checkResult(res.ms); logSend(run(), 'check', { phase: set === 'eind' ? 'end' : 'start', score: set === 'eind' ? C.eind : C.start, max: C.of }); if (set === 'eind') logEnd(run(), res.ms); else logFlush(); }
-      const list = ESCR.checkOf(res.ms.variant, set), next = ESCR.checkNext(res.ms, set);
+      if (res.complete) { const C = ESCR.checkResult(res.ms), form = ESCR.formOfRun(res.ms, set); // D34: form A or B and the per-item results (LOGGING_SPEC.md)
+        // A D31 to D33 run (room questions, no form) sends no check event: the spec has no form for it.
+        if (form) logSend(run(), 'check', { phase: set === 'eind' ? 'end' : 'start', form, score: set === 'eind' ? C.eind : C.start, max: C.of, items: C.items[set] }); if (set === 'eind') logEnd(run(), res.ms); else logFlush(); }
+      const list = ESCR.checkOf(res.ms.variant, set, res.ms), next = ESCR.checkNext(res.ms, set);
       if (next) flash = { kind: 'info', title: `Vraag ${list.indexOf(next) + 1} van ${list.length}` };
       else if (set === 'start') { escChk = null; flash = { kind: 'ok', title: 'Startcheck klaar', text: 'Start nu de klok.' }; }
-      else flash = { kind: 'ok', title: 'Ontsnapt! Jullie tijd: ' + ESCR.clock(ESCR.mission.result(res.ms).time) + '.' };
+      else flash = res.ms.stopped ? { kind: 'ok', title: 'Klaar! Kijk hieronder wat jullie goed hadden.' } : { kind: 'ok', title: 'Ontsnapt! Jullie tijd: ' + ESCR.clock(ESCR.mission.result(res.ms).time) + '.' };
       render(); window.scrollTo(0, 0); },
     'esc-begin': () => { if (!logStart(run())) return; const res = escAct({ t: 'begin' }); if (res.ok) { flash = { kind: 'info', title: 'De klok loopt. Kamer 1: ' + escRooms(res.ms)[0].title + '.' }; render(); window.scrollTo(0, 0); } },
     'esc-pick': el => { const [q, v] = escArgs(el); escAnswer(q, v); },
@@ -8641,9 +8784,13 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     const t = e.target; if (e.key !== 'Enter' || !t.id || !(t.id === 'esc-num' || /^esc-d\d$/.test(t.id))) return;
     const b = $('app').querySelector(t.id === 'esc-num' ? '[data-action^="esc-num:"]' : '[data-action="esc-code"]'); if (b) { e.preventDefault(); b.click(); }
   });
-  document.addEventListener('input', e => { const t = e.target, m = /^esc-d(\d)$/.exec(t.id || ''); if (!m) return;
+  document.addEventListener('toggle', e => { const d = e.target; if (!d || !d.classList || !d.classList.contains('t-fold')) return; tFold[d.dataset.fold] = d.open ? 1 : 0; tFoldSave(); }, true);
+  // A printed teacher screen shows the folded sections too; after printing they fold back as the teacher left them.
+  window.addEventListener('beforeprint', () => document.querySelectorAll('details.t-fold:not([open])').forEach(d => { d.dataset.print = '1'; d.open = true; }));
+  window.addEventListener('afterprint', () => document.querySelectorAll('details.t-fold[data-print]').forEach(d => { delete d.dataset.print; d.open = false; }));
+  document.addEventListener('input', e => { const t = e.target, m = /^esc-([ds])(\d)$/.exec(t.id || ''); if (!m) return;
     const v = t.value.replace(/\D/g, '').slice(-1); if (v !== t.value) t.value = v; drafts[t.id] = v;
-    const n = v && $('esc-d' + (+m[1] + 1)); if (n) { n.focus(); n.select(); } });
+    const n = v && $('esc-' + m[1] + (+m[2] + 1)); if (n) { n.focus(); n.select(); } });
 
   // ---------- F9 Herhaling na 4 weken (src/herhaling.js): the pupil's follow-up, 3 to 5 weeks after the lesson ----------
   // Four new micro-checks (two after a short lesson), one tap each, no hint and no feedback until the end; then right or wrong with the rule and
@@ -8658,7 +8805,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     const pick = h9Link ? '' : `<div class="h9-pick"><p class="t-k" id="h9-pick-h">Welke kamers speelde je klas? Alle vier, of de twee van de korte les.</p>
       <div class="esc-cards one" role="group" aria-labelledby="h9-pick-h">${ESCR.ROOMS.map(R => `<button type="button" class="esc-card tog" data-action="h9-tog:${R.id}" aria-pressed="${h9PickNow().includes(R.id)}"><span class="box" aria-hidden="true"></span>${esc(R.title)}</button>`).join('')}</div></div>`;
     return `<section class="esc-intro h9-intro"><div class="esc-intro-l"><p class="esc-kicker">Herhaling · alleen · ongeveer ${H9.MIN} minuten</p><h1 class="esc-title">Weet je het nog?</h1>
-      <p class="esc-lead">Een paar weken geleden speelde je klas Je eerste maand als 18-jarige. Nu krijg je ${n ? (n === 4 ? 'vier' : 'twee') : 'een paar'} nieuwe vragen, één per kamer. Andere datums en bedragen, dezelfde regels.</p>
+      <p class="esc-lead">Een paar weken geleden speelde je klas Je eerste maand als 18-jarige. Nu krijg je ${n ? (n === 4 ? 'vier' : 'twee') : 'een paar'} vragen, één per kamer. Andere datums en bedragen dan in de kamers, dezelfde regels. Misschien ken je ze van de check in de les.</p>
       ${n ? `<ol class="esc-map" aria-label="De kamers">${rooms.map((R, i) => `<li><span class="esc-mapn" aria-hidden="true">${i + 1}</span><span><span class="sr">Vraag ${i + 1}: </span>${esc(R.title)}</span></li>`).join('')}</ol>` : ''}</div>
       <div class="card esc-rules act"><h2 class="h3">Zo werkt het</h2><ul><li>Werk alleen, op je eigen scherm.</li><li>Eén tik per vraag. Er zijn geen hints.</li><li>Aan het eind zie je wat goed was, met uitleg.</li><li>Je antwoorden blijven op dit scherm. Er wordt niets bewaard of verstuurd.</li></ul>
         <p class="esc-fic">${esc(H9.FIC)}</p>${pick}${flash && flash.kind === 'warn' ? flashBox() : ''}${btn('Begin', 'h9-begin', 'esc-go big')}</div></section>`;
