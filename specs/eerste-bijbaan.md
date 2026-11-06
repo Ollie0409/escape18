@@ -12,6 +12,7 @@ Status: draft content, no code. Written 6 Nov 2026 after reading `d32/src/escape
 |---|---|
 | Id (proposal) | ESC-BIJBAAN |
 | Title | Je eerste bijbaan |
+| Lead | Je eerste bijbaan: je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen. |
 | Pupils | havo/vwo, 16 tot 18 jaar, in tweetallen, één scherm |
 | Escape time | 27 minuten (minuut 6 tot 33); les 45 minuten met 3 minuten reserve |
 | Rooms | 4, in date order: contract (aug/sep 2026), uurloon (nov 2026), rooster (dec 2026), belasting (jan 2027) |
@@ -235,11 +236,11 @@ De leerling kan:
 - **Clue:** "Het 2e cijfer van het slot: kijk naar wat je in november te weinig kreeg. Neem het laatste cijfer van de hele euro's."
 - **Shown with:** uren, tabel
 - **Digit:** **5** (€ 15,00, whole euros 15, last digit 5).
-- **Remember:** "Zoek het minimumloon voor jouw leeftijd op bij de Rijksoverheid. Krijg je te weinig? Spreek je werkgever aan. Helpt dat niet, meld het bij de Nederlandse Arbeidsinspectie."
+- **Remember:** "Zoek het minimumloon voor jouw leeftijd op bij de Rijksoverheid. Krijg je te weinig? Spreek je werkgever aan. Helpt dat niet? Meld het dan bij de Nederlandse Arbeidsinspectie."
 
 **Voor de docent (kamer 2):**
 - Wachten tot januari mag niet: in november is Sam 17, dus geldt het bedrag voor 17 jaar.
-- Op 1 januari 2027 gaat het minimumjeugdloon omhoog. Per uur: 15 jaar € 4,59; 16 jaar € 6,12; 17 jaar € 7,65; 18 jaar € 9,56; 19 jaar € 11,47; 20 jaar € 13,38; 21 jaar en ouder € 15,29 (Rijksoverheid, Bedragen minimumloon 2027, bijgewerkt op 6 november 2026: https://www.rijksoverheid.nl/themas/werk/minimumloon/bedragen-minimumloon/bedragen-minimumloon-2027).
+- Op 1 januari 2027 gaat het minimumjeugdloon omhoog. Per uur: 15 jaar € 4,59; 16 jaar € 6,12; 17 jaar € 7,65; 18 jaar € 9,56; 19 jaar € 11,47; 20 jaar € 13,38; 21 jaar en ouder € 15,29 (Rijksoverheid, Bedragen minimumloon 2027, bijgewerkt op 6 november 2026). De link staat bij de bronnen.
 - De vragen gaan over november 2026, dus de antwoorden blijven goed. Noem de nieuwe bedragen bij het nabespreken.
 
 (Spec note, not shown: if the lesson is played after 1 January 2027, add the 2027 table next to the 2026 table, never instead of it; 2.1, 2.2 and digit 2 are about November 2026.)
@@ -284,7 +285,7 @@ De leerling kan:
 
 School time is given as clock times, breaks included, because the whole time at school counts as arbeidstijd (Arbeidstijdenwet art. 4:4 lid 2: "de onderbrekingen inbegrepen").
 
-### Document 4 `regel` (type: rule card, title "Regels onder de 18")
+### Document 4 `regel` (type: rule card, title "Regels als je jonger bent dan 18")
 
 > r1. Je werkt nooit na 23:00 uur.
 > r2. Elke 24 uur heb je minstens 12 uur achter elkaar vrij. Van 23:00 tot 06:00 uur ben je altijd vrij.
@@ -461,7 +462,7 @@ Each form has one question per room. Question n of form A and question n of form
 |---|---|---|---|---|---|
 | A1 | contract | oproeptermijn | "Je werkt bij een snackbar. Je contract zegt: oproepen minstens 4 dagen van tevoren. Woensdag om 18:00 vraagt je baas of je vrijdag komt. Moet je vrijdag komen?" | a "Ja, met een oproepcontract moet je altijd komen" · b "Ja, want het is meer dan 1 dag van tevoren" · c "Nee, je mag nee zeggen: de oproep is te laat" | c "Nee, je mag nee zeggen: de oproep is te laat" (2 dagen van tevoren) |
 | A2 | uurloon | onderbetaald-stappen | "Je bent 18. In oktober 2026 krijg je € 7,00 per uur. Het minimumloon voor 18 jaar is dan € 7,50. Wat doe je eerst?" | a "Wachten tot je 19 bent" · b "Een melding doen bij de Belastingdienst" · c "Je werkgever erop aanspreken" · d "Meteen naar de rechter" | c "Je werkgever erop aanspreken" |
-| A3 | rooster | nacht | "Je bent 17. Je werkt vrijdagavond in een restaurant. Zaterdag heb je geen school en geen werk. Hoe laat moet je dienst uiterlijk klaar zijn?" | a "Om 22:00 uur" · b "Om 23:00 uur" · c "Om 00:00 uur" · d "Er is geen grens op vrijdag" | b "Om 23:00 uur" |
+| A3 | rooster | nacht | "Je bent 17. Vrijdag heb je overdag geen school en geen werk. Je werkt vrijdagavond in een restaurant. Zaterdag heb je geen school en geen werk. Hoe laat moet je dienst uiterlijk klaar zijn?" | a "Om 22:00 uur" · b "Om 23:00 uur" · c "Om 00:00 uur" · d "Er is geen grens op vrijdag" | b "Om 23:00 uur" |
 | A4 | belasting | korting-een | "Je werkt bij een kapper en krijgt daar al loonheffingskorting. Je neemt er een tweede bijbaan bij, bij een fietsenmaker. Wat zeg je tegen de fietsenmaker?" | a "Ja, pas de korting ook toe" · b "Nee, pas de korting niet toe: ik heb hem al bij de kapper" · c "Maakt niet uit: de Belastingdienst regelt het" | b "Nee, pas de korting niet toe: ik heb hem al bij de kapper" |
 
 ### Vorm B
@@ -470,10 +471,10 @@ Each form has one question per room. Question n of form A and question n of form
 |---|---|---|---|---|---|
 | B1 | contract | oproeptermijn | "Je werkt bij een bloemenzaak. Je contract zegt: oproepen minstens 4 dagen van tevoren. Zondag om 12:00 vraagt je baas of je dinsdag komt. Moet je dinsdag komen?" | a "Ja, je baas bepaalt wanneer je werkt" · b "Ja, want het is meer dan 1 dag van tevoren" · c "Nee, je mag nee zeggen: de oproep is te laat" | c "Nee, je mag nee zeggen: de oproep is te laat" (2 dagen van tevoren) |
 | B2 | uurloon | onderbetaald-stappen | "Je bent 16. In oktober 2026 krijg je € 4,90 per uur. Het minimumloon voor 16 jaar is dan € 5,17. Wat doe je eerst?" | a "Wachten tot je 17 bent" · b "Een melding doen bij de Belastingdienst" · c "Je werkgever erop aanspreken" · d "Meteen naar de rechter" | c "Je werkgever erop aanspreken" |
-| B3 | rooster | nacht | "Je bent 16. Je baas vraagt of je zaterdag tot middernacht blijft. Zondag heb je geen school en geen werk. Hoe laat moet je dienst uiterlijk klaar zijn?" | a "Om 00:00 uur, want zondag ben je vrij" · b "Om 23:00 uur" · c "Om 22:00 uur" · d "Er is geen grens in het weekend" | b "Om 23:00 uur" |
+| B3 | rooster | nacht | "Je bent 16. Zaterdag heb je overdag geen school en geen werk. Je baas vraagt of je zaterdag tot middernacht blijft. Zondag heb je geen school en geen werk. Hoe laat moet je dienst uiterlijk klaar zijn?" | a "Om 00:00 uur, want zondag ben je vrij" · b "Om 23:00 uur" · c "Om 22:00 uur" · d "Er is geen grens in het weekend" | b "Om 23:00 uur" |
 | B4 | belasting | korting-een | "Je werkt bij een bakker en krijgt daar al loonheffingskorting. Je neemt er een tweede bijbaan bij, via een uitzendbureau. Wat zeg je tegen het uitzendbureau?" | a "Ja, pas de korting ook toe" · b "Nee, pas de korting niet toe: ik heb hem al bij de bakker" · c "Maakt niet uit: de Belastingdienst regelt het" | b "Nee, pas de korting niet toe: ik heb hem al bij de bakker" |
 
-Parallel checks: A1 and B1 both have a call 2 days ahead against a 4-day contract, with the same trap option b. A2 and B2 both give a wage below a real, date-stamped minimum (October 2026 stays true after 1 January 2027 because the date is in the question) and ask for the first step; same options apart from the age. A3 and B3 both ask for the latest end time with no school or work the next day, so the 12-hour rest never binds and 23:00 is the one right answer; the situations differ (17, vrijdag; 16, zaterdag tot middernacht). A4 and B4 differ only in the employers. All amounts: 18 jaar € 7,50 and 16 jaar € 5,17 are the Rijksoverheid amounts for 1 juli to 31 december 2026.
+Parallel checks: A1 and B1 both have a call 2 days ahead against a 4-day contract, with the same trap option b. A2 and B2 both give a wage below a real, date-stamped minimum (October 2026 stays true after 1 January 2027 because the date is in the question) and ask for the first step; same options apart from the age. A3 and B3 both ask for the latest end time with no school or work earlier that day and none the next day, so the 12-hour rest never binds and 23:00 is the one right answer (with school that morning, r2 of kamer 3 gives an earlier end, for example 20:30 after school from 08:30); the situations differ (17, vrijdag; 16, zaterdag tot middernacht). Rule checked on 6 Nov 2026: Rijksoverheid "Hoeveel pauze en rust" for 16 and 17 ("elke dag minimaal 12 uur rust", "in elk geval tussen 23.00 - 06.00 uur") and Rijksoverheid "Hoeveel uur werken 16, 17 jaar" ("Schooltijd telt ook mee als arbeidstijd"). A4 and B4 differ only in the employers. All amounts: 18 jaar € 7,50 and 16 jaar € 5,17 are the Rijksoverheid amounts for 1 juli to 31 december 2026.
 
 **Antwoorden start- en eindcheck (voor de docent):**
 - Vorm A: A1 "Nee, je mag nee zeggen: de oproep is te laat". A2 "Je werkgever erop aanspreken". A3 "Om 23:00 uur". A4 "Nee, pas de korting niet toe: ik heb hem al bij de kapper".
@@ -485,16 +486,18 @@ Parallel checks: A1 and B1 both have a call 2 days ahead against a 4-day contrac
 |---|---|---|
 | 0 tot 4 | Uitleg | Laat het docentenscherm zien. Leerlingen openen de link en werken met z'n tweeën op één scherm. Zeg: alles is verzonnen, behalve de regels en de tabel met het minimumloon. |
 | 4 tot 6 | Startcheck | Elk tweetal beantwoordt 4 vragen voordat de klok start en ziet nog niet wat goed is. Geef geen hints. |
-| 6 tot 33 | Escape | Start de klastimer op 27 minuten. Tweetallen spelen vier kamers en schrijven elk cijfer op. Loop rond; wijs bij vragen naar de regel in het document, niet naar het antwoord. Klaar voor de tijd? Laat het tweetal de gespreksvragen op het eindscherm bespreken en elk een als-dan-plan maken. |
-| 33 | Stop | Iedereen stopt, ook wie nog niet klaar is. Lees de cijfers van het slot hardop voor. Tweetallen die nog niet klaar zijn, openen het slot met die cijfers of tikken op "Tijd is om? Naar de eindcheck". Iedereen doet de eindcheck en het als-dan-plan. |
+| 6 tot 33 | Escape | Start de klastimer op 27 minuten. Tweetallen spelen vier kamers en schrijven elk cijfer op. Loop rond; wijs bij vragen naar de regel in het document, niet naar het antwoord. Klaar voor de tijd? Laat het tweetal de gespreksvragen op het eindscherm bespreken. |
+| 33 | Stop | Tik op Stop de escape. Iedereen stopt, ook wie nog niet klaar is. Lees de cijfers van het slot voor van je geprinte antwoordblad. Tweetallen die nog niet klaar zijn, openen het slot met die cijfers, of tikken onderaan op We stoppen en dan op Naar de eindcheck. Iedereen doet de eindcheck en het als-dan-plan. |
 | 33 tot 35 | Eindcheck | Elk tweetal beantwoordt 4 vragen over dezelfde regels. Daarna ziet het wat het goed had, voor en na. |
 | 35 tot 40 | Nabespreken | Vraag met handopsteken: wie had bij de startcheck 3 of 4 goed? En bij de eindcheck? Vraag welke kamer het lastigst was en begin daar. Kies een of twee gespreksvragen. Vraag naar ervaringen, niet naar punten. |
-| 40 tot 42 | Afsluiten | Elke leerling maakt een eigen als-dan-plan en zegt het tegen de buur. Over 3 tot 5 weken: laat de klas de eindcheck nog eens doen. |
+| 40 tot 42 | Afsluiten | Laat twee of drie leerlingen hun als-dan-plan hardop zeggen. Stel daarna de slotvraag. |
 | 42 tot 45 | Reserve | Voor inloggen dat uitloopt, of een gesprek dat langer duurt. Loopt het inloggen uit? Houd minuut 33 als stopmoment aan. |
 
-Totaal: 4 + 2 + 27 + 2 + 5 + 2 + 3 (reserve) = 45 minuten.
+Totaal: 4 + 2 + 27 + 2 + 5 + 2 + 3 (reserve) = 45 minuten. Materials: a device per pair, pen and paper for the digits, a digital board or projector.
 
-(Spec notes, not shown: the minute-33 row needs the G3 engine change, a pupil button "Tijd is om? Naar de eindcheck" or a lock that opens from any room; without it, unfinished pairs cannot reach the lock or the end check. Timing: playtest G4 estimated 24 minutes for a careful pair with 15 questions; this revision removes one question, two contract lines and three situation sentences, and the rule cards should cut first-try misses (7 to 8 of 15 in the playtest), so 27 minutes should fit most pairs. Not yet timed with real pupils.)
+Tip voor de docent: een fout antwoord wordt doorgestreept. Een tweetal kan dus ook gokken tot het goed is. Het telt dan alleen niet mee bij "In één keer goed". Vertel de klas dat goed lezen sneller gaat. (G4 fix 12.)
+
+(Spec notes, not shown: the minute-33 row uses the engine stop flow: the teacher taps "Stop de escape", pupils tap "We stoppen", type the read-out digits or tap "Naar de eindcheck". The digits are not on the open plan. Timing: playtest G4 estimated 24 minutes for a careful pair with 15 questions; this revision removes one question, two contract lines and three situation sentences, and the rule cards should cut first-try misses (7 to 8 of 15 in the playtest), so 27 minutes should fit most pairs. Not yet timed with real pupils.)
 
 ## Antwoordblad (voor de docent)
 
@@ -598,6 +601,17 @@ Word meanings without a rule: oproepen, dienst, pauze, studiedag, jaaropgaaf, in
 6. **Not measured:** readability (no Flesch-Douma score yet) and timing (the 27 minutes are not timed with real pupils; see the lesplan spec note).
 
 ## Changelog
+
+**6 Nov 2026, third revision: gate round 2 (`qa/gate_round2.md`).** Code stays **3521**; no answer, option or digit changed.
+- Lesplan row Stop: named the real buttons ("Stop de escape" for the teacher; "We stoppen", then "Naar de eindcheck" for pupils, as the engine shows them). The teacher reads the digits from the printed answer sheet; no digits on the open plan.
+- Check A3 and B3: the 23:00 answer only holds without school or work earlier that day (r2 of kamer 3: 12 hours rest, school counts). Rule verified on Rijksoverheid on 6 Nov 2026 ("Jongeren van 16 en 17 ... moeten elke dag minimaal 12 uur rust hebben", "in elk geval tussen 23.00 - 06.00 uur"; "Schooltijd telt ook mee als arbeidstijd"). A3 adds "Vrijdag heb je overdag geen school en geen werk."; B3 adds "Zaterdag heb je overdag geen school en geen werk." The two stay parallel; the parallel note is updated. wetten.overheid.nl (Arbeidstijdenwet art. 5:3) could not be opened this round; the spec's earlier reading of art. 5:3 stands.
+- Lesplan row Afsluiten: removed "Over 3 tot 5 weken: laat de klas de eindcheck nog eens doen." (the site cannot open only the end check). Shared finding: the plan is asked for once, in the Stop row. Escape row no longer says "en elk een als-dan-plan maken"; Afsluiten now "Laat twee of drie leerlingen hun als-dan-plan hardop zeggen. Stel daarna de slotvraag."
+- Materials and Tip voor de docent added under the plan, as in Op kamers (G4 fix 12, the strike-out tip, was missing here).
+- Kamer 2 Remember: "Helpt dat niet? Meld het dan bij de Nederlandse Arbeidsinspectie."
+- Kamer 2 teacher note: the raw URL is gone; the line ends "(Rijksoverheid, Bedragen minimumloon 2027, bijgewerkt op 6 november 2026). De link staat bij de bronnen."
+- Kamer 3 rule card title: "Regels als je jonger bent dan 18".
+- Lead added to the overview table: "Je eerste bijbaan: je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen."
+- Spec note under the plan: the stop flow now exists in the engine.
 
 **6 Nov 2026, second revision: fact check B, gate G3 to G8, playtest G4.** Answer key re-derived: digit 1 = 3 (13:00 to 16:00, cancelled 2 days ahead), digit 2 = 5 (20 × € 0,75 = € 15,00), digit 3 = 2 (9 min 7; rest 17:30 to 08:30 is 15 uur), digit 4 = 1 (2026 + 5 = 2031). **Code stays 3521.** Question numbers changed: old 3.2 `tot` removed, old 3.3 `schooldag` is now 3.2, old 3.4 `pauze` is now 3.3; contract lines renumbered c1 to c7.
 

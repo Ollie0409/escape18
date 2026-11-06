@@ -15,6 +15,8 @@ Story time: May 2027 to February 2028. The pupil starts hbo on 1 September 2027 
 
 Code: **2073**
 
+Lead: "Studiefinanciering aanvragen bij DUO, thuis of op kamers wonen, extra geld of lenen, en wat je later terugbetaalt."
+
 Clues: the engine shows all documents of the room on the digit screen (`clueDocs` left out), so every clue can be read or worked out from a document on that screen. Each clue starts with "Het ne cijfer van het slot is" (G4 fix 2).
 
 ## Leerdoelen
@@ -67,7 +69,7 @@ From: "Hogeschool Zeestad, Studentenzaken", place "Zeestad, 10 mei 2027", greeti
 - Correct: c
 - Retry pointer: s4 "of een ov-kaart voor studenten"
 - Nudge: "Lees zin 4. Een ov-kaart voor studenten heeft bij DUO een eigen naam."
-- Hint: "Lees de drie antwoorden. Welk antwoord hoort bij DUO, en niet bij de hogeschool of een winkel?"
+- Hint: "Lees de drie antwoorden. Welk antwoord is iets wat je bij DUO aanvraagt?"
 - Explanation: "Bij DUO vraag je ook het studentenreisproduct aan. Daarmee reis je gratis of met korting. Je zet het op je persoonlijke OV-chipkaart, bij een ophaalautomaat."
 - Sources: roReis, duoOv; OV-chipkaart and ophaalautomaat: duoReisAanvragen
 
@@ -128,7 +130,7 @@ Subtitle: "Echte bedragen van DUO"
 - Options:
   - a "Als je een huurcontract hebt voor een kamer in een andere stad"
   - b "Als je meer dan de helft van de week op je eigen kamer slaapt"
-  - c "Als je bij de gemeente op een ander adres staat dan je ouders, en daar woont"
+  - c "Als je bij de gemeente op een ander adres staat en daar woont"
 - Correct: c
 - Retry pointer: intro "Je schrijft je daar dan ook in bij de gemeente."
 - Nudge: "DUO kijkt naar je adres bij de gemeente. En naar nog iets."
@@ -307,19 +309,19 @@ Score: 1 point per right answer, 0 to 4, before and after.
 |---|---|---|
 | 0 tot 5 | Uitleg en inloggen | Laat het docentenscherm zien. Leerlingen openen de link en werken met z'n tweeën op één scherm. |
 | 5 tot 7 | Startcheck | Elk tweetal beantwoordt vier vragen (vorm A of B) voordat de klok start. Geef geen hints. |
-| 7 tot 33 | Escape | Start de klastimer. Tweetallen spelen vier kamers en schrijven elk cijfer op. Klaar voor de tijd? Laat het tweetal de gespreksvragen op het eindscherm bespreken en elk een als-dan-plan maken. |
-| 33 | Stop | Zeg: stop. Lees de cijfers van het slot hardop voor: 2, 0, 7, 3. Tweetallen die nog bezig zijn, stoppen ook. Iedereen gaat door met de eindcheck en het als-dan-plan. |
+| 7 tot 33 | Escape | Start de klastimer. Tweetallen spelen vier kamers en schrijven elk cijfer op. Klaar voor de tijd? Laat het tweetal de gespreksvragen op het eindscherm bespreken. |
+| 33 | Stop | Zeg: stop. Lees de cijfers van het slot voor van je geprinte antwoordblad. Tweetallen die nog bezig zijn, stoppen ook. Iedereen gaat door met de eindcheck en het als-dan-plan. |
 | 33 tot 35 | Eindcheck | De andere vorm: vier vragen over dezelfde regels. Daarna ziet elk tweetal wat het goed had, voor en na. |
 | 35 tot 39 | Nabespreken | Vraag met handopsteken: wie had bij de startcheck 3 of 4 goed? En bij de eindcheck? Vraag welke kamer het lastigst was en begin daar. Gebruik de gespreksvragen. Vraag naar ervaringen, niet naar bedragen thuis. |
-| 39 tot 41 | Afsluiten | Elke leerling maakt één als-dan-plan en zegt het tegen de buur. |
+| 39 tot 41 | Afsluiten | Laat twee of drie leerlingen hun als-dan-plan hardop zeggen. Stel daarna de slotvraag. |
 | 41 tot 45 | Reserve | 4 minuten speling. Gebruik ze als inloggen of nabespreken langer duurt. |
 
-Total 45 minutes, of which 4 minutes buffer. Materials: a device per pair, pen and paper for the digits, a projector. Care point: room 3 is about parents' income. Do not ask pupils about their own family's money in class. The code of the slot is in the Antwoordblad; do not project it before minute 33. A wrong option is struck out, so a pair can find a single-choice answer by trying; the end screen shows how many were right the first time.
+Total 45 minutes, of which 4 minutes buffer. Materials: a device per pair, pen and paper for the digits, a digital board or projector. Care point: room 3 is about parents' income. Do not ask pupils about their own family's money in class. The code of the slot is in the Antwoordblad; do not project it before minute 33. A wrong option is struck out, so a pair can find a single-choice answer by trying; the end screen shows how many were right the first time.
 
 Build note (engine, not this spec): pairs that are still in a room at minute 33 cannot reach the end check on the pupil screen yet (G3 "all lessons", `src/engine.js`). Until the engine has a skip to the end check, those pairs do the end check on paper from the Antwoordblad.
 
 Voor de docent, per kamer:
-- Kamer 1: Studiefinanciering en reisproduct vraag je aan in Mijn DUO, met DigiD. DUO raadt aan dat "het liefst minstens 8 weken" voor de start te doen. Voor 1 september 2027 is dat 7 juli 2027. Dat is een advies, geen harde termijn. Studiefinanciering kan voor het lopende studiejaar met terugwerkende kracht, het reisproduct niet. Nog niet geslaagd? Vraag toch aan voor de opleiding die je wilt doen. Voor hbo en universiteit is er geen minimumleeftijd. Voor mbo moet je 18 zijn voor een beurs of lening. Het reisproduct koppel je aan een persoonlijke OV-chipkaart.
+- Kamer 1: Studiefinanciering en reisproduct vraag je aan in Mijn DUO, met DigiD. DUO raadt aan om dat "het liefst minstens 8 weken" voor de start te doen. Voor 1 september 2027 is dat 7 juli 2027. Dat is een advies, geen harde termijn. Studiefinanciering kan voor het lopende studiejaar met terugwerkende kracht, het reisproduct niet. Nog niet geslaagd? Vraag toch aan voor de opleiding die je wilt doen. Voor hbo en universiteit is er geen minimumleeftijd. Voor mbo moet je 18 zijn voor een beurs of lening. Het reisproduct koppel je aan een persoonlijke OV-chipkaart.
 - Kamer 2: Uitwonend = ingeschreven op een ander adres dan je ouders en daar wonen. Er zijn uitzonderingen, bijvoorbeeld als de gemeente weigert in te schrijven. De woonsituatie zet je zelf in Mijn DUO; DUO kijkt naar de 1e van de maand. DUO controleert de woonsituatie. De basisbeurs is heel 2027 € 335,10 uitwonend en € 134,45 thuiswonend per maand.
 - Kamer 3: Aanvullende beurs hangt af van het inkomen van de ouders en het aantal broers en zussen. Eén keer aanvragen; DUO rekent elk jaar opnieuw. Minder of geen aanvullende beurs? Dan kun je het verschil extra lenen. Betaal je instellingscollegegeld? Dan is het collegegeldkrediet van september tot en met december 2027 hoogstens € 1.154,60 per maand. Lening en collegegeldkrediet betaal je altijd terug, met rente vanaf het moment dat je leent. Rente 2027: 2,70% voor de meeste studenten (SF35), 3,28% voor een kleinere groep (SF15). In 2026 was het 2,33% en 2,29%.
 - Kamer 4: Prestatiebeurs: gift met diploma binnen 10 jaar; de eerste 5 maanden aanvullende beurs zijn altijd een gift. Eerstejaarsregeling: krijg je voor het eerst prestatiebeurs voor hbo of universiteit, kom je van de middelbare school en stopt je studiefinanciering voor 1 februari? Dan betaal je basisbeurs, aanvullende beurs en reisproduct van dat jaar niet terug. Je krijgt dan in hetzelfde studiejaar geen nieuwe prestatiebeurs voor hbo of universiteit. Dit kan één keer. Mila stopte op 20 december 2027; haar studiefinanciering stopt per 1 januari 2028. Ze valt er dus onder, als ze dit studiejaar niet opnieuw begint. De lening betaalt ze altijd terug. Reisproduct: vanaf de 1e van de maand na het uitschrijven niet meer reizen, uiterlijk de 10e stopzetten. Ov-schuld in 2026: € 96,09 per halve maand in de 1e maand, daarna € 192,21 per halve maand. De bedragen voor 2028 zijn nog niet bekend.
@@ -360,7 +362,7 @@ Slotvraag: "Noem twee dingen die je bij DUO regelt voordat je gaat studeren, en 
 
 Als-dan-plan (prompt):
 "Maak je eigen als-dan-plan en zeg het tegen je buur. Kies een situatie en een actie.
-Als ik ... (toegelaten ben tot een opleiding / op kamers ga / stop met mijn studie),
+Als ik ... (me heb aangemeld voor een opleiding / op kamers ga / stop met mijn studie),
 dan ... (vraag ik in Mijn DUO studiefinanciering, de aanvullende beurs en mijn reisproduct aan / schrijf ik me in bij mijn nieuwe gemeente en zet ik mijn woonsituatie in Mijn DUO / zet ik mijn reisproduct stop bij een ophaalautomaat op het station).
 Zet een herinnering in je telefoon."
 
@@ -399,6 +401,17 @@ Zet een herinnering in je telefoon."
 ## Changelog
 
 Item numbers: A = rows of `factcheck_A_studiefinanciering.md` in table order (A1 to A22). B = rows of `qa/checkB/studiefinanciering.md` in table order (B1 = "RISK (decision)", B18 = "ERROR (metadata)"). G3-S = rows of the Studiefinanciering table in `qa/gate_G3_G8.md` (S1 = `teacher.answers.after`, S8 = answer sheet "Wanneer uitwonend"); G3-L = rows of its "All three lessons" table (L1 = pupil flow, L13 = start and end check vs room questions). G4-F = the numbered "Fixes" list in `qa/gate_G4_playtest.md`; G4-R1 to R4 = its studiefinanciering room rows.
+
+6 november 2026 (third revision, gate round 2, `qa/gate_round2.md`):
+- Lesplan row Stop: the digits "2, 0, 7, 3" are no longer on the open, projected plan (they contradicted the care point). New text: "Lees de cijfers van het slot voor van je geprinte antwoordblad."
+- Lesplan rows Escape and Afsluiten (shared finding): the plan is asked for once, in the Stop row. Escape row no longer says "en elk een als-dan-plan maken"; Afsluiten now "Laat twee of drie leerlingen hun als-dan-plan hardop zeggen. Stel daarna de slotvraag."
+- Voor de docent, Kamer 1: "DUO raadt aan dat ..." now "DUO raadt aan om dat ... te doen" (a full Dutch sentence).
+- Lead added under the code (G3-S6): "thuis of uit wonen" now "thuis of op kamers wonen"; the landing card uses the same text.
+- Vraag 1.2 hint: "Welk antwoord is iets wat je bij DUO aanvraagt?" (no option mentions a shop).
+- Als-dan-plan: "toegelaten ben tot een opleiding" now "me heb aangemeld voor een opleiding", in line with the teacher note (apply 8 weeks ahead, also before you are admitted).
+- Vraag 2.3 option c shortened to "Als je bij de gemeente op een ander adres staat en daar woont", so the right answer is no longer the longest option (G4-F8). Answer still c.
+- Materials: "a digital board or projector" (Dutch: "een digibord of beamer"). Care point 2, Dutch wording: "vóór minuut 33".
+- Digits and code unchanged: **2073**. No check item changed.
 
 6 november 2026 (revision 2):
 - B1 (coordinator decision): switched to the published 2027 amounts, each verified on the DUO bedragen page: basisbeurs € 134,45 / € 335,10; aanvullende beurs € 507,10; lening € 325,44; collegegeldkrediet € 230,92 (Sep to Dec 2027; € 224,50 Jan to Aug 2027). Tables 2 and 3b, prompts, explanations, answer sheet and source table updated. 2.1 = € 335,10; 2.2 = € 200,65; 3.2 = € 507,10. Digits 2, 0, 7, 3; code **2073** (was 2413). Header validUntil 31 december 2027. Also resolves G3-S5, G4-R2, G4-R3 and G4-F6 (year mix).

@@ -164,7 +164,7 @@ Regel 2: haalt de verhuurder niets van de borg af? Dan krijg je hem binnen 14 da
 
 ## Kamer 3. Inschrijven bij de gemeente (zaterdag 28 augustus 2027)
 
-**Intro:** "Je hebt getekend. Vandaag verhuis je van het huis van je ouders in Dorpsveen naar Zeestad."
+**Intro:** "Je hebt getekend, met de juiste borg van € 820. Vandaag verhuis je van het huis van je ouders in Dorpsveen naar Zeestad."
 
 ### Document 3: je verhuisplanning (type: rows, id: planning)
 Title: "Mijn planning, augustus en september 2027"
@@ -176,7 +176,7 @@ Title: "Mijn planning, augustus en september 2027"
 Note: "Dorpsveen en Zeestad zijn verzonnen gemeenten."
 
 **Moeilijke woorden (plain):** "BRP: de lijst van de gemeente met wie waar woont. Uiterlijk: op zijn laatst.
-Regel: je mag je verhuizing doorgeven vanaf 4 weken voor je verhuisdag. Dat moet uiterlijk 5 dagen na je verhuisdag."
+Regel: je mag je verhuizing doorgeven vanaf 4 weken voor je verhuisdag. Je moet het uiterlijk 5 dagen na je verhuisdag doorgeven."
 
 ### Vraag 3.1 (id: gemeente, kind: pick, docs: planning)
 - Prompt: "Bij wie geef je je verhuizing door?"
@@ -295,7 +295,7 @@ Title: "Lindelaan 8, kamer 3 (uit je contract)"
 - Sources: bdStudent, bdWoningen, hsb1997
 
 ### Cijfer kamer 4
-- Clue: "Het 4e cijfer van het slot: Noor schrijft: 'Ik heb een eigen deur met slot, keuken, wc en douche.' Hoeveel dingen noemt ze?"
+- Clue: "Het 4e cijfer van het slot: hoeveel dingen heeft Noor voor zichzelf alleen? Een deur met slot telt als één ding. Ze schrijft: 'Ik heb een eigen deur met slot, keuken, wc en douche.'"
 - Digit: **4** (deur met slot, keuken, wc, douche; the line is in the clue; same four as the right items of V4.2).
 - Remember: "Huurtoeslag is er meestal alleen voor een zelfstandige woning. Een kamer met gedeelde keuken of wc telt meestal niet."
 
@@ -341,18 +341,18 @@ Score: 1 point per right answer, 0 to 4, before and after, shown per pair on the
 |---|---|---|---|
 | 0 tot 2 | 2 | Uitleg | Zet de link en de klascode al op het bord voordat de les begint. Laat het docentenscherm zien. Leerlingen werken met z'n tweeën op één scherm. |
 | 2 tot 3 | 1 | Startcheck | Elk tweetal beantwoordt vier vragen (vorm A of B) voordat de klok start. Geef geen hints. |
-| 3 tot 33 | 30 | Escape | Start de klastimer. Tweetallen spelen vier kamers en schrijven elk cijfer op. Klaar voor de tijd? Laat het tweetal de gespreksvragen op het eindscherm bespreken en elk een als-dan-plan maken. |
-| 33 | | Stop | Op minuut 33 stopt iedereen, ook wie nog niet klaar is. Lees de cijfers voor die tweetallen nog missen: kamer 1 is 2, kamer 2 is 8, kamer 3 is 2, kamer 4 is 4. Alle tweetallen doen daarna de eindcheck en het plan. |
+| 3 tot 33 | 30 | Escape | Start de klastimer. Tweetallen spelen vier kamers en schrijven elk cijfer op. Klaar voor de tijd? Laat het tweetal de gespreksvragen op het eindscherm bespreken. |
+| 33 | | Stop | Op minuut 33 stopt iedereen, ook wie nog niet klaar is. Lees de cijfers voor van je geprinte antwoordblad. Alle tweetallen doen daarna de eindcheck en het plan. |
 | 33 tot 35 | 2 | Eindcheck | De andere vorm: vier vragen over dezelfde regels. Daarna ziet elk tweetal wat het goed had, voor en na. |
 | 35 tot 40 | 5 | Nabespreken | Vraag met handopsteken: wie had bij de startcheck 3 of 4 goed? En bij de eindcheck? Vraag welke kamer het lastigst was en begin daar. Gebruik de gespreksvragen. Vraag naar ervaringen, niet naar punten. |
-| 40 tot 42 | 2 | Afsluiten | Elke leerling maakt één als-dan-plan en zegt het tegen de buur. |
+| 40 tot 42 | 2 | Afsluiten | Laat twee of drie leerlingen hun als-dan-plan hardop zeggen. Stel daarna de slotvraag. |
 | 42 tot 45 | 3 | Buffer | Reserve voor een late start, traag inloggen of een langer gesprek. De escape stopt altijd op minuut 33; de buffer vangt de rest op. |
 
-Total 45 minutes: 2 + 1 + 30 + 2 + 5 + 2 + 3 = 45, of which 3 minutes buffer. Materials: a device per pair, pen and paper for the digits, a projector.
+Total 45 minutes: 2 + 1 + 30 + 2 + 5 + 2 + 3 = 45, of which 3 minutes buffer. Materials: a device per pair, pen and paper for the digits, a digital board or projector.
 
-Tip voor de docent: een fout antwoord wordt doorgestreept. Een tweetal kan dus ook gokken tot het goed is. Dat kost alleen de score "in één keer goed". Vertel de klas dat goed lezen sneller gaat. (G4 fix 12.)
+Tip voor de docent: een fout antwoord wordt doorgestreept. Een tweetal kan dus ook gokken tot het goed is. Het telt dan alleen niet mee bij "In één keer goed". Vertel de klas dat goed lezen sneller gaat. (G4 fix 12.)
 
-Note for developers: the stop at minute 33 needs the pupil button "Tijd is om? Naar de eindcheck" (G3, all lessons, row 1), because the lock view now opens only after all rooms. Until that button exists, the teacher reads out the whole code (2824) and pairs that cannot reach the lock do the eindcheck on paper (print vorm A and vorm B from this spec). Playtest estimate for a real pair: 14 to 20 minutes (G4), so a late start of a few minutes still leaves enough escape time.
+Note for developers: the stop at minute 33 uses the engine stop flow (G3, all lessons, row 1): the teacher taps "Stop de escape", pupils tap "We stoppen", type the digits the teacher reads out from the printed answer sheet or skip, then do the end check and the plan. The digits are never on the open lesson plan (gate round 2). Playtest estimate for a real pair: 14 to 20 minutes (G4), so a late start of a few minutes still leaves enough escape time.
 
 Voor de docent, per kamer (teacher points, each from the source table):
 - Kamer 1: Betaal niets voor een kamer die je niet hebt gezien. Moet je naar een buitenlandse rekening betalen? Ook dat is een signaal, maar geen bewijs (Fraudehelpdesk). Opgelicht? Meld het bij je bank en doe aangifte bij de politie. De Fraudehelpdesk geeft hulp en tips.
@@ -433,6 +433,17 @@ The four huurtoeslag web pages are pages of one organisation (Belastingdienst / 
 ## Changelog
 
 Item numbers: A1 to A21 are the rows of `factcheck_A_op-kamers.md` in table order. B1 to B16 are the rows of `qa/checkB/op-kamers.md` in file order (B1 to B4 ERROR, B5 to B16 RISK). "G3 OK n" is row n of the op-kamers table in `qa/gate_G3_G8.md`; "G3 All n" is row n of its "All three lessons" table. "G4 R1 to R4" are the op-kamers room rows of `qa/gate_G4_playtest.md`; "G4 fix n" is item n of its "Fixes" list. Brief = the revision brief of 6 November 2026.
+
+6 november 2026 (third revision, gate round 2, `qa/gate_round2.md`):
+- Lesplan row Stop: the four digits are no longer on the open, projected plan. New text: "Lees de cijfers voor van je geprinte antwoordblad." The code stays only inside the closed Antwoordblad.
+- Lesplan rows Escape and Afsluiten (shared finding): the plan is asked for once, in the Stop row. Escape row no longer says "en elk een als-dan-plan maken"; Afsluiten now "Laat twee of drie leerlingen hun als-dan-plan hardop zeggen. Stel daarna de slotvraag."
+- Room 4 clue: "Hoeveel dingen heeft Noor voor zichzelf alleen? Een deur met slot telt als één ding." so deur and slot are not counted apart. Noor's line stays in the clue, after the question, so no clue sentence is over 20 words. Digit stays 4.
+- Room 3 Regel: "Dat moet uiterlijk ..." now "Je moet het uiterlijk 5 dagen na je verhuisdag doorgeven." Same rule.
+- Room 3 intro: "Je hebt getekend, met de juiste borg van € 820." so pupils know they did not pay the € 1.230 of the contract.
+- Materials: "a digital board or projector" (Dutch: "een digibord of beamer", as the landing page).
+- Tip voor de docent: "Dat kost alleen de score ..." now "Het telt dan alleen niet mee bij "In één keer goed"."
+- Note for developers updated: the stop flow exists in the engine.
+- Digits and code unchanged: **2824**. No answer, option or check item changed.
 
 6 november 2026 (second revision, check B, G3, G4):
 - B1 (ERROR, source table): confirmed on Stb. 2023, 103 (art. 22 onderdeel B inserts art. 7:261b after 7:261a). Source table row now cites the Staatsblad and 7:261b; Onzeker note corrected from 7:261a to 7:261b. Not applied: "geldt ook voor de huur van een kamer" as a stated fact, because BW 7:233 could not be read; kept as Onzeker.
