@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-4Bl05dJy9043FuGgOIUEb9YUmAaqTPhqgv+BReapQGU='; style-src 'sha256-XZa67yQu8iyqtNbXQaV9YjbClG+U9VCA/HpTxC3NXHY='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-4Bl05dJy9043FuGgOIUEb9YUmAaqTPhqgv+BReapQGU='; style-src 'sha256-3GVC3BFOcBkLBQUgf/U4Q0fb3G9EW1EvgMn8obYD2z4='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Wat Escape 18 bewaart, wat nooit, waar, wie het ziet en hoe lang.">
 <title>Privacy · Escape 18</title>
@@ -322,6 +322,69 @@ footer.foot{border-top:1px solid var(--line);padding-top:14px;color:var(--muted)
 .esc-grid tr.ln.point::before{content:none}
 .esc-grid tr.ln.point th:first-child::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 11.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px}
 @media print{.esc-tscroll{overflow:visible}.t-ans{min-width:0}}
+/* v3: review fixes (lock on one row, pointer badge, answers hidden from the board, stopping the escape, smartboard) */
+.esc-dial{flex-wrap:nowrap}
+.esc-digit{flex:1 1 0;min-width:0;max-width:84px}
+.esc-digit input{min-width:0}
+.esc-cards>.esc-card:last-child:nth-child(odd){grid-column:1/-1}
+.ln.point::before{white-space:nowrap;flex:none}
+.esc-web dl div.ln.point::before{content:none}
+.esc-web .ln.point dt::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 11.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px;white-space:nowrap;vertical-align:2px}
+.t-room h3 .t-k{display:block;margin-bottom:2px}
+details.t-key summary{flex-wrap:wrap;gap:4px 10px}
+.t-warn{font:700 12px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--stop-soft);color:var(--stop);border-radius:99px;padding:5px 9px;white-space:nowrap}
+details.t-secret[open]{border:2px solid var(--stop);border-radius:14px;padding:4px 14px 14px;display:flex;flex-direction:column;gap:10px}
+.t-lockcode{font-size:1.1em}
+.t-chk{border-collapse:collapse;width:100%;table-layout:fixed}
+.t-chk th,.t-chk td{text-align:left;vertical-align:top;padding:6px 8px 6px 4px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.t-chk thead th{font:700 12.5px/1.3 var(--mono);color:var(--muted);border-bottom:2px solid var(--ink)}
+.t-stop{display:flex;flex-direction:column;gap:12px;border:3px solid var(--sun);border-radius:16px;padding:16px 18px;background:var(--warn-soft)}
+.t-timer .btn.t-stopbtn{background:var(--sun);color:var(--sun-ink);border-color:var(--sun)}
+.t-timer .btn.t-stopbtn[aria-pressed="true"]{background:transparent;color:inherit;border-color:currentColor}
+.esc-timeup{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;background:var(--teal-soft);border:2px solid var(--teal);border-radius:14px;padding:12px 16px;font-size:17px}
+.esc-stopbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px 12px;color:var(--muted);font-size:14.5px;border-top:1px solid var(--line);padding-top:12px}
+details.esc-recap{border:1px solid var(--line);border-radius:12px;padding:6px 12px 10px;background:var(--sunk)}
+details.esc-recap summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;align-items:center}
+details.esc-recap dl{margin:4px 0 0;display:flex;flex-direction:column;gap:8px}
+details.esc-recap dt{font-size:14.5px;color:var(--muted)}
+details.esc-recap dd{margin:0;font-weight:700;overflow-wrap:anywhere}
+.paper-opts{list-style:none;padding-left:0;margin:4pt 0}
+/* Smartboard: the pupil view widens to about 1400 px with larger type; the teacher board (code, link, QR, timer) fits one screen. */
+@media (min-width:1600px){
+  body[data-view="pupil"] .wrap{zoom:1.2}
+  body[data-view="teacher"] .wrap{max-width:1840px;padding-block:14px 48px}
+  .t-view{font-size:22px;gap:18px}
+  .t-top{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start}
+  .t-top.started .t-startc{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:28px;align-content:start}
+  .t-top.started .t-startc>*{grid-column:1}
+  .t-top.started .t-startc>.t-link{grid-column:2;grid-row:1/span 3;align-self:start;grid-template-columns:minmax(0,1fr)}
+  .t-top.started .t-startc>.t-join{grid-column:1/-1}
+  .t-top.started .t-qr svg{width:300px}
+  .t-steps li{font-size:26px}
+  .t-code{font-size:28px}
+  .t-join .big{font-size:40px}
+  .t-clock{font-size:180px}
+}
+@media print{.esc-stopbar,.esc-timeup{display:none!important}}
+/* Rule box ("Regels"): the room's rules next to every question. Not a document: no paper look, a teal frame and a "!" mark. */
+.esc-rules-box{background:var(--teal-soft);border:2px solid var(--teal);border-radius:12px;padding:10px 14px 12px;min-width:0;overflow-wrap:anywhere}
+.esc-rules-h{margin:0 0 6px;display:flex;align-items:center;gap:8px;font:700 13px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--teal)}
+.esc-rules-ic{width:22px;height:22px;border-radius:50%;background:var(--teal);color:var(--teal-ink);display:inline-grid;place-items:center;font:800 14px/1 var(--display);flex:none}
+.esc-rules-box ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.esc-rules-box li{padding:4px 6px;border-radius:6px;font-size:15.5px;line-height:1.45}
+.esc-rules-box li b{font-weight:700}
+.esc-situ .ln.point{border-radius:4px;padding:1px 3px;color:var(--ink)}
+.esc-introline{border-left:3px solid var(--line);padding-left:10px}
+/* Lesson plan: lesson minutes, length, and the stop as a moment */
+.t-plan td:nth-child(2){white-space:nowrap}
+.t-plan tr.t-moment td{background:var(--stop-soft)}.t-plan tr.t-moment td:first-child{font-weight:700}
+.t-plan tr.t-moment td:nth-child(2){font:600 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--stop)}
+.t-needs{margin:12px 0 0}
+.t-tip,.t-care{margin-top:12px;border-radius:8px;padding:8px 12px}
+.t-tip{background:var(--sunk);border-left:4px solid var(--teal)}.t-care{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.t-tip p,.t-care ul{margin:0}.t-care ul{padding-left:20px}
+.t-tip-h,.t-care-h{margin:0 0 2px!important;font:600 12px/1.3 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+@media print{.paper .esc-rules-box,.sheet .t-tip,.sheet .t-care{border:1px solid #999;background:none;break-inside:avoid}.sheet .s-plan tr.t-moment td{font-weight:700}}
 </style>
 <script src="config.js"></script>
 </head>
