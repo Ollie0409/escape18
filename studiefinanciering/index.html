@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-5YPHRgfsCZulVvcodT5PPrt7qwr7DF/H0vNPajI6xgA='; style-src 'sha256-vCdbxJUuq8aICo41MwS3CcpknWStm4vn8FuDtImq4Ec='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-X/5n2uJ/gsirZ9LLekKSqEgIFC/Cdl9ml+mdYmm1+KI='; style-src 'sha256-OJOwsPyerrndNDN97JCuwOssWb2QbdrBq0nq0mYmpeo='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Studiefinanciering aanvragen bij DUO, thuis of op kamers wonen, extra geld of lenen, en wat je later terugbetaalt.">
 <meta name="e18-title" content="Studiefinanciering">
@@ -564,13 +564,36 @@ body[data-view="proj"] .wrap{max-width:none;padding-block:12px 12px;gap:10px}
 .esc-card,label.opt,.esc-right,.esc-recap dd,.esc-explain,.esc-cluetext,.paper-opts li,.t-key dd{overflow-wrap:anywhere;hyphens:auto}
 .esc-card>span,label.opt>span{min-width:0}
 .esc-parts{display:block}.esc-part{display:block;padding-left:1.1em;text-indent:-1.1em}.esc-part::before{content:"\2022\00a0\00a0"}
+
+/* Engine backlog (7 Nov 2026, G4 playtests) */
+/* Euro amounts never break after the sign: keepEuro() in engine.js wraps "€ 2.140" in .eur */
+.eur{white-space:nowrap}
+/* Teacher timer card keeps its own height, also at 00:00 (it no longer stretches to the Start card) */
+.t-top>.t-timer{align-self:start}
+/* Audience lines: the first in view, the rest behind "Meer over deze les" */
+.t-aud-more summary{cursor:pointer;font-weight:700;color:var(--teal);margin:4px 0}
+.t-aud-more[open] summary{margin-bottom:6px}
+/* Room header at phone width: the title gets the whole first row and a size that fits whole words (no break inside a word at 360 px) */
+.esc-h1{hyphens:manual}
+@media (max-width:640px){
+  .esc-hud{grid-template-columns:minmax(0,1fr) auto}
+  .esc-hud-t{grid-column:1/-1;grid-row:1}
+  .esc-slots{grid-column:1;grid-row:2}
+  .esc-clock{grid-column:2;grid-row:2}
+  .esc-h1{font-size:clamp(19px,6.2vw,26px)}
+}
+/* Teacher Start card above the fold at 1366 x 768 (mbo G4 N8): before Start the card is the sharing choice and the button, in a compact type size */
+.t-choice>p:not(.q),.t-aud p{font-size:16px;line-height:1.45}
+.t-top:not(.started){grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+@media (max-width:860px){.t-top:not(.started){grid-template-columns:minmax(0,1fr)}}
+.t-timer .btn[hidden]{display:none}
 </style>
 <script src="../config.js"></script>
 </head>
 <body>
 <main id="app" class="wrap"></main>
 <noscript><p class="wrap">Deze les werkt alleen met JavaScript aan.</p></noscript>
-<script>window.E18_BUILD={"version":"studiefinanciering-20261107-122f7ad"};
+<script>window.E18_BUILD={"version":"studiefinanciering-20261107-0153332"};
 window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lead":"Studiefinanciering aanvragen bij DUO, thuis of op kamers wonen, extra geld of lenen, en wat je later terugbetaalt.","fictional":"Alles is verzonnen: de mensen, de school en de berichten. De regels en de bedragen van DUO zijn echt; bij elke uitleg staat de bron.","minutes":26,"variant":"basis","checked":"2026-11-06","validUntil":"2027-12-31","check":{"A":[{"id":"C1","prompt":"Je broer gaat na de zomer naar het hbo. Hij wil studiefinanciering. Waar vraagt hij die aan?","options":[["c","Bij DUO, in Mijn DUO"],["a","Bij de hogeschool, bij zijn inschrijving"],["b","In Studielink, bij zijn aanmelding"]],"correct":"c"},{"id":"C2","prompt":"Sara heeft een huurcontract voor een kamer. Bij de gemeente staat ze nog op het adres van haar ouders. Is ze voor DUO meestal uitwonend?","options":[["b","Ja, als ze meer dan de helft van de week op haar kamer slaapt"],["c","Nee, want ze staat nog op het adres van haar ouders ingeschreven"],["a","Ja, want ze heeft een huurcontract"]],"correct":"c"},{"id":"C3","prompt":"Je leent elke maand geld bij DUO. Na vier jaar haal je je diploma. Wat geldt dan voor die lening?","options":[["a","Het wordt een gift, net als de basisbeurs"],["c","Je betaalt het terug, met rente"],["b","Je betaalt alleen de helft terug"]],"correct":"c"},{"id":"C4","prompt":"Noor doet een studie van 3 jaar aan de universiteit. Ze haalt haar diploma na 9 jaar. Wordt haar basisbeurs een gift?","options":[["b","Nee, want ze deed er langer over dan 7 jaar"],["a","Nee, want ze deed er langer over dan 3 jaar"],["c","Ja, want ze haalde haar diploma binnen 10 jaar"]],"correct":"c"}],"B":[{"id":"B1","prompt":"Je zus begint volgend jaar aan de universiteit. Ze wil goedkoop met de trein naar college. Waar vraagt ze het studentenreisproduct aan?","options":[["a","Bij de universiteit, bij haar inschrijving"],["c","Bij DUO, in Mijn DUO"],["b","In Studielink, bij haar aanmelding"]],"correct":"c"},{"id":"B2","prompt":"Je vriendin Lisa slaapt vier nachten per week op kamers. Bij de gemeente staat ze nog op het adres van haar ouders. Is ze voor DUO meestal uitwonend?","options":[["c","Nee, want ze staat nog op het adres van haar ouders ingeschreven"],["a","Ja, want ze slaapt meer dan de helft van de week op kamers"],["b","Ja, als ze een huurcontract heeft"]],"correct":"c"},{"id":"B3","prompt":"Je leent elke maand collegegeldkrediet. Je haalt je diploma op tijd. Wat geldt dan voor dat collegegeldkrediet?","options":[["b","Je betaalt alleen de helft terug"],["a","Het wordt een gift, net als de basisbeurs"],["c","Je betaalt het terug, met rente"]],"correct":"c"},{"id":"B4","prompt":"Tom doet een studie van 4 jaar. Hij doet er langer over en haalt zijn diploma na 8 jaar. Wordt zijn basisbeurs een gift?","options":[["a","Nee, want hij deed er langer over dan 4 jaar"],["c","Ja, want hij haalde zijn diploma binnen 10 jaar"],["b","Nee, want hij deed er langer over dan 7 jaar"]],"correct":"c"}]},"rooms":[{"id":"aanvragen","title":"Aanvragen","where":"maandag 10 mei 2027","intro":"Je bent aangemeld voor Communicatie bij Hogeschool Zeestad. Je begint op 1 september 2027. Vandaag krijg je een mail en een folder.","docs":{"mail":{"type":"letter","kind":"Mail","from":"Hogeschool Zeestad, Studentenzaken","place":"Zeestad, 10 mei 2027","greeting":"Beste student,","lines":[["s1","Je aanmelding in Studielink voor Communicatie is binnen."],["s2","Je start op woensdag 1 september 2027."],["s3","Regel op tijd de betaling van je collegegeld. Volg daarvoor onze instructies."],["s4","Wil je studiefinanciering of een ov-kaart voor studenten? Dat regelen wij niet."],["s5","Met vriendelijke groet, Studentenzaken"]],"plain":"Studiefinanciering: geld van de overheid voor je studie. Collegegeld: wat je de hogeschool betaalt om te studeren. Ophaalautomaat: een automaat, bijvoorbeeld op het station. Daar zet je een reisproduct op je OV-chipkaart, of je zet het stop."},"folder":{"type":"letter","kind":"Folder","from":"Hogeschool Zeestad","place":"Reizen naar Zeestad","lines":[["f1","Krijg je studiefinanciering? Dan reis je gratis of met korting met trein, tram en bus."],["f2","Bij DUO kies je reisrecht voor door de week, of reisrecht voor het weekend."],["f3","Na je aanvraag geef je de gegevens van je persoonlijke OV-chipkaart door op studentenreisproduct.nl. Daarna zet je het reisproduct bij een ophaalautomaat op je kaart."]]}},"questions":[{"id":"waar","short":"Waar aanvragen","type":"single","docs":["mail"],"prompt":"Waar vraag je studiefinanciering aan?","options":[["c","Bij DUO, in Mijn DUO"],["a","In Studielink, bij je aanmelding"],["b","Bij Hogeschool Zeestad"]],"correct":"c","pointTo":{"doc":"mail","line":"s4"},"retry":"Lees zin 4. De hogeschool doet het niet. Wie dan wel?","hint":"Lees zin 1 en zin 4 van de mail. Wat regel je in Studielink? Wat doet de hogeschool niet?","explain":"Studiefinanciering vraag je aan bij DUO. Je logt in op Mijn DUO met DigiD.","sources":["duoAanvragen","nlwwAanvragen"]},{"id":"reizen","short":"Goedkoop reizen","type":"single","docs":["mail"],"prompt":"Wat vraag je ook bij DUO aan om goedkoop met de trein en bus te reizen?","options":[["b","Een gewone ov-kaart met saldo"],["c","Het studentenreisproduct"],["a","Een korting bij de hogeschool"]],"correct":"c","pointTo":{"doc":"mail","line":"s4"},"retry":"Lees zin 4. Een ov-kaart voor studenten heeft bij DUO een eigen naam.","hint":"Lees de drie antwoorden. Welk antwoord is iets wat je bij DUO aanvraagt?","explain":"Bij DUO vraag je ook het studentenreisproduct aan. Daarmee reis je gratis of met korting. Na je aanvraag geef je op studentenreisproduct.nl de gegevens van je persoonlijke OV-chipkaart door. Daarna zet je het reisproduct bij een ophaalautomaat op je kaart.","sources":["roReis","duoOv","duoReisAanvragen"]},{"id":"soorten","short":"Soorten reisproduct","type":"multi","docs":["folder"],"prompt":"Welke soorten studentenreisproduct zijn er?","legend":"Tik alle soorten aan.","options":[["c","Een weekabonnement"],["a","Een dagabonnement"],["d","Een weekendabonnement"],["b","Een maandabonnement"]],"correct":["c","d"],"pointTo":{"doc":"folder","line":"f2"},"retry":"Lees regel 2 van de folder. Bij welke dagen hoort elk abonnement?","hint":"Kijk in de folder. Welke regel gaat over wat je bij DUO kiest?","explain":"Je kiest een weekabonnement of een weekendabonnement. Daarmee reis je gratis of met korting.","sources":["roReis","duoOv"]}],"clue":"Het 1e cijfer van het slot is het aantal soorten reisrecht dat je kunt kiezen. Kijk in regel 2 van de folder.","clueFull":true,"digit":"2","remember":"Studiefinanciering en je reisproduct vraag je aan bij DUO, in Mijn DUO. Regel op tijd een DigiD.","teacherNote":"Studiefinanciering en reisproduct vraag je aan in Mijn DUO, met DigiD. DUO raadt aan om dat \"het liefst minstens 8 weken\" voor de start te doen. Voor 1 september 2027 is dat 7 juli 2027. Dat is een advies, geen harde termijn. Studiefinanciering kan voor het lopende studiejaar met terugwerkende kracht, het reisproduct niet. Nog niet geslaagd? Vraag toch aan voor de opleiding die je wilt doen. Voor hbo en universiteit is er geen minimumleeftijd. Voor mbo moet je 18 zijn voor een beurs of lening. Het reisproduct koppel je aan een persoonlijke OV-chipkaart, op studentenreisproduct.nl. Je krijgt daarvoor eerst een welkomstmail van studentenreisproduct.nl. Daarna zet je het reisproduct bij een ophaalautomaat op de kaart."},{"id":"thuis-uit","title":"Thuis of uit?","where":"maandag 7 juni 2027","intro":"Vanaf 1 september 2027 huur je een kamer in Zeestad. Je schrijft je daar dan ook in bij de gemeente. Hoeveel basisbeurs krijg je vanaf september?","docs":{"tabel":{"type":"table","title":"Basisbeurs hbo en universiteit, per maand, in 2027","from":"Echte bedragen van DUO","rows":[["thuis","Thuiswonend","€ 134,45"],["uit","Uitwonend","€ 335,10"]],"plain":"Basisbeurs: geld van DUO voor studenten die recht hebben op studiefinanciering. Thuiswonend: je woont bij je ouders. Uitwonend: je woont niet bij je ouders."}},"questions":[{"id":"uitbedrag","short":"Basisbeurs uitwonend 2027","type":"number","unit":"€","docs":["tabel"],"prompt":"Vanaf september ben je uitwonend. Hoeveel basisbeurs krijg je dan per maand?","correct":335.1,"pointTo":{"doc":"tabel","line":"uit"},"retry":"In de tabel staan twee bedragen. Welk bedrag hoort bij wonen op kamers?","hint":"Lees bij Moeilijke woorden wat uitwonend betekent. Zoek dat woord in de tabel.","explain":"Uitwonend krijg je in 2027 € 335,10 basisbeurs per maand.","sources":["duoBedragen"]},{"id":"verschil","short":"Verschil met thuiswonend","type":"number","unit":"€","docs":["tabel"],"prompt":"Hoeveel is dat per maand meer dan thuiswonend?","correct":200.65,"pointTo":{"doc":"tabel","lines":["thuis","uit"]},"retry":"Haal het bedrag voor thuiswonend van het bedrag voor uitwonend af.","hint":"Je hebt beide regels van de tabel nodig. Welke som hoort bij 'meer dan'?","explain":"€ 335,10 min € 134,45 = € 200,65. Uitwonend krijg je dus elke maand een stuk meer.","sources":["duoBedragen"]},{"id":"wanneer","short":"Wanneer uitwonend","type":"single","docs":[],"prompt":"Wanneer ben je voor DUO meestal uitwonend?","options":[["c","Als je bij de gemeente op een ander adres staat en daar woont"],["a","Als je een huurcontract hebt voor een kamer in een andere stad"],["b","Als je meer dan de helft van de week op je eigen kamer slaapt"]],"correct":"c","pointTo":{"intro":"Je schrijft je daar dan ook in bij de gemeente."},"retry":"DUO kijkt naar je adres bij de gemeente. En naar nog iets.","hint":"Lees de intro van deze kamer nog eens. Wat doe je bij de gemeente?","explain":"Meestal ben je uitwonend als je bij de gemeente op een ander adres staat dan je ouders. En je woont daar ook echt. Er zijn een paar uitzonderingen. Bijvoorbeeld als de gemeente je niet wil inschrijven. DUO krijgt je adres van de gemeente.","sources":["duoUitwonend","wsf15"]}],"clue":"Het 2e cijfer van het slot is het laatste cijfer van het bedrag dat je uitwonend meer krijgt. Reken met de tabel. Kijk alleen naar de hele euro's.","clueFull":true,"digit":"0","remember":"Ga je op kamers? Schrijf je in bij je nieuwe gemeente en zet in Mijn DUO dat je uitwonend bent. Pas dan krijg je de basisbeurs voor uitwonenden.","teacherNote":"Uitwonend = ingeschreven op een ander adres dan je ouders en daar wonen. Er zijn uitzonderingen, bijvoorbeeld als de gemeente weigert in te schrijven. De woonsituatie zet je zelf in Mijn DUO; DUO kijkt naar de 1e van de maand. DUO controleert de woonsituatie. De basisbeurs is heel 2027 € 335,10 uitwonend en € 134,45 thuiswonend per maand."},{"id":"extra-geld","title":"Extra geld of lenen?","where":"maandag 5 juli 2027","intro":"Je moeder stuurt je een appje over geld voor je studie.","docs":{"app":{"type":"chat","name":"Mama","messages":[["m1","them","Papa en ik verdienen niet zo veel.","19:40"],["m2","them","Kun jij extra geld krijgen van DUO?"],["m3","them","Of moet je dan lenen? Dat moet je toch terugbetalen?"]]},"tabel":{"type":"table","title":"Hbo en universiteit, per maand, september tot en met december 2027","from":"Echte bedragen van DUO","rows":[["aanv","Aanvullende beurs, hoogstens","€ 507,10"],["lening","Gewone lening, hoogstens","€ 325,44"],["krediet","Collegegeldkrediet bij wettelijk collegegeld","€ 230,92"]],"note":"Krijg je minder of geen aanvullende beurs? Dan kun je het verschil extra lenen. Dat komt bovenop de gewone lening.","plain":"Aanvullende beurs: extra geld van DUO als je ouders weinig kunnen bijdragen. Lening: geld dat je later terugbetaalt, met rente. Collegegeldkrediet: een lening om je collegegeld te betalen. Wettelijk collegegeld: het gewone collegegeld. Betaal je meer collegegeld? Dan kun je ook meer collegegeldkrediet krijgen."}},"questions":[{"id":"ouders","short":"Aanvullende beurs hangt af van","type":"single","docs":["app"],"prompt":"Waar hangt de aanvullende beurs vooral van af?","options":[["a","Van wat je zelf verdient met je bijbaan"],["c","Van het inkomen van je ouders"],["b","Van je cijfers op je eindexamen"]],"correct":"c","pointTo":{"doc":"app","line":"m1"},"retry":"Lees het eerste appje van je moeder nog eens.","hint":"Lees bij Moeilijke woorden wat een aanvullende beurs is.","explain":"De aanvullende beurs hangt vooral af van het inkomen van je ouders. Ook het aantal broers en zussen telt mee. DUO raadt aan om hem altijd aan te vragen.","sources":["duoAanvullend","roHo"]},{"id":"hoogstens","short":"Hoogste aanvullende beurs vanaf september 2027","type":"number","unit":"€","docs":["tabel"],"prompt":"Hoeveel aanvullende beurs kun je vanaf september 2027 hoogstens krijgen per maand?","correct":507.1,"pointTo":{"doc":"tabel","line":"aanv"},"retry":"Zoek in de tabel de regel met het woord aanvullende.","hint":"Lees bij Moeilijke woorden welk woord bij extra geld van DUO hoort. Zoek dat woord in de tabel.","explain":"Vanaf september 2027 is de aanvullende beurs hoogstens € 507,10 per maand. Hoeveel jij krijgt, hangt af van je ouders.","sources":["duoBedragen"]},{"id":"lening","short":"Altijd terugbetalen","type":"single","docs":["app"],"prompt":"Wat moet je altijd terugbetalen, ook als je je diploma haalt?","options":[["c","De lening"],["a","De basisbeurs"],["b","De aanvullende beurs"]],"correct":"c","pointTo":{"doc":"app","line":"m3"},"retry":"Een beurs kan een gift worden. Wat nooit?","hint":"Lees bij Moeilijke woorden welk geld je later terugbetaalt.","explain":"Een lening en collegegeldkrediet betaal je altijd terug, met rente. Leen dus niet meer dan je nodig hebt.","sources":["duoGift","roHo"]}],"clue":"Het 3e cijfer van het slot is het laatste cijfer van de hoogste aanvullende beurs in de tabel. Kijk alleen naar de hele euro's.","clueFull":true,"digit":"7","remember":"Vraag de aanvullende beurs altijd aan. Lenen kan ook, maar dat betaal je altijd terug.","teacherNote":"Aanvullende beurs hangt af van het inkomen van de ouders en het aantal broers en zussen. Eén keer aanvragen; DUO rekent elk jaar opnieuw. Minder of geen aanvullende beurs? Dan kun je het verschil extra lenen. Betaal je instellingscollegegeld? Dan is het collegegeldkrediet van september tot en met december 2027 hoogstens € 1.154,60 per maand. Lening en collegegeldkrediet betaal je altijd terug, met rente vanaf het moment dat je leent. Rente 2027: 2,70% voor de meeste studenten (SF35), 3,28% voor een kleinere groep (SF15). In 2026 was het 2,33% en 2,29%."},{"id":"gift","title":"Gift of terugbetalen?","where":"maandag 7 februari 2028","intro":"Je studeert nu een half jaar. Je vriendin Mila begon net als jij in september 2027. Het was haar eerste studie, na de middelbare school. Nu is ze gestopt. Ze stuurt je een appje.","docs":{"app":{"type":"chat","name":"Mila","messages":[["a1","them","Ik ben op 20 december gestopt met mijn studie.","21:05"],["a2","them","Op 21 december heb ik mijn studiefinanciering in Mijn DUO stopgezet."],["a3","them","Mijn ov-kaart gebruik ik nog gewoon. Dat mag toch?"]]},"overzicht":{"type":"table","title":"Prestatiebeurs hbo en universiteit (regels van DUO)","rows":[["p1","Basisbeurs","diploma binnen 10 jaar? Dan wordt het een gift. Anders betaal je terug."],["p2","Aanvullende beurs","de eerste 5 maanden zijn altijd een gift. De rest wordt een gift met een diploma binnen 10 jaar."],["p3","Studentenreisproduct","diploma binnen 10 jaar? Dan wordt het een gift. Anders betaal je terug."],["p4","Lening en collegegeldkrediet","altijd terugbetalen, met rente."],["p5","Stop je in je 1e jaar?","Stopt je studiefinanciering voor 1 februari? Dan betaal je de beurs en het reisproduct van dat jaar meestal niet terug. Er gelden voorwaarden."]],"plain":"Prestatiebeurs: geld dat eerst een lening is. Haal je op tijd je diploma, dan hoef je het niet terug te betalen. Gift: geld dat je niet terugbetaalt. Ov-schuld: geld dat je DUO moet betalen als je reist zonder recht op je reisproduct."}},"questions":[{"id":"gift","short":"Gift met diploma","type":"single","docs":["overzicht"],"prompt":"Je haalt je diploma binnen 10 jaar. Wat wordt dan een gift?","options":[["c","De basisbeurs, de aanvullende beurs en het studentenreisproduct"],["a","Alles, ook de lening"],["b","Alleen het studentenreisproduct"]],"correct":"c","pointTo":{"doc":"overzicht","lines":["p1","p2","p3","p4"]},"retry":"Kijk welke regels het woord gift hebben. Welke regel niet?","hint":"Lees regel 1 tot en met 4 van het overzicht. Waar staat het woord gift?","explain":"Basisbeurs, aanvullende beurs en reisproduct worden een gift met een diploma binnen 10 jaar. De eerste 5 maanden aanvullende beurs zijn altijd een gift.","sources":["duoGift","roHo","roReis"]},{"id":"mila","short":"Mila en haar ov","type":"single","docs":["app"],"prompt":"Mila reist nog steeds met haar studentenreisproduct. Mag dat?","options":[["a","Ja, tot het eind van het studiejaar"],["c","Nee. Ze moest het in januari al stopzetten. Nu krijgt ze een ov-schuld"],["b","Ja, zolang haar ov-kaart werkt"]],"correct":"c","pointTo":{"doc":"app","lines":["a1","a3"]},"retry":"Het reisproduct hoort bij je studiefinanciering. Mila heeft die stopgezet.","hint":"Lees bij Moeilijke woorden wat een ov-schuld is.","explain":"Mila stopte op 20 december. Vanaf 1 januari mocht ze niet meer reizen met haar reisproduct. Ze moest het uiterlijk 10 januari stopzetten bij een ophaalautomaat, bijvoorbeeld op het station. Ze reist toch nog. Daarom krijgt ze een ov-schuld. Haar beurs en reisproduct van dit jaar hoeft ze misschien niet terug te betalen. Kijk naar regel 5 van het overzicht.","sources":["duoStop","duoOvschuld","duoEerstejaars"]},{"id":"termijn","short":"Sem, diploma na 11 jaar","type":"single","docs":["overzicht"],"prompt":"Sem doet een hbo-studie van 4 jaar. Hij haalt zijn diploma pas na 11 jaar. Hij had geen bijzondere reden voor die vertraging, zoals een ziekte. Wat geldt dan voor zijn basisbeurs?","options":[["c","Hij betaalt het terug, met rente, want het duurde langer dan 10 jaar"],["a","Het wordt een gift, want hij heeft een diploma"],["b","Het wordt een gift, want zijn studie duurt 4 jaar"]],"correct":"c","pointTo":{"doc":"overzicht","line":"p1"},"retry":"Lees regel 1 van het overzicht. Haalde Sem zijn diploma op tijd?","hint":"Vergelijk de 11 jaar van Sem met het getal in regel 1 van het overzicht.","explain":"Een diploma telt alleen binnen 10 jaar. Sem deed er 11 jaar over. Dan betaalt hij zijn basisbeurs terug, met rente. Loop je vertraging op door een ziekte of beperking? Dan kan DUO soms een uitzondering maken.","sources":["duoGift","roHo","roReis","duoHoelang"]}],"clue":"Het 4e cijfer van het slot is het aantal regels in het overzicht met het woord gift.","clueFull":true,"digit":"3","remember":"Je beurs is eerst een lening. Haal binnen 10 jaar je diploma, dan wordt hij een gift. Stop je? Zet je reisproduct op tijd stop.","teacherNote":"Prestatiebeurs: gift met diploma binnen 10 jaar; de eerste 5 maanden aanvullende beurs zijn altijd een gift. De diplomatermijn van tien jaar begint bij de eerste maand waarin je studiefinanciering voor hbo of universiteit ontvangt. Ook een studentenreisproduct telt als studiefinanciering. Door bijzondere omstandigheden, zoals ziekte of een beperking, kan de termijn langer worden. Eerstejaarsregeling: krijg je voor het eerst prestatiebeurs voor hbo of universiteit, kom je van de middelbare school en stopt je studiefinanciering voor 1 februari? Dan betaal je basisbeurs, aanvullende beurs en reisproduct van dat jaar niet terug. Voorwaarde is ook dat je in hetzelfde studiejaar niet opnieuw studiefinanciering voor hbo of universiteit krijgt. Dit kan één keer. Mila stopte op 20 december 2027; haar studiefinanciering stopt per 1 januari 2028. Mila voldoet aan de eerstejaarsregeling, mits ze in hetzelfde studiejaar niet opnieuw studiefinanciering voor hbo of universiteit krijgt. Een eventuele gewone lening moet ze wel terugbetalen. Reisproduct: vanaf de 1e van de maand na het uitschrijven niet meer reizen, uiterlijk de 10e stopzetten. Ov-schuld in 2026: € 96,09 per halve maand in de 1e maand, daarna € 192,21 per halve maand. De bedragen voor 2028 zijn nog niet bekend."}],"debrief":["Ga je na deze school studeren? Blijf je thuis wonen of ga je op kamers? Wat weegt voor jou het zwaarst?","Lenen voor je studie: wanneer vind jij dat slim, en wanneer niet? Waar zou je het geld voor gebruiken?","Wie kan jou helpen met DUO en Mijn DUO? Wat wil je zelf leren regelen?"],"plan":{"intro":"Maak je eigen als-dan-plan en zeg het tegen je buur. Kies een situatie en een actie. Zet een herinnering in je telefoon.","when":["ik me heb aangemeld voor een opleiding","ik op kamers ga","ik stop met mijn studie"],"then":["vraag ik in Mijn DUO studiefinanciering, de aanvullende beurs en mijn reisproduct aan","schrijf ik me in bij mijn nieuwe gemeente en zet ik mijn woonsituatie in Mijn DUO","zet ik mijn reisproduct stop bij een ophaalautomaat op het station"]},"teacher":{"answers":{"format":"text","head":["Kamer","Vraag","Goed antwoord"],"rows":[["1","Waar aanvragen","Bij DUO, in Mijn DUO"],["1","Goedkoop reizen","Het studentenreisproduct"],["1","Soorten reisproduct","Een weekabonnement; een weekendabonnement"],["1","**Cijfer**","**2**"],["2","Basisbeurs uitwonend 2027","€ 335,10"],["2","Verschil met thuiswonend","€ 200,65"],["2","Wanneer uitwonend","Ander adres dan je ouders bij de gemeente, en daar echt wonen"],["2","**Cijfer**","**0**"],["3","Aanvullende beurs hangt af van","Het inkomen van je ouders"],["3","Hoogste aanvullende beurs vanaf september 2027","€ 507,10"],["3","Altijd terugbetalen","De lening"],["3","**Cijfer**","**7**"],["4","Gift met diploma","De basisbeurs, de aanvullende beurs en het studentenreisproduct"],["4","Mila en haar ov","Nee. Ze moest het in januari al stopzetten. Nu krijgt ze een ov-schuld"],["4","Sem, diploma na 11 jaar","Hij betaalt het terug, met rente, want het duurde langer dan 10 jaar"],["4","**Cijfer**","**3**"],["","**Code**","**2073**"]],"after":"Start- en eindcheck vorm A: C1 Bij DUO, in Mijn DUO. C2 Nee, want ze staat nog op het adres van haar ouders ingeschreven. C3 Je betaalt het terug, met rente. C4 Ja, want ze haalde haar diploma binnen 10 jaar. Vorm B: B1 Bij DUO, in Mijn DUO. B2 Nee, want ze staat nog op het adres van haar ouders ingeschreven. B3 Je betaalt het terug, met rente. B4 Ja, want hij haalde zijn diploma binnen 10 jaar."},"goal":"1. De leerling weet dat je studiefinanciering en het studentenreisproduct bij DUO aanvraagt, en welke twee soorten reisproduct er zijn. 2. De leerling kan in een tabel de basisbeurs voor thuiswonend en uitwonend aflezen, het verschil uitrekenen en zeggen wanneer je voor DUO meestal uitwonend bent. 3. De leerling kan zeggen waar de aanvullende beurs vooral van afhangt en dat je een lening altijd terugbetaalt. 4. De leerling kan uitleggen wat een prestatiebeurs is (gift bij een diploma binnen 10 jaar) en dat je je reisproduct stopzet als je stopt met studeren.","plan":[{"from":0,"to":5,"title":"Uitleg en inloggen","text":"Laat het docentenscherm zien. Leerlingen openen de link en werken met z'n tweeën op één scherm."},{"from":5,"to":7,"title":"Startcheck","text":"Elk tweetal beantwoordt vier vragen (vorm A of B) voordat de klok start. Geef geen hints."},{"from":7,"to":33,"title":"Escape","text":"Start de klastimer. Tweetallen spelen vier kamers en schrijven elk cijfer op. Klaar voor de tijd? Laat het tweetal de gespreksvragen op het eindscherm bespreken."},{"at":33,"title":"Stop","text":"Zeg: stop. Lees de cijfers van het slot voor van je geprinte antwoordblad. Tweetallen die nog bezig zijn, stoppen ook. Iedereen gaat door met de eindcheck en het als-dan-plan."},{"from":33,"to":35,"title":"Eindcheck","text":"De andere vorm: vier vragen over dezelfde regels. Daarna ziet elk tweetal wat het goed had, voor en na."},{"from":35,"to":39,"title":"Nabespreken","text":"Vraag met handopsteken: wie had bij de startcheck 3 of 4 goed? En bij de eindcheck? Vraag welke kamer het lastigst was en begin daar. Gebruik de gespreksvragen. Vraag naar ervaringen, niet naar bedragen thuis."},{"from":39,"to":41,"title":"Afsluiten","text":"Laat twee of drie leerlingen hun als-dan-plan hardop zeggen. Stel daarna de slotvraag."},{"from":41,"to":45,"title":"Reserve","text":"4 minuten speling. Gebruik ze als inloggen of nabespreken langer duurt."}],"materials":["een apparaat per tweetal","pen en papier voor de cijfers","een digibord of beamer"],"care":["Kamer 3 gaat over het inkomen van ouders. Vraag leerlingen in de klas niet naar het geld van hun eigen gezin.","De code van het slot staat in het antwoordblad. Laat de code niet op het bord zien vóór minuut 33.","Een fout antwoord wordt doorgestreept. Een tweetal kan dus bij een vraag met één antwoord het goede antwoord vinden door te proberen. Het eindscherm laat zien hoeveel vragen in één keer goed waren."],"closing":"Noem twee dingen die je bij DUO regelt voordat je gaat studeren, en één ding dat je doet als je stopt."},"sources":{"duoAanvragen":{"name":"DUO, aanvragen studiefinanciering","url":"https://duo.nl/particulier/studiefinanciering/aanvragen.jsp","checked":"2026-11-06","until":"No set date; check Jan 2027"},"nlwwAanvragen":{"name":"Netherlands Worldwide (Ministerie van Buitenlandse Zaken), how to apply for student finance","url":"https://netherlandsworldwide.nl/student-finance-abroad/how-apply","checked":"2026-11-06","until":"No set date; check Jan 2027"},"roReis":{"name":"Rijksoverheid, recht op een reisproduct voor studenten","url":"https://www.rijksoverheid.nl/themas/onderwijs/studiefinanciering/vraag-en-antwoord/studiefinanciering/recht-reisproduct-studenten","checked":"2026-11-06","until":"No set date; check Jan 2027"},"duoOv":{"name":"DUO, ov","url":"https://duo.nl/particulier/studiefinanciering/ov.jsp","checked":"2026-11-06","until":"No set date; check Jan 2027"},"duoBedragen":{"name":"DUO, bedragen studiefinanciering","url":"https://duo.nl/particulier/studiefinanciering/bedragen.jsp","checked":"2026-11-06","until":"31 Dec 2027 (all amounts used; collegegeldkrediet € 230,92 is for Sep to Dec 2027)"},"duoReisAanvragen":{"name":"DUO, aanvragen studentenreisproduct","url":"https://duo.nl/particulier/ov-en-reizen/aanvragen.jsp","checked":"2026-11-06","until":"No set date; check Jan 2027 (DUO announces a move to OVpay)"},"duoVoorwaarden":{"name":"DUO, voorwaarden","url":"https://duo.nl/particulier/studiefinanciering/voorwaarden.jsp","checked":"2026-11-06","until":"No set date; check Jan 2027"},"duoUitwonend":{"name":"DUO, uitwonend","url":"https://duo.nl/particulier/studiefinanciering/uitwonend.jsp","checked":"2026-11-06","until":"No set date; check Jan 2027"},"wsf15":{"name":"Wet studiefinanciering 2000, art. 1.5 lid 1","url":"https://wetten.overheid.nl/jci1.3:c:BWBR0011453&hoofdstuk=1&artikel=1.5","checked":"2026-11-06","until":"No set date; check Jan 2027"},"duoAanvullend":{"name":"DUO, aanvullende beurs","url":"https://duo.nl/particulier/studiefinanciering/aanvullende-beurs.jsp","checked":"2026-11-06","until":"No set date; check Jan 2027"},"duoAanvullendHoeveel":{"name":"DUO, aanvullende beurs studiefinanciering","url":"https://duo.nl/particulier/aanvullende-beurs-studiefinanciering/index.jsp","checked":"2026-11-06","until":"No set date; check Jan 2027"},"roHo":{"name":"Rijksoverheid, studiefinanciering hbo en universiteit","url":"https://www.rijksoverheid.nl/themas/onderwijs/studiefinanciering/studiefinanciering-hbo-universiteit","checked":"2026-11-06","until":"No set date; check Jan 2027"},"duoGift":{"name":"DUO, gift of terugbetalen","url":"https://duo.nl/particulier/studiefinanciering/gift-of-terugbetalen.jsp","checked":"2026-11-06","until":"No set date; interest rate changes yearly (1 Jan)"},"duoHoelang":{"name":"DUO, hoelang recht op het studentenreisproduct","url":"https://duo.nl/particulier/ov-en-reizen/hoelang-recht.jsp","checked":"2026-11-06","until":"No set date; check Jan 2027"},"duoEerstejaars":{"name":"DUO, stoppen in uw 1e jaar","url":"https://duo.nl/particulier/opleiding-stoppen-of-wijzigen/stoppen-in-je-eerste-jaar.jsp","checked":"2026-11-06","until":"No set date; check Jan 2027"},"duoStop":{"name":"DUO, studentenreisproduct stopzetten","url":"https://duo.nl/particulier/studentenreisproduct-stopzetten.jsp","checked":"2026-11-06","until":"Rule: no set date"},"duoOvschuld":{"name":"DUO, wat is een ov-schuld","url":"https://duo.nl/particulier/ov-schuld-terugbetalen/index.jsp","checked":"2026-11-06","until":"Rule: no set date. Ov-schuld amounts (teacher only) valid for 2026"}}};
 /* All interface text of the Escape 18 engine and site pages, one table per language. nl is the default and must have every key;
    other languages may miss keys (they fall back to nl). A value is a string or a function of its arguments.
@@ -582,7 +605,7 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     consentChoice: 'Je docent heeft gekozen of de klas anoniem antwoorden deelt.',
     checkEndLeadB: 'Nu een paar andere vragen over hetzelfde. Daarna zie je wat jullie goed hadden, voor en na.', colResult: 'Jullie antwoord',
     joinType: 'Open deze korte link op je laptop of Chromebook:', joinCode: 'Typ dan de klascode hierboven in. Een QR-code mag ook.', qrExtra: 'Of scan de QR-code. Deze link heeft de klascode er al in:',
-    shareQ: 'Anonieme antwoorden van deze klas delen met het Escape 18-team?', shareWhat: 'We krijgen dan alleen welke antwoorden de tweetallen kiezen, hoe lang ze erover doen en hoeveel hints ze nemen. Nooit namen. Na de stop zie je de resultaten van de hele klas samen.',
+    shareQ: 'Anonieme antwoorden van deze klas delen met het Escape 18-team?', shareWhat: 'We krijgen dan alleen welke antwoorden de tweetallen kiezen, hoe lang ze erover doen en hoeveel hints ze nemen. Nooit namen. Na de stop zie je de resultaten van de hele klas samen, als het delen lukt. Lukt het niet, tel dan met handopsteken.',
     shareNoNote: 'Nee: er wordt niets verstuurd uit deze klas. De link voor leerlingen eindigt op &log=0.', shareLocked: 'De les is gestart. Wil je je keuze veranderen? Kies Nieuwe klascode.',
     chooseFirst: 'Kies eerst hierboven Ja of Nee. Dan krijg je een klascode, een link en een QR-code.',
     licenceA: 'Lesmateriaal: ', licenceName: 'CC BY-NC-SA 4.0', licenceB: '. Gratis gebruiken en aanpassen, niet commercieel, met naamsvermelding.', licenceUrl: 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl',
@@ -606,16 +629,16 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     checkStartLead: 'Beantwoord deze vragen samen voordat de klok start. Je ziet nog niet wat goed is. Gok gerust.', checkEndLead: 'Dezelfde vragen als aan het begin, in een andere volgorde. Daarna zie je wat jullie goed hadden, voor en na.',
     chkErr: 'Kies bij elke vraag een antwoord.', done: 'Klaar',
     roomN: i => 'Kamer ' + i, firstQ: 'Naar de eerste vraag', qOf: (i, n) => `Vraag ${i} van ${n}`,
-    good: 'Goed!', goodNow: 'Goed, nu wel!', rightIs: 'Dit is het goede antwoord', rightAns: 'Het goede antwoord', nextQ: 'Volgende vraag', toDigit: 'Naar het cijfer van deze kamer',
-    notGood: 'Nog niet goed.', showLine: 'Toon de regel in het document', showLines: n => `Toon de ${n} regels in het document`, showSpot: 'Toon waar het staat', showSpots: n => `Toon de ${n} plekken`, rulesH: 'Regels', ruleH: 'Regel', ruleN: n => `Regel ${n}:`, tableScroll: x => `${x} (schuif opzij voor de hele tabel)`,
+    good: 'Goed!', goodNow: 'Goed, nu wel!', rightAns: 'Het goede antwoord', nextQ: 'Volgende vraag', toDigit: 'Naar het cijfer van deze kamer',
+    notGood: 'Nog niet goed.', showSpot: 'Toon waar het staat', rulesH: 'Regels', ruleH: 'Regel', ruleN: n => `Regel ${n}:`, tableScroll: x => `${x} (schuif opzij voor de hele tabel)`,
     ansSheetH: 'Antwoordblad', hint: 'Hint:', hintBtn: 'Hint (+30 seconden)', tried: 'Al geprobeerd: ',
     answers: 'Antwoorden', answersMulti: 'Antwoorden, kies er meer', multiErr: 'Kies eerst een of meer antwoorden.', check: 'Controleer', and: ' en ',
     yourAnswer: 'Jullie antwoord', inUnit: u => ` (in ${u})`, numErr: 'Typ alleen een getal, bijvoorbeeld 1250 of 12,50.',
     found: 'Gevonden!', thisDigit: 'Dit is het cijfer', writeDown: 'Schrijf op:', remember: 'Dit neem je mee', toLock: 'Naar het slot', nextRoom: 'Naar de volgende kamer',
-    clueRetry: 'Lees de aanwijzing nog eens en kijk in de documenten.', yourDigits: 'Jullie cijfers', yourDigit: 'Jullie cijfer', roomDone: 'Kamer klaar!',
+    clueRetry: 'Lees de aanwijzing nog eens en kijk in de documenten.', yourDigits: 'Jullie cijfers', yourDigit: 'Jullie cijfer', digitOnly: n => n > 1 ? `Typ alleen de ${n} cijfers.` : 'Typ alleen het cijfer.', roomDone: 'Kamer klaar!',
     clueLead: n => n > 1 ? `Jullie ${n} cijfers voor het slot zijn ` : 'Jullie cijfer voor het slot is ',
     lockTitle: 'Open het slot', lockIntro: 'Zet de cijfers van de kamers achter elkaar, in de volgorde van de kamers.', digitN: i => 'Cijfer ' + i, lockGroup: 'Code van het slot',
-    lockErr: 'Het slot gaat nog niet open. Kijk of de cijfers in de goede volgorde staan.', lockOpen: 'Open het slot', lockFound: 'Kijk op jullie briefje. Dit zijn de cijfers per kamer:',
+    lockErr: 'Dat is niet de code. Controleer elk cijfer.', lockOpen: 'Open het slot', lockFound: 'Dit zijn de cijfers per kamer:',
     roomItem: (i, t) => `Kamer ${i}: ${t}`, nDigits: n => n > 1 ? n + ' cijfers' : '1 cijfer',
     won: 'Het slot is open!', statTime: 'Tijd, met hints', statHints: 'Hints', statFirst: 'In één keer goed', statFirstOf: (a, b) => `${a} van ${b} gemaakte vragen`,
     chkTitle: 'Jullie start- en eindcheck', beforeAfter: (a, b, c, d) => `Voor: <b>${a} van ${b}</b> goed. Na: <b>${c} van ${d}</b> goed.`,
@@ -624,7 +647,7 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     planCard: (w, t) => `Als ${w}, dan ${t}.`, planNote: 'Dit plan blijft alleen op dit scherm. Het wordt niet verstuurd en niet bewaard. Maak een foto of print het als je het wilt houden.',
     printPlan: 'Print mijn plan', planAgain: 'Maak een ander plan', when: 'Als ...', then: 'dan ...', own: 'Of schrijf zelf wat je dan doet', ownHelp: 'Dit blijft op dit apparaat. Het wordt nergens heen gestuurd.',
     planErr: 'Kies een "als" en een "dan", of schrijf zelf wat je dan doet.', makePlan: 'Maak mijn plan',
-    detailH: 'Bronnen en uitzonderingen', faqH: 'Dit wordt vaak gevraagd',
+    detailH: 'Achtergrond en bronnen bij deze kamer', faqH: 'Dit wordt vaak gevraagd',
     slipTitle: 'Mijn volgende stap', slipBtn: 'Print plan-strookjes',
     revealH: 'Zo kom je bij dit werk', bbBtn: 'Print beroepenblad', bbTitle: 'Beroepenblad',
     bbNote: label => `Werken tweetallen op papier? ${label}: één A4 per tweetal. Daarop staat na elke kamer welk werk het was en hoe je er komt. Er wordt niets opgeslagen of verstuurd.`,
@@ -647,8 +670,8 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     fbErr: 'Vul de eerste vier vragen in: nog eens geven, hoeveel gebruikt, aantal leerlingen en minuten.', sendNoConfig: 'In deze versie is versturen niet ingesteld. Er wordt niets verstuurd.',
     fbWhere: 'Je feedback gaat naar het Escape 18-team, los van je keuze over de antwoorden van de klas. E-mailadressen en telefoonnummers halen we weg.', fbSend: 'Verstuur feedback', fbSent: '<b>Dank je wel!</b> Je feedback wordt verstuurd naar het Escape 18-team.', fbOffline: '<b>Je bent offline.</b> We versturen je feedback zodra je weer online bent.', radioHint: 'Kies met de pijltjestoetsen of klik.',
     sheetTitle: t => t + ': antwoordblad', sheetCode: c => `Escape 18. Code van het slot: <b>${c}</b>`, colAns: 'Antwoord', colWhy: 'Waarom', chkHead: 'Start- en eindcheck',
-    classCode: 'Klascode', newCode: 'Nieuwe klascode (nieuwe klas)', startLesson: 'Start de les', startNote: 'Je krijgt dan een klascode, een link en een QR-code voor de leerlingen.',
-    toPupil: 'Naar het leerlingscherm', tSub: m => `Escape 18 · havo en vwo · tweetallen · ${m} minuten`, startTitle: 'Zo begin je',
+    classCode: 'Klascode', newCode: 'Nieuwe klascode (nieuwe klas)', startLesson: 'Start de les', startNote: 'Tik op Start de les. Dan zie je de klascode, de korte link en een QR-code voor de leerlingen.', audMore: 'Meer over deze les',
+    toPupil: 'Naar het leerlingscherm', tSub: (m, lv) => `Escape 18 · ${lv || 'havo en vwo'} · tweetallen · ${m} minuten`, startTitle: 'Zo begin je',
     steps: ['Ga naar de korte link hieronder.', 'Typ de klascode in.', 'Speel met z\'n tweeën op één scherm en tik op Start.'],
     planH: 'Lesplan', goal: 'Doel:', colMin: 'Min', colWhat: 'Wat', colHow: 'Hoe', colLessonMin: 'Lesminuut', colDur: 'Duur', planRange: (a, b) => `${a} tot ${b}`, planDur: n => `${n} min`, planMoment: 'moment', planTotal: n => `Totaal: ${n} minuten.`, tipH: 'Tip voor de docent', careH: 'Let op', needs: 'Nodig:', print: 'Print het antwoordblad', discussH: 'Nabespreken per kamer', core: 'Kern',
     showAnswers: 'Toon antwoorden', lockCode: 'Code van het slot:', closeH: 'Afsluiten', debriefNote: 'De tweetallen zien deze vragen op hun eindscherm:', teacherTitle: 'Voor de docent: ',
@@ -702,8 +725,8 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     projNoCode: 'Tik eerst op het docentenscherm op Start de les. Dan staan hier de klascode, de link en de QR-code.', projJoin: 'Ga naar', projJoinCode: 'en typ de klascode:',
     vsH: 'Lesverslag', vsLead: 'Maak na de les een kort verslag voor jezelf, je sectie of de school. Print het, of kies bij het printen Opslaan als pdf.',
     vsLocal: 'Het verslag blijft alleen op dit scherm. Er wordt niets bewaard of verstuurd. Noem geen namen van leerlingen.',
-    vsDate: 'Datum', vsGroup: 'Klas of niveau', vsGroupHelp: 'Bijvoorbeeld havo 5', vsPupils: 'Aantal leerlingen', vsPrep: 'Voorbereiding in minuten', vsHard: 'Lastig volgens handopsteken', vsHardHelp: 'Aantal leerlingen per kamer. Niet verplicht.', vsNote: 'Wat zag je?', vsNoteHelp: 'Eén of twee zinnen, zonder namen.',
-    vsPrint: 'Print het lesverslag', vsPreview: 'Zo ziet het verslag eruit', vsResOn: 'In het verslag staan de klasresultaten hierboven: de hele klas samen, zonder antwoorden.', vsResOff: 'Geen klasresultaten op dit scherm. Tel daarom met handopsteken.',
+    vsDate: 'Datum', vsGroup: 'Klas of niveau', vsGroupHelp: x => `Bijvoorbeeld ${x || 'havo 5'}`, vsPupils: 'Aantal leerlingen', vsPrep: 'Voorbereiding in minuten', vsHard: 'Lastig volgens handopsteken', vsHardHelp: 'Aantal leerlingen per kamer. Niet verplicht.', vsNote: 'Wat zag je?', vsNoteHelp: 'Eén of twee zinnen, zonder namen.',
+    vsPrint: 'Print het lesverslag', vsPreview: 'Zo ziet het verslag eruit', vsResOn: 'In het verslag staan de klasresultaten hierboven: de hele klas samen, zonder antwoorden.', vsResOff: 'Nog geen klasresultaten op dit scherm. Ze komen na de stop, als je Ja koos en het delen lukt. Lukt het niet, tel dan met handopsteken.', vsResNee: 'Je koos Nee bij delen, dus er komen geen klasresultaten. Tel met handopsteken.', vsResNone: 'Delen is niet ingesteld, dus er komen geen klasresultaten. Tel met handopsteken.',
     vsTitle: t => `Lesverslag Escape 18: ${t}`, vsLDate: d => `Datum: ${d}.`, vsLGroup: g => `Klas: ${g}.`, vsLPupils: n => `Leerlingen: ${n}.`, vsLPrep: n => `Voorbereiding: ${n} ${n === 1 ? 'minuut' : 'minuten'}.`,
     vsLRes: 'Klasresultaten (anoniem, de hele klas samen):', vsLPairs: (p, e) => `Tweetallen: ${p}, aan het eind: ${e}.`, vsLLock: (o, r) => `Slot open: ${o} van ${r} tweetallen bij het slot.`,
     vsLRoom: (n, title, a, b) => `Kamer ${n}, ${title}: ${a} van ${b} tweetallen klaar.`, vsLHard: (q, p) => `Lastigste vraag: ${q} (${p}% in één keer goed).`,
@@ -759,7 +782,7 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     consentChoice: 'Your teacher has chosen whether the class shares answers anonymously.',
     checkEndLeadB: 'Now a few other questions about the same things. Then you see what you got right, before and after.', colResult: 'Your answer',
     joinType: 'Open this short link on your laptop or Chromebook:', joinCode: 'Then type in the class code above. A QR code works too.', qrExtra: 'Or scan the QR code. This link already has the class code in it:',
-    shareQ: 'Share anonymous answers of this class with the Escape 18 team?', shareWhat: 'We then only get which answers the pairs choose, how long they take and how many hints they take. Never names. After the stop you see the results of the whole class together.',
+    shareQ: 'Share anonymous answers of this class with the Escape 18 team?', shareWhat: 'We then only get which answers the pairs choose, how long they take and how many hints they take. Never names. After the stop you see the results of the whole class together, if sharing works. If it does not, count with a show of hands.',
     shareNoNote: 'No: nothing is sent from this class. The pupil link ends in &log=0.', shareLocked: 'The lesson has started. Want to change your choice? Choose New class code.',
     chooseFirst: 'First choose Yes or No above. Then you get a class code, a link and a QR code.',
     licenceA: 'Course material: ', licenceName: 'CC BY-NC-SA 4.0', licenceB: '. Free to use and adapt, not commercial, with credit to the author.', licenceUrl: 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en',
@@ -782,16 +805,16 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     checkStartLead: 'Answer these questions together before the clock starts. You do not see yet what is right. Just guess.', checkEndLead: 'The same questions as at the start, in a different order. Then you see what you got right, before and after.',
     chkErr: 'Choose an answer for every question.', done: 'Done',
     roomN: i => 'Room ' + i, firstQ: 'Go to the first question', qOf: (i, n) => `Question ${i} of ${n}`,
-    good: 'Right!', goodNow: 'Right this time!', rightIs: 'This is the right answer', rightAns: 'The right answer', nextQ: 'Next question', toDigit: 'Go to the digit of this room',
-    notGood: 'Not right yet.', showLine: 'Show the line in the document', showLines: n => `Show the ${n} lines in the document`, showSpot: 'Show where it is', showSpots: n => `Show the ${n} places`, rulesH: 'Rules', ruleH: 'Rule', ruleN: n => `Rule ${n}:`, tableScroll: x => `${x} (scroll sideways for the whole table)`,
+    good: 'Right!', goodNow: 'Right this time!', rightAns: 'The right answer', nextQ: 'Next question', toDigit: 'Go to the digit of this room',
+    notGood: 'Not right yet.', showSpot: 'Show where it is', rulesH: 'Rules', ruleH: 'Rule', ruleN: n => `Rule ${n}:`, tableScroll: x => `${x} (scroll sideways for the whole table)`,
     ansSheetH: 'Answer sheet', hint: 'Hint:', hintBtn: 'Hint (+30 seconds)', tried: 'Already tried: ',
     answers: 'Answers', answersMulti: 'Answers, choose more than one', multiErr: 'First choose one or more answers.', check: 'Check', and: ' and ',
     yourAnswer: 'Your answer', inUnit: u => ` (in ${u})`, numErr: 'Type a number only, for example 1250 or 12,50.',
     found: 'Found it!', thisDigit: 'This is the digit', writeDown: 'Write down:', remember: 'Take this with you', toLock: 'Go to the lock', nextRoom: 'Go to the next room',
-    clueRetry: 'Read the clue again and look at the documents.', yourDigits: 'Your digits', yourDigit: 'Your digit', roomDone: 'Room done!',
+    clueRetry: 'Read the clue again and look at the documents.', yourDigits: 'Your digits', yourDigit: 'Your digit', digitOnly: n => n > 1 ? `Type only the ${n} digits.` : 'Type only the digit.', roomDone: 'Room done!',
     clueLead: n => n > 1 ? `Your ${n} digits for the lock are ` : 'Your digit for the lock is ',
     lockTitle: 'Open the lock', lockIntro: 'Put the digits of the rooms in a row, in the order of the rooms.', digitN: i => 'Digit ' + i, lockGroup: 'Code of the lock',
-    lockErr: 'The lock does not open yet. Check that the digits are in the right order.', lockOpen: 'Open the lock', lockFound: 'Look at your note. These are the digits per room:',
+    lockErr: 'That is not the code. Check each digit.', lockOpen: 'Open the lock', lockFound: 'These are the digits per room:',
     roomItem: (i, t) => `Room ${i}: ${t}`, nDigits: n => n > 1 ? n + ' digits' : '1 digit',
     won: 'The lock is open!', statTime: 'Time, with hints', statHints: 'Hints', statFirst: 'Right first time', statFirstOf: (a, b) => `${a} of ${b} questions done`,
     chkTitle: 'Your start and end check', beforeAfter: (a, b, c, d) => `Before: <b>${a} of ${b}</b> right. After: <b>${c} of ${d}</b> right.`,
@@ -800,7 +823,7 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     planCard: (w, t) => `If ${w}, then ${t}.`, planNote: 'This plan only stays on this screen. It is not sent and not saved. Take a photo or print it if you want to keep it.',
     printPlan: 'Print my plan', planAgain: 'Make another plan', when: 'If ...', then: 'then ...', own: 'Or write what you will do', ownHelp: 'This stays on this device. It is not sent anywhere.',
     planErr: 'Choose an "if" and a "then", or write what you will do.', makePlan: 'Make my plan',
-    detailH: 'Sources and exceptions', faqH: 'Often asked',
+    detailH: 'Background and sources for this room', faqH: 'Often asked',
     slipTitle: 'My next step', slipBtn: 'Print plan slips',
     revealH: 'How you get into this work', bbBtn: 'Print job sheet', bbTitle: 'Job sheet',
     bbNote: label => `Pairs working on paper? ${label}: one A4 per pair. It shows after each room which job it was and how you get there. Nothing is saved or sent.`,
@@ -822,8 +845,8 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     fbErr: 'Fill in the first four questions: teach again, how much used, number of pupils and minutes.', sendNoConfig: 'Sending is not set up in this version. Nothing is sent.',
     fbWhere: 'Your feedback goes to the Escape 18 team, separate from your choice about the class answers. We remove e-mail addresses and phone numbers.', fbSend: 'Send feedback', fbSent: '<b>Thank you!</b> Your feedback is being sent to the Escape 18 team.', fbOffline: '<b>You are offline.</b> We will send your feedback as soon as you are back online.', radioHint: 'Choose with the arrow keys or click.',
     sheetTitle: t => t + ': answer sheet', sheetCode: c => `Escape 18. Code of the lock: <b>${c}</b>`, colAns: 'Answer', colWhy: 'Why', chkHead: 'Start and end check',
-    classCode: 'Class code', newCode: 'New class code (new class)', startLesson: 'Start the lesson', startNote: 'You then get a class code, a link and a QR code for the pupils.',
-    toPupil: 'Go to the pupil screen', tSub: m => `Escape 18 · havo and vwo · pairs · ${m} minutes`, startTitle: 'How to start',
+    classCode: 'Class code', newCode: 'New class code (new class)', startLesson: 'Start the lesson', startNote: 'Tap Start the lesson. Then you see the class code, the short link and a QR code for the pupils.', audMore: 'More about this lesson',
+    toPupil: 'Go to the pupil screen', tSub: (m, lv) => `Escape 18 · ${lv || 'havo and vwo'} · pairs · ${m} minutes`, startTitle: 'How to start',
     steps: ['Go to the short link below.', 'Type in the class code.', 'Play in pairs on one screen and tap Start.'],
     planH: 'Lesson plan', goal: 'Aim:', colMin: 'Min', colWhat: 'What', colHow: 'How', colLessonMin: 'Lesson minute', colDur: 'Length', planRange: (a, b) => `${a} to ${b}`, planDur: n => `${n} min`, planMoment: 'moment', planTotal: n => `Total: ${n} minutes.`, tipH: 'Tip for the teacher', careH: 'Take care', needs: 'You need:', print: 'Print the answer sheet', discussH: 'Discussion per room', core: 'Key point',
     showAnswers: 'Show answers', lockCode: 'Code of the lock:', closeH: 'Closing', debriefNote: 'The pairs see these questions on their end screen:', teacherTitle: 'For the teacher: ',
@@ -873,8 +896,8 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     projNoCode: 'First tap Start the lesson on the teacher screen. Then the class code, the link and the QR code appear here.', projJoin: 'Go to', projJoinCode: 'and type the class code:',
     vsH: 'Lesson report', vsLead: 'After the lesson, make a short report for yourself, your department or the school. Print it, or choose Save as PDF when printing.',
     vsLocal: 'The report stays on this screen only. Nothing is kept or sent. Do not name any pupils.',
-    vsDate: 'Date', vsGroup: 'Class or level', vsGroupHelp: 'For example havo 5', vsPupils: 'Number of pupils', vsPrep: 'Preparation in minutes', vsHard: 'Hard by show of hands', vsHardHelp: 'Number of pupils per room. Not required.', vsNote: 'What did you see?', vsNoteHelp: 'One or two sentences, without names.',
-    vsPrint: 'Print the lesson report', vsPreview: 'This is how the report looks', vsResOn: 'The report has the class results above: the whole class together, without answers.', vsResOff: 'No class results on this screen. So count with a show of hands.',
+    vsDate: 'Date', vsGroup: 'Class or level', vsGroupHelp: x => `For example ${x || 'havo 5'}`, vsPupils: 'Number of pupils', vsPrep: 'Preparation in minutes', vsHard: 'Hard by show of hands', vsHardHelp: 'Number of pupils per room. Not required.', vsNote: 'What did you see?', vsNoteHelp: 'One or two sentences, without names.',
+    vsPrint: 'Print the lesson report', vsPreview: 'This is how the report looks', vsResOn: 'The report has the class results above: the whole class together, without answers.', vsResOff: 'No class results on this screen yet. They come after the stop, if you chose Yes and sharing works. If it does not, count with a show of hands.', vsResNee: 'You chose No for sharing, so there are no class results. Count with a show of hands.', vsResNone: 'Sharing is not set up, so there are no class results. Count with a show of hands.',
     vsTitle: t => `Lesson report Escape 18: ${t}`, vsLDate: d => `Date: ${d}.`, vsLGroup: g => `Class: ${g}.`, vsLPupils: n => `Pupils: ${n}.`, vsLPrep: n => `Preparation: ${n} ${n === 1 ? 'minute' : 'minutes'}.`,
     vsLRes: 'Class results (anonymous, the whole class together):', vsLPairs: (p, e) => `Pairs: ${p}, at the end: ${e}.`, vsLLock: (o, r) => `Lock open: ${o} of ${r} pairs at the lock.`,
     vsLRoom: (n, title, a, b) => `Room ${n}, ${title}: ${a} of ${b} pairs finished.`, vsLHard: (q, p) => `Hardest question: ${q} (${p}% right first time).`,
@@ -1188,9 +1211,19 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
   // A lesson page offers only the languages its data has (Dutch always); the site index keeps its own switch.
   const LESSON_LANGS = I.LANGS.filter(x => x === 'nl' || I.hasLang(RAW, x));
   let lang = LESSON_LANGS.includes(params.get('lang')) ? params.get('lang') : 'nl';
-  let t = I.t(lang), L = I.localise(RAW, lang);
+  // Lesson audience (optional teacher.noun, e.g. ['student', 'studenten'] for mbo): that noun replaces "leerling(en)" in every interface text of the
+  // page (pupil and teacher screen, prints, Lesverslag). In another language only when the lesson gives the noun in that language.
+  function nounT(tt, lg) {
+    const raw = (RAW.teacher || {}).noun, N = I.localise(raw, lg);
+    if (!Array.isArray(N) || N.length < 2 || (lg !== 'nl' && !I.hasLang(raw, lg))) return tt;
+    const [one, many] = N, re = lg === 'nl' ? /\b([Ll])eerling(en|scherm)?\b/g : /\b([Pp])upil(s)?\b/g;
+    const fix = x => x.replace(re, (m, c, suf) => { const w = !suf ? one : suf === 'scherm' ? many + 'scherm' : many; return c === c.toUpperCase() ? w.charAt(0).toUpperCase() + w.slice(1) : w; });
+    const deep = v => typeof v === 'string' ? fix(v) : Array.isArray(v) ? v.map(deep) : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, deep(x)])) : v;
+    return (key, ...a) => deep(tt(key, ...a));
+  }
+  let t = nounT(I.t(lang), lang), L = I.localise(RAW, lang);
   function setLang(x) {
-    lang = LESSON_LANGS.includes(x) ? x : 'nl'; t = I.t(lang); L = I.localise(RAW, lang);
+    lang = LESSON_LANGS.includes(x) ? x : 'nl'; t = nounT(I.t(lang), lang); L = I.localise(RAW, lang);
     document.documentElement.lang = lang;
     try { const u = new URL(location.href); if (lang === 'nl') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang); history.replaceState(null, '', u.href); } catch (e) { /* file:// in some browsers */ }
   }
@@ -1286,14 +1319,20 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     const i = part ? String(text).indexOf(part) : -1, span = x => `<span class="ln point" id="${id}" tabindex="-1">${esc(x)}</span>`;
     return i < 0 ? span(text) : esc(text.slice(0, i)) + span(part) + esc(text.slice(i + part.length));
   }
-  function docsFor(R, keys, points, withRules) {
+  function docsOnly(R, keys, points) {
     const list = Array.isArray(keys) ? keys.filter(k => k !== 'rules') : Object.keys(R.docs || {}); // [] = no documents, left out = all
     const pts = (points || []).filter(p => p.doc[0] !== '@');
     pts.forEach(p => { if (!list.includes(p.doc)) list.push(p.doc); });
-    const rules = withRules ? ruleBox(R, (points || []).filter(p => p.doc === '@rules').map(p => p.line)) : '';
     const pp = (points || []).find(p => p.doc === '@plain');
-    return rules + list.map(k => docHtml(k, R.docs[k], pts.filter(p => p.doc === k).map(p => p.line), pp && R.docs[k].plain && R.docs[k].plain.includes(pp.line) ? pp.line : null)).join('');
+    return list.map(k => docHtml(k, R.docs[k], pts.filter(p => p.doc === k).map(p => p.line), pp && R.docs[k].plain && R.docs[k].plain.includes(pp.line) ? pp.line : null)).join('');
   }
+  const rulesFor = (R, points) => ruleBox(R, (points || []).filter(p => p.doc === '@rules').map(p => p.line));
+  function docsFor(R, keys, points, withRules) { return (withRules ? rulesFor(R, points) : '') + docsOnly(R, keys, points); }
+  // Room screens (intro and questions) at 1366 x 768 (engine backlog 7 Nov, G4 S3/S5): the documents start at the top of the right column, next to the
+  // question. The rule box goes in the left column under the answers (or under the intro) whenever the screen has documents; without documents it
+  // stays in the right column as before. Paper, the digit screen and the clue documents keep the rule box with the documents.
+  const stageParts = (R, keys, points) => { const docs = docsOnly(R, keys, points), rules = rulesFor(R, points);
+    return docs ? { docs, left: rules } : { docs: rules, left: '' }; };
   // Multi-part answers (insurance gate G4 S7): parts are never glued with a capital. As text (the answer sheet table): short parts become "A en b en c",
   // where a following part starts in lower case unless its first word is a name or an abbreviation (a word this lesson also writes with a capital in the
   // middle of a sentence, or one with more capitals or a digit); parts that are sentences are joined with "; ". In HTML (feedback, "Kijk terug", the
@@ -1364,9 +1403,9 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
   }
 
   function viewRoomIntro() {
-    const R = room();
-    return hud() + `<div class="esc-stage"><section class="esc-a card"><p class="eyebrow">${t('roomN', run().ri + 1)}</p><h2 tabindex="-1" id="rt">${esc(R.title)}</h2><p class="esc-cluetext">${esc(R.intro)}</p></section>
-      <div class="esc-docs">${docsFor(R, null, null, true)}</div><div class="esc-b"><div class="row"><button class="btn esc-go" data-act="go-q">${t('firstQ')}</button></div></div></div>`;
+    const R = room(), P = stageParts(R, null, null);
+    return hud() + `<div class="esc-stage${P.docs ? '' : ' nodocs'}"><section class="esc-a card"><p class="eyebrow">${t('roomN', run().ri + 1)}</p><h2 tabindex="-1" id="rt">${esc(R.title)}</h2><p class="esc-cluetext">${esc(R.intro)}</p></section>
+      ${P.docs ? `<div class="esc-docs">${P.docs}</div>` : ''}<div class="esc-b">${P.left}<div class="row"><button class="btn esc-go" data-act="go-q">${t('firstQ')}</button></div></div></div>`;
   }
 
   // Sources (optional): L.sources = { key: { name, url, checked } }; a question lists its keys, or says in sourceNone why it has none.
@@ -1375,13 +1414,14 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     : Q.sourceNone ? `<p class="esc-src">${esc(Q.sourceNone)}</p>` : '';
   function viewQuestion() {
     const R = room(), Q = ques(), q = run().q, last = run().qi === R.questions.length - 1;
-    const pts = q.state === 'retry' ? pointsOf(Q.pointTo) : [], point = pts[0] || null, docs = docsFor(R, Q.docs, pts, true);
-    const inDocs = pts.every(p => p.doc[0] !== '@'), situP = pts.find(p => p.doc === '@situ'), introP = pts.find(p => p.doc === '@intro');
-    const showBtn = !point ? '' : inDocs ? (pts.length > 1 ? t('showLines', pts.length) : t('showLine')) : pts.length > 1 ? t('showSpots', pts.length) : t('showSpot');
+    const pts = q.state === 'retry' ? pointsOf(Q.pointTo) : [], P = stageParts(R, Q.docs, pts), docs = P.docs;
+    const situP = pts.find(p => p.doc === '@situ'), introP = pts.find(p => p.doc === '@intro');
+    // The "Toon waar het staat" button (one label for every pointer) only when its first target is really on this screen (see pointCheck after render).
+    const point = pts[0] || null, showBtn = t('showSpot');
     let b = '';
     if (q.state === 'done') {
-      b = `<section class="card esc-fb ${q.right ? 'ok' : 'no'}" id="fb" tabindex="-1" aria-live="polite"><h2>${q.right ? (q.tries === 1 ? t('good') : t('goodNow')) : t('rightIs')}</h2>
-        ${q.right ? '' : `<p class="esc-right"><span>${t('rightAns')}</span><b>${ansHtml(Q, Q.correct)}</b></p>`}<p class="esc-explain">${esc(Q.explain)}</p>${srcLine(Q)}
+      b = `<section class="card esc-fb ${q.right ? 'ok' : 'no'}" id="fb" tabindex="-1" aria-live="polite"><h2>${q.right ? (q.tries === 1 ? t('good') : t('goodNow')) : t('rightAns')}</h2>
+        ${q.right ? '' : `<p class="esc-right"><b>${ansHtml(Q, Q.correct)}</b></p>`}<p class="esc-explain">${esc(Q.explain)}</p>${srcLine(Q)}
         <div class="row"><button class="btn esc-go" data-act="next-q">${last ? t('toDigit') : t('nextQ')}</button></div></section>`;
     } else {
       const nudge = q.state === 'retry' ? `<div class="esc-nudge" id="nudge" tabindex="-1" role="alert"><p><b>${t('notGood')}</b> ${esc(Q.retry)}</p>${point ? `<button class="btn small ghost" data-act="show-line" data-id="${esc(point.id)}">${showBtn}</button>` : Q.pointNone ? `<p class="esc-src">${esc(Q.pointNone)}</p>` : ''}</div>` : '';
@@ -1395,7 +1435,7 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
       b = nudge + ans + hint;
     }
     return hud() + `<div class="esc-stage${docs ? '' : ' nodocs'}"><section class="esc-a"><p class="eyebrow">${t('qOf', run().qi + 1, R.questions.length)}</p>${introP ? `<p class="esc-situ esc-introline">${markIn(R.intro, introP.line, introP.id)}</p>` : ''}${Q.situ ? `<p class="esc-situ">${situP ? markIn(Q.situ, situP.line, situP.id) : esc(Q.situ)}</p>` : ''}<h2 class="esc-prompt" id="qp" tabindex="-1">${esc(Q.prompt)}</h2>${Q.legend ? `<p class="esc-legend">${esc(Q.legend)}</p>` : ''}</section>
-      ${docs ? `<div class="esc-docs">${docs}</div>` : ''}<div class="esc-b">${b}</div></div>`;
+      ${docs ? `<div class="esc-docs">${docs}</div>` : ''}<div class="esc-b">${b}${P.left}</div></div>`;
   }
 
   // Reveal (optional room data, default off): `reveal: { lines: [...], src }` in place of `remember`. After the digit the clue screen is one short card at the
@@ -1408,13 +1448,16 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
   // Circling gate (optional lesson data `clueGate: { text, button }`, default off): before the digit field the pair first sees the text ({n} is the room
   // number) and one button, such as "Klaar, ik heb omcirkeld". The tap only opens the digit field: nothing is logged or kept.
   const gateCard = () => `<section class="card esc-gate" id="cluegate"><p class="esc-cluetext">${esc(String(L.clueGate.text || '').replace(/\{n\}/g, run().ri + 1))}</p><div class="row"><button class="btn esc-go" data-act="clue-gate" id="cluegatebtn">${esc(L.clueGate.button)}</button></div></section>`;
+  // Digit-specific nudge (optional room data `clueWrong: { typed: 'text', ... }`): the text for exactly what the pair typed, e.g. '274' or '5'.
+  const clueWrongText = (R, v) => v != null && R.clueWrong && Object.prototype.hasOwnProperty.call(R.clueWrong, v) ? R.clueWrong[v] : '';
   function viewClue() {
     const R = room(), c = run().clue, last = run().ri === L.rooms.length - 1;
     if (c.state === 'done' && R.reveal) return hud() + `<div class="esc-stage nodocs esc-revealv"><div class="esc-a">${revealCard(R, c, last)}</div></div>`;
     const b = c.state !== 'done' && L.clueGate && !c.gate ? gateCard() : c.state === 'done' ? `<section class="card esc-fb ok" id="cluefb" tabindex="-1"><h2>${c.right ? t('found') : t('thisDigit')}</h2><p class="esc-cluetext">${t('writeDown')} <b class="t-url">${esc(R.digit)}</b></p>
         ${R.remember ? `<p class="esc-plain"><b>${t('remember')}</b>${esc(R.remember)}</p>` : ''}<div class="row"><button class="btn esc-go" data-act="next-room">${last ? t('toLock') : t('nextRoom')}</button></div></section>`
-      : `<form class="card" data-form="clue" novalidate>${c.state === 'retry' ? `<p class="esc-nudge" role="alert" id="cluenudge" tabindex="-1"><span><b>${t('notGood')}</b> ${esc(R.clueRetry || t('clueRetry'))}</span></p>` : ''}
-        <label class="h3" for="digit">${R.digit.length > 1 ? t('yourDigits') : t('yourDigit')}</label><div class="esc-numrow"><input id="digit" inputmode="numeric" autocomplete="off" maxlength="${R.digit.length}" value="${esc(c.raw || '')}"><button class="btn esc-go" type="submit">${t('check')}</button></div></form>`;
+      : `<form class="card" data-form="clue" novalidate>${c.long ? `<p class="esc-nudge" role="alert" id="cluenudge" tabindex="-1"><span><b>${esc(t('digitOnly', R.digit.length))}</b>${clueWrongText(R, c.raw) ? ' ' + esc(clueWrongText(R, c.raw)) : ''}</span></p>`
+          : c.state === 'retry' ? `<p class="esc-nudge" role="alert" id="cluenudge" tabindex="-1"><span><b>${t('notGood')}</b> ${esc(clueWrongText(R, c.wrong) || R.clueRetry || t('clueRetry'))}</span></p>` : ''}
+        <label class="h3" for="digit">${R.digit.length > 1 ? t('yourDigits') : t('yourDigit')}</label><div class="esc-numrow"><input id="digit" inputmode="numeric" autocomplete="off" maxlength="12" value="${esc(c.raw || '')}"${c.long ? ' aria-invalid="true" aria-describedby="cluenudge"' : ''}><button class="btn esc-go" type="submit">${t('check')}</button></div></form>`;
     const recap = `<details class="esc-recap" open><summary>${t('recapH')}</summary><dl>${R.questions.map(Q => `<div><dt>${esc(Q.prompt)}</dt><dd>${ansHtml(Q, Q.correct)}</dd></div>`).join('')}</dl></details>`;
     return hud() + `<div class="esc-stage"><section class="esc-a card"><p class="esc-open" tabindex="-1" id="ct">${t('roomDone')}</p><p class="esc-cluetext">${R.clueFull ? '' : t('clueLead', R.digit.length)}${esc(R.clue)}</p>${recap}</section>
       <div class="esc-docs">${docsFor(R, R.clueDocs, null, !R.clueDocs || R.clueDocs.includes('rules'))}</div><div class="esc-b">${b}</div></div>`;
@@ -1422,7 +1465,8 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
 
   function viewLock() {
     const r = run(), code = lockCode();
-    const inputs = code.split('').map((x, i) => `<label class="esc-digit" for="d${i}">${t('digitN', i + 1)}<input id="d${i}" inputmode="numeric" maxlength="1" autocomplete="off" data-dial="${i}" value=""></label>`).join('');
+    const kept = r.lockVals || [];
+    const inputs = code.split('').map((x, i) => `<label class="esc-digit" for="d${i}">${t('digitN', i + 1)}<input id="d${i}" inputmode="numeric" maxlength="1" autocomplete="off" data-dial="${i}" value="${esc(kept[i] || '')}"></label>`).join('');
     const list = L.rooms.map((R, i) => `<li><span>${esc(t('roomItem', i + 1, R.title))}</span><b>${r.lockTries >= 3 ? esc(R.digit) : t('nDigits', R.digit.length)}</b></li>`).join('');
     return hud() + `<section class="card"><h2 tabindex="-1" id="lt">${esc((L.lock && L.lock.title) || t('lockTitle'))}</h2><p class="esc-cluetext">${esc((L.lock && L.lock.intro) || t('lockIntro'))}</p>
       <form data-form="lock" novalidate><div class="esc-dial" role="group" aria-label="${t('lockGroup')}">${inputs}</div>
@@ -1434,7 +1478,7 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
   function viewStop() {
     const r = run(), code = lockCode(), pre = []; let pos = 0;
     L.rooms.forEach((R, i) => { for (const ch of R.digit) pre[pos++] = r.digits[i] != null ? ch : ''; });
-    const inputs = code.split('').map((x, i) => `<label class="esc-digit" for="d${i}">${t('digitN', i + 1)}<input id="d${i}" inputmode="numeric" maxlength="1" autocomplete="off" data-dial="${i}" value="${esc(pre[i])}"></label>`).join('');
+    const inputs = code.split('').map((x, i) => `<label class="esc-digit" for="d${i}">${t('digitN', i + 1)}<input id="d${i}" inputmode="numeric" maxlength="1" autocomplete="off" data-dial="${i}" value="${esc(r.lockErr && r.lockVals ? r.lockVals[i] || '' : pre[i])}"></label>`).join('');
     return hud() + `<section class="card esc-stopv"><h2 tabindex="-1" id="stoph">${t('pStopH')}</h2><p class="esc-cluetext">${t('pStopLead')}</p>
       <form data-form="lock" novalidate><div class="esc-dial" role="group" aria-label="${t('lockGroup')}">${inputs}</div>
       ${r.lockErr ? `<p class="err" role="alert" id="lockerr">${t('lockErr')}</p>` : ''}<div class="row"><button class="btn esc-go" type="submit">${t('lockOpen')}</button></div></form>
@@ -1511,11 +1555,14 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
       <p>${t('shareWhat')} <a href="${privacyHref()}">${t('privacy')}</a></p>${T.share === false ? `<p class="note">${esc(t('shareNoNote'))}</p>` : ''}${locked ? `<p class="note">${t('shareLocked')}</p>` : ''}</div>`;
   }
   const overNote = () => T.left <= 0 && !T.stopped ? `<p class="t-over" id="tover" role="status">${t('tOver')}</p>` : '';
+  // At 00:00 only "Opnieuw" (a start button there would restart the clock without a reset).
+  const runBtn = () => `<button class="btn ghost" data-act="t-run" id="trun"${T.left <= 0 ? ' hidden' : ''}>${T.running ? t('pause') : T.left < T.dur * 60 && T.left > 0 ? t('resume') : t('startTimer')}</button>`;
   function timerBlock() {
-    const durs = Array.from(new Set([20, 30, 40, RAW.minutes || 30])).sort((a, b) => a - b);
+    // Presets: the lesson's own (optional teacher.timers, e.g. [16, 20, 22, 30, 40] for a 30-minute variant) or 20, 30 and 40; always with the lesson's minutes.
+    const own = (L.teacher || {}).timers, durs = Array.from(new Set((Array.isArray(own) && own.length ? own : [20, 30, 40]).concat(RAW.minutes || 30))).sort((a, b) => a - b);
     return `<section class="t-card t-timer${T.left <= 0 ? ' over' : ''}" aria-label="${t('timer')}"><h2>${t('timer')}</h2><p class="t-clock" id="tclock" role="timer">${mmss(T.left)}</p>${overNote()}
       <div class="t-durs" role="group" aria-label="${t('chooseTime')}">${durs.map(d => `<button class="t-dur" data-act="t-dur" data-v="${d}" aria-pressed="${T.dur === d}">${t('min', d)}</button>`).join('')}</div>
-      <div class="row"><button class="btn ghost" data-act="t-run" id="trun">${T.running ? t('pause') : T.left < T.dur * 60 && T.left > 0 ? t('resume') : t('startTimer')}</button><button class="btn ghost" data-act="t-reset">${t('reset')}</button></div>
+      <div class="row">${runBtn()}<button class="btn ghost" data-act="t-reset">${t('reset')}</button></div>
       <div class="row"><button class="btn t-stopbtn" data-act="t-stop" id="tstop" aria-pressed="${T.stopped}">${T.stopped ? t('stopUndo') : t('stopBtn')}</button></div></section>`;
   }
   function feedbackBlock() {
@@ -1534,9 +1581,34 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
         ${T.fbErr ? `<p class="err" role="alert" id="fberr">${esc(T.fbErr)}</p>` : ''}<p class="note" id="fbwhere">${off || t('fbWhere')}</p>
         <div class="row"><button class="btn esc-go" type="submit" ${off ? 'disabled' : ''}>${t('fbSend')}</button></div></form></section>`;
   }
+  // Teacher "Bronnen" (belasting G4 S7): only name, link and check date of a source; never its key, its `until` note or the content team's notes.
+  // room.teacherDetail (spec: "Bronnen en uitzonderingen") is shown in the room's closed block as background, without internal markers.
+  // The room's closed block lists the sources of its questions, then the sources that note names, in that order.
+  const srcItem = k => { const S = (L.sources || {})[k]; return S ? `<li>${srcLink(k)}${S.checked ? ' (' + t('srcChecked', fmtDate(S.checked)) + ')' : ''}</li>` : ''; };
+  function roomSrcKeys(R) {
+    const all = Object.keys(L.sources || {}), keys = [];
+    R.questions.forEach(Q => [].concat(Q.sources || []).forEach(k => { if (all.includes(k) && !keys.includes(k)) keys.push(k); }));
+    const note = [].concat(R.teacherDetail || []).join(' ');
+    if (note) all.map(k => [k, note.search(new RegExp('(^|[^A-Za-z0-9_-])' + k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?![A-Za-z0-9_-])'))]).filter(x => x[1] >= 0).sort((a, b) => a[1] - b[1]).forEach(([k]) => { if (!keys.includes(k)) keys.push(k); });
+    return keys;
+  }
+  // teacherDetail is shown to the teacher as background (exceptions, extra answers), with content-team markers removed:
+  // sentences naming internal checks, and parentheses that only point at internal files or notes.
+  const INTERNAL = /\b(check ?[AB]\d*|factcheck|gate [A-Z]?\d|zie Onzeker|onderzoeksdossier|content team|contentteam)\b/i;
+  function teacherBg(R) {
+    const txt = [].concat(R.teacherDetail || []).join(' ');
+    if (!txt) return '';
+    const parts = txt.replace(/\s*\(([^()]*)\)/g, (m, x) => INTERNAL.test(x) ? '' : m).split(/(?<=[.!?])\s+(?=[A-Z0-9"€])/);
+    return parts.filter(x => !INTERNAL.test(x)).join(' ').trim();
+  }
+  const roomSrcBlock = R => {
+    const keys = roomSrcKeys(R), bg = teacherBg(R);
+    if (!keys.length && !bg) return '';
+    return `<details class="t-detail t-rsrc"><summary>${t('detailH')}</summary>${bg ? `<p class="esc-plain t-bg">${esc(bg)}</p>` : ''}${keys.length ? `<ul class="t-src">${keys.map(srcItem).join('')}</ul>` : ''}</details>`;
+  };
   function sourcesBlock() {
     const keys = Object.keys(L.sources || {}); if (!keys.length) return '';
-    const body = `<ul class="t-src">${keys.map(k => { const S = L.sources[k]; return `<li>${srcLink(k)}${S.checked ? ' (' + t('srcChecked', fmtDate(S.checked)) + ')' : ''}</li>`; }).join('')}</ul>`;
+    const body = `<ul class="t-src">${keys.map(srcItem).join('')}</ul>`;
     return `<section class="t-card">${(L.teacher || {}).hideKern ? `<details class="t-detail"><summary><h2>${t('srcH')}</h2></summary>${body}</details>` : `<h2>${t('srcH')}</h2>${body}`}</section>`;
   }
   // Answer sheet from the spec (teacher.answers): { head, rows, after, format }. Cells keep the spec's wording; **x** is bold.
@@ -1653,7 +1725,9 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
       + `${L.revealNote ? `<p class="bb-n">${esc(L.revealNote)}</p>` : ''}</section>`;
   }
   // Teacher-only extras (optional): audience lines at the top of the teacher screen, and the "Dit wordt vaak gevraagd" question and answer block under the plan.
-  const audienceBlock = TP => TP.audience ? `<section class="t-aud" id="taud">${[].concat(TP.audience).map(x => `<p>${esc(x)}</p>`).join('')}</section>` : '';
+  // The first audience line stays in view; the others sit in a closed "Meer over deze les", so the Start card is above the fold at 1366 x 768.
+  const audienceBlock = TP => { if (!TP.audience) return ''; const A = [].concat(TP.audience);
+    return `<section class="t-aud" id="taud"><p>${esc(A[0])}</p>${A.length > 1 ? `<details class="t-aud-more"><summary>${t('audMore')}</summary>${A.slice(1).map(x => `<p>${esc(x)}</p>`).join('')}</details>` : ''}</section>`; };
   const faqBlock = TP => { if (!(TP.faq && TP.faq.length)) return '';
      const body = `<dl class="t-faq">${TP.faq.map(f => `<div><dt>${esc(f.q)}</dt><dd>${esc(f.a)}</dd></div>`).join('')}</dl>`;
     return `<section class="t-card">${TP.hideKern ? `<details class="t-detail"><summary><h2>${t('faqH')}</h2></summary>${body}</details>` : `<h2>${t('faqH')}</h2>${body}`}</section>`; };
@@ -1665,7 +1739,7 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
   const RES = { data: null, json: '', state: 'wait', err: false, timer: 0, ctrl: null, inflight: false, wait: RES_EVERY, errs: 0, stoppedAt: 0, done: false, at: 0 };
   const resWanted = () => S.view === 'teacher' && T.stopped === true && LOG.on() && T.share === true && LOG.validCode(T.code);
   function resReset() { if (RES.ctrl) try { RES.ctrl.abort(); } catch (e) { /* already done */ } clearTimeout(RES.timer);
-    Object.assign(RES, { data: null, json: '', state: 'wait', err: false, timer: 0, ctrl: null, inflight: false, wait: RES_EVERY, errs: 0, stoppedAt: 0, done: false, at: 0 }); }
+    Object.assign(RES, { shown: null, data: null, json: '', state: 'wait', err: false, timer: 0, ctrl: null, inflight: false, wait: RES_EVERY, errs: 0, stoppedAt: 0, done: false, at: 0 }); }
   const fin = v => Number.isFinite(v) ? v : null;
   function resClean(x) {
     if (!x || typeof x !== 'object' || Array.isArray(x)) return null;
@@ -1725,12 +1799,12 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
   }
   function resUpdate() {
     const b = document.getElementById('tres-body'), st = document.getElementById('tres-status'), ac = document.getElementById('tres-act'); if (!b) return;
-    const body = resBody(); if (b.innerHTML !== body) b.innerHTML = body; // the HTML only changes when the answer changed
+    const body = resBody(); if (RES.shown !== body) { RES.shown = body; b.innerHTML = body; keepEuro(b); } // the HTML only changes when the answer changed
     const txt = resStatus(); if (st.textContent !== txt) st.textContent = txt;
     const a = resAct(); if (ac.innerHTML !== a) ac.innerHTML = a;
     const vo = document.getElementById('vsout'), vr = document.getElementById('vsres'); // the Lesverslag follows the summary
     if (vo) { const h = vsOut(); if (vo.innerHTML !== h) vo.innerHTML = h; }
-    if (vr) { const x = t(RES.data && RES.data.enough && T.stopped ? 'vsResOn' : 'vsResOff'); if (vr.textContent !== x) vr.textContent = x; }
+    if (vr) { const x = vsResText(); if (vr.textContent !== x) vr.textContent = x; }
   }
   function resFetch(manual) {
     const ep = LOG.endpoint(); if (!ep || RES.inflight) return;
@@ -1837,13 +1911,14 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     return { lines, errs };
   }
   const vsOut = () => { const V = vsLines(); return `${V.errs.length ? `<ul class="err" role="alert">${V.errs.map(e => `<li>${esc(e)}</li>`).join('')}</ul>` : ''}<div class="vs-text">${V.lines.map((l, i) => i === 0 ? `<h3>${esc(l)}</h3>` : `<p>${esc(l)}</p>`).join('')}</div>`; };
+  // Where the class results come from, in the same words as the Ja/Nee card (shareWhat): after the stop, if sharing works; otherwise a show of hands.
+  const vsResText = () => RES.data && RES.data.enough && T.stopped ? t('vsResOn') : !LOG.on() ? t('vsResNone') : T.share === false ? t('vsResNee') : t('vsResOff');
   function vsBlock() {
     const V = T.vs, f = (k, lab, type, help, extra = '') => `<label class="field" for="vs-${k}">${lab}${help ? ` <small>${help}</small>` : ''}<input id="vs-${k}" data-vs="${k}" type="${type}" autocomplete="off" value="${esc(V[k] || '')}" ${extra}></label>`;
-    const hasRes = !!(RES.data && RES.data.enough && T.stopped);
     return `<section class="t-card t-vs" id="tvs" aria-labelledby="tvs-h"><h2 id="tvs-h">${t('vsH')}</h2><p>${t('vsLead')}</p>
-      <div class="vs-in"><div class="t-two">${f('date', t('vsDate'), 'date', '')}${f('group', t('vsGroup'), 'text', t('vsGroupHelp'), 'maxlength="40"')}${f('pupils', t('vsPupils'), 'text', '', 'inputmode="numeric" maxlength="3"')}${f('prep', t('vsPrep'), 'text', '', `inputmode="numeric" maxlength="3" placeholder="${T.qs.fin ? qsMin() : ''}"`)}</div>
+      <div class="vs-in"><div class="t-two">${f('date', t('vsDate'), 'date', '')}${f('group', t('vsGroup'), 'text', t('vsGroupHelp', (L.teacher || {}).groupExample || (L.teacher || {}).level), 'maxlength="40"')}${f('pupils', t('vsPupils'), 'text', '', 'inputmode="numeric" maxlength="3"')}${f('prep', t('vsPrep'), 'text', '', `inputmode="numeric" maxlength="3" placeholder="${T.qs.fin ? qsMin() : ''}"`)}</div>
       <fieldset><legend>${t('vsHard')} <small>${t('vsHardHelp')}</small></legend><div class="t-two">${L.rooms.map((R, i) => f('h-' + R.id, esc(t('roomItem', i + 1, R.title)), 'text', '', 'inputmode="numeric" maxlength="3"')).join('')}</div></fieldset>
-      ${f('note', t('vsNote'), 'text', t('vsNoteHelp'), 'maxlength="240"')}<p class="note" id="vsres">${hasRes ? t('vsResOn') : t('vsResOff')}</p></div>
+      ${f('note', t('vsNote'), 'text', t('vsNoteHelp'), 'maxlength="240"')}<p class="note" id="vsres">${esc(vsResText())}</p></div>
       <h3 class="h3">${t('vsPreview')}</h3><div class="vs-out" id="vsout">${vsOut()}</div>
       <div class="row"><button class="btn ghost" data-act="print-verslag">${t('vsPrint')}</button></div><p class="note">${t('vsLocal')}</p></section>`;
   }
@@ -1860,7 +1935,7 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     return `<div class="p-view"><header class="p-head"><div><p class="eyebrow">${esc(t('projEyebrow', T.dur))}</p><h1 class="p-h1" tabindex="-1">${esc(L.title)}</h1></div>
       <div class="row"><button class="btn ghost small" data-act="p-prob" aria-expanded="${T.pProb}" aria-controls="pprob">${t('probBtn')}</button><button class="btn ghost small" data-act="proj-back" id="pback">${t('projBack')}</button></div></header>
       <div class="p-main"><section class="t-timer p-timer${T.left <= 0 ? ' over' : ''}" aria-label="${t('timer')}"><p class="t-clock" id="tclock" role="timer">${mmss(T.left)}</p>${overNote()}
-          <div class="row"><button class="btn ghost" data-act="t-run" id="trun">${T.running ? t('pause') : T.left < T.dur * 60 && T.left > 0 ? t('resume') : t('startTimer')}</button><button class="btn ghost" data-act="t-reset">${t('reset')}</button><button class="btn t-stopbtn" data-act="t-stop" id="tstop" aria-pressed="${T.stopped}">${T.stopped ? t('stopUndo') : t('stopBtn')}</button></div>${stop}</section>
+          <div class="row">${runBtn()}<button class="btn ghost" data-act="t-reset">${t('reset')}</button><button class="btn t-stopbtn" data-act="t-stop" id="tstop" aria-pressed="${T.stopped}">${T.stopped ? t('stopUndo') : t('stopBtn')}</button></div>${stop}</section>
         <section class="p-join" aria-label="${t('startTitle')}">${join}</section>
         <section class="p-side"><ul class="p-rules">${t('projRules').map(x => `<li>${esc(x)}</li>`).join('')}</ul>
           <h2 class="p-rh">${t('projRoomsH')}</h2><ol class="p-rooms">${P.list.map((x, i) => `<li class="${i === P.k ? 'now' : ''}${i < P.k ? ' past' : ''}"${i === P.k ? ' aria-current="step"' : ''}><span class="p-rn" aria-hidden="true">${i + 1}</span><span class="p-rt"><span class="sr">${t('roomN', i + 1)}: </span>${esc(x.R.title)}</span><span class="p-ru">${esc(t('projUntil', x.until))}</span></li>`).join('')}</ol></section></div>
@@ -1871,33 +1946,50 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     const TP = L.teacher || {}, plan = TP.plan || [], total = planTotal(plan);
     const canStart = !LOG.on() || T.share !== null;
     const start = T.code ? joinBlock() + choiceBlock() + `<div class="row"><button class="btn ghost small" data-act="t-new">${t('newCode')}</button></div>` : choiceBlock() + `<div class="row"><button class="btn esc-go big" data-act="t-start" ${canStart ? '' : 'disabled aria-describedby="tshare"'}>${t('startLesson')}</button></div><p class="note">${canStart ? t('startNote') : t('chooseFirst')}</p>`;
+    // Before Start the card is only the sharing choice and the button (the steps for the pupils name the link and code, which come after Start).
     const steps = T.stopped ? `<section class="t-stop" id="tstoph" tabindex="-1" aria-live="polite"><h2>${t('stopH')}</h2><ol class="t-steps">${t(L.check ? 'stopBoard' : 'stopBoardNoCheck').map(s => `<li>${esc(s)}</li>`).join('')}</ol><p class="note">${t('stopTeacher')}</p></section>`
-      : `<h2>${t('startTitle')}</h2><ol class="t-steps">${(TP.start || t('steps')).map(s => `<li>${esc(s)}</li>`).join('')}</ol>`;
+      : `<h2>${t('startTitle')}</h2>${T.code ? `<ol class="t-steps">${(TP.start || t('steps')).map(s => `<li>${esc(s)}</li>`).join('')}</ol>` : ''}`;
     const disc = t('disclaimer', RAW.checked ? fmtDate(RAW.checked) : '', RAW.validUntil ? fmtDate(RAW.validUntil) : '');
     // Answers and the lock code are never open on the board: every key is a closed "Toon antwoorden" that warns "Niet tonen op het bord".
     const keySum = `<summary>${t('showAnswers')} <span class="t-warn">${t('keyWarn')}</span></summary>`;
     const allKey = `<details class="t-key t-secret" id="tans">${keySum}<p class="note">${t('keyWarnLong')}</p><h3 class="h3">${t('allAnswersH')}</h3><p class="t-lockcode">${t('lockCode')} <b class="t-url">${esc(lockCode())}</b></p>${AS() ? ansTable(null) + ansAfter() : ''}${checkKey()}</details>`;
     const anyDiscuss = L.rooms.some(R => R.discuss && R.discuss.length);
-    return `<div class="t-view"><header class="t-head"><div><p class="eyebrow">${t('forTeacher')}</p><h1 class="t2" tabindex="-1">${esc(L.title)}</h1><p class="t-sub">${t('tSub', total || 45)}</p></div>
+    return `<div class="t-view"><header class="t-head"><div><p class="eyebrow">${t('forTeacher')}</p><h1 class="t2" tabindex="-1">${esc(L.title)}</h1><p class="t-sub">${esc(t('tSub', total || 45, TP.level))}</p></div>
       <div class="row">${langSwitch()}<button class="btn" data-act="proj" id="tproj">${t('projBtn')}</button><button class="btn ghost" data-act="goto-prob">${t('probBtn')}</button><button class="btn ghost" data-act="pupil">${t('toPupil')}</button></div></header>
       ${audienceBlock(TP)}<div class="t-top${T.code ? ' started' : ''}"><section class="t-card t-startc">${steps}${start}</section>${timerBlock()}</div>
       ${resBlock()}${qsBlock()}
       <section class="t-card"><h2>${t('planH')}</h2>${TP.goal ? `<p><b>${t('goal')}</b> ${esc(TP.goal)}</p>` : ''}<div class="esc-tscroll" role="region" tabindex="0" aria-label="${esc(t('planH'))}">${planTable(plan, 't-plan')}</div>
         ${planExtras(TP)}<div class="row"><button class="btn ghost" data-act="print">${t('print')}</button><button class="btn ghost" data-act="print-paper">${t('paperBtn')}</button><button class="btn ghost" data-act="print-paper-key">${t('paperKeyBtn')}</button>${BB() ? `<button class="btn ghost" data-act="print-bblad">${bbBtn()}</button>` : ''}${L.slip ? `<button class="btn ghost" data-act="print-slips">${esc(L.slip.button || t('slipBtn'))}</button>` : ''}</div><p class="note">${t('paperNote')}</p>${BB() ? `<p class="note" id="bbnote">${esc(BB().note || t('bbNote', BB().button || t('bbBtn')))}</p>` : ''}${L.slip ? `<p class="note" id="slipnote">${SLIPS_N() === 1 ? t('slipNote1', L.slip.button || t('slipBtn'), 30) : t('slipNote', SLIPS_N(), Math.ceil(30 / SLIPS_N()))}</p>` : ''}</section>
       ${probBlock()}${faqBlock(TP)}<section class="t-card"><h2>${anyDiscuss ? t('discussH') : t('perRoomH')}</h2><div class="t-rooms">${L.rooms.map((R, i) => `<article class="t-room"><h3><span class="t-k">${t('roomN', i + 1)}</span> ${esc(R.title)}</h3>
-        ${R.discuss && R.discuss.length ? `<ul class="esc-talk">${R.discuss.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${remText(R) ? (TP.hideKern ? `<details class="t-detail t-kern"><summary>${t('hideKernH')}</summary><p class="esc-plain"><b>${t('core')}</b>${esc(remText(R))}</p></details>` : `<p class="esc-plain"><b>${t('core')}</b>${esc(remText(R))}</p>`) : ''}${R.teacherNote ? `<p class="esc-plain"><b>${t('teacherNoteH')}</b>${esc(R.teacherNote)}</p>` : ''}${R.teacherDetail ? `<details class="t-detail"><summary>${t('detailH')}</summary>${[].concat(R.teacherDetail).map(x => `<p>${esc(x)}</p>`).join('')}</details>` : ''}
+        ${R.discuss && R.discuss.length ? `<ul class="esc-talk">${R.discuss.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${remText(R) ? (TP.hideKern ? `<details class="t-detail t-kern"><summary>${t('hideKernH')}</summary><p class="esc-plain"><b>${t('core')}</b>${esc(remText(R))}</p></details>` : `<p class="esc-plain"><b>${t('core')}</b>${esc(remText(R))}</p>`) : ''}${R.teacherNote ? `<p class="esc-plain"><b>${t('teacherNoteH')}</b>${esc(R.teacherNote)}</p>` : ''}${roomSrcBlock(R)}
         <details class="t-key t-secret">${keySum}${AS() ? ansTable(i + 1) : `<dl>${R.questions.map(Q => `<div><dt>${esc(Q.short || Q.prompt)}</dt><dd>${ansHtml(Q)}</dd></div>`).join('')}<div><dt>${t('digitForLock')}</dt><dd>${esc(R.digit)}</dd></div></dl>`}</details></article>`).join('')}</div>
         ${allKey}</section>
       <section class="t-card"><h2>${t('closeH')}</h2>${TP.closing ? `<p class="t-closing">${esc(TP.closing)}</p>` : ''}${L.debrief && L.debrief.length ? `<p>${t('debriefNote')}</p><ul class="esc-talk">${L.debrief.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</section>
       ${vsBlock()}${sourcesBlock()}${feedbackBlock()}${devLine()}<p class="t-disc" id="tdisc">${esc(disc)}</p><p class="t-disc t-licence" id="tlicence">${esc(t('licenceA'))}<a href="${esc(t('licenceUrl'))}" rel="license noopener">${esc(t('licenceName'))}</a>${esc(t('licenceB'))}</p></div>${sheet()}${paper()}${paperKey()}${slips()}${beroepenblad()}`;
   }
 
+  // Euro amounts never break after the sign (belasting G4 S5): every "€ 2.140" in the page text is wrapped in a no-wrap span after a render.
+  // Text only (textContent stays the same), never attributes, inputs or the QR code.
+  const EUR = /€\s?-?\d(?:[\d.,]*\d)?(?:,-)?/g;
+  function keepEuro(root) {
+    if (!root || (root.textContent || '').indexOf('€') < 0) return;
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => n.nodeValue.indexOf('€') < 0 || !n.parentNode || n.parentNode.closest('.eur, script, style, textarea, svg') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+    const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+    nodes.forEach(n => { const x = n.nodeValue; EUR.lastIndex = 0; if (!EUR.test(x)) return; EUR.lastIndex = 0;
+      const f = document.createDocumentFragment(); let at = 0, m;
+      while ((m = EUR.exec(x))) { if (m.index > at) f.appendChild(document.createTextNode(x.slice(at, m.index))); const sp = document.createElement('span'); sp.className = 'eur'; sp.textContent = m[0]; f.appendChild(sp); at = m.index + m[0].length; }
+      if (at < x.length) f.appendChild(document.createTextNode(x.slice(at))); n.parentNode.replaceChild(f, n); });
+  }
+  // No "Toon waar het staat" button that points at nothing (mbo G4 S5): the button stays only when its target is on the page and holds text.
+  function pointCheck() { const b = app.querySelector('[data-act="show-line"]'); if (!b) return; const el = document.getElementById(b.dataset.id);
+    if (!el || !el.getClientRects().length || !(el.textContent || '').trim()) b.remove(); }
   // ----- render and focus -----
   function render(focus, keepScroll) {
     const v = S.view;
     const html = v === 'start' ? viewStart() : v === 'check' ? viewCheck(S.phase) : v === 'intro' ? viewRoomIntro() : v === 'q' ? viewQuestion()
       : v === 'clue' ? viewClue() : v === 'lock' ? viewLock() : v === 'stop' ? viewStop() : v === 'win' ? viewWin() : v === 'proj' ? viewProj() : viewTeacher();
     app.innerHTML = (outdated() ? `<p class="banner" role="note" id="outdated">${esc(L.staleText || t('outdated'))}</p>` : '') + html + (ESCAPE_VIEWS.includes(v) && S.run ? stopBar() : '');
+    keepEuro(app); pointCheck();
     document.body.dataset.view = v === 'teacher' ? 'teacher' : v === 'proj' ? 'proj' : 'pupil';
     document.title = (v === 'teacher' || v === 'proj' ? t('teacherTitle') : '') + L.title + ' · Escape 18';
     if (!keepScroll) window.scrollTo(0, 0);
@@ -1933,13 +2025,15 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
   function nextQ() { const r = run(); if (r.qi < room().questions.length - 1) showQ(r.qi + 1); else { r.clue = { tries: 0, state: 'ask', right: false, raw: '' }; S.view = 'clue'; render('#ct'); } }
   function clueTry(raw) {
     const R = room(), c = run().clue, v = String(raw || '').replace(/\s/g, '');
-    c.raw = v; if (!/^\d+$/.test(v)) { render('#digit', true); return; }
+    c.raw = v; if (!/^\d+$/.test(v)) { c.long = false; render('#digit', true); return; }
+    // More digits than the room gives (typing "274" for one digit): say so, and do not count it as a try.
+    c.long = v.length > R.digit.length; if (c.long) { render('#cluenudge', true); return; }
     c.tries++;
-    if (v === R.digit) { c.state = 'done'; c.right = true; } else if (c.tries === 1) c.state = 'retry'; else { c.state = 'done'; c.right = false; }
+    if (v === R.digit) { c.state = 'done'; c.right = true; } else if (c.tries === 1) { c.state = 'retry'; c.wrong = v; } else { c.state = 'done'; c.right = false; }
     if (c.state === 'done') { run().digits[run().ri] = R.digit; plog('room', { room: R.id, sec: Math.round((now() - run().roomT0) / 1000) }); LOG.flush(); }
     render(c.state === 'done' ? '#cluefb' : '#cluenudge', true);
   }
-  function nextRoom() { const r = run(); if (r.ri < L.rooms.length - 1) enterRoom(r.ri + 1); else { S.view = 'lock'; render('#d0'); } }
+  function nextRoom() { const r = run(); if (r.ri < L.rooms.length - 1) enterRoom(r.ri + 1); else { S.view = 'lock'; r.lockVals = null; r.lockErr = false; render('#d0'); } }
   function lockTry(code) {
     const r = run();
     if (S.view === 'stop') { if (code === lockCode()) stopExit('code'); else { r.lockErr = true; render('#d0', true); } return; }
@@ -1996,7 +2090,7 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
       const c = document.getElementById('tclock'); if (c) c.textContent = mmss(T.left);
       if (S.view === 'proj') projNow();
       if (T.left <= 0) { T.running = false; const card = c && c.closest('.t-timer'); if (card) { card.classList.add('over'); if (!document.getElementById('tover') && !T.stopped) c.insertAdjacentHTML('afterend', overNote()); }
-        const b = document.getElementById('trun'); if (b) b.textContent = t('startTimer'); }
+        const b = document.getElementById('trun'); if (b) { b.textContent = t('startTimer'); b.hidden = true; } }
     }
     if (S.view === 'teacher' && T.qs.run) { const q = document.getElementById('qstime'); if (q) q.textContent = mmss(qsMs() / 1000); }
     if (S.run && S.run.t0 && ESCAPE_VIEWS.includes(S.view)) {
@@ -2007,6 +2101,14 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
   }
   setInterval(tick, 250);
 
+  // One print dialog per click (mbo G4 N10): a second click that waited behind the open dialog, or a double click, does not print again.
+  // Per print button: another print button right after still prints.
+  let printAt = 0, printLast = '', printing = false;
+  function printOnce(cls) {
+    if (printing || (cls === printLast && now() - printAt < 1500)) return;
+    printing = true; document.body.classList.add(cls);
+    try { window.print(); } finally { printing = false; printAt = now(); printLast = cls; }
+  }
   // ----- events -----
   app.addEventListener('click', e => {
     const b = e.target.closest('[data-act]'); if (!b || b.disabled) return;
@@ -2028,10 +2130,10 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     else if (act === 'send-pfb') { if (r.fb.fun && r.fb.learned && !r.fb.sent) { plog('pupil_feedback', Object.assign({ fun: r.fb.fun, learned: r.fb.learned }, r.fb.wish ? { wish: r.fb.wish } : {})); LOG.flush(); r.fb.sent = true; render('#pfb', true); } }
     else if (act === 'plan-again') { r.plan = null; render('[name="when"]', true); }
     else if (act === 'we-stop' && b.dataset.bar && stopEarly()) { if (ESCAPE_VIEWS.includes(S.view)) { r.stopAsk = true; render('#westopyes', true); } }
-    else if (act === 'we-stop' || act === 'we-stop-yes') { if (ESCAPE_VIEWS.includes(S.view)) { r.stopAsk = false; r.prevView = S.view; r.lockErr = false; S.view = 'stop'; render('#stoph'); } }
+    else if (act === 'we-stop' || act === 'we-stop-yes') { if (ESCAPE_VIEWS.includes(S.view)) { r.stopAsk = false; r.prevView = S.view; r.lockErr = false; r.lockVals = null; S.view = 'stop'; render('#stoph'); } }
     else if (act === 'we-stop-no') { r.stopAsk = false; render('#westop', true); }
     else if (act === 'p-skip') stopExit('skip');
-    else if (act === 'p-back') { S.view = r.prevView || 'intro'; r.lockErr = false; render(FOCUS[S.view]); }
+    else if (act === 'p-back') { S.view = r.prevView || 'intro'; r.lockErr = false; r.lockVals = null; render(FOCUS[S.view]); }
     else if (act === 't-stop') { T.stopped = !T.stopped; if (T.stopped && T.running) { T.left = Math.max(0, Math.round((T.endAt - now()) / 1000)); T.running = false; }
       if (T.stopped) { RES.stoppedAt = now(); RES.done = false; } render(T.stopped ? '#tstoph' : '#tstop', true); }
     else if (act === 'res-refresh') { if (resWanted()) { LOG.flush(); resFetch(true); resUpdate(); } }
@@ -2053,7 +2155,7 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     else if (act === 'print' || act === 'print-paper' || act === 'print-paper-key' || act === 'print-plan' || act === 'print-slips' || act === 'print-verslag' || (act === 'print-bblad' && BB())) {
       if (act === 'print') qsTick('print'); if (act === 'print-paper' || act === 'print-paper-key' || act === 'print-bblad') qsTick('paper');
       if (S.view === 'teacher' && (act === 'print' || act === 'print-paper' || act === 'print-paper-key' || act === 'print-bblad')) render(b.dataset.act === 'qs-do' ? `[data-act="qs-do"][data-v="${act}"]` : `[data-act="${act}"]`, true);
-      document.body.classList.add(act === 'print' ? 'print-sheet' : act); window.print(); }
+      printOnce(act === 'print' ? 'print-sheet' : act); }
   });
   // Feedback confirmation wording depends on connectivity; the log queue itself flushes on 'online' (log.js).
   const fbRefresh = () => { if (S.view === 'teacher' && T.fb === 'sent' && document.getElementById('tfb')) render(null, true); };
@@ -2078,7 +2180,7 @@ window.E18_LESSON={"slug":"studiefinanciering","title":"Studiefinanciering","lea
     } else if (k === 'check') checkDone(f);
     else if (k === 'num') { const raw = f.querySelector('#num').value, n = parseNum(raw); r.q.raw = raw; if (n == null) { r.q.numErr = true; render('#num', true); return; } r.q.numErr = false; answer(n); }
     else if (k === 'clue') clueTry(f.querySelector('#digit').value);
-    else if (k === 'lock') lockTry(Array.from(f.querySelectorAll('[data-dial]')).map(i => i.value.trim()).join(''));
+    else if (k === 'lock') { const vals = Array.from(f.querySelectorAll('[data-dial]')).map(i => i.value.trim()); r.lockVals = vals; lockTry(vals.join('')); } // the typed digits stay after a wrong code
     else if (k === 'plan') {
       const w = f.querySelector('input[name="when"]:checked'), th = f.querySelector('input[name="then"]:checked'), own = f.querySelector('#own').value.trim();
       const wi = f.querySelector('input[name="within"]:checked');
