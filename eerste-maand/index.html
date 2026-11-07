@@ -582,9 +582,16 @@ h1.t-h1{font-size:clamp(28px,4.2vw,54px);font-weight:800;font-stretch:115%}
 .t-steps{margin:0;padding:0;list-style:none;counter-reset:tstep;display:flex;flex-direction:column;gap:10px}
 .t-steps li{counter-increment:tstep;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;font:700 clamp(19px,2vw,27px)/1.25 var(--body)}
 .t-steps li::before{content:counter(tstep);width:1.7em;height:1.7em;border-radius:50%;background:var(--sun);color:var(--sun-ink);display:grid;place-items:center;font:800 .85em/1 var(--display)}
-.t-link{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center}
-.t-qr svg{display:block;width:clamp(160px,20vw,300px);height:auto;border-radius:8px;forced-color-adjust:none}
-.t-qr.none{grid-column:1/-1}
+.t-link{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:flex-start;min-width:0}
+.t-link>*{min-width:0}
+.t-link>.t-share{flex:1 1 100%}
+.t-join{flex:1 1 100%;display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center}
+.t-join>.t-klasbox{flex:1 1 9em;min-width:0}
+.t-qr{flex:0 0 auto}
+.t-qr svg{display:block;width:clamp(150px,min(14vw,28vh),240px);height:auto;border-radius:8px;forced-color-adjust:none}
+.t-qr.none{flex:1 1 100%}
+.t-link>.t-url,.t-link>.t-alt{flex:1 1 12em;align-self:center}
+.t-link>.t-join~.t-url,.t-link>.t-join~.t-alt{flex-basis:100%}
 .t-url{font:600 clamp(16px,1.5vw,20px)/1.35 var(--mono);overflow-wrap:anywhere;margin:0;min-width:0}
 .t-note{font-size:16px;border-left:4px solid var(--sun);padding:4px 0 4px 12px;margin:0;color:var(--ink)}
 .t-fix summary{cursor:pointer;color:var(--teal);font-weight:700;font-size:16px;min-height:44px;display:flex;align-items:center}
@@ -621,7 +628,7 @@ h1.t-h1{font-size:clamp(28px,4.2vw,54px);font-weight:800;font-stretch:115%}
 .t-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 16px}
 .t-privacy{margin:0;font-size:16px;color:var(--muted);max-width:70ch}
 @media (max-width:900px){.t-top,.t-rooms{grid-template-columns:minmax(0,1fr)}}
-@media (max-width:520px){.t-card{padding:18px 16px}.t-link{grid-template-columns:minmax(0,1fr)}.t-key dl div{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.t-card{padding:18px 16px}.t-key dl div{grid-template-columns:minmax(0,1fr)}}
 @media (forced-colors:active){.t-dur[aria-pressed="true"]{outline:3px solid CanvasText;outline-offset:2px}.t-digit b{border:2px solid CanvasText}.t-code{border:2px dashed CanvasText}}
 /* D24: which lesson (four rooms or a short lesson of two), learning aims with their curriculum fit, "Voor de docent", the lesson report. */
 .t-choose{gap:12px}
@@ -681,7 +688,7 @@ h1.t-h1{font-size:clamp(28px,4.2vw,54px);font-weight:800;font-stretch:115%}
 .esc-close-q,.t-close-q{font:700 19px/1.35 var(--display);margin:0 0 6px}
 .esc-scale{margin:10px 0}.esc-scale-q{margin:0 0 6px;font-weight:700}.esc-scale-k{display:flex;flex-wrap:wrap;gap:8px}.esc-scale-l{display:flex;justify-content:space-between;gap:8px;max-width:330px}
 .esc-share{margin:12px 0;font-size:15px}.esc-share p{margin:0 0 6px}.esc-klas-is b{font:700 20px/1 var(--mono);letter-spacing:.12em}.esc-klas input{text-transform:uppercase;font:700 20px/1.2 var(--mono);letter-spacing:.12em;max-width:10em}
-.t-share{margin:0 0 12px}.t-share-q{margin:0 0 4px}.t-klas{font:700 clamp(28px,4vw,48px)/1.1 var(--mono);letter-spacing:.14em;margin:8px 0 4px}.t-klas b{font:inherit}.t-shortlink{margin:0 0 6px;overflow-wrap:anywhere}
+.t-share{margin:0}.t-share-q{margin:0 0 4px}.t-klas{font:700 clamp(24px,2.6vw,40px)/1.1 var(--mono);letter-spacing:.1em;margin:0 0 4px}.t-klas b{font:inherit}.t-shortlink{margin:0 0 6px;overflow-wrap:anywhere}
 .p-klas{font:800 clamp(34px,4.4vw,80px)/1.05 var(--mono);letter-spacing:.14em;margin:6px 0}.p-klas b{font:inherit}.p-short{font:700 clamp(18px,1.7vw,30px)/1.3 var(--body);overflow-wrap:anywhere;margin:0}.p-klas-wait{font-weight:700}
 .t-disc{margin:4px 0 0;font-size:14px;color:var(--muted);max-width:70ch}
 .flash.stale{margin:10px 0}
@@ -1005,6 +1012,22 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   .p18-pc-line{display:inline-block;width:55mm;border-bottom:1pt solid #000;height:10pt;vertical-align:bottom}
   .p18-pc-foot{margin-top:auto!important;font-size:7.6pt;border-top:.75pt dashed #000;padding-top:2mm}
 }
+/* D36: Projectiemodus on a low screen (1366x768, 1280x720 school laptops and projectors): timer, class code and QR code fit 720px without scrolling. */
+@media (min-width:1200px) and (max-height:800px){
+.p-view{gap:10px;font-size:clamp(15px,2.3vh,19px)}
+.p-head{align-items:center;gap:6px 16px}.p-h1{font-size:clamp(24px,4vh,34px)}.p-head .btn{min-height:44px;padding:8px 16px;font-size:16px}
+.p-head .eyebrow{margin:0}
+.t-clock.p-clock{font-size:clamp(56px,min(12.5vw,22vh),250px)}
+.p-timer{padding:12px 20px;gap:8px}.p-rooms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.p-steps{font-size:clamp(15px,2.6vh,20px)}.p-rules li{font-size:clamp(15px,2.6vh,20px)}.p-timer .btn{min-height:46px;padding:8px 18px;font-size:16px}
+.p-prog{padding:12px 18px;gap:8px}.p-ph{font-size:clamp(20px,3vh,26px)}
+.p-rooms{gap:5px}.p-rooms li{padding:4px 12px}
+.p-join{padding:10px 18px;gap:8px 20px}.p-qr svg{width:clamp(110px,min(10vw,24vh),180px)}
+.p-steps{gap:2px}.p-url{margin:2px 0 0}
+.p-klas{font-size:clamp(30px,7.5vh,56px);margin:2px 0 0;letter-spacing:.1em}.p-short{font-size:clamp(15px,2.6vh,20px);margin:2px 0 0}
+.p-rules{gap:3px}
+.p-note{font-size:13px}
+}
 </style>
 <main class="wrap" id="app"></main>
 <div id="live" class="sr" role="status" aria-live="polite"></div>
@@ -1013,7 +1036,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
 (function (g) {
   'use strict';
   const E18 = g.E18 = g.E18 || {};
-  const VERSIONS = { build: 'E18-D35', content: 'C21', save: 1 }; // D35 (7 Nov): who-runs-it, data-location and licence wording only (the About card, a licence line in the teacher footer); no room, question, answer key, option id, digit or the code 1725 changed. D34 (6 Nov): lesson 1 to the round-2 classroom standard (stop flow, plan with stop and reserve, check forms A and B; DECISIONS.md D-036). D33 (6 Nov): fixes from the 4 November adult and teacher tests (room 2 comparison line, numerus fixus and selectie in room 4's word line, a closing question, a one-page answer sheet, the rooms on paper) and anonymous results logging (src/e18log.js, LOGGING_SPEC.md v2, off unless config.js sets an endpoint). Texts only in the rooms; no question, option id, answer key, digit or the code 1725 changed and no action was added, so content stays C21 (as F7 and D30 did for texts, D-023). D32-candidate (3 Nov): D31b-candidate plus F10 (funder views in the pilot report tool), F9 (Herhaling na 4 weken, its own question set H1) and F8 (Eerst lezen), merged in that order (INTEGRATION.md, "D32"); no room, answer key, option id or the code 1725 changed, so content stays C21. D31b-candidate (3 Nov): D31-candidate plus F7, merged afterwards (INTEGRATION.md, "F7 merge"); content stays C21. D31-f8 (3 Nov, FEATURE_F8.md): Eerst lezen: in the escape the answers wait until the pair opened the question's document and read it a few seconds; "Waar staat dat?" marks the line after a wrong answer; the teacher screen and Projectiemodus get "Welke zin verraadde het?" per room and the lesverslag an optional show-of-hands count. Screen memory only, nothing in the action log, saves or storage; no room, question, answer key, option id, digit or the code 1725 changed, so content stays C21. D31-f9 (3 Nov, feature F9, FEATURE_F9.md): Herhaling na 4 weken (src/herhaling.js), additive: no room, answer key, option id or code changes and nothing enters a run or a save, so content stays C21 and save format 1; the follow-up's own question set is versioned apart as H1 (DECISIONS.md D-031-f9). D31-candidate (3 Nov): integration build of the feature branches (INTEGRATION.md); content stays C21 because no feature changes a room, answer key, option id or the code 1725. D31-f7 (3 Nov, F7): readability pass on ESC-MAAND (tools/readability.js, READABILITY.md): 15 flagged strings rewritten in plain Dutch, one-line 'Moeilijke woorden' hints under the letter, payslip, sms and Studielink list, and zorgtoeslag explained where it first shows; texts only, answer keys, option ids, digits and code 1725 unchanged, so content stays C21 (D-023). D31-f3 (3 Nov, feature F3): the close becomes "Mijn 18-plan" (src/plan18.js), an if-then plan per pupil after the lock with a card and an optional calendar file; screen memory only, nothing stored or sent. D31-f4 (3 Nov, FEATURE_F4.md): teacher screen only: "Klaar in 5 minuten" (five preparation steps, a bereidingstijd that can go into the lesverslag), "Probleem?", the Projectiemodus and a quick-start box on the printed plan; no pupil content change, so C21 stays. D31-f1 (3 Nov, feature branch F1, FEATURE_F1.md): a Startcheck before room 1 and an Eindcheck after the lock, made of existing room questions (same ids, options and answers). The check is a new optional action in the ESC-MAAND log: every C21 run without it replays exactly, so content stays C21 (as D24 did for the short lesson, D-023); a run with a check cannot be loaded by E18-D30 (unknown action), which fails loudly and is never rescored. D31-f2 (3 Nov): source freshness (src/freshness.js): every source of De les has a check date, the pupil's source links say when they were checked, the teacher screen lists every rule with its sources, the next check (January or July) and a printable upkeep checklist; tools/source-freshness.js fails on a rule with fewer than two sources or a check older than 7 months. No room, answer key or option id changed, so content stays C21. D30 (27 Oct): fixes from an AI persona walkthrough, each checked in the code first: room 3 asks for all signals in the plural and its digit names the first question (pupils counted the foreign number); room 2 digit text simplified; room 1 says 'Kies' not 'Tik'; numerus fixus explained on the list; the vwo curriculum fit no longer claims 4.5 eigen risico. Clue and prompt texts changed; answer keys, option ids and rooms unchanged, so content stays C21 (D-023). D29 merges an outside code review of D28 (ChatGPT, 25-26 Oct; every fix reproduced and retested here): Herhaling answers stayed visible because display:flex beat [hidden]; the short-lesson timer started at 30; a stale #les= kept a short lesson; a damaged save counter could overwrite progress; premium wording qualified (parents may pay). No answer key, option id or room changes, so C21 stays. D27 adds the Over en privacy screen and the fact-check link checker (no content change). D26 adds Nibud-competence fits on the teacher screen (no pupil content change). D25 embeds the fonts (no request to another server); no content change, so C21 stays. Before: D24 adds the short lesson as new ESC-MAAND variants and teacher-screen parts; no answer key or option id changed, so content stays C21 (D-023).
+  const VERSIONS = { build: 'E18-D36', content: 'C21', save: 1 }; // D36 (7 Nov): school-test fixes (teacher screen and Projectiemodus layout, live time-up notice, honest feedback message); no room, question, answer key or digit changed. D35 (7 Nov): who-runs-it, data-location and licence wording only (the About card, a licence line in the teacher footer); no room, question, answer key, option id, digit or the code 1725 changed. D34 (6 Nov): lesson 1 to the round-2 classroom standard (stop flow, plan with stop and reserve, check forms A and B; DECISIONS.md D-036). D33 (6 Nov): fixes from the 4 November adult and teacher tests (room 2 comparison line, numerus fixus and selectie in room 4's word line, a closing question, a one-page answer sheet, the rooms on paper) and anonymous results logging (src/e18log.js, LOGGING_SPEC.md v2, off unless config.js sets an endpoint). Texts only in the rooms; no question, option id, answer key, digit or the code 1725 changed and no action was added, so content stays C21 (as F7 and D30 did for texts, D-023). D32-candidate (3 Nov): D31b-candidate plus F10 (funder views in the pilot report tool), F9 (Herhaling na 4 weken, its own question set H1) and F8 (Eerst lezen), merged in that order (INTEGRATION.md, "D32"); no room, answer key, option id or the code 1725 changed, so content stays C21. D31b-candidate (3 Nov): D31-candidate plus F7, merged afterwards (INTEGRATION.md, "F7 merge"); content stays C21. D31-f8 (3 Nov, FEATURE_F8.md): Eerst lezen: in the escape the answers wait until the pair opened the question's document and read it a few seconds; "Waar staat dat?" marks the line after a wrong answer; the teacher screen and Projectiemodus get "Welke zin verraadde het?" per room and the lesverslag an optional show-of-hands count. Screen memory only, nothing in the action log, saves or storage; no room, question, answer key, option id, digit or the code 1725 changed, so content stays C21. D31-f9 (3 Nov, feature F9, FEATURE_F9.md): Herhaling na 4 weken (src/herhaling.js), additive: no room, answer key, option id or code changes and nothing enters a run or a save, so content stays C21 and save format 1; the follow-up's own question set is versioned apart as H1 (DECISIONS.md D-031-f9). D31-candidate (3 Nov): integration build of the feature branches (INTEGRATION.md); content stays C21 because no feature changes a room, answer key, option id or the code 1725. D31-f7 (3 Nov, F7): readability pass on ESC-MAAND (tools/readability.js, READABILITY.md): 15 flagged strings rewritten in plain Dutch, one-line 'Moeilijke woorden' hints under the letter, payslip, sms and Studielink list, and zorgtoeslag explained where it first shows; texts only, answer keys, option ids, digits and code 1725 unchanged, so content stays C21 (D-023). D31-f3 (3 Nov, feature F3): the close becomes "Mijn 18-plan" (src/plan18.js), an if-then plan per pupil after the lock with a card and an optional calendar file; screen memory only, nothing stored or sent. D31-f4 (3 Nov, FEATURE_F4.md): teacher screen only: "Klaar in 5 minuten" (five preparation steps, a bereidingstijd that can go into the lesverslag), "Probleem?", the Projectiemodus and a quick-start box on the printed plan; no pupil content change, so C21 stays. D31-f1 (3 Nov, feature branch F1, FEATURE_F1.md): a Startcheck before room 1 and an Eindcheck after the lock, made of existing room questions (same ids, options and answers). The check is a new optional action in the ESC-MAAND log: every C21 run without it replays exactly, so content stays C21 (as D24 did for the short lesson, D-023); a run with a check cannot be loaded by E18-D30 (unknown action), which fails loudly and is never rescored. D31-f2 (3 Nov): source freshness (src/freshness.js): every source of De les has a check date, the pupil's source links say when they were checked, the teacher screen lists every rule with its sources, the next check (January or July) and a printable upkeep checklist; tools/source-freshness.js fails on a rule with fewer than two sources or a check older than 7 months. No room, answer key or option id changed, so content stays C21. D30 (27 Oct): fixes from an AI persona walkthrough, each checked in the code first: room 3 asks for all signals in the plural and its digit names the first question (pupils counted the foreign number); room 2 digit text simplified; room 1 says 'Kies' not 'Tik'; numerus fixus explained on the list; the vwo curriculum fit no longer claims 4.5 eigen risico. Clue and prompt texts changed; answer keys, option ids and rooms unchanged, so content stays C21 (D-023). D29 merges an outside code review of D28 (ChatGPT, 25-26 Oct; every fix reproduced and retested here): Herhaling answers stayed visible because display:flex beat [hidden]; the short-lesson timer started at 30; a stale #les= kept a short lesson; a damaged save counter could overwrite progress; premium wording qualified (parents may pay). No answer key, option id or room changes, so C21 stays. D27 adds the Over en privacy screen and the fact-check link checker (no content change). D26 adds Nibud-competence fits on the teacher screen (no pupil content change). D25 embeds the fonts (no request to another server); no content change, so C21 stays. Before: D24 adds the short lesson as new ESC-MAAND variants and teacher-screen parts; no answer key or option id changed, so content stays C21 (D-023).
   const COMPATIBLE_CONTENT = ['C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C20', 'C21']; // In order, oldest first. C21 changes the escape ESC-MAAND after review D22 (answer keys, option ids, room order, code 7135 became 1725): a mission that declares contentSince refuses its runs from an older content version loudly, like C12 did for every mission, and is never rescored silently (D-022); saves of C12 to C20 without an ESC-MAAND run still load. C20 adds the escape run ESC-MAAND and the one-retry rule in practice exercises (a retry is only sent with retry: true, so older practice saves replay unchanged). C12 changed answer keys after the content review (D-015); older saves are refused, never silently rescored. C13 only skips F01's pressure scene when the order is already done (a C12 run that answered it there fails loudly on import). C14 only adds Life Mode chapter 1. C16 adds Life Mode chapters 2 and 3; chapter 1 replays unchanged. C19 adds six practice exercises; C18 only adds the practice bank (new missions); both read older saves unchanged. C17 adds three starting profiles as chapter-1 variants; basis runs replay unchanged and carried data without a profile continues as basis. C15 adds its optional dating thread and review fixes (a C14 payslip answer that reported a missing shift after choosing 'nothing missing' now fails loudly).
   const MISSIONS = E18.MISSIONS = E18.MISSIONS || {};
   // D31-f2: the date this build was made; bump it with VERSIONS.build. The page computes the source status (op tijd / controle nodig) from it,
@@ -7738,26 +7761,28 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   const tFoldOpen = k => `<details class="t-fold" data-fold="${k}" ${tFold[k] ? 'open' : ''}>`;
   const tFoot = () => `<p class="t-privacy">${esc(tPrivacy())}</p><p class="t-disc">${esc(TCH.disclaimer())}</p><p class="t-disc t-licence">${esc(TCH.LICENCE.a)}<a href="${esc(TCH.LICENCE.url)}" rel="license noopener">${esc(TCH.LICENCE.name)}</a>${esc(TCH.LICENCE.b)}</p>`;
   function teachShare() {
-    if (!logOn()) return '';
+    if (!logOn()) return { share: '', box: '' };
     const pick = (v, l) => btn(l, 't-share:' + v, tLog.share === (v === 'ja') ? '' : 'ghost', `aria-pressed="${tLog.share === (v === 'ja')}"${tLog.started ? ' disabled' : ''}`);
     const ask = `<p class="t-share-q" id="t-share-q"><b>${esc(TCH.SHARE_ASK)}</b></p><p class="sub2">${esc(TCH.SHARE_WHAT)} <a href="${LOG_PRIVACY}" target="_blank" rel="noopener">Lees over privacy<span class="sr">, opent in een nieuw tabblad</span></a></p>
       <div class="row-acts t-share-btns" role="group" aria-labelledby="t-share-q">${pick('ja', 'Ja')}${pick('nee', 'Nee')}</div>`;
-    if (!tChosen()) return `<div class="t-share open">${ask}<p class="t-note">Kies eerst Ja of Nee. Daarna verschijnen de klascode en de link voor leerlingen.</p></div>`;
+    if (!tChosen()) return { share: `<div class="t-share open">${ask}<p class="t-note">Kies eerst Ja of Nee. Daarna verschijnen de klascode en de link voor leerlingen.</p></div>`, box: '' };
     const short = LG.shortLink(tPupil(), tLog.share);
-    return `<div class="t-share">${ask}<p class="sub2">${esc(tLog.started ? TCH.SHARE_LOCKED : tLog.share ? TCH.SHARE_JA : TCH.SHARE_NEE)}</p>
-      <p class="t-klas">Klascode <b id="t-klas">${esc(tLog.klas)}</b></p>${short ? `<p class="t-shortlink">Op een laptop of Chromebook: ga naar <b>${esc(short)}</b> en typ de klascode.</p>` : ''}
+    // D36: the class code and the "Nieuwe klas" button go in their own box (t-klasbox), so teachLinkBox can set it beside the QR code.
+    const box = `<div class="t-klasbox"><p class="t-klas">Klascode <b id="t-klas">${esc(tLog.klas)}</b></p>${short ? `<p class="t-shortlink">Op een laptop of Chromebook: ga naar <b>${esc(short)}</b> en typ de klascode.</p>` : ''}
       <div class="row-acts">${btn('Nieuwe klas', 't-newclass', 'ghost small')}</div></div>`;
+    return { share: `<div class="t-share">${ask}<p class="sub2">${esc(tLog.started ? TCH.SHARE_LOCKED : tLog.share ? TCH.SHARE_JA : TCH.SHARE_NEE)}</p></div>`, box };
   }
   const tSrc = list => list.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}<span class="sr">, opent in een nieuw tabblad</span></a>`).join('<span aria-hidden="true"> · </span>');
   // The link as text and its QR code, made here in the browser; a file:// page or a link that is too long gets a note instead.
   function teachLinkBox() {
     if (tLes === 'short' && !tVar()) return `<p class="t-note">Kies eerst twee kamers voor de korte les.</p>`;
-    if (logOn() && !tChosen()) return teachShare();
+    if (logOn() && !tChosen()) return teachShare().share;
     const link = tPupilLog(), web = TCH.isWebLink(link), M = web ? TCH.qr(link) : null, n = M ? M.length + 8 : 0;
     const qr = M ? `<svg viewBox="0 0 ${n} ${n}" role="img" aria-label="QR-code met de link naar deze les" shape-rendering="crispEdges"><rect width="${n}" height="${n}" fill="#fff"/><path d="${TCH.qrPath(M)}" fill="#000"/></svg>`
       : `<p class="t-note">${esc(web ? TCH.NOTES.long : TCH.NOTES.file)}</p>`;
     const alt = tLes === 'short' ? `<p class="t-alt">Werkt de link niet? Leerlingen tikken op het startscherm op Korte les en kiezen ${esc(tRooms().map(R => R.title).join(' en '))}.</p>` : '';
-    return `${teachShare()}<div class="t-qr ${M ? '' : 'none'}">${qr}</div><p class="t-url"><span class="sr">Link: </span>${esc(link)}</p>${alt}`;
+    const sh = teachShare(), qrBox = `<div class="t-qr ${M ? '' : 'none'}">${qr}</div>`;
+    return `${sh.share}${sh.box ? `<div class="t-join">${sh.box}${qrBox}</div>` : qrBox}<p class="t-url"><span class="sr">Link: </span>${esc(link)}</p>${alt}`;
   }
   // Which lesson: the four-room lesson or a short lesson; for the short one, two of the four rooms.
   function teachChoose() {
@@ -8250,7 +8275,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     't-newclass': () => { tLog = { share: null, klas: null, sess: null, started: false, sent: null }; tLogSave(); flash = { kind: 'info', title: 'Nieuwe klas. Kies eerst Ja of Nee.' }; pendingFocus = { key: '[data-action="t-share:ja"]' }; render(); },
     't-vs-save': () => { const r = tReport(); if (r.errors.length) { flash = { kind: 'warn', title: 'Kijk eerst het verslag na.', items: r.errors }; return render(); }
       const data = tFeedback(), same = tLog.sent === JSON.stringify(data);
-      if (logOn() && tLog.share === true && !same) { const ok = LOG.send(tCtx(), 'feedback', data); if (ok) { tLog.sent = JSON.stringify(data); tLogSave(); logFlush(); } flash = ok ? { kind: 'ok', title: 'Opgeslagen. Je feedback is anoniem gedeeld met het Escape 18-team. Dank je wel.' } : { kind: 'warn', title: 'Delen lukte niet. Het verslag staat nog op deze pagina.' }; }
+      if (logOn() && tLog.share === true && !same) { const ok = LOG.send(tCtx(), 'feedback', data); if (ok) { tLog.sent = JSON.stringify(data); tLogSave(); logFlush(); } flash = ok ? (navigator.onLine === false ? { kind: 'info', title: 'Je bent offline. We versturen je feedback zodra je weer online bent.' } : { kind: 'ok', title: 'Opgeslagen. Je feedback wordt anoniem verstuurd naar het Escape 18-team. Dank je wel.' }) : { kind: 'warn', title: 'Delen lukte niet. Het verslag staat nog op deze pagina.' }; }
       else flash = same && tLog.share === true ? { kind: 'info', title: 'Deze feedback is al gedeeld.' } : { kind: 'info', title: 'Opgeslagen op deze pagina. Er is niets verstuurd, want deze klas deelt niet.' };
       render(); },
     't-run': () => { if (tEnd == null && tChosen() && !tLog.started && tVar()) { tLog.started = true; tLogSave(); LOG.send(tCtx(), 'teacher_start', { variant: tVar(), rooms: tRooms().map(R => R.id) }); logFlush(); }
@@ -8512,7 +8537,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     const kicker = label || (R ? `Kamer ${rn} van ${rooms.length}${p.step === 'q' && p.room === rn - 1 ? ` · vraag ${p.n + 1} van ${n}` : ''}` : 'Het slot');
     return `<section class="esc-hud" aria-label="Je voortgang"><div class="esc-hud-t"><p class="esc-kicker">${esc(kicker)}</p><h1 class="esc-h1">${esc(R ? R.title : 'Kraak de code')}</h1></div>
       <ol class="esc-slots" aria-label="Je code">${slots}</ol>
-      <p class="esc-clock"><span class="sr">Tijd: </span><span id="esc-clock" role="timer" data-start="${ESCR.clockStart(ms)}" data-pen="${pen}">${ESCR.clock(Date.now() - ESCR.clockStart(ms) + pen)}</span>${ms.hints.length ? `<small>met ${ms.hints.length} × 30 s hint</small>` : ''}</p>
+      <p class="esc-clock"><span class="sr">Tijd: </span><span id="esc-clock" role="timer" data-start="${ESCR.clockStart(ms)}" data-pen="${pen}" data-limit="${(escTijd() || ESCR.minutesOf(ms.variant)) * 60000}">${ESCR.clock(Date.now() - ESCR.clockStart(ms) + pen)}</span>${ms.hints.length ? `<small>met ${ms.hints.length} × 30 s hint</small>` : ''}</p>
       ${btn('Pauze', 'pause', 'ghost small')}
       ${R ? `<ol class="esc-prog" aria-hidden="true">${R.qs.map((Q, i) => `<li class="${i < done ? 'done' : i === done ? 'now' : ''}"></li>`).join('')}<li class="${done > n ? 'done' : done === n ? 'now' : ''}"></li></ol>` : ''}</section>`;
   }
@@ -8658,9 +8683,10 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   // D34 stop flow (gate round 2; kamers-engine README "Stopping"): every escape view ends with "We stoppen"; when the pupil clock reaches the
   // escape time a calm notice says the time is up. The stop view fills in the digits found so far; the pair types the rest or goes on.
   const escTijd = () => { try { const v = parseInt(new URLSearchParams(location.search).get('tijd'), 10); return v >= 5 && v <= 90 ? v : null; } catch (e) { return null; } };
+  const escTimeUpHtml = () => `<div class="card esc-timeup" role="status" id="esc-timeup"><p><b>De tijd is om.</b> Rustig afronden. Tik op We stoppen als je docent dat zegt.</p>${btn('We stoppen', 'esc-stop', 'esc-go')}</div>`;
   function escStopBar(r, ms) {
     const start = ESCR.clockStart(ms), min = escTijd() || ESCR.minutesOf(ms.variant), up = start != null && ms.paused == null && Date.now() - start >= min * 60000;
-    return `${up ? `<div class="card esc-timeup" role="status" id="esc-timeup"><p><b>De tijd is om.</b> Rustig afronden. Tik op We stoppen als je docent dat zegt.</p>${btn('We stoppen', 'esc-stop', 'esc-go')}</div>` : ''}
+    return `${up ? escTimeUpHtml() : ''}
       <div class="esc-stopbar"><p>Zegt je docent dat de tijd om is?</p>${btn('We stoppen', 'esc-stop', 'ghost small')}</div>`;
   }
   function escStopView(r, ms) {
@@ -8781,7 +8807,11 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
       classRoute = null; runId = core.startRun(st, ESC_ID, v).id; view = 'run'; escFb = null; escRev = null; flash = null; drafts = {}; persist(); render(); window.scrollTo(0, 0); }
   };
   // The running clock only changes its own text (role="timer" is not announced); Enter in an amount or a lock digit checks it.
-  setInterval(() => { const el = document.getElementById('esc-clock'); if (el && ESCR) el.textContent = ESCR.clock(Date.now() - (+el.dataset.start) + (+el.dataset.pen || 0)); }, 1000);
+  // D36: the time-up notice also appears live from this tick when the escape time passes (before, only the next render showed it). Same test as
+  // escStopBar (time since the clock start, without hint penalties); inserted above the stop bar so typing in an answer field is not disturbed.
+  setInterval(() => { const el = document.getElementById('esc-clock'); if (!el || !ESCR) return; el.textContent = ESCR.clock(Date.now() - (+el.dataset.start) + (+el.dataset.pen || 0));
+    const lim = +el.dataset.limit, bar = document.querySelector('.esc-stopbar');
+    if (lim > 0 && bar && !document.getElementById('esc-timeup') && Date.now() - (+el.dataset.start) >= lim) bar.insertAdjacentHTML('beforebegin', escTimeUpHtml()); }, 1000);
   document.addEventListener('keydown', e => {
     const t = e.target; if (e.key !== 'Enter' || !t.id || !(t.id === 'esc-num' || /^esc-d\d$/.test(t.id))) return;
     const b = $('app').querySelector(t.id === 'esc-num' ? '[data-action^="esc-num:"]' : '[data-action="esc-code"]'); if (b) { e.preventDefault(); b.click(); }
