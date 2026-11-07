@@ -1,0 +1,445 @@
+{
+  "schema": "escape18-lessons/1",
+  "generated": "2026-11-07",
+  "site": "https://ollie0409.github.io/escape18/",
+  "provider": {
+    "name": "Escape 18 (Olivier Runge), gestart als studentenproject van team Klaar voor Later, Erasmus Universiteit Rotterdam",
+    "contact_email": null,
+    "contact_todo": "TODO EIGENAAR: nog geen contactadres; vul in zodra het bestaat. Formulieren (geldlessen.nl, Week van het geld) vragen naam, e-mail en telefoon: kies wat openbaar mag."
+  },
+  "status_note": "Gratis testversie in ontwikkeling. Nog niet in de praktijk getest; geen effectonderzoek. Vermeld dit in elke listing.",
+  "licence": {
+    "name": "CC BY-NC-SA 4.0",
+    "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl",
+    "todo": "TODO EIGENAAR: bevestig dat deze licentie geldt voor alle lessen, docentbladen en de video. Let op: Wikiwijs accepteert alleen CC BY of CC BY-SA."
+  },
+  "cost": "Gratis",
+  "language": "nl (leerling- en docentscherm ook in het Engels)",
+  "format": "Digitale escape-les in de browser; tweetallen op één scherm; docentenscherm voor het digibord; papieren reserveversie",
+  "materials_needed": [
+    "een laptop, Chromebook of telefoon per tweetal",
+    "pen en papier",
+    "digibord of beamer"
+  ],
+  "where_to_get": "Direct online te openen, geen bestelling of account nodig",
+  "privacy": "https://ollie0409.github.io/escape18/privacy.html",
+  "walkthrough_video": "https://ollie0409.github.io/escape18/walkthrough.mp4",
+  "nibud_themes_note": "Nibud-leerdoelen zoals geldlessen.nl ze vraagt: 'gecontroleerd' = ontleend aan de Nibud-aansluiting op het docentenscherm van de les; 'voorstel' = nog na te lopen door het team.",
+  "curriculum_status_note": "Per aansluiting: 'gecontroleerd' = staat met bron in de lesspecificatie of op het docentenscherm; 'voorstel' = toewijzing voor deze listing, nog niet nagelopen.",
+  "lessons": [
+    {
+      "slug": "eerste-maand",
+      "status": "live",
+      "title": "Je eerste maand als 18-jarige",
+      "url": "https://ollie0409.github.io/escape18/eerste-maand/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/eerste-maand/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo en vwo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: loonstrook nakijken, brief van de zorgverzekeraar lezen, nepbericht herkennen en op tijd aanmelden. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Loonstrook nakijken, brief van de zorgverzekeraar lezen, nepbericht herkennen en op tijd aanmelden.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna een loonstrook nakijken, een zorgbrief lezen en een nepbericht herkennen.",
+      "niveau": "havo en vwo",
+      "leerjaren": "havo 4-5, vwo 5-6",
+      "vak_moment": [
+        "Mentoruur",
+        "LOB",
+        "Economie",
+        "Maatschappijleer"
+      ],
+      "onderwerpen": [
+        "Werk en loon",
+        "Verzekeren en zorg",
+        "Oplichting herkennen",
+        "Studie en keuze"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": true,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "In een brief van de zorgverzekeraar de opdracht met de uiterste datum aanwijzen en zeggen vanaf welke maand premie verschuldigd is.",
+        "Een loonstrook naast het rooster leggen, de ontbrekende uren vinden en het goede brutoloon, vakantiegeld en nettoloon uitrekenen.",
+        "In een sms twee waarschuwingssignalen aanwijzen en zeggen hoe je zelf controleert of het bericht echt is en waar je het meldt.",
+        "Voor een opleiding met en zonder numerus fixus de uiterste aanmelddatum noemen en zeggen wat er gebeurt als je te laat bent."
+      ],
+      "curriculum_anchor_short": "Economie G1 en D9 · Maatschappijleer D2 · LOB loopbaansturing",
+      "curriculum": [
+        {
+          "kader": "Economie havo 2027",
+          "onderdeel": "G1 Risico en verzekeren, G2.2 verplichte verzekering; D9 Arbeidsmarkt; A2 Rekenkundig onderbouwen",
+          "status": "gecontroleerd"
+        },
+        {
+          "kader": "Economie vwo 2027 (concept)",
+          "onderdeel": "G4 Risico verzekeren; A2",
+          "status": "gecontroleerd"
+        },
+        {
+          "kader": "Maatschappijleer havo en vwo 2027",
+          "onderdeel": "D2 Sociale rechten en plichten",
+          "status": "gecontroleerd"
+        },
+        {
+          "kader": "LOB havo/vwo",
+          "onderdeel": "Loopbaancompetentie loopbaansturing",
+          "status": "gecontroleerd"
+        }
+      ],
+      "nibud_leerdoelen": [
+        "Inkomsten verwerven",
+        "Geldzaken organiseren"
+      ],
+      "nibud_status": "gecontroleerd",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-10-25",
+      "valid_until": "2027-07-31",
+      "source_of_metadata": "Lesson page eerste-maand (teacher screen, Leerdoelen en aansluiting, checked 25 Oct 2026)"
+    },
+    {
+      "slug": "verzekerd",
+      "status": "live",
+      "title": "Verzekerd na je 18e",
+      "url": "https://ollie0409.github.io/escape18/verzekerd/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/verzekerd/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo en vwo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: wat moet je verzekeren, wat kies je zelf en wat betaalt je polis? Reken met eigen risico en meld schade goed. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Wat moet je verzekeren, wat kies je zelf en wat betaalt je polis? Reken met eigen risico en meld schade goed.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna zeggen welke verzekering verplicht is en rekenen met eigen risico.",
+      "niveau": "havo en vwo",
+      "leerjaren": "havo 4-5, vwo 5-6",
+      "vak_moment": [
+        "Economie",
+        "Mentoruur"
+      ],
+      "onderwerpen": [
+        "Verzekeren en zorg"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Zeggen welke verzekeringen de wet verplicht (basisverzekering zorg; WA voor een motorvoertuig op je naam) en dat je de rest zelf kiest.",
+        "In voorwaarden opzoeken wie verzekerd is en wat niet verzekerd is, en zo zeggen of schade gedekt is, ook op kamers.",
+        "Uitrekenen wat de verzekeraar betaalt boven het verplicht eigen risico van 2027, een vrijwillig eigen risico afwegen tegen premiekorting, en een verwacht schadebedrag berekenen.",
+        "Weten hoe je schade meldt: op tijd, met bewijs en eerlijk."
+      ],
+      "curriculum_anchor_short": "Economie G1 Risico en verzekeren (havo G1.1, G1.4, G2.2, G2.3; vwo G4)",
+      "curriculum": [
+        {
+          "kader": "Economie havo 2027",
+          "onderdeel": "G1 Risico en verzekeren: G1.1, G1.4, G2.2, G2.3 (kamer 3 en 1)",
+          "status": "gecontroleerd"
+        },
+        {
+          "kader": "Economie vwo 2027 (conceptsyllabus)",
+          "onderdeel": "G4.1, G4.2, G4.4, G4.5",
+          "status": "gecontroleerd"
+        },
+        {
+          "kader": "Mentoruur",
+          "onderdeel": "Kamers 1, 2 en 4: wat je regelt als je 18 wordt (geen examenstof)",
+          "status": "gecontroleerd"
+        }
+      ],
+      "nibud_leerdoelen": [
+        "Voorbereid zijn op (on)voorziene gebeurtenissen"
+      ],
+      "nibud_status": "voorstel",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-07",
+      "valid_until": "2027-12-31",
+      "source_of_metadata": "content_new/verzekerd.md (Doelgroep en moment, Leerdoelen); lessons/verzekerd.js teacher.audience"
+    },
+    {
+      "slug": "eerste-bijbaan",
+      "status": "live",
+      "title": "Je eerste bijbaan",
+      "url": "https://ollie0409.github.io/escape18/eerste-bijbaan/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/eerste-bijbaan/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo en vwo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna hun uurloon en rooster nakijken met de echte regels.",
+      "niveau": "havo en vwo",
+      "leerjaren": "havo 4-5, vwo 4-6",
+      "vak_moment": [
+        "Mentoruur",
+        "Economie"
+      ],
+      "onderwerpen": [
+        "Werk en loon",
+        "Belasting"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 27,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "In een contract zien of een proeftijd mag.",
+        "Zeggen wanneer een oproep te laat is, en hoeveel loon er komt als de werkgever afzegt.",
+        "Het minimumloon voor de eigen leeftijd opzoeken en uitrekenen hoeveel te weinig is betaald.",
+        "De stappen noemen als de werkgever te weinig betaalt.",
+        "Een rooster nakijken op de regels voor werken onder de 18: 's nachts, rust, een schooldag en pauze.",
+        "De loonheffingskorting bij één werkgever tegelijk laten toepassen en zeggen hoe en tot wanneer belasting terugvragen kan."
+      ],
+      "curriculum_anchor_short": "Economie D9 Arbeidsmarkt · Nibud: inkomsten verwerven",
+      "curriculum": [
+        {
+          "kader": "Economie havo 2027",
+          "onderdeel": "D9 Arbeidsmarkt (prijs van arbeid, minimumloon)",
+          "status": "voorstel"
+        },
+        {
+          "kader": "Mentoruur",
+          "onderdeel": "Rechten en plichten bij je eerste baan",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [
+        "Inkomsten verwerven"
+      ],
+      "nibud_status": "voorstel",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-06",
+      "valid_until": "2027-06-30",
+      "source_of_metadata": "content_new/eerste-bijbaan.md (Overview, Leerdoelen)"
+    },
+    {
+      "slug": "op-kamers",
+      "status": "live",
+      "title": "Op kamers",
+      "url": "https://ollie0409.github.io/escape18/op-kamers/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/op-kamers/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo en vwo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: nepadvertentie herkennen, huurcontract lezen, inschrijven bij de gemeente en nagaan of je huurtoeslag krijgt. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Nepadvertentie herkennen, huurcontract lezen, inschrijven bij de gemeente en nagaan of je huurtoeslag krijgt.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna een nepadvertentie herkennen en de hoogste borg uitrekenen.",
+      "niveau": "havo en vwo",
+      "leerjaren": "havo 5, vwo 6",
+      "vak_moment": [
+        "Mentoruur",
+        "LOB"
+      ],
+      "onderwerpen": [
+        "Wonen",
+        "Oplichting herkennen"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 30,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "In een kameradvertentie twee signalen van oplichting aanwijzen en zeggen wat je doet voordat je iets betaalt.",
+        "In een huurcontract kale huur en servicekosten uit elkaar houden, de hoogste toegestane borg uitrekenen en zeggen wanneer de borg terug moet komen.",
+        "Zeggen bij welke gemeente en uiterlijk wanneer je een verhuizing doorgeeft, en waarom je adres in de BRP telt voor je studiefinanciering.",
+        "Uitleggen waarom je voor een gewone studentenkamer meestal geen huurtoeslag krijgt, en wanneer het soms wel kan."
+      ],
+      "curriculum_anchor_short": "Mentoruur of LOB · Nibud: geldzaken organiseren",
+      "curriculum": [
+        {
+          "kader": "Mentoruur / LOB",
+          "onderdeel": "Zelfstandig wonen na school",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [
+        "Geldzaken organiseren"
+      ],
+      "nibud_status": "voorstel",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-06",
+      "valid_until": "2026-12-31",
+      "source_of_metadata": "content_new/op-kamers.md (Leerdoelen)"
+    },
+    {
+      "slug": "studiefinanciering",
+      "status": "live",
+      "title": "Studiefinanciering",
+      "url": "https://ollie0409.github.io/escape18/studiefinanciering/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/studiefinanciering/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo en vwo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: studiefinanciering aanvragen bij DUO, thuis of op kamers wonen, extra geld of lenen, en wat je later terugbetaalt. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Studiefinanciering aanvragen bij DUO, thuis of op kamers wonen, extra geld of lenen, en wat je later terugbetaalt.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna zeggen wat ze bij DUO aanvragen en wat ze later terugbetalen.",
+      "niveau": "havo en vwo",
+      "leerjaren": "havo 5, vwo 6",
+      "vak_moment": [
+        "LOB",
+        "Mentoruur"
+      ],
+      "onderwerpen": [
+        "Studie en keuze"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Weten dat je studiefinanciering en het studentenreisproduct bij DUO aanvraagt, en welke twee soorten reisproduct er zijn.",
+        "In een tabel de basisbeurs voor thuiswonend en uitwonend aflezen, het verschil uitrekenen en zeggen wanneer je voor DUO meestal uitwonend bent.",
+        "Zeggen waar de aanvullende beurs vooral van afhangt en dat je een lening altijd terugbetaalt.",
+        "Uitleggen wat een prestatiebeurs is (gift bij een diploma binnen 10 jaar) en dat je je reisproduct stopzet als je stopt met studeren."
+      ],
+      "curriculum_anchor_short": "LOB of mentoruur · Nibud: inkomsten verwerven",
+      "curriculum": [
+        {
+          "kader": "LOB / mentoruur",
+          "onderdeel": "Voorbereiden op studeren: studiefinanciering regelen",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [
+        "Inkomsten verwerven",
+        "Geldzaken organiseren"
+      ],
+      "nibud_status": "voorstel",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-06",
+      "valid_until": "2027-12-31",
+      "source_of_metadata": "content_new/studiefinanciering.md (Leerdoelen)"
+    },
+    {
+      "slug": "route-18",
+      "status": "live",
+      "title": "Route 18",
+      "url": "https://ollie0409.github.io/escape18/route-18/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/route-18/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo en vwo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: je route na school: welk diploma waarheen leidt, tot wanneer je je aanmeldt en welke dag je gaat meelopen. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Je route na school: welk diploma waarheen leidt, tot wanneer je je aanmeldt en welke dag je gaat meelopen.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna hun aanmelddatum noemen en een meeloopdag plannen.",
+      "niveau": "havo en vwo",
+      "leerjaren": "havo 5, vwo 6 (ook havo 4, vwo 5)",
+      "vak_moment": [
+        "LOB",
+        "Mentoruur"
+      ],
+      "onderwerpen": [
+        "Studie en keuze"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Zeggen met welk diploma je naar het mbo, het hbo of de universiteit kunt, en dat je via mbo 4 of een hbo-propedeuse verder kunt.",
+        "De uiterste aanmelddata kennen: 15 januari (numerus fixus), 1 april (mbo) en 1 mei (andere bachelors), en weten wat er gebeurt als je te laat bent.",
+        "Uitleggen wat een bindend studieadvies is, en waarom stoppen vóór 1 februari in het eerste jaar uitmaakt voor je studiefinanciering.",
+        "Eén activiteit kiezen om een opleiding te beleven (open dag, meeloopdag of proefstuderen) en er een datum bij zetten."
+      ],
+      "curriculum_anchor_short": "LOB: loopbaansturing · Geef de les vóór 15 januari",
+      "curriculum": [
+        {
+          "kader": "LOB havo/vwo",
+          "onderdeel": "Loopbaancompetentie loopbaansturing (plannen van je vervolgstap)",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [],
+      "nibud_status": "n.v.t.",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-07",
+      "valid_until": "2027-07-31",
+      "source_of_metadata": "content_new/route-18.md (Doelgroep en moment, Leerdoelen); lessons/route-18.js teacher.care (LOB)"
+    },
+    {
+      "slug": "belasting-terug",
+      "status": "binnenkort",
+      "title": "Geld terug van de Belastingdienst",
+      "url": null,
+      "teacher_sheet_pdf": null,
+      "summary_400": "Escape-les van 45 minuten voor havo en vwo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: moet of mag je aangifte doen? Lees je jaaropgaven, check je aangifte en herken een nepmail. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Moet of mag je aangifte doen? Lees je jaaropgaven, check je aangifte en herken een nepmail.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna hun jaaropgaaf lezen en een nepmail over een teruggaaf herkennen.",
+      "niveau": "havo en vwo",
+      "leerjaren": "havo 4-5, vwo 4-6",
+      "vak_moment": [
+        "Mentoruur",
+        "LOB",
+        "Economie"
+      ],
+      "onderwerpen": [
+        "Belasting",
+        "Werk en loon",
+        "Oplichting herkennen"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Zeggen wanneer je aangifte moet doen en wanneer je het mag (geen brief en geld terug, tot 5 jaar later).",
+        "Op twee jaaropgaven het loon, de ingehouden loonheffing en de loonheffingskorting vinden.",
+        "De vooraf ingevulde aangifte naast de jaaropgaven leggen, een fout bedrag vinden en zeggen waar je dat verbetert.",
+        "Een nepmail over een teruggaaf herkennen en weten waar berichten zeker echt zijn."
+      ],
+      "curriculum_anchor_short": "Mentoruur, LOB of economie (geen examenstof) · voor 1 maart tot 30 juni 2027",
+      "curriculum": [
+        {
+          "kader": "Mentoruur / LOB / economie",
+          "onderdeel": "Oefenuur aangifte doen; geen examenstof",
+          "status": "gecontroleerd"
+        }
+      ],
+      "nibud_leerdoelen": [
+        "Inkomsten verwerven",
+        "Geldzaken organiseren"
+      ],
+      "nibud_status": "voorstel",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-07",
+      "valid_until": "2027-12-31",
+      "source_of_metadata": "content_new/belasting-terug.md (Doelgroep en moment, Leerdoelen)"
+    },
+    {
+      "slug": "eerste-bijbaan-mbo",
+      "status": "binnenkort",
+      "title": "Je eerste baan (mbo)",
+      "url": null,
+      "teacher_sheet_pdf": null,
+      "summary_400": "Escape-les van 45 minuten voor mbo niveau 3 en 4. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: leerbaan, stage of bijbaan: je loon nakijken, je rooster checken en een tweede baan goed regelen. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Leerbaan, stage of bijbaan: je loon nakijken, je rooster checken en een tweede baan goed regelen.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna hun loon en rooster nakijken bij stage, leerbaan en bijbaan.",
+      "niveau": "mbo niveau 3 en 4",
+      "leerjaren": "mbo niveau 3-4 (niveau 2 met hulp)",
+      "vak_moment": [
+        "LOB"
+      ],
+      "onderwerpen": [
+        "Werk en loon",
+        "Belasting"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 22,
+      "korte_versie_30_min": true,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Zeggen wie loon krijgt bij een leerbaan (bbl) en bij een stage (bol), en wie stagekosten betaalt.",
+        "Nagaan of een stagebedrijf een erkend leerbedrijf is.",
+        "Het minimumloon voor de eigen leeftijd opzoeken, ook in de bbl, en uitrekenen hoeveel te weinig is betaald.",
+        "Zeggen wat je doet als je werkgever te weinig betaalt.",
+        "Een rooster nakijken op de regels voor 16 en 17 jaar, en zeggen wat vanaf 18 jaar verandert.",
+        "Bij een oproepcontract zeggen wanneer een oproep te laat is en hoeveel uur loon je minstens krijgt.",
+        "Bij twee banen tegelijk de loonheffingskorting bij één werkgever laten toepassen."
+      ],
+      "curriculum_anchor_short": "Mbo: loopbaan en burgerschap (economische dimensie)",
+      "curriculum": [
+        {
+          "kader": "Mbo generieke kwalificatie-eisen loopbaan en burgerschap (versie 1 augustus 2026)",
+          "onderdeel": "Economische dimensie: rechten en plichten van de beroepsbeoefenaar, arbeidsverhoudingen; loopbaan: werkexploratie",
+          "status": "gecontroleerd"
+        }
+      ],
+      "nibud_leerdoelen": [
+        "Inkomsten verwerven"
+      ],
+      "nibud_status": "voorstel",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-07",
+      "valid_until": "2027-06-30",
+      "source_of_metadata": "content_new/eerste-bijbaan-mbo.md (Leerdoelen, Past bij)"
+    }
+  ]
+}
