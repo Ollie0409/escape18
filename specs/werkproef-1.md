@@ -1,6 +1,6 @@
 # Escape "Werkproef 1" (content spec, ID voorstel: ESC-WERK-1)
 
-Pilot van de Werkproef-game uit `content_new/werkproef-design.md` (section "Pilot scope" / "First pilot"). Revision 3, 7 november 2026. Gecontroleerd op 7 november 2026; validUntil: 31 juli 2027 (the end of school year 2026-2027; the rules have no set end date, and every "kans op werk" figure carries its read date in pupil text, in the reveal's source line "KiesMBO en Studiekeuze123, geraadpleegd op 7 november 2026."; scheduled re-checks in December 2026, after SBB's November baankans measurement [kmUitleg], and after every new ROA or Studiekeuze123 release). Every fact in pupil and teacher text comes from the source table at the end; every page in it was opened on 7 November 2026. Nothing is from memory. Status: **pilot, not for release: every task still needs practitioner verification** (section "Praktijkverificatie"; forms ready to send in `outreach/practitioners/`).
+Pilot van de Werkproef-game uit `content_new/werkproef-design.md` (section "Pilot scope" / "First pilot"). Revision 4, 7 november 2026. Gecontroleerd op 7 november 2026; validUntil: 31 juli 2027 (the end of school year 2026-2027; the rules have no set end date, and every "kans op werk" figure carries its read date in pupil text, in the reveal's source line "KiesMBO en Studiekeuze123, geraadpleegd op 7 november 2026."; scheduled re-checks in December 2026, after SBB's November baankans measurement [kmUitleg], and after every new ROA or Studiekeuze123 release). Every fact in pupil and teacher text comes from the source table at the end; every page in it was opened on 7 November 2026. Nothing is from memory. Status: **pilot, not for release: every task still needs practitioner verification** (section "Praktijkverificatie"; forms ready to send in `outreach/practitioners/`).
 
 Lead: "Proef vier soorten werk. Pas na elke taak zie je welk beroep het is en hoe je er komt."
 
@@ -372,7 +372,7 @@ From the pupil playtest (gate G4 B1, S1, S2) and check B (5, 6). These are optio
 
 - `rulesExtra`: "Pak je proefkaart. Na elke taak omcirkel je eerst op de kaart. Dan pas vul je het cijfer in."
 - `clueGate`: text "Pak je proefkaart. Omcirkel bij taak {n}: was het leuk? Was het moeilijk?", button "Klaar, ik heb omcirkeld"
-- `revealNote`: "Dit zijn verschillende metingen, soms uit eerdere jaren. Het percentage gaat over afgestudeerden na 1,5 jaar, niet over jouw eigen kans."
+- `revealNote`: "Dit zijn verschillende metingen, soms uit eerdere jaren. De percentages over werk in het vakgebied gaan over afgestudeerden na 1,5 jaar. Het percentage doorstroom naar het hbo gaat over het afgelopen schooljaar. Geen van deze cijfers voorspelt jouw eigen kans op werk."
 - `beroepenblad`: button "Print beroepenblad", title "Beroepenblad: welk werk was het?", intro "Klaar met een kamer? Omcirkel eerst op je proefkaart: was de taak leuk? Was hij moeilijk? Lees dan pas bij die kamer welk werk het was."
 
 Start screen: the rulesExtra line is the fifth item under "Zo werkt het", so pairs know about the proefkaart before room 1 (S1). Digit screen: the clue card and the documents stay; below them the gate card shows the text ("{n}" becomes the room number) and one button; the digit field opens only after the tap (S1). The tap is not logged and not stored. After the digit, the screen is one card at the top: "Gevonden!", the digit, the heading "Zo kom je bij dit werk", the three reveal lines, the revealNote, the button to the next room, and under it the source line with the read date (S2, check B 6). At 1366 x 768 and 1024 x 768 the button is above the fold (tested). The revealNote says in two sentences what the numbers measure (check B 5): the vacancy sentence and the percentage are different measures, maybe from earlier years, and the percentage is about graduates after 1,5 years, not the pupil's own chance.
@@ -532,7 +532,7 @@ Supported now, no change needed: `table` with `head` (menu, code, test, werkblad
 
 New in Revision 2: six optional lesson-data features in `kamers-engine/src/` (default off; a lesson without them renders as before; validator in `build.js`; tests in `tests/werkproef-e2e.js`):
 1. **`room.reveal`** `{ lines, src }`, in place of `remember`: after the digit, one card at the top of the screen with the digit, the heading (`revealTitle`, default "Zo kom je bij dit werk"), the lines, the lesson's `revealNote`, the button and the source line. The end screen ("Dit neem je mee"), the teacher's Kern and the Beroepenblad use the lines joined.
-2. **`revealNote`** (lesson): one short line under every reveal.
+2. **`revealNote`** (lesson): one short note under every reveal (Revision 4: four sentences, 42 words).
 3. **`clueGate`** `{ text, button }` (lesson): the digit field opens only after the tap; not logged, not stored.
 4. **`rulesExtra`** (lesson): extra lines under "Zo werkt het" on the start screen.
 5. **`beroepenblad`** `{ button, title, intro, note }` (lesson): a print button on the plan card and in step 3 of the kit; one A4 with the reveals per room, no answers or code.
@@ -646,6 +646,9 @@ The rooms carry no school-year dates except the contract (1 January to 31 Decemb
 ---
 
 ## Changelog
+
+**Revision 4 (7 Nov)**, after ChatGPT check B round 3 (`qa/checkB/werkproef-1_round3.md`, 1 RISK; 74 claims OK). Lock code unchanged: 3231; nothing else changed.
+- 1 (RISK, `revealNote`): the note said "Het percentage gaat over afgestudeerden na 1,5 jaar", but the room 2 card also has the 50% doorstroom of bol graduates of last school year. New note, the same on every card and on the Beroepenblad: "Dit zijn verschillende metingen, soms uit eerdere jaren. De percentages over werk in het vakgebied gaan over afgestudeerden na 1,5 jaar. Het percentage doorstroom naar het hbo gaat over het afgelopen schooljaar. Geen van deze cijfers voorspelt jouw eigen kans op werk." The checker's wording named "kamer 2" and "bol-gediplomeerden"; the note is shown under every reveal, so it names the measure in general and the bol detail stays on the room 2 line ("Van de studenten die de bol-opleiding afrondden").
 
 **Revision 3 (7 Nov)**, after ChatGPT check B round 2 (`qa/checkB/werkproef-1_round2.md`, FAIL: 1 ERROR, 2 RISK; 72 claims OK). **Lock code unchanged: 3231**; room answers and digits unchanged.
 - 1 (ERROR, software reveal): applied. "Van de studenten die de bol-opleiding afrondden, ging 50% daarna naar het hbo." (kmSd shows "Doorstroom naar hbo 50%" under bol only.) Teacher detail: "bij bbl toont KiesMBO geen doorstroom".
