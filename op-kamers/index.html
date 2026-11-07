@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-Nu6Jtu/4iu7wDnCsAe6fl6Koz9kfTbn25Df8mVhXaxM='; style-src 'sha256-vfSeu+iSav4TMk3Qq0tw0q9TU8CRIXpH+rAOg3Z5gRw='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-g5jusCbj+V/bOjVkCsNOO/JbQpUrkBJQMeUYLrFW72g='; style-src 'sha256-Aq3LXF2VY5C62/IO+d6xO6q2TMQ7o03lrfQtnKJ1ZBk='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Een kamer huren: een nepadvertentie herkennen, je huurcontract lezen, je inschrijven bij de gemeente en nagaan of je huurtoeslag krijgt.">
 <meta name="e18-title" content="Op kamers">
@@ -162,6 +162,7 @@ label.opt:has(input:checked){border-color:var(--teal);background:var(--teal-soft
 .esc-web-price{font:800 clamp(26px,3vw,34px)/1 var(--display);font-stretch:110%;color:var(--teal)}
 .esc-web dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0}
 .esc-web dl div{display:contents}
+@supports (grid-template-columns:subgrid){.esc-web dl div{display:grid;grid-column:1/-1;grid-template-columns:subgrid}}  /* a box of its own, so a pointed fact can be focused and marked */
 .esc-web dt,.esc-web dd{padding:5px 4px;border-bottom:1px dashed var(--line);margin:0}
 .esc-web dt{color:var(--muted);padding-right:14px}
 .esc-web dd{font-weight:700}
@@ -299,9 +300,12 @@ footer.foot{border-top:1px solid var(--line);padding-top:14px;color:var(--muted)
 .paper .box{display:inline-block;min-width:3.5em;border-bottom:1.5px solid #000;margin-left:6px}
 @media print{
   @page{size:A4;margin:14mm}
-  body.print-paper .wrap>*:not(.paper):not(.paper-key){display:none!important}
+  /* S5 (G4): two separate prints. Pupil pages never carry the answer pages or the lock code. */
+  body.print-paper .wrap>*:not(.paper){display:none!important}
   body.print-paper .paper{display:block!important;font-size:11.5pt}
-  body.print-paper .paper-key{display:block!important;font-size:11pt;break-before:page}
+  body.print-paper-key .wrap>*:not(.paper-key){display:none!important}
+  body.print-paper-key .paper-key{display:block!important;font-size:11pt}
+  .paper .lockp{break-inside:avoid;margin-top:14pt;padding-top:8pt;border-top:1.5px solid #000}
   .paper-key table{border-collapse:collapse;width:100%}.paper-key td{border-bottom:1px solid #999;padding:4pt;vertical-align:top}
   .paper-key h1{font-size:18pt}.paper-key h2{font-size:13pt;margin:10pt 0 4pt;break-after:avoid}.paper-key table{break-inside:avoid}
   .paper h1,.paper h2{break-after:avoid}.paper img,.paper table{max-width:100%}
@@ -398,13 +402,148 @@ details.esc-recap dd{margin:0;font-weight:700;overflow-wrap:anywhere}
 
 .opts-hint{margin:0 0 8px;font-size:12px;line-height:1.4;color:var(--muted)}
 .esc-slip dd.dd-prose{font:400 16px/1.55 var(--body);font-variant-numeric:normal;text-align:left;flex:1 1 100%}.esc-slip .row-prose dt{flex:1 1 100%;font-weight:600}
+/* Plan slip: pupil end-screen card and the teacher's print-only slips (one A4, cut lines between the slips) */
+.slip-card .slip-fields{display:flex;flex-direction:column;gap:12px}
+.slip-card .slip-note{border-left:4px solid var(--teal);padding-left:12px}
+.slip-hint{font-weight:400;color:var(--muted)}
+.slips{display:none}
+@media print{
+  body.print-slips .wrap{padding:0;margin:0;max-width:none;display:block}
+  body.print-slips .wrap>*:not(.slips){display:none!important}
+  body.print-slips .slips{display:grid!important;height:266mm;width:100%;break-inside:avoid;font-size:12pt;line-height:1.3;color:#000;background:#fff}
+  .slips-n1{grid-template-rows:1fr}.slips-n2{grid-template-rows:repeat(2,1fr)}.slips-n3{grid-template-rows:repeat(3,1fr)}.slips-n4{grid-template-rows:repeat(4,1fr)}
+  .slip-cell{box-sizing:border-box;padding:5mm 6mm 4mm;min-height:0;display:block}
+  .slip-cell:not(:last-child){border-bottom:.4mm dashed #444}
+  .slip-h{font:700 16pt/1.2 var(--body);margin:0}
+  .slip-i{margin:1.5mm 0 0;font-size:11pt}
+  .slip-f{margin-top:3.2mm}
+  .slip-r{display:flex;align-items:flex-end;gap:0 2.5mm;min-height:10.5mm}
+  .slip-l{flex:0 1 auto;line-height:1.25;padding-bottom:.8mm}
+  .slip-hint{font-size:11pt;font-weight:400;color:#222}
+  .slip-w{flex:1 1 30mm;min-width:30mm;border-bottom:.3mm solid #000;height:10.5mm}
+  .slip-hb{margin:1.2mm 0 0;line-height:1.25}
+  .slip-x{display:block;border-bottom:.3mm solid #000;height:10.5mm}
+  .slip-foot{margin:4mm 0 0;font-size:11pt;line-height:1.3;color:#222}
+}
+/* Teacher extras: audience lines, closed per-room detail, question and answer block */
+.t-aud{border-left:4px solid var(--teal);padding:2px 0 2px 14px;margin:0 0 14px}.t-aud p{margin:4px 0}
+.t-detail{margin:8px 0}.t-detail summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}.t-detail p{margin:6px 0}
+.t-faq{display:flex;flex-direction:column;gap:12px;margin:0}.t-faq dt{font-weight:700}.t-faq dd{margin:2px 0 0}
+@media print{.t-detail,.t-aud{display:none}}
+/* Paper version: a wide document table wraps inside the page instead of running off the edge */
+@media print{.paper .esc-grid{min-width:0;font-size:9.5pt}.paper .esc-grid th,.paper .esc-grid td{white-space:normal;padding:3pt 5pt 3pt 2pt}.paper .esc-grid thead th{font-size:8.5pt}}
+
+/* ===== v3 (7 Nov 2026): Klasresultaten, teacher kit, projection mode, confidence and wish taps, wide tables ===== */
+/* S7 (G4): document tables wrap; a table with 4 or more columns becomes one block per row in a narrow box, so every column stays visible */
+.esc-grid{min-width:0}
+.esc-grid th,.esc-grid td{white-space:normal;overflow-wrap:break-word}
+.esc-tscroll{container-type:inline-size}
+@container (max-width:620px){
+  .esc-grid.wide thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .esc-grid.wide,.esc-grid.wide tbody,.esc-grid.wide tr,.esc-grid.wide th,.esc-grid.wide td{display:block;width:auto}
+  .esc-grid.wide tr{border-bottom:1px solid var(--line);padding:6px 2px}
+  .esc-grid.wide tbody th{border:0;padding:2px 4px 4px;font-size:1.02em}
+  .esc-grid.wide td{border:0;padding:1px 4px;display:grid;grid-template-columns:minmax(6.5em,38%) minmax(0,1fr);gap:2px 10px}
+  .esc-grid.wide td::before{content:attr(data-h);font:600 12.5px/1.5 var(--mono);color:var(--muted)}
+}
+@container (max-width:780px){
+  .esc-grid.wide.c5 thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .esc-grid.wide.c5,.esc-grid.wide.c5 tbody,.esc-grid.wide.c5 tr,.esc-grid.wide.c5 th,.esc-grid.wide.c5 td{display:block;width:auto}
+  .esc-grid.wide.c5 tr{border-bottom:1px solid var(--line);padding:6px 2px}
+  .esc-grid.wide.c5 tbody th{border:0;padding:2px 4px 4px;font-size:1.02em}
+  .esc-grid.wide.c5 td{border:0;padding:1px 4px;display:grid;grid-template-columns:minmax(6.5em,38%) minmax(0,1fr);gap:2px 10px}
+  .esc-grid.wide.c5 td::before{content:attr(data-h);font:600 12.5px/1.5 var(--mono);color:var(--muted)}
+}
+@media print{.esc-tscroll{container-type:normal}}
+/* end check: optional confidence; end screen: optional topic wish */
+fieldset.conf{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+fieldset.conf legend{font-weight:700;font-size:15px}
+fieldset.conf legend small,fieldset.wish legend small{font-weight:400;color:var(--muted)}
+.conf-opts{display:flex;flex-wrap:wrap;gap:8px}
+label.opt.conf-opt{min-height:44px;padding:6px 12px;font-size:15px}
+fieldset.wish{margin-top:12px}
+.wish-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px}
+.tap.wish-tap{font:700 15px/1.25 var(--body);text-align:left;padding:8px 12px}
+.tap[aria-pressed="true"]{background:var(--teal);color:var(--teal-ink);border-color:var(--teal)}
+/* N4 (G4): the teacher timer at 00:00 */
+.t-timer.over{box-shadow:inset 0 0 0 6px var(--sun)}
+.t-over{margin:0;align-self:flex-start;background:var(--sun);color:var(--sun-ink);font:800 clamp(18px,1.8vw,24px)/1.2 var(--display);padding:8px 14px;border-radius:10px}
+/* Klasresultaten */
+.t-res{border:3px solid var(--teal)}
+#tres-body{display:flex;flex-direction:column;gap:14px}
+.t-res-lead{font:700 clamp(18px,1.7vw,23px)/1.3 var(--body);margin:0}
+.t-res .t-room p{margin:0}
+.t-resno{margin:0}
+.t-dev{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+/* Klaar in 15 minuten */
+.qs-top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.qs-top>div:first-child{flex:1 1 320px;min-width:0}
+.qs-clock{flex:0 0 auto;background:var(--sunk);border-radius:14px;padding:10px 14px;display:flex;flex-direction:column;gap:6px}
+.qs-time{font:600 40px/1 var(--mono);font-variant-numeric:tabular-nums;margin:0}
+.qs-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.qs-steps li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.qs-steps li.done{background:var(--ok-soft);border-color:var(--ok)}
+.qs-steps input[type=checkbox]{width:24px;height:24px;margin-top:4px;accent-color:var(--teal)}
+.qs-steps label{font-weight:700;cursor:pointer}.qs-steps label .t-k{display:inline;margin-right:6px}
+.qs-steps p{margin:4px 0 6px;font-size:.92em}
+/* Probleem? */
+.t-pbs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+details.t-pb{border:1px solid var(--line);border-left:6px solid var(--sun);border-radius:12px;padding:6px 14px;background:var(--panel)}
+details.t-pb summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}
+details.t-pb p{margin:6px 0}
+/* Lesverslag */
+.t-vs fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.t-vs legend{font-weight:700;margin-bottom:6px}.t-vs legend small,.t-vs .field small{font-weight:400;color:var(--muted)}
+.t-vs .t-two{align-items:end}
+.vs-in{display:flex;flex-direction:column;gap:12px;max-width:820px}
+.vs-out{border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--sunk);max-width:820px}
+.vs-text p{margin:2px 0}.vs-text h3{font:800 18px/1.25 var(--display);margin:0 0 6px}
+.vs-out ul.err{margin:0 0 8px;padding-left:18px}
+@media print{
+  body.print-verslag .wrap>*:not(.t-view){display:none!important}
+  body.print-verslag .t-view>*:not(#tvs){display:none!important}
+  body.print-verslag #tvs>*:not(.vs-out){display:none!important}
+  body.print-verslag #tvs{border:0;padding:0}
+  body.print-verslag .vs-out{border:0;background:none;padding:0;font-size:12pt;max-width:none}
+  body.print-verslag .vs-out ul.err{display:none}
+}
+/* Projectiemodus: one board screen; fits 1280x720 and 1366x768 without scrolling, larger on 1920x1080 */
+body[data-view="proj"] .wrap{max-width:none;padding-block:12px 12px;gap:10px}
+.p-view{display:flex;flex-direction:column;gap:12px;min-height:calc(100vh - 24px)}
+.p-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.p-h1{font:800 clamp(24px,2.6vw,44px)/1.05 var(--display);font-stretch:110%;margin:0}
+.p-main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.95fr) minmax(0,1fr);gap:14px;align-items:stretch;flex:1}
+.p-timer{border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;justify-content:flex-start}
+.p-timer .t-clock{font-size:clamp(84px,min(11vw,22vh),220px)}
+.p-stop{color:var(--ink);padding:10px 14px}.p-stop h2{font:800 22px/1.1 var(--display)}.p-stop .t-steps li{font-size:clamp(16px,1.5vw,24px)}
+.p-join{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;min-width:0}
+.p-qr svg{display:block;width:clamp(150px,min(17vw,34vh),330px);height:auto;border-radius:8px;forced-color-adjust:none}
+.p-code p{margin:0}.p-codev{font:700 clamp(40px,4.6vw,80px)/1 var(--mono);letter-spacing:.14em;color:var(--teal)}
+.p-go{font-size:clamp(16px,1.4vw,24px);overflow-wrap:anywhere}.p-go b{font-family:var(--mono)}
+.p-wait{font:700 20px/1.35 var(--body)}
+.p-side{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.p-rules{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font:700 clamp(16px,1.4vw,24px)/1.3 var(--body)}
+.p-rh{font:800 clamp(16px,1.3vw,22px)/1.1 var(--display);margin:4px 0 0}
+.p-rooms{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.p-rooms li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:clamp(15px,1.25vw,21px)}
+.p-rooms li.now{background:var(--sun);color:var(--sun-ink);border-color:var(--sun);font-weight:700}
+.p-rooms li.past{opacity:.6}
+.p-rn{width:1.7em;height:1.7em;border-radius:50%;background:var(--teal);color:var(--teal-ink);display:grid;place-items:center;font:800 .9em/1 var(--display)}
+.p-ru{font:600 .9em/1.2 var(--mono)}
+.p-prob{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px}
+.p-note{font-size:14px;color:var(--muted);margin:0}
+@media (max-width:1100px){.p-main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.p-side{grid-column:1/-1}}
+@media (max-width:700px){.p-main{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .p-timer{background:var(--panel);color:var(--ink);border:2px solid var(--line)}}
+:root[data-theme="dark"] .p-timer{background:var(--panel);color:var(--ink);border:2px solid var(--line)}
+@media print{.t-res,.t-resno,.qs,.t-prob,.t-dev{display:none!important}}
 </style>
 <script src="../config.js"></script>
 </head>
 <body>
 <main id="app" class="wrap"></main>
 <noscript><p class="wrap">Deze les werkt alleen met JavaScript aan.</p></noscript>
-<script>window.E18_BUILD={"version":"op-kamers-20261107-ff978cc"};
+<script>window.E18_BUILD={"version":"op-kamers-20261107-a252019"};
 window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer huren: een nepadvertentie herkennen, je huurcontract lezen, je inschrijven bij de gemeente en nagaan of je huurtoeslag krijgt.","fictional":"Alles is verzonnen: de mensen, bedrijven, adressen, bedragen, berichten en contracten. De regels zijn echt; bij elke uitleg staat de bron.","minutes":30,"variant":"basis","checked":"2026-11-06","validUntil":"2026-12-31","check":{"A":[{"id":"C1","prompt":"Een verhuurder zit in het buitenland. Je kunt de kamer niet bekijken. Hij wil eerst de borg. Wat doe je?","options":[["a","Snel betalen, dan ben je de eerste"],["b","De helft betalen als garantie"],["c","Niets betalen voordat je de kamer hebt bekeken en gecheckt"]],"correct":"c"},{"id":"C2","prompt":"De kale huur is € 400. De servicekosten zijn € 60. Hoeveel borg mag de verhuurder hoogstens vragen?","options":[["a","€ 800"],["b","€ 920"],["c","€ 1.200"]],"correct":"a"},{"id":"C3","prompt":"Je verhuist op 10 september. Uiterlijk wanneer geef je dat door aan je nieuwe gemeente?","options":[["a","10 september"],["b","15 september"],["c","10 oktober"]],"correct":"b"},{"id":"C4","prompt":"Je huurt een kamer en deelt keuken en wc met huisgenoten. Krijg je dan meestal huurtoeslag?","options":[["a","Ja, vanaf 18 jaar altijd"],["b","Nee, meestal niet"],["c","Ja, als je student bent"]],"correct":"b"}],"B":[{"id":"B1","prompt":"Een verhuurder heeft geen tijd om de kamer te laten zien. Je moet eerst de huur van de eerste maand overmaken. Wat doe je?","options":[["a","De huur overmaken, want dat is minder dan de borg"],["b","Niets betalen voordat je de kamer hebt bekeken en gecheckt"],["c","Eerst betalen en daarna om foto's vragen"]],"correct":"b"},{"id":"B2","prompt":"De kale huur is € 350. De servicekosten zijn € 70. Hoeveel borg mag de verhuurder hoogstens vragen?","options":[["a","€ 840"],["b","€ 1.050"],["c","€ 700"]],"correct":"c"},{"id":"B3","prompt":"Je verhuist op 3 oktober. Uiterlijk wanneer geef je dat door aan je nieuwe gemeente?","options":[["a","8 oktober"],["b","3 oktober"],["c","3 november"]],"correct":"a"},{"id":"B4","prompt":"Je huurt een kamer met een eigen keuken. De wc en de douche deel je met huisgenoten. Krijg je dan meestal huurtoeslag?","options":[["a","Ja, want je hebt een eigen keuken"],["b","Ja, want je betaalt zelf huur"],["c","Nee, meestal niet: je deelt de wc en douche"]],"correct":"c"}]},"rooms":[{"id":"advertentie","title":"De advertentie","where":"maandag 14 juni 2027","intro":"Je bent inmiddels 18 jaar. Je zoekt een kamer in Zeestad voor september. Op KamerVinder Zeestad zie je een leuke kamer. Je stuurt de verhuurder een bericht.","docs":{"advert":{"type":"listing","site":"KamerVinder Zeestad","title":"KamerVinder Zeestad: Kamer Havenstraat 12","lines":[["a1","Kamer van 14 m² in Zeestad-Centrum"],["a2","Huur: € 495 per maand, inclusief servicekosten"],["a3","Vrij vanaf 1 september 2027"],["a4","Gedeelde keuken en badkamer met 3 studenten"],["a5","Verhuurder: Mark"]],"note":"De site, het adres en de verhuurder zijn verzonnen.","plain":"Borg: geld dat je vooraf betaalt. Zo heeft de verhuurder zekerheid. Als je weggaat, krijg je het terug. Heb je schade gemaakt of nog niet alles betaald? Dan mag de verhuurder dat eraf halen. Servicekosten: kosten voor extra's, zoals energie en internet."},"chat":{"type":"chat","name":"Mark (verhuurder)","messages":[["z1","them","Hoi! Leuk dat je de kamer wilt.","20:14"],["z2","them","Ik woon nu in Spanje voor mijn werk."],["z3","them","Bekijken kan dus helaas niet. De foto's zijn nieuw."],["z4","them","Maak eerst de borg van € 990 over. Dan stuur ik je de sleutel per post."],["z5","them","Rekening: ES00 0000 0000 0000 0000 0000, op naam van M. Jansen."]],"note":"Het rekeningnummer is verzonnen en bestaat niet."}},"questions":[{"id":"signalen","short":"Signalen van oplichting","type":"multi","docs":["advert","chat"],"prompt":"Welke signalen van oplichting zie je in de advertentie en het gesprek?","legend":"Tik alle signalen aan.","options":[["b","De advertentie noemt een adres"],["d","Je moet al betalen voordat je iets hebt gecheckt"],["a","Mark antwoordt snel en vriendelijk"],["c","Je kunt de kamer niet eerst bekijken"]],"correct":["c","d"],"pointTo":{"doc":"chat","lines":["z3","z4"]},"retry":"Lees bericht 3 en 4 van Mark nog eens. Wat kan niet, en wat moet je wel?","hint":"Een vriendelijk bericht of een adres bewijst niets.","explain":"Niet kunnen kijken en eerst moeten betalen zijn signalen. Een adres of een vriendelijke toon bewijst niets.","sources":["fhdHuur","omHuur"]},{"id":"betalen","short":"Wat doe je nu","type":"single","docs":["chat"],"prompt":"Wat doe je nu?","options":[["b","De helft van de borg overmaken, als garantie"],["c","Niets betalen voordat je de kamer hebt bekeken en gecheckt"],["a","Snel de borg betalen, voordat een ander de kamer krijgt"]],"correct":"c","pointTo":{"doc":"chat","line":"z3"},"retry":"Ook een deel van het geld ben je kwijt als het nep is.","hint":"Eerst kijken, dan pas betalen.","explain":"Betaal niets voordat je de kamer hebt gezien en gecheckt. Kun je niet kijken? Dan huur je hem niet.","sources":["fhdHuur","omHuur"]},{"id":"melden","short":"Advies aan Daan","type":"single","docs":[],"situ":"Je vriend Daan maakte vorige week € 990 over aan een verhuurder die hij nooit zag. Nu antwoordt die niet meer.","prompt":"Wat raad je Daan aan?","options":[["c","Het melden bij zijn bank en aangifte doen bij de politie"],["a","Nog een week wachten, misschien komt de sleutel nog"],["b","Nog € 50 betalen, want de verhuurder vraagt om verzendkosten"]],"correct":"c","pointTo":{"situ":"Nu antwoordt die niet meer."},"retry":"Daan is zijn geld kwijt. Wie beheert zijn rekening? En wie zoekt oplichters?","hint":"Denk aan de bank en de politie.","explain":"Ben je opgelicht? Meld het bij je bank en doe aangifte bij de politie. Hulp en tips krijg je bij de Fraudehelpdesk. Betaal nooit nog meer.","sources":["fhdSlachtoffer","politieOplichting","fhdHuur"]}],"clue":"Het 1e cijfer van het slot: Mark vraagt € 990 borg. De huur is € 495 per maand. Voor hoeveel maanden huur is die borg?","clueFull":true,"digit":"2","remember":"Kun je de kamer niet bekijken, of moet je eerst betalen? Betaal dan niets.","teacherNote":"Betaal niets voor een kamer die je niet hebt gezien. Moet je naar een buitenlandse rekening betalen? Ook dat is een signaal, maar geen bewijs (Fraudehelpdesk). Opgelicht? Meld het bij je bank en doe aangifte bij de politie. De Fraudehelpdesk geeft hulp en tips."},{"id":"huurcontract","title":"Het huurcontract","where":"donderdag 1 juli 2027","intro":"Je hebt een echte kamer gevonden en bekeken. Woonhuis Zeestad stuurt je het huurcontract. Lees het voordat je tekent.","docs":{"contract":{"type":"letter","kind":"Huurcontract","from":"Woonhuis Zeestad BV","place":"Zeestad, 1 juli 2027","greeting":"Huurovereenkomst kamer","lines":[["c1","Huurder: jij. Verhuurder: Woonhuis Zeestad BV."],["c2","Adres: Lindelaan 8, kamer 3, Zeestad."],["c3","Ingangsdatum: 28 augustus 2027."],["c4","Kale huur: € 410 per maand."],["c5","Servicekosten (energie, water en internet): € 85 per maand."],["c6","Borg: € 1.230, te betalen bij het tekenen."]],"note":"Dit is een stukje uit een huurcontract. Een echt contract is langer.","plain":"Kale huur: de huur voor de kamer zelf, zonder extra's. Servicekosten: kosten voor extra's, zoals energie en internet. Borg: geld dat je vooraf betaalt. Zo heeft de verhuurder zekerheid. Als je weggaat, krijg je het terug. Heb je schade gemaakt of nog niet alles betaald? Dan mag de verhuurder dat eraf halen."}},"rules":{"lines":[["r1","de borg is hoogstens 2 keer de kale huur. Dat geldt voor contracten vanaf 1 juli 2023."],["r2","haalt de verhuurder niets van de borg af? Dan krijg je hem binnen 14 dagen terug. Is er schade, of heb je nog niet alles betaald? Dan mag hij die kosten eraf halen. Je krijgt de rest dan binnen 30 dagen. Hij moet schriftelijk uitleggen welke kosten eraf gaan."]]},"questions":[{"id":"totaal","short":"Totaal per maand","type":"number","unit":"€","docs":["contract"],"prompt":"Hoeveel betaal je elke maand in totaal?","correct":495,"pointTo":{"doc":"contract","lines":["c4","c5"]},"retry":"Je betaalt de kale huur en de servicekosten. Tel ze op.","hint":"Reken € 410 + € 85.","explain":"Je betaalt kale huur plus servicekosten: € 410 + € 85 = € 495 per maand.","sourceNone":"Dit haal je uit het contract zelf. Er is geen regel voor nodig."},{"id":"borg","short":"Hoogste borg","type":"number","unit":"€","docs":["contract"],"prompt":"Hoeveel borg mag Woonhuis Zeestad hoogstens vragen?","correct":820,"pointTo":[{"doc":"contract","line":"c4"},{"rule":"r1"}],"retry":"Lees regel 1. Tellen de servicekosten mee?","hint":"Gebruik alleen de kale huur.","explain":"De borg is hoogstens 2 keer de kale huur. 2 × € 410 = € 820. Dus € 1.230 is te veel.","sources":["roBorg","vhnBorg","wgv261b"]},{"id":"terug","short":"Borg terug","type":"single","docs":["contract"],"situ":"Na een jaar ga je weg. Je kamer is zonder schade. Je hebt alle huur en servicekosten betaald. De verhuurder haalt dus niets van je borg af.","prompt":"Wanneer moet je borg uiterlijk terug zijn?","options":[["a","Binnen 3 maanden na het einde van de huur"],["b","Als de nieuwe huurder zijn borg heeft betaald"],["d","Binnen 14 dagen na het einde van de huur"],["c","Binnen 30 dagen, want zo lang mag de verhuurder altijd wachten"]],"correct":"d","pointTo":{"rule":"r2"},"retry":"Lees regel 2. Haalt de verhuurder iets van je borg af?","hint":"Er gaat niets af. Dan geldt de kortste termijn.","explain":"Gaat er niets van de borg af? Dan krijg je hem binnen 14 dagen terug. Is er schade, of heb je nog niet alles betaald? Dan mag de verhuurder die kosten eraf halen. Je krijgt de rest dan binnen 30 dagen.","sources":["roBorg","vhnBorg","wgv261b"]}],"clue":"Het 2e cijfer van het slot: Woonhuis Zeestad mag hoogstens € 820 borg vragen. Welk cijfer staat vooraan in 820?","clueFull":true,"digit":"8","remember":"Lees je contract: kale huur en servicekosten staan apart. De borg is hoogstens 2 maanden kale huur.","teacherNote":"Borg is hoogstens 2 maanden kale huur bij een contract vanaf 1 juli 2023 (daarvoor 3 maanden). Terug binnen 14 dagen, of binnen 30 dagen als er kosten af gaan. Alleen achterstallige huur, servicekosten, schade en energieprestatievergoeding mogen eraf. Haalt de verhuurder iets af? Dan moet hij dat schriftelijk melden, met alle kosten op een rij. Dit geldt ook voor een kamer. Het contract in de les is een kort stukje. Sinds 1 januari 2025 moet de verhuurder bij een nieuw contract ook laten weten hoeveel punten de kamer heeft. De Huurprijscheck van de Huurcommissie rekent dat uit (Volkshuisvesting Nederland)."},{"id":"gemeente","title":"Inschrijven bij de gemeente","where":"zaterdag 28 augustus 2027","intro":"Je hebt getekend, met de juiste borg van € 820. Vandaag verhuis je van het huis van je ouders in Dorpsveen naar Zeestad.","docs":{"planning":{"type":"table","title":"Mijn planning, augustus en september 2027","rows":[["r1","za 28 aug","verhuizen naar Lindelaan 8, kamer 3, Zeestad"],["r2","ma 30 aug","introductieweek begint"],["r3","wo 1 sep","eerste collegedag"],["r4","nog doen","adres doorgeven"]],"note":"Dorpsveen en Zeestad zijn verzonnen gemeenten.","plain":"BRP: de lijst van de gemeente met wie waar woont. Uiterlijk: op zijn laatst."}},"rules":{"lines":[["r1","je mag je verhuizing doorgeven vanaf 4 weken voor je verhuisdag. Je moet het uiterlijk 5 dagen na je verhuisdag doorgeven."]]},"questions":[{"id":"gemeente","short":"Bij wie doorgeven","type":"single","docs":["planning"],"prompt":"Bij wie geef je je verhuizing door?","options":[["b","Bij Woonhuis Zeestad, je verhuurder"],["d","Bij de gemeente Zeestad, waar je gaat wonen"],["a","Bij DUO"],["c","Bij de gemeente Dorpsveen, waar je vandaan komt"]],"correct":"d","pointTo":{"doc":"planning","line":"r1"},"retry":"Je geeft het door aan één gemeente. Waar woon je straks?","hint":"Het is een gemeente.","explain":"Je geeft je verhuizing door aan de gemeente waar je gaat wonen. Online kan dat met DigiD.","sources":["roVerhuis","rdamVerhuis"]},{"id":"datum","short":"Uiterlijk","type":"single","docs":["planning"],"prompt":"Uiterlijk wanneer geef je je verhuizing door?","options":[["d","Op 2 september 2027"],["b","Op 1 oktober 2027"],["a","Op 28 augustus 2027, de dag zelf"],["c","Je hoeft niets te doen: je verhuurder regelt het"]],"correct":"d","pointTo":[{"doc":"planning","line":"r1"},{"rule":"r1"}],"retry":"Lees de regel. Tel 5 dagen verder vanaf 28 augustus.","hint":"Augustus heeft 31 dagen.","explain":"Geef je verhuizing door vanaf 4 weken ervoor tot uiterlijk 5 dagen erna. Te laat? Dan kan de gemeente een boete geven.","sources":["roVerhuis","roVerhuisProduct","rdamVerhuis"]},{"id":"duo","short":"Basisbeurs Sem","type":"single","docs":[],"situ":"Je huisgenoot Sem krijgt een basisbeurs van DUO. Dat is geld voor studenten. Uitwonend krijg je meer dan thuiswonend. Regel: uitwonend ben je als je bij de gemeente op een ander adres staat dan je ouders. Je moet daar ook echt wonen. Er zijn een paar uitzonderingen, maar die gelden niet voor Sem. Sem woont echt op kamers. Maar bij de gemeente staat hij nog op het adres van zijn ouders.","prompt":"Welke basisbeurs krijgt Sem nu van DUO?","options":[["c","Thuiswonend, want hij staat bij zijn ouders ingeschreven"],["b","Geen basisbeurs, want zijn adres klopt niet"],["a","Uitwonend, want hij woont echt op kamers"]],"correct":"c","pointTo":{"situ":"bij de gemeente staat hij nog op het adres van zijn ouders"},"retry":"Lees de regel nog eens. Op welk adres staat Sem bij de gemeente?","hint":"Twee dingen moeten kloppen: je adres bij de gemeente en waar je echt woont.","explain":"Sem staat bij de gemeente nog bij zijn ouders. Dus krijgt hij de basisbeurs voor thuiswonend. Hij moet zijn verhuizing doorgeven aan de gemeente Zeestad. In Mijn DUO zet hij dan zelf dat hij uitwonend is.","sources":["duoUitwonend","wsf15","duoBedragen"]}],"clue":"Het 3e cijfer van het slot: je verhuist op 28 augustus. Je hebt 5 dagen om het door te geven. Welke dag in september is je laatste dag?","clueFull":true,"digit":"2","remember":"Verhuisd? Geef het binnen 5 dagen door aan je nieuwe gemeente. DUO kijkt naar dat adres.","teacherNote":"Verhuizing doorgeven aan de nieuwe gemeente, vanaf 4 weken ervoor tot 5 dagen erna. Boete tot € 325 (Rijksoverheid). DUO krijgt het adres van de gemeente; de woonsituatie zet je zelf in Mijn DUO (DUO)."},{"id":"huurtoeslag","title":"Huurtoeslag?","where":"maandag 13 september 2027","intro":"Je woont twee weken op kamers. Je vriendin Noor stuurt je een appje.","docs":{"app":{"type":"chat","name":"Noor","messages":[["n1","them","Ik krijg huurtoeslag voor mijn studio!","18:02"],["n2","them","Ik heb een eigen deur met slot, keuken, wc en douche."],["n3","them","Vraag jij het ook aan voor je kamer?"]]},"kamer":{"type":"listing","kind":"Je kamer","site":"uit je contract","title":"Lindelaan 8, kamer 3 (uit je contract)","lines":[["k1","Eigen kamer met slot"],["k2","Keuken: samen met 4 huisgenoten"],["k3","Wc en douche: samen met 4 huisgenoten"],["k4","Aangewezen voor huurtoeslag (voor 1 juli 1997): nee"]],"plain":"Huurtoeslag: geld van de overheid als hulp bij je huur. Je vraagt het aan bij Dienst Toeslagen. Zelfstandige woning: een woning met alles voor jou alleen. Aangewezen: de overheid heeft voor 1 juli 1997 officieel besloten dat een kamer toch meetelt. Voor zo'n kamer kun je soms huurtoeslag krijgen."}},"questions":[{"id":"kamer","short":"Huurtoeslag kamer 3","type":"single","docs":["kamer"],"prompt":"Kun jij huurtoeslag krijgen voor kamer 3?","options":[["a","Ja, want je bent 18 en je betaalt huur"],["c","Nee, want je deelt de keuken, wc en douche"],["d","Ja, want je kamer heeft een eigen slot"],["b","Ja, want Noor krijgt het ook"]],"correct":"c","pointTo":{"doc":"kamer","lines":["k2","k3"]},"retry":"Kijk wat je deelt met je huisgenoten. Wat heeft Noor wel?","hint":"Huurtoeslag is er meestal alleen voor een zelfstandige woning.","explain":"Huurtoeslag krijg je meestal alleen voor een zelfstandige woning. Deel je keuken, wc of douche? Dan is het geen zelfstandige woning. Je kamer is ook niet aangewezen. Daarom krijg je geen huurtoeslag.","sources":["bdWoningen","bdStudent"]},{"id":"zelfstandig","short":"Zelfstandige woning","type":"multi","docs":["app"],"prompt":"Wat heeft een zelfstandige woning in ieder geval voor jou alleen?","legend":"Tik alles aan wat erbij hoort.","options":[["d","Een keuken"],["a","Een tuin of balkon"],["f","Een douche of bad"],["c","Een eigen deur naar je woning, die op slot kan"],["b","Een woonkamer van minstens 20 m²"],["e","Een wc"]],"correct":["c","d","e","f"],"pointTo":{"doc":"app","line":"n2"},"retry":"Noor noemt precies wat ze heeft. Een tuin of een grote kamer is niet nodig.","hint":"Het zijn er vier. Lees het appje van Noor.","explain":"Een zelfstandige woning heeft voor jou alleen: een deur die je van binnen en buiten op slot kunt doen, een keuken, een wc en een douche of bad. De douche telt sinds 1 maart 2024. Ook een eigen woon- of slaapkamer hoort erbij. Die heeft elke kamer al.","sources":["bdWoningen","bdKan"]},{"id":"uitzondering","short":"Uitzondering","type":"single","docs":["kamer"],"prompt":"Je deelt de keuken, wc en douche. Wanneer kun je voor zo'n kamer soms toch huurtoeslag krijgen?","options":[["b","Als je jonger bent dan 21"],["c","Als de kamer voor 1 juli 1997 is aangewezen voor huurtoeslag"],["a","Als je kale huur lager is dan € 500"]],"correct":"c","pointTo":{"doc":"kamer","line":"k4"},"retry":"Kijk naar de laatste regel over je kamer. Welk jaar staat daar?","hint":"Lees wat 'aangewezen' betekent.","explain":"Is je kamer voor 1 juli 1997 aangewezen? Dan kun je soms toch huurtoeslag krijgen. Je moet dan ook aan de andere voorwaarden voldoen. Vraag het na bij je verhuurder.","sources":["bdStudent","bdWoningen","hsb1997"]}],"clue":"Het 4e cijfer van het slot: hoeveel dingen heeft Noor voor zichzelf alleen? Een deur met slot telt als één ding. Ze schrijft: 'Ik heb een eigen deur met slot, keuken, wc en douche.'","clueFull":true,"digit":"4","remember":"Huurtoeslag is er meestal alleen voor een zelfstandige woning. Een kamer met gedeelde keuken of wc telt meestal niet.","teacherNote":"Huurtoeslag meestal alleen voor een zelfstandige woning. Een gedeelde voordeur, gang of trap van het gebouw mag; de woning zelf moet alles eigen hebben (Belastingdienst). Uitzondering voor kamers: aangewezen voor 1 juli 1997. Sinds 2026: geen huurgrens meer, jongerengrens 21 jaar, servicekosten tellen niet meer mee. Deze wijzigingen gelden sinds 1 januari 2026. De bedragen voor de berekening gelden alleen voor 2026. Kijk voor 2027 bij Dienst Toeslagen wat dan geldt."}],"debrief":["Zoek jij straks een kamer? Waar zou je zoeken, en hoe check je of de verhuurder echt is?","Waarom betalen mensen toch voor een kamer die ze niet zagen? Wat zou jij doen als je echt geen kamer vindt?","Wat moet je allemaal regelen als je verhuist? Wat regel je zelf, en wat laat je nu nog aan je ouders over?"],"plan":{"intro":"Maak je eigen als-dan-plan en zeg het tegen je buur. Kies een situatie en een actie. Zet een herinnering in je telefoon.","when":["ik een kamer vind die ik wil huren","ik een huurcontract krijg","ik verhuisd ben"],"then":["bekijk ik de kamer eerst en betaal ik pas als ik alles heb gecheckt","reken ik na of de borg niet hoger is dan 2 keer de kale huur","geef ik mijn adres binnen 5 dagen door aan mijn nieuwe gemeente"]},"teacher":{"answers":{"format":"text","head":["Kamer","Vraag","Goed antwoord"],"rows":[["1","Signalen van oplichting","Je kunt de kamer niet eerst bekijken; Je moet al betalen voordat je iets hebt gecheckt"],["1","Wat doe je nu","Niets betalen voordat je de kamer hebt bekeken en gecheckt"],["1","Advies aan Daan","Het melden bij zijn bank en aangifte doen bij de politie"],["1","**Cijfer**","**2** (€ 990 is 2 × € 495)"],["2","Totaal per maand","€ 495"],["2","Hoogste borg","€ 820"],["2","Borg terug","Binnen 14 dagen na het einde van de huur"],["2","**Cijfer**","**8** (vooraan in 820)"],["3","Bij wie doorgeven","Bij de gemeente Zeestad, waar je gaat wonen"],["3","Uiterlijk","Op 2 september 2027"],["3","Basisbeurs Sem","Thuiswonend, want hij staat bij zijn ouders ingeschreven"],["3","**Cijfer**","**2** (2 september)"],["4","Huurtoeslag kamer 3","Nee, want je deelt de keuken, wc en douche"],["4","Zelfstandige woning","Een eigen deur naar je woning, die op slot kan; Een keuken; Een wc; Een douche of bad"],["4","Uitzondering","Als de kamer voor 1 juli 1997 is aangewezen voor huurtoeslag"],["4","**Cijfer**","**4** (deur, keuken, wc, douche)"],["","**Code**","**2824**"]],"after":"Start- en eindcheck vorm A: C1 Niets betalen voordat je de kamer hebt bekeken en gecheckt; C2 € 800; C3 15 september; C4 Nee, meestal niet. Vorm B: B1 Niets betalen voordat je de kamer hebt bekeken en gecheckt; B2 € 700; B3 8 oktober; B4 Nee, meestal niet: je deelt de wc en douche."},"goal":"1. De leerling kan in een kameradvertentie twee signalen van oplichting aanwijzen en zeggen wat je doet voordat je iets betaalt. 2. De leerling kan in een huurcontract kale huur en servicekosten uit elkaar houden, de hoogste toegestane borg uitrekenen en zeggen wanneer de borg terug moet komen. 3. De leerling kan zeggen bij welke gemeente en uiterlijk wanneer je een verhuizing doorgeeft, en waarom je adres in de BRP telt voor je studiefinanciering. 4. De leerling kan uitleggen waarom je voor een gewone studentenkamer meestal geen huurtoeslag krijgt, en wanneer het soms wel kan.","plan":[{"from":0,"to":2,"title":"Uitleg","text":"Zet de link en de klascode al op het bord voordat de les begint. Laat het docentenscherm zien. Leerlingen werken met z'n tweeën op één scherm."},{"from":2,"to":3,"title":"Startcheck","text":"Elk tweetal beantwoordt vier vragen (vorm A of B) voordat de klok start. Geef geen hints."},{"from":3,"to":33,"title":"Escape","text":"Start de klastimer. Tweetallen spelen vier kamers en schrijven elk cijfer op. Klaar voor de tijd? Laat het tweetal de gespreksvragen op het eindscherm bespreken."},{"at":33,"title":"Stop","text":"Op minuut 33 stopt iedereen, ook wie nog niet klaar is. Lees de cijfers voor van je geprinte antwoordblad. Alle tweetallen doen daarna de eindcheck en het plan."},{"from":33,"to":35,"title":"Eindcheck","text":"De andere vorm: vier vragen over dezelfde regels. Daarna ziet elk tweetal wat het goed had, voor en na."},{"from":35,"to":40,"title":"Nabespreken","text":"Vraag met handopsteken: wie had bij de startcheck 3 of 4 goed? En bij de eindcheck? Vraag welke kamer het lastigst was en begin daar. Gebruik de gespreksvragen. Vraag naar ervaringen, niet naar punten."},{"from":40,"to":42,"title":"Afsluiten","text":"Laat twee of drie leerlingen hun als-dan-plan hardop zeggen. Stel daarna de slotvraag."},{"from":42,"to":45,"title":"Buffer","text":"Reserve voor een late start, traag inloggen of een langer gesprek. De escape stopt altijd op minuut 33; de buffer vangt de rest op."}],"materials":["een apparaat per tweetal","pen en papier voor de cijfers","een digibord of beamer"],"tip":"Een fout antwoord wordt doorgestreept. Een tweetal kan dus ook gokken tot het goed is. Het telt dan alleen niet mee bij \"In één keer goed\". Vertel de klas dat goed lezen sneller gaat.","closing":"Noem één ding dat je moet doen voordat je een kamer betaalt, en één ding dat je moet doen binnen 5 dagen nadat je verhuisd bent."},"sources":{"fhdHuur":{"name":"Fraudehelpdesk, Woonplek gevonden? Check voordat je huurt","url":"https://www.fraudehelpdesk.nl/campagnes/een-dak-boven-je-hoofd-of-van-je-centen-beroofd/","checked":"2026-11-06","until":"No set date; check Jan 2027"},"omHuur":{"name":"Openbaar Ministerie, Online campagne waarschuwt voor huurfraude","url":"https://www.om.nl/actueel/nieuws/2021/10/01/online-campagne-waarschuwt-voor-huurfraude","checked":"2026-11-06","until":"No set date; check Jan 2027"},"roBorg":{"name":"Rijksoverheid, woning huren waarborgsom","url":"https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/woning-huren/woning-huren-waarborgsom","checked":"2026-11-06","until":"Law in force since 1 Jul 2023 (Wet goed verhuurderschap); check Jan 2027"},"vhnBorg":{"name":"Volkshuisvesting Nederland, waarborgsom","url":"https://www.volkshuisvestingnederland.nl/onderwerpen/huurbescherming-en-huurcontracten/waarborgsom","checked":"2026-11-06","until":"Law in force since 1 Jul 2023 (Wet goed verhuurderschap); check Jan 2027"},"fhdSlachtoffer":{"name":"Fraudehelpdesk, Slachtoffer geworden, wat nu?","url":"https://www.fraudehelpdesk.nl/slachtoffer-geworden-wat-nu/","checked":"2026-11-06","until":"No set date; check Jan 2027"},"politieOplichting":{"name":"Politie, Ik ben opgelicht","url":"https://www.politie.nl/aangifte-of-melding-doen/aangifte-van-oplichting.html","checked":"2026-11-06","until":"No set date; check Jan 2027"},"wgv261b":{"name":"Wet goed verhuurderschap, Stb. 2023, 103 (art. 7:261b BW)","url":"https://zoek.officielebekendmakingen.nl/dossier/stb-2023-103.pdf","checked":"2026-11-06","until":"Law in force since 1 Jul 2023 (Wet goed verhuurderschap); check Jan 2027"},"vhnPunten":{"name":"Volkshuisvesting Nederland, Ik verhuur een kamer","url":"https://www.volkshuisvestingnederland.nl/wat-betekent-de-wet-betaalbare-huur-voor-mij/situaties/ik-verhuur/ik-verhuur-een-kamer","checked":"2026-11-06","until":"No set date; check Jan 2027"},"hcPunten":{"name":"Huurcommissie, Wettelijke wijzigingen per 1 januari 2025","url":"https://www.huurcommissie.nl/actueel/nieuws/2024/12/19/wettelijke-wijzigingen-per-1-januari-2025-om-rekening-mee-te-houden","checked":"2026-11-06","until":"No set date; check Jan 2027"},"vhnWgv":{"name":"Volkshuisvesting Nederland, WGV-brochure voor huurders (pdf)","url":"https://volkshuisvestingnederland.nl/binaries/volkshuisvestingnederland/documenten/publicaties/2024/02/09/huurders/WGV+Brochure+huurders+NL_TG.pdf","checked":"2026-11-06","until":"Law in force since 1 Jul 2023 (Wet goed verhuurderschap); check Jan 2027"},"roVerhuis":{"name":"Rijksoverheid, hoe kan ik mijn verhuizing doorgeven","url":"https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/gemeenten/hoe-kan-ik-mijn-verhuizing-doorgeven-aan-de-gemeente","checked":"2026-11-06","until":"€ 325 maximum (Rijksoverheid alleen): check Jan 2027"},"roVerhuisProduct":{"name":"Rijksoverheid, verhuizing melden","url":"https://www.rijksoverheid.nl/wetten-en-regelingen/productbeschrijvingen/verhuizing-melden","checked":"2026-11-06","until":"€ 325 maximum (Rijksoverheid alleen): check Jan 2027"},"rdamVerhuis":{"name":"Gemeente Rotterdam, verhuizing doorgeven","url":"https://www.rotterdam.nl/verhuizing-doorgeven","checked":"2026-11-06","until":"€ 325 maximum (Rijksoverheid alleen): check Jan 2027"},"duoBedragen":{"name":"DUO, bedragen studiefinanciering","url":"https://duo.nl/particulier/studiefinanciering/bedragen.jsp","checked":"2026-11-06","until":"No set date; DUO amounts change each 1 Jan; check Jan 2027"},"duoUitwonend":{"name":"DUO, uitwonend","url":"https://duo.nl/particulier/studiefinanciering/uitwonend.jsp","checked":"2026-11-06","until":"No set date; check Jan 2027"},"wsf15":{"name":"Wet studiefinanciering 2000, art. 1.5 lid 1","url":"https://wetten.overheid.nl/jci1.3:c:BWBR0011453&hoofdstuk=1&artikel=1.5","checked":"2026-11-06","until":"No set date; check Jan 2027"},"bdWoningen":{"name":"Belastingdienst, voor welke woningen kan ik huurtoeslag krijgen","url":"https://belastingdienst.nl/wps/wcm/connect/nl/huurtoeslag/content/voor-welke-woningen-huurtoeslag","checked":"2026-11-06","until":"Rules for 2026; check before 1 Jan 2027 (toeslag year)"},"bdKan":{"name":"Belastingdienst, kan ik huurtoeslag krijgen","url":"https://belastingdienst.nl/wps/wcm/connect/nl/toeslagen/content/kan-ik-huurtoeslag-krijgen","checked":"2026-11-06","until":"Rules for 2026; check before 1 Jan 2027 (toeslag year)"},"bdStudent":{"name":"Belastingdienst, Ik woon op kamers: kan ik huurtoeslag krijgen?","url":"https://www.belastingdienst.nl/wps/wcm/connect/nl/huurtoeslag/content/student-op-kamers-huurtoeslag","checked":"2026-11-06","until":"Rules for 2026; check before 1 Jan 2027 (toeslag year)"},"hsb1997":{"name":"Huursubsidiebesluit, Stb. 1997, 269","url":"https://zoek.officielebekendmakingen.nl/stb-1997-269.pdf","checked":"2026-11-06","until":"Rules for 2026; check before 1 Jan 2027 (toeslag year)"},"bd2026":{"name":"Belastingdienst, Huurtoeslag verandert vanaf 2026","url":"https://www.belastingdienst.nl/wps/wcm/connect/nl/huurtoeslag/content/huurtoeslag-verandert-vanaf-2026","checked":"2026-11-06","until":"Amounts valid for 2026; change on 1 Jan 2027"}}};
 /* All interface text of the Escape 18 engine and site pages, one table per language. nl is the default and must have every key;
    other languages may miss keys (they fall back to nl). A value is a string or a function of its arguments.
@@ -416,13 +555,13 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     consentChoice: 'Je docent heeft gekozen of de klas anoniem antwoorden deelt.',
     checkEndLeadB: 'Nu een paar andere vragen over hetzelfde. Daarna zie je wat jullie goed hadden, voor en na.', colResult: 'Jullie antwoord',
     joinType: 'Open deze korte link op je laptop of Chromebook:', joinCode: 'Typ dan de klascode hierboven in. Een QR-code mag ook.', qrExtra: 'Of scan de QR-code. Deze link heeft de klascode er al in:',
-    shareQ: 'Anonieme antwoorden van deze klas delen met het Escape 18-team?', shareWhat: 'We krijgen dan alleen welke antwoorden de tweetallen kiezen, hoe lang ze erover doen en hoeveel hints ze nemen. Nooit namen.',
+    shareQ: 'Anonieme antwoorden van deze klas delen met het Escape 18-team?', shareWhat: 'We krijgen dan alleen welke antwoorden de tweetallen kiezen, hoe lang ze erover doen en hoeveel hints ze nemen. Nooit namen. Na de stop zie je de resultaten van de hele klas samen.',
     shareNoNote: 'Nee: er wordt niets verstuurd uit deze klas. De link voor leerlingen eindigt op &log=0.', shareLocked: 'De les is gestart. Wil je je keuze veranderen? Kies Nieuwe klascode.',
     chooseFirst: 'Kies eerst hierboven Ja of Nee. Dan krijg je een klascode, een link en een QR-code.',
     licenceA: 'Lesmateriaal: ', licenceName: 'CC BY-NC-SA 4.0', licenceB: '. Gratis gebruiken en aanpassen, niet commercieel, met naamsvermelding.', licenceUrl: 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl',
     disclaimer: (c, v) => `Educatief materiaal, geen financieel of juridisch advies. Bedragen gecontroleerd op ${c}; ze kunnen na ${v} veranderen.`,
     outdated: 'Let op: sommige bedragen kunnen verouderd zijn.',
-    paperBtn: 'Kamers op papier', paperNote: 'Geen laptops? Print Kamers op papier: de kamers en vragen voor de tweetallen, met achteraan een antwoordpagina voor jezelf. Print daarnaast het antwoordblad als je dat wilt. Op papier wordt niets verstuurd.', paperKeyH: 'Antwoorden per kamer', paperKeyWarn: 'Alleen voor de docent. Deel deze pagina niet uit.', paperKeyCode: 'Code van het slot',
+    paperBtn: 'Kamers op papier (leerlingen)', paperKeyBtn: 'Antwoorden (docent)', paperNote: 'Geen laptops? Print Kamers op papier (leerlingen): de kamers en vragen voor de tweetallen, zonder antwoorden en zonder de code. Print Antwoorden (docent) één keer voor jezelf. Op papier is er geen tip bij een fout antwoord: loop rond. Op papier wordt niets verstuurd.', paperKeyH: 'Antwoorden per kamer', paperKeyWarn: 'Alleen voor de docent. Deel deze pagina niet uit.', paperKeyCode: 'Code van het slot',
     paperIntro: 'Werk met z\'n tweeën. Lees de documenten, kruis het antwoord aan en schrijf per kamer het cijfer op. Je docent heeft de antwoorden.', paperAnswer: 'Antwoord:', paperMulti: 'Kruis alle goede antwoorden aan.',
 
     within: 'binnen', srcLabel: 'Bron:', srcH: 'Bronnen', srcChecked: d => `gecontroleerd op ${d}`, teacherNoteH: 'Voor de docent',
@@ -458,8 +597,13 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     planCard: (w, t) => `Als ${w}, dan ${t}.`, planNote: 'Dit plan blijft alleen op dit scherm. Het wordt niet verstuurd en niet bewaard. Maak een foto of print het als je het wilt houden.',
     printPlan: 'Print mijn plan', planAgain: 'Maak een ander plan', when: 'Als ...', then: 'dan ...', own: 'Of schrijf zelf wat je dan doet', ownHelp: 'Dit blijft op dit apparaat. Het wordt nergens heen gestuurd.',
     planErr: 'Kies een "als" en een "dan", of schrijf zelf wat je dan doet.', makePlan: 'Maak mijn plan',
+    detailH: 'Bronnen en uitzonderingen', faqH: 'Dit wordt vaak gevraagd',
+    slipTitle: 'Mijn volgende stap', slipBtn: 'Print plan-strookjes',
+    slipNote: (n, copies) => `Eén A4 met ${n} ${n === 1 ? 'strookje' : 'strookjes'}, met knip-lijnen. Kies bij het printen het aantal exemplaren: voor 30 leerlingen ${copies}. Er wordt niets opgeslagen of verstuurd.`,
+    slipPaper: 'Vul je strookje op papier in.', slipPaperMore: 'Dit staat erop:',
+    slipScreenNote: 'Dit wordt niet opgeslagen en niet verstuurd.', slipScreenMore: 'Het blijft alleen op dit scherm. Schrijf het ook op je strookje of maak een foto, want als je dit scherm sluit, is het weg.',
     pfbThanks: '<b>Dank je!</b> Zo kunnen we de les beter maken.', pfbTitle: 'Wat vonden jullie ervan?', fun: 'Hoe leuk was de les?', funLo: 'niet leuk', funHi: 'heel leuk',
-    learned: 'Hoeveel heb je geleerd?', learnedLo: 'niets', learnedHi: 'heel veel', ofFive: v => `${v} van 5`, send: 'Verstuur', pfbNote: 'Alleen jullie twee tikken worden verstuurd, zonder namen.', restart: 'Opnieuw beginnen',
+    learned: 'Hoeveel heb je geleerd?', learnedLo: 'niets', learnedHi: 'heel veel', ofFive: v => `${v} van 5`, send: 'Verstuur', pfbNote: 'Alleen jullie tikken worden verstuurd, zonder namen.', restart: 'Opnieuw beginnen',
     // teacher
     qrLabel: 'QR-code met de link naar deze les', link: 'Link: ',
     fileNote: 'Dit is een bestand op deze computer, geen webadres. Een QR-code werkt alleen met een webadres. Leerlingen openen dan zelf de les en typen de klascode in.',
@@ -470,7 +614,7 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     fbUsed: 'Hoeveel van de les heb je gebruikt?', fbHeel: 'De hele les', fbKort: 'Een korte versie', fbDeels: 'Een deel', fbPupils: 'Aantal leerlingen', fbMinutes: 'Hoeveel minuten duurde de les?',
     noNames: 'Noem geen namen van leerlingen of collega\'s.', fbWorked: 'Wat werkte goed?', fbNotworked: 'Wat werkte niet?', max500: 'Hooguit 500 tekens.',
     fbErr: 'Vul de eerste vier vragen in: nog eens geven, hoeveel gebruikt, aantal leerlingen en minuten.', sendNoConfig: 'In deze versie is versturen niet ingesteld. Er wordt niets verstuurd.',
-    fbWhere: 'Je feedback gaat naar het Escape 18-team, los van je keuze over de antwoorden van de klas.', fbSend: 'Verstuur feedback', fbSent: '<b>Dank je wel!</b> Je feedback wordt verstuurd naar het Escape 18-team.', fbOffline: '<b>Je bent offline.</b> We versturen je feedback zodra je weer online bent.', radioHint: 'Kies met de pijltjestoetsen of klik.',
+    fbWhere: 'Je feedback gaat naar het Escape 18-team, los van je keuze over de antwoorden van de klas. E-mailadressen en telefoonnummers halen we weg.', fbSend: 'Verstuur feedback', fbSent: '<b>Dank je wel!</b> Je feedback wordt verstuurd naar het Escape 18-team.', fbOffline: '<b>Je bent offline.</b> We versturen je feedback zodra je weer online bent.', radioHint: 'Kies met de pijltjestoetsen of klik.',
     sheetTitle: t => t + ': antwoordblad', sheetCode: c => `Escape 18. Code van het slot: <b>${c}</b>`, colAns: 'Antwoord', colWhy: 'Waarom', chkHead: 'Start- en eindcheck',
     classCode: 'Klascode', newCode: 'Nieuwe klascode (nieuwe klas)', startLesson: 'Start de les', startNote: 'Je krijgt dan een klascode, een link en een QR-code voor de leerlingen.',
     toPupil: 'Naar het leerlingscherm', tSub: m => `Escape 18 · havo en vwo · tweetallen · ${m} minuten`, startTitle: 'Zo begin je',
@@ -490,9 +634,57 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     pStopSkip: 'Naar de eindcheck', pStopSkipNoCheck: 'Naar het eindscherm', pStopOr: 'Geen cijfers? Ga dan meteen verder.', pStopBack: 'Terug naar de escape',
     wonStop: 'Goed gewerkt!', wonStopNote: 'De tijd was om, dus jullie zijn eerder gestopt. Kijk hieronder wat je meeneemt.',
     recapH: 'Kijk terug: de vragen van deze kamer',
+    // v3 (7 Nov 2026): Klasresultaten (backend-v2/CLIENT_SPEC.md section 2), this device's record (section 3)
+    resH: 'Klasresultaten', resWait: 'Klasresultaten laden...', resStart: (n, title) => `Begin bij kamer ${n}, ${title}: daar ging het minst vaak in één keer goed.`,
+    resDone: (a, b) => `${a} van ${b} tweetallen klaar.`, resHard: 'Lastigste vraag:', resHardPct: p => `${p}% had het in één keer goed.`,
+    resWrong: 'Meest gekozen fout antwoord:', resWrongN: n => n === 1 ? '(1 tweetal)' : `(${n} tweetallen)`, resEmpty: 'Nog geen antwoorden.',
+    resCheck: (s, e, max) => `Startcheck gemiddeld ${s} van ${max}. Eindcheck gemiddeld ${e} van ${max}.`,
+    resFoot: time => `Alleen de hele klas samen, nooit per tweetal. Bijgewerkt om ${time}.`,
+    resFew: 'Nog te weinig tweetallen voor een samenvatting. Er zijn er minstens 3 nodig. Dit scherm probeert het elke 20 seconden opnieuw.',
+    resErr: 'De klasresultaten zijn nu niet te laden. Gebruik de vragen bij Nabespreken per kamer hieronder.',
+    resNo: 'Je koos Nee bij delen. Daarom zijn er geen klasresultaten. Gebruik de vragen bij Nabespreken per kamer hieronder.',
+    resRefresh: 'Vernieuw de klasresultaten',
+    devNote: 'Dit apparaat onthoudt welke lessen je hier startte. Dat blijft op dit apparaat.', devForget: 'Vergeet dit apparaat',
+    // end check: confidence per question (optional), end screen: topic wish (optional)
+    confQ: 'Hoe zeker zijn jullie?', confOpt: 'Niet verplicht.', confs: ['Gok', 'Een beetje', 'Heel zeker'],
+    wishQ: 'Over welk onderwerp willen jullie hierna een les?', wishOpt: 'Niet verplicht. Kies er één.',
+    wishes: { zorgverzekering: 'Een zorgverzekering kiezen', abonnementen: 'Abonnementen en kleine lettertjes', verzekeringen: 'Andere verzekeringen, zoals voor schade of op reis', belasting: 'Belasting en toeslagen', budget: 'Rondkomen met je geld', anders: 'Iets anders' },
+    // teacher kit: Klaar in 15 minuten, Probleem?, Projectiemodus, Lesverslag, timer at 00:00
+    tOver: 'Tijd is om: stop de escape.',
+    qsH: 'Klaar in 15 minuten', qsLead: 'Vijf stappen om de les voor te bereiden. De bereidingstijd loopt mee, zodat je hem in het lesverslag kunt zetten.',
+    qsLocal: 'De bereidingstijd blijft alleen op dit scherm. Er wordt niets bewaard of verstuurd.', qsTimeK: 'Bereidingstijd', qsStart: 'Start', qsPause: 'Pauze', qsGo: 'Verder', qsReset: 'Opnieuw',
+    qsStep: n => `Stap ${n}`, qsStatus: (a, b) => `${a} van ${b} stappen klaar.`, qsFin: m => `Klaar. Voorbereiding: ${m} ${m === 1 ? 'minuut' : 'minuten'}.`, qsOpenPupil: 'Open het leerlingscherm', qsToProj: 'Naar de Projectiemodus',
+    qsSteps: [['plan', 'Lees het lesplan en de kern per kamer', 'Het lesplan staat hieronder. Bij Nabespreken per kamer staat per kamer de kern. Daarmee leid je het gesprek na de stop.'],
+      ['print', 'Print het antwoordblad', 'Op het antwoordblad staan de antwoorden en de code van het slot. Na de stop lees je de cijfers ervan voor. Zet het niet op het bord.'],
+      ['paper', 'Print Kamers op papier als reserve', 'Werkt het internet of een laptop niet? Dan werken tweetallen op papier. Geen reserve nodig? Vink deze stap dan zelf aan.'],
+      ['link', 'Test de link', 'Open het leerlingscherm in een nieuw tabblad. Zie je het startscherm van de les? Dan werkt de link. Deze test stuurt niets.'],
+      ['board', 'Start de les en zet het bord in Projectiemodus', 'Kies Ja of Nee bij delen en tik op Start de les. Zet dan het bord in Projectiemodus: groot, met de klascode, de QR-code en de klok.']],
+    probH: 'Probleem?', probBtn: 'Probleem?',
+    probs: [['join', 'Leerlingen komen niet in de les', ['Laat ze de korte link precies overtypen. Of laat ze de QR-code scannen.', 'Klopt de klascode niet? Laat het vak leeg en tik op Start. De les werkt ook zonder klascode. Hun antwoorden tellen dan niet mee in de klasresultaten.', 'Werkt de link op één laptop niet? Laat dat tweetal meedoen met een ander tweetal: met z\'n vieren op één scherm.']],
+      ['log', 'Het delen van antwoorden lukt niet', ['Sommige schoolnetwerken blokkeren het versturen. De les werkt dan precies hetzelfde. Voor de leerlingen gaat er niets mis.', 'Wat nog niet verstuurd is, blijft even in de browser en gaat later alsnog. Lukt dat niet, dan zie je na de stop geen klasresultaten.', 'Vraag dan na de stop met handopsteken welke kamer het lastigst was. Gebruik de vragen bij Nabespreken per kamer.']],
+      ['paper', 'Geen internet of geen laptops', ['Wie de les al open heeft, speelt gewoon door. Ververs de pagina dan niet.', 'Geen laptops? Print Kamers op papier (leerlingen), één per tweetal. Print Antwoorden (docent) één keer voor jezelf. Op papier wordt niets verstuurd.', 'Op papier is er geen tip bij een fout antwoord. Loop rond en help waar het nodig is.']],
+      ['stuck', 'Een tweetal zit vast', ['Wijs op de knop Hint bij de vraag. Een hint kost 30 seconden.', 'Fout? Het tweetal krijgt één herkansing en ziet waar het staat. Is het dan weer fout, dan laat de les het goede antwoord zien, met uitleg.', 'Zet de antwoorden niet op het bord. Ze staan op je geprinte antwoordblad.']],
+      ['lock', 'Het slot gaat niet open', ['Het slot zegt dat het nog niet opengaat. Kijk of de cijfers in de volgorde van de kamers staan.', 'Na drie foute codes laat het slot per kamer het cijfer zien.']]],
+    projBtn: 'Projectiemodus', projBack: 'Terug naar het docentenscherm', projEyebrow: m => `Projectiemodus · ${m} minuten`,
+    projRules: ['Speel met z\'n tweeën op één scherm.', 'Fout? Je krijgt één herkansing.', 'Een hint kost 30 seconden.', 'Schrijf elk cijfer op.'],
+    projRoomsH: 'Kamers met richttijd', projUntil: c => `klaar bij ${c}`, projNote: 'Richttijd: de tijd van de escape gelijk verdeeld over de kamers. Met Esc ga je terug naar het docentenscherm.',
+    projNoCode: 'Tik eerst op het docentenscherm op Start de les. Dan staan hier de klascode, de link en de QR-code.', projJoin: 'Ga naar', projJoinCode: 'en typ de klascode:',
+    vsH: 'Lesverslag', vsLead: 'Maak na de les een kort verslag voor jezelf, je sectie of de school. Print het, of kies bij het printen Opslaan als pdf.',
+    vsLocal: 'Het verslag blijft alleen op dit scherm. Er wordt niets bewaard of verstuurd. Noem geen namen van leerlingen.',
+    vsDate: 'Datum', vsGroup: 'Klas of niveau', vsGroupHelp: 'Bijvoorbeeld havo 5', vsPupils: 'Aantal leerlingen', vsPrep: 'Voorbereiding in minuten', vsHard: 'Lastig volgens handopsteken', vsHardHelp: 'Aantal leerlingen per kamer. Niet verplicht.', vsNote: 'Wat zag je?', vsNoteHelp: 'Eén of twee zinnen, zonder namen.',
+    vsPrint: 'Print het lesverslag', vsPreview: 'Zo ziet het verslag eruit', vsResOn: 'In het verslag staan de klasresultaten hierboven: de hele klas samen, zonder antwoorden.', vsResOff: 'Geen klasresultaten op dit scherm. Tel daarom met handopsteken.',
+    vsTitle: t => `Lesverslag Escape 18: ${t}`, vsLDate: d => `Datum: ${d}.`, vsLGroup: g => `Klas: ${g}.`, vsLPupils: n => `Leerlingen: ${n}.`, vsLPrep: n => `Voorbereiding: ${n} ${n === 1 ? 'minuut' : 'minuten'}.`,
+    vsLRes: 'Klasresultaten (anoniem, de hele klas samen):', vsLPairs: (p, e) => `Tweetallen: ${p}, aan het eind: ${e}.`, vsLLock: (o, r) => `Slot open: ${o} van ${r} tweetallen bij het slot.`,
+    vsLRoom: (n, title, a, b) => `Kamer ${n}, ${title}: ${a} van ${b} tweetallen klaar.`, vsLHard: (q, p) => `Lastigste vraag: ${q} (${p}% in één keer goed).`,
+    vsLHands: 'Lastig volgens handopsteken:', vsLHand: (n, title, k) => `Kamer ${n}, ${title}: ${k} ${k === 1 ? 'leerling' : 'leerlingen'}.`, vsLNoHands: 'Lastig volgens handopsteken: niet geteld.',
+    vsLNote: x => `Wat de docent zag: "${x}"`, vsLEnd: 'Er staan geen namen of antwoorden van leerlingen in dit verslag. Het is op dit apparaat gemaakt en niet verstuurd.',
+    vsErrPupils: 'Vul bij het aantal leerlingen een getal van 1 tot en met 60 in.', vsErrPrep: 'Vul bij de voorbereiding 1 tot en met 120 minuten in.', vsErrHand: (title, max) => `Bij ${title}: vul 0 tot en met ${max} in.`,
     // site pages
     site: {
-      brandSub: 'Klaar voor later', open: 'Open de les', soon: 'Binnenkort', backHome: 'Terug naar Escape 18',
+      brandSub: 'Klaar voor later',
+      planSum: 'Ik ga dit geven', planWhen: 'Wanneer ongeveer?', planWhenOpts: [['deze week', 'deze week'], ['deze maand', 'deze maand'], ['later', 'later']], planLevel: 'Welk niveau?',
+      planLevels: [['pro', 'praktijkonderwijs'], ['vmbo', 'vmbo'], ['havo', 'havo'], ['vwo', 'vwo'], ['mbo', 'mbo'], ['anders', 'anders']], planSend: 'Verstuur', planNeedWhen: 'Kies wanneer ongeveer.',
+      planNote: 'Dit stuurt alleen anoniem naar het Escape 18-team: welke les, wanneer ongeveer en welk niveau. Geen naam en geen school.', planThanks: 'Dank je wel. Veel plezier met de les!', open: 'Open de les', soon: 'Binnenkort', backHome: 'Terug naar Escape 18',
       indexTitle: 'Escape 18', indexDesc: 'Escape 18: gratis escape-lessen voor havo en vwo over wat er verandert als je 18 wordt.', eyebrow: 'Gratis lessen voor havo en vwo',
       lead: 'Escape 18 is een escape voor in de klas. Leerlingen van 16 tot 18 jaar oefenen met wat er verandert als je 18 wordt. Ze werken met z\'n tweeën op één scherm en lossen opdrachten op met echte soorten documenten, zoals een brief, een loonstrook of een huurcontract. Je eigen docent leidt de les. Leerlingen hebben geen account nodig.',
       test: 'Dit is een gratis testversie die we nog verder ontwikkelen. Gebruik en test hem gerust; we horen graag wat werkte en wat niet.',
@@ -514,14 +706,18 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
       whoH: 'Wie is verantwoordelijk', who: 'Olivier Runge, voor Escape 18. Escape 18 begon als studentenproject van team Klaar voor Later (Erasmus Universiteit Rotterdam). Olivier Runge zet het nu voort als gratis testversie, geen bedrijf.',
       storedH: 'Wat we bewaren', colWhat: 'Wat', colWhen: 'Wanneer', colData: 'Welke gegevens',
       rows: [['Start van de les', 'De docent start de les (alleen bij Ja)', 'Welke les het is, hoeveel kamers die heeft en in welke taal.'], ['Start', 'Een tweetal begint', 'Dat er een tweetal begint, welke versie van de les en in welke taal.'],
-        ['Start- en eindcheck', 'Na de check', 'Welke versie van de check (A of B), welke vragen goed waren en hoeveel, bijvoorbeeld 2 van de 3.'], ['Antwoord', 'Na elke vraag', 'Welk antwoord het tweetal als eerste koos (een letter of een getal), of het in één keer goed was, hoe vaak ze het probeerden, of ze een hint namen en hoeveel seconden de vraag duurde.'],
+        ['Start- en eindcheck', 'Na de check', 'Welke versie van de check (A of B), welke vragen goed waren en hoeveel, bijvoorbeeld 2 van de 3. Bij de startcheck ook of alles al goed was. Bij de eindcheck per vraag hoe zeker het tweetal was: gok, een beetje of heel zeker. Dat tikt het tweetal alleen aan als het wil.'], ['Antwoord', 'Na elke vraag', 'Welk antwoord het tweetal als eerste koos (een letter of een getal), of het in één keer goed was, hoe vaak ze het probeerden, of ze een hint namen en hoeveel seconden de vraag duurde.'],
         ['Kamer', 'Na elke kamer', 'Hoeveel seconden de kamer duurde.'], ['Slot', 'Bij het slot', 'Of het slot openging en na hoeveel seconden.'],
-        ['Mening', 'Aan het eind, als het tweetal dat wil', 'Twee tikken van 1 tot 5: hoe leuk de les was en hoeveel ze leerden.'], ['Einde', 'Aan het eind', 'Hoe lang de escape duurde.'],
-        ['Feedback van de docent', 'Als de docent het formulier verstuurt', 'Of je de les nog eens geeft, hoeveel je ervan gebruikte, het aantal leerlingen, het aantal minuten, en wat werkte en wat niet. Die laatste twee schrijf je zelf, zonder namen van leerlingen.']],
-      alsoStored: 'Bij elk van deze regels staan ook: de naam en versie van de les, de klascode en een willekeurige code voor deze ene keer spelen. De klascode is 5 tekens en wordt door het docentenscherm verzonnen, bijvoorbeeld K7MQX. De willekeurige code is bij elke keer spelen nieuw. Hij blijft niet op het apparaat staan.',
+        ['Mening', 'Aan het eind, als het tweetal dat wil', 'Twee tikken van 1 tot 5: hoe leuk de les was en hoeveel ze leerden. Als het tweetal wil ook één tik: over welk onderwerp het hierna een les wil, gekozen uit een vaste lijst.'], ['Einde', 'Aan het eind', 'Hoe lang de escape duurde.'],
+        ['Feedback van de docent', 'Als de docent het formulier verstuurt', 'Of je de les nog eens geeft, hoeveel je ervan gebruikte, het aantal leerlingen, het aantal minuten, en wat werkte en wat niet. Die laatste twee schrijf je zelf, zonder namen van leerlingen. E-mailadressen en telefoonnummers in je tekst halen we automatisch weg.'],
+        ['Ik ga dit geven', 'Als een docent op de startpagina bij een les op Ik ga dit geven tikt en het verstuurt', 'Welke les, wanneer ongeveer (deze week, deze maand of later) en welk niveau, bijvoorbeeld havo. Geen naam en geen school.'],
+        ['Les opnieuw gestart', 'Als een docent een les start die op hetzelfde apparaat al eens op een eerdere dag gestart is (alleen bij Ja)', 'Dat het de 2e, 3e, 4e of 5e keer of vaker is, en of de vorige keer deze week, deze maand of langer geleden was.']],
+      alsoStored: 'Bij elk van deze regels staan ook: de naam en versie van de les, de klascode en een willekeurige code voor deze ene keer spelen. De klascode is 5 tekens en wordt door het docentenscherm verzonnen, bijvoorbeeld K7MQX. De willekeurige code is bij elke keer spelen nieuw. Hij blijft niet op het apparaat staan. Bij Ik ga dit geven staat geen klascode.',
+      teacherDevH: 'Wat het docentenscherm onthoudt', teacherDev: 'Kies je Ja en start je de les? Dan onthoudt de browser op jouw apparaat welke les je startte, hoe vaak en op welke dag. Dat blijft op jouw apparaat. We sturen alleen het bericht Les opnieuw gestart uit de tabel hierboven. Daarin staat geen code van jou of van je apparaat. Wissen kan met de knop Vergeet dit apparaat op het docentenscherm. Je kunt ook de sitegegevens in je browser wissen.',
+      classResH: 'Wat de docent na de les ziet', classRes: 'Na de stop ziet de docent op het docentenscherm een samenvatting van de hele klas. Per kamer: hoeveel tweetallen klaar waren, welke vraag het lastigst was en welk fout antwoord het vaakst gekozen werd. Dat kan alleen als de docent Ja koos en als minstens 3 tweetallen meededen. Je ziet nooit welk tweetal wat antwoordde. Iedereen die de klascode kent, kan deze samenvatting opvragen. Er staat geen naam in en niets over één leerling.',
       neverH: 'Wat we nooit bewaren', never: ['Namen of e-mailadressen van leerlingen.', 'Tekst die leerlingen zelf typen, zoals hun als-dan-plan. Dat plan blijft op hun eigen scherm.', 'Het internetadres (IP-adres), het soort apparaat of de browser.', 'Iets anders waarmee we een leerling of een apparaat kunnen herkennen.'],
       google: 'De gegevens staan in een Google Sheet in het Google-account van Escape 18 (beheerd door Olivier Runge). Google is de host. Daarom krijgt Google bij het versturen technisch het internetadres (IP-adres) van de verbinding. Wij bewaren dat adres niet en wij zien het ook niet.',
-      whereH: 'Waar en wie', where: 'Alleen Olivier Runge kan de gegevens zien. We gebruiken ze om de lessen beter te maken, bijvoorbeeld om te zien welke vraag te moeilijk is.',
+      whereH: 'Waar en wie', where: 'Alleen Olivier Runge kan alle gegevens zien. De docent ziet alleen de samenvatting van de eigen klas. Olivier krijgt elke week een e-mail met aantallen, de moeilijkste vragen en de feedback van docenten. We gebruiken de gegevens om de lessen beter te maken, bijvoorbeeld om te zien welke vraag te moeilijk is.',
       queue: 'Wat nog niet verstuurd is, staat even in de browser van het apparaat (bijvoorbeeld als er geen internet is). Zodra het verstuurd is, wordt het daar gewist.',
       howLongH: 'Hoe lang', howLong: 'We verwijderen alle gegevens uiterlijk op 31 januari 2027. Gaat het project door, dan uiterlijk op 31 augustus 2027.', contactH: 'Contact',
       dpaH: 'Voor scholen', dpa: 'We verwerken geen persoonsgegevens van leerlingen. Een school heeft voor deze testversie daarom geen verwerkersovereenkomst nodig. Wil de privacy officer van je school dit controleren? Neem dan contact op met Olivier Runge via het adres hieronder.', contactMissing: 'Het contactadres volgt nog.'
@@ -532,13 +728,13 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     consentChoice: 'Your teacher has chosen whether the class shares answers anonymously.',
     checkEndLeadB: 'Now a few other questions about the same things. Then you see what you got right, before and after.', colResult: 'Your answer',
     joinType: 'Open this short link on your laptop or Chromebook:', joinCode: 'Then type in the class code above. A QR code works too.', qrExtra: 'Or scan the QR code. This link already has the class code in it:',
-    shareQ: 'Share anonymous answers of this class with the Escape 18 team?', shareWhat: 'We then only get which answers the pairs choose, how long they take and how many hints they take. Never names.',
+    shareQ: 'Share anonymous answers of this class with the Escape 18 team?', shareWhat: 'We then only get which answers the pairs choose, how long they take and how many hints they take. Never names. After the stop you see the results of the whole class together.',
     shareNoNote: 'No: nothing is sent from this class. The pupil link ends in &log=0.', shareLocked: 'The lesson has started. Want to change your choice? Choose New class code.',
     chooseFirst: 'First choose Yes or No above. Then you get a class code, a link and a QR code.',
     licenceA: 'Course material: ', licenceName: 'CC BY-NC-SA 4.0', licenceB: '. Free to use and adapt, not commercial, with credit to the author.', licenceUrl: 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en',
     disclaimer: (c, v) => `Educational material, not financial or legal advice. Amounts checked on ${c}; they may change after ${v}.`,
     outdated: 'Note: some amounts may be out of date.',
-    paperBtn: 'Rooms on paper', paperNote: 'No laptops? Print Rooms on paper: the rooms and questions for the pairs, with an answer page for yourself at the end. Print the answer sheet as well if you want it. Nothing on paper is sent.', paperKeyH: 'Answers per room', paperKeyWarn: 'For the teacher only. Do not hand this page out.', paperKeyCode: 'Code of the lock',
+    paperBtn: 'Rooms on paper (pupils)', paperKeyBtn: 'Answers (teacher)', paperNote: 'No laptops? Print Rooms on paper (pupils): the rooms and questions for the pairs, without answers and without the code. Print Answers (teacher) once for yourself. On paper there is no tip after a wrong answer: walk around. Nothing on paper is sent.', paperKeyH: 'Answers per room', paperKeyWarn: 'For the teacher only. Do not hand this page out.', paperKeyCode: 'Code of the lock',
     paperIntro: 'Work in pairs. Read the documents, tick the answer and write down the digit for each room. Your teacher has the answers.', paperAnswer: 'Answer:', paperMulti: 'Tick all right answers.',
 
     notTranslated: 'This lesson is not translated yet. The tasks are in Dutch.',
@@ -573,8 +769,13 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     planCard: (w, t) => `If ${w}, then ${t}.`, planNote: 'This plan only stays on this screen. It is not sent and not saved. Take a photo or print it if you want to keep it.',
     printPlan: 'Print my plan', planAgain: 'Make another plan', when: 'If ...', then: 'then ...', own: 'Or write what you will do', ownHelp: 'This stays on this device. It is not sent anywhere.',
     planErr: 'Choose an "if" and a "then", or write what you will do.', makePlan: 'Make my plan',
+    detailH: 'Sources and exceptions', faqH: 'Often asked',
+    slipTitle: 'My next step', slipBtn: 'Print plan slips',
+    slipNote: (n, copies) => `One A4 page with ${n} ${n === 1 ? 'slip' : 'slips'} and cut lines. Choose the number of copies when you print: for 30 pupils ${copies}. Nothing is saved or sent.`,
+    slipPaper: 'Fill in your slip on paper.', slipPaperMore: 'This is on it:',
+    slipScreenNote: 'This is not saved and not sent.', slipScreenMore: 'It only stays on this screen. Also write it on your slip or take a photo, because when you close this screen it is gone.',
     pfbThanks: '<b>Thank you!</b> This helps us improve the lesson.', pfbTitle: 'What did you think?', fun: 'How much fun was the lesson?', funLo: 'no fun', funHi: 'great fun',
-    learned: 'How much did you learn?', learnedLo: 'nothing', learnedHi: 'a lot', ofFive: v => `${v} of 5`, send: 'Send', pfbNote: 'Only your two taps are sent, without names.', restart: 'Start again',
+    learned: 'How much did you learn?', learnedLo: 'nothing', learnedHi: 'a lot', ofFive: v => `${v} of 5`, send: 'Send', pfbNote: 'Only your taps are sent, without names.', restart: 'Start again',
     qrLabel: 'QR code with the link to this lesson', link: 'Link: ',
     fileNote: 'This is a file on this computer, not a web address. A QR code only works with a web address. Pupils then open the lesson themselves and type in the class code.',
     shareLine: 'Share anonymous results with the Escape 18 team: ', on: 'on', off: 'off', privacy: 'Privacy',
@@ -584,7 +785,7 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     fbUsed: 'How much of the lesson did you use?', fbHeel: 'The whole lesson', fbKort: 'A short version', fbDeels: 'A part', fbPupils: 'Number of pupils', fbMinutes: 'How many minutes did the lesson take?',
     noNames: 'Do not name any pupils or colleagues.', fbWorked: 'What worked well?', fbNotworked: 'What did not work?', max500: 'At most 500 characters.',
     fbErr: 'Fill in the first four questions: teach again, how much used, number of pupils and minutes.', sendNoConfig: 'Sending is not set up in this version. Nothing is sent.',
-    fbWhere: 'Your feedback goes to the Escape 18 team, separate from your choice about the class answers.', fbSend: 'Send feedback', fbSent: '<b>Thank you!</b> Your feedback is being sent to the Escape 18 team.', fbOffline: '<b>You are offline.</b> We will send your feedback as soon as you are back online.', radioHint: 'Choose with the arrow keys or click.',
+    fbWhere: 'Your feedback goes to the Escape 18 team, separate from your choice about the class answers. We remove e-mail addresses and phone numbers.', fbSend: 'Send feedback', fbSent: '<b>Thank you!</b> Your feedback is being sent to the Escape 18 team.', fbOffline: '<b>You are offline.</b> We will send your feedback as soon as you are back online.', radioHint: 'Choose with the arrow keys or click.',
     sheetTitle: t => t + ': answer sheet', sheetCode: c => `Escape 18. Code of the lock: <b>${c}</b>`, colAns: 'Answer', colWhy: 'Why', chkHead: 'Start and end check',
     classCode: 'Class code', newCode: 'New class code (new class)', startLesson: 'Start the lesson', startNote: 'You then get a class code, a link and a QR code for the pupils.',
     toPupil: 'Go to the pupil screen', tSub: m => `Escape 18 · havo and vwo · pairs · ${m} minutes`, startTitle: 'How to start',
@@ -603,8 +804,53 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     pStopSkip: 'Go to the end check', pStopSkipNoCheck: 'Go to the end screen', pStopOr: 'No digits? Then go straight on.', pStopBack: 'Back to the escape',
     wonStop: 'Well done!', wonStopNote: 'Time was up, so you stopped early. See below what you take with you.',
     recapH: 'Look back: the questions of this room',
+    resH: 'Class results', resWait: 'Loading class results...', resStart: (n, title) => `Start with room ${n}, ${title}: fewest pairs got it right first time there.`,
+    resDone: (a, b) => `${a} of ${b} pairs finished.`, resHard: 'Hardest question:', resHardPct: p => `${p}% got it right first time.`,
+    resWrong: 'Most chosen wrong answer:', resWrongN: n => n === 1 ? '(1 pair)' : `(${n} pairs)`, resEmpty: 'No answers yet.',
+    resCheck: (s, e, max) => `Start check average ${s} of ${max}. End check average ${e} of ${max}.`,
+    resFoot: time => `Only the whole class together, never per pair. Updated at ${time}.`,
+    resFew: 'Not enough pairs for a summary yet. At least 3 are needed. This screen tries again every 20 seconds.',
+    resErr: 'The class results cannot be loaded now. Use the questions under Discussion per room below.',
+    resNo: 'You chose No for sharing, so there are no class results. Use the questions under Discussion per room below.',
+    resRefresh: 'Refresh class results',
+    devNote: 'This device remembers which lessons you started here. That stays on this device.', devForget: 'Forget this device',
+    confQ: 'How sure are you?', confOpt: 'Not required.', confs: ['A guess', 'A bit', 'Very sure'],
+    wishQ: 'Which topic would you like a lesson about next?', wishOpt: 'Not required. Choose one.',
+    wishes: { zorgverzekering: 'Choosing a health insurance', abonnementen: 'Subscriptions and small print', verzekeringen: 'Other insurance, such as for damage or travel', belasting: 'Tax and benefits (toeslagen)', budget: 'Getting by on your money', anders: 'Something else' },
+    tOver: 'Time is up: stop the escape.',
+    qsH: 'Ready in 15 minutes', qsLead: 'Five steps to prepare the lesson. The preparation time runs along, so you can put it in the lesson report.',
+    qsLocal: 'The preparation time stays on this screen only. Nothing is kept or sent.', qsTimeK: 'Preparation time', qsStart: 'Start', qsPause: 'Pause', qsGo: 'Go on', qsReset: 'Reset',
+    qsStep: n => `Step ${n}`, qsStatus: (a, b) => `${a} of ${b} steps done.`, qsFin: m => `Done. Preparation: ${m} ${m === 1 ? 'minute' : 'minutes'}.`, qsOpenPupil: 'Open the pupil screen', qsToProj: 'Go to projection mode',
+    qsSteps: [['plan', 'Read the lesson plan and the key point per room', 'The lesson plan is below. Under Discussion per room you find the key point of each room. Use it to lead the talk after the stop.'],
+      ['print', 'Print the answer sheet', 'The answer sheet has the answers and the code of the lock. After the stop you read out the digits from it. Do not put it on the board.'],
+      ['paper', 'Print Rooms on paper as a backup', 'Internet or a laptop not working? Then pairs work on paper. No backup needed? Then tick this step yourself.'],
+      ['link', 'Test the link', 'Open the pupil screen in a new tab. Do you see the start screen of the lesson? Then the link works. This test sends nothing.'],
+      ['board', 'Start the lesson and put the board in projection mode', 'Choose Yes or No for sharing and tap Start the lesson. Then put the board in projection mode: large, with the class code, the QR code and the clock.']],
+    probH: 'Problem?', probBtn: 'Problem?',
+    probs: [['join', 'Pupils cannot get into the lesson', ['Let them type the short link exactly. Or let them scan the QR code.', 'Class code not accepted? Leave the box empty and tap Start. The lesson also works without a class code. Their answers then do not count in the class results.', 'Link not working on one laptop? Let that pair join another pair: four on one screen.']],
+      ['log', 'Sharing answers does not work', ['Some school networks block sending. The lesson then works exactly the same. Nothing goes wrong for the pupils.', 'Anything not sent yet stays in the browser for a while and is sent later. If that fails, you see no class results after the stop.', 'Then ask after the stop with a show of hands which room was hardest. Use the questions under Discussion per room.']],
+      ['paper', 'No internet or no laptops', ['Pupils who already have the lesson open just play on. Do not reload the page then.', 'No laptops? Print Rooms on paper (pupils), one per pair. Print Answers (teacher) once for yourself. Nothing on paper is sent.', 'On paper there is no tip after a wrong answer. Walk around and help where needed.']],
+      ['stuck', 'A pair is stuck', ['Point to the Hint button at the question. A hint costs 30 seconds.', 'Wrong? The pair gets one more try and sees where it is. Wrong again? Then the lesson shows the right answer, with an explanation.', 'Do not put the answers on the board. They are on your printed answer sheet.']],
+      ['lock', 'The lock does not open', ['The lock says it does not open yet. Check that the digits are in the order of the rooms.', 'After three wrong codes the lock shows the digit of each room.']]],
+    projBtn: 'Projection mode', projBack: 'Back to the teacher screen', projEyebrow: m => `Projection mode · ${m} minutes`,
+    projRules: ['Play in pairs on one screen.', 'Wrong? You get one more try.', 'A hint costs 30 seconds.', 'Write down every digit.'],
+    projRoomsH: 'Rooms with a guide time', projUntil: c => `done by ${c}`, projNote: 'Guide time: the escape time split evenly over the rooms. Press Esc to go back to the teacher screen.',
+    projNoCode: 'First tap Start the lesson on the teacher screen. Then the class code, the link and the QR code appear here.', projJoin: 'Go to', projJoinCode: 'and type the class code:',
+    vsH: 'Lesson report', vsLead: 'After the lesson, make a short report for yourself, your department or the school. Print it, or choose Save as PDF when printing.',
+    vsLocal: 'The report stays on this screen only. Nothing is kept or sent. Do not name any pupils.',
+    vsDate: 'Date', vsGroup: 'Class or level', vsGroupHelp: 'For example havo 5', vsPupils: 'Number of pupils', vsPrep: 'Preparation in minutes', vsHard: 'Hard by show of hands', vsHardHelp: 'Number of pupils per room. Not required.', vsNote: 'What did you see?', vsNoteHelp: 'One or two sentences, without names.',
+    vsPrint: 'Print the lesson report', vsPreview: 'This is how the report looks', vsResOn: 'The report has the class results above: the whole class together, without answers.', vsResOff: 'No class results on this screen. So count with a show of hands.',
+    vsTitle: t => `Lesson report Escape 18: ${t}`, vsLDate: d => `Date: ${d}.`, vsLGroup: g => `Class: ${g}.`, vsLPupils: n => `Pupils: ${n}.`, vsLPrep: n => `Preparation: ${n} ${n === 1 ? 'minute' : 'minutes'}.`,
+    vsLRes: 'Class results (anonymous, the whole class together):', vsLPairs: (p, e) => `Pairs: ${p}, at the end: ${e}.`, vsLLock: (o, r) => `Lock open: ${o} of ${r} pairs at the lock.`,
+    vsLRoom: (n, title, a, b) => `Room ${n}, ${title}: ${a} of ${b} pairs finished.`, vsLHard: (q, p) => `Hardest question: ${q} (${p}% right first time).`,
+    vsLHands: 'Hard by show of hands:', vsLHand: (n, title, k) => `Room ${n}, ${title}: ${k} ${k === 1 ? 'pupil' : 'pupils'}.`, vsLNoHands: 'Hard by show of hands: not counted.',
+    vsLNote: x => `What the teacher saw: "${x}"`, vsLEnd: 'This report has no names or answers of pupils. It was made on this device and not sent.',
+    vsErrPupils: 'Fill in a number from 1 to 60 for the number of pupils.', vsErrPrep: 'Fill in 1 to 120 minutes for the preparation.', vsErrHand: (title, max) => `For ${title}: fill in 0 to ${max}.`,
     site: {
-      brandSub: 'Ready for later', open: 'Open the lesson', soon: 'Coming soon', backHome: 'Back to Escape 18',
+      brandSub: 'Ready for later',
+      planSum: 'I am going to teach this', planWhen: 'Roughly when?', planWhenOpts: [['deze week', 'this week'], ['deze maand', 'this month'], ['later', 'later']], planLevel: 'Which level?',
+      planLevels: [['pro', 'praktijkonderwijs'], ['vmbo', 'vmbo'], ['havo', 'havo'], ['vwo', 'vwo'], ['mbo', 'mbo'], ['anders', 'other']], planSend: 'Send', planNeedWhen: 'Choose roughly when.',
+      planNote: 'This only sends, anonymously, to the Escape 18 team: which lesson, roughly when and which level. No name and no school.', planThanks: 'Thank you. Enjoy the lesson!', open: 'Open the lesson', soon: 'Coming soon', backHome: 'Back to Escape 18',
       indexTitle: 'Escape 18', indexDesc: 'Escape 18: free classroom escapes for havo and vwo about what changes when you turn 18.', eyebrow: 'Free lessons for havo and vwo',
       lead: 'Escape 18 is a classroom escape. Pupils aged 16 to 18 practise what changes when you turn 18. They work in pairs on one screen and solve tasks with real kinds of documents, such as a letter, a payslip or a rental contract. Their own teacher leads the lesson. Pupils do not need an account.',
       test: 'This is a free test version that we are still developing. Feel free to use and test it; we would love to hear what worked and what did not.',
@@ -626,14 +872,18 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
       whoH: 'Who is responsible', who: 'Olivier Runge, for Escape 18. Escape 18 began as a student project by team Klaar voor Later (Erasmus University Rotterdam). Olivier Runge now continues it as a free test version, not a company.',
       storedH: 'What we keep', colWhat: 'What', colWhen: 'When', colData: 'Which data',
       rows: [['Lesson start', 'The teacher starts the lesson', 'Which lesson it is, how many rooms it has and in which language.'], ['Start', 'A pair starts', 'That a pair starts, which version of the lesson and in which language.'],
-        ['Start and end check', 'After the check', 'Which version of the check (A or B), which questions were right and how many, for example 2 of 3.'], ['Answer', 'After each question', 'Which answer the pair chose first (a letter or a number), whether it was right first time, how often they tried, whether they took a hint and how many seconds the question took.'],
+        ['Start and end check', 'After the check', 'Which version of the check (A or B), which questions were right and how many, for example 2 of 3. For the start check also whether everything was already right. For the end check, per question, how sure the pair was: a guess, a bit or very sure. The pair only taps this if it wants to.'], ['Answer', 'After each question', 'Which answer the pair chose first (a letter or a number), whether it was right first time, how often they tried, whether they took a hint and how many seconds the question took.'],
         ['Room', 'After each room', 'How many seconds the room took.'], ['Lock', 'At the lock', 'Whether the lock opened and after how many seconds.'],
-        ['Opinion', 'At the end, if the pair wants to', 'Two taps from 1 to 5: how much fun the lesson was and how much they learned.'], ['End', 'At the end', 'How long the escape took.'],
-        ['Teacher feedback', 'When the teacher sends the form', 'Whether you would teach the lesson again, how much you used, the number of pupils, the number of minutes, and what worked and what did not. You write those last two yourself, without names of pupils.']],
-      alsoStored: 'Each of these records also has: the name and version of the lesson, the class code and a random code for this one play. The class code has 5 characters and is made up by the teacher screen, for example K7MQX. The random code is new every time. It does not stay on the device.',
+        ['Opinion', 'At the end, if the pair wants to', 'Two taps from 1 to 5: how much fun the lesson was and how much they learned. If the pair wants, also one tap: which topic it would like a lesson about next, chosen from a fixed list.'], ['End', 'At the end', 'How long the escape took.'],
+        ['Teacher feedback', 'When the teacher sends the form', 'Whether you would teach the lesson again, how much you used, the number of pupils, the number of minutes, and what worked and what did not. Those last two you write yourself, without names of pupils. We automatically remove e-mail addresses and phone numbers from your text.'],
+        ['I am going to teach this', 'When a teacher taps I am going to teach this for a lesson on the home page and sends it', 'Which lesson, roughly when (this week, this month or later) and which level, for example havo. No name and no school.'],
+        ['Lesson started again', 'When a teacher starts a lesson that was already started on the same device on an earlier day (only with Yes)', 'That it is the 2nd, 3rd, 4th or 5th time or more, and whether the last time was this week, this month or longer ago.']],
+      alsoStored: 'Each of these records also has: the name and version of the lesson, the class code and a random code for this one play. The class code has 5 characters and is made up by the teacher screen, for example K7MQX. The random code is new every time. It does not stay on the device. I am going to teach this has no class code.',
+      teacherDevH: 'What the teacher screen remembers', teacherDev: 'Do you choose Yes and start the lesson? Then the browser on your device remembers which lesson you started, how often and on which day. That stays on your device. We only send the message Lesson started again from the table above. It contains no code of you or your device. You can delete it with the Forget this device button on the teacher screen, or by clearing the site data in your browser.',
+      classResH: 'What the teacher sees after the lesson', classRes: 'After the stop the teacher sees a summary of the whole class on the teacher screen. Per room: how many pairs finished, which question was hardest and which wrong answer was chosen most. This only works if the teacher chose Yes and at least 3 pairs took part. You never see which pair answered what. Anyone who knows the class code can request this summary. It contains no name and nothing about one pupil.',
       neverH: 'What we never keep', never: ['Names or e-mail addresses of pupils.', 'Text that pupils type themselves, such as their if-then plan. That plan stays on their own screen.', 'The internet address (IP address), the kind of device or the browser.', 'Anything else that could identify a pupil or a device.'],
       google: 'The data is kept in a Google Sheet in the Google account of Escape 18 (managed by Olivier Runge). Google is the host, so when data is sent Google technically receives the internet address (IP address) of the connection. We do not store that address and we do not see it.',
-      whereH: 'Where and who', where: 'Only Olivier Runge can see the data. We use it to improve the lessons, for example to see which question is too hard.',
+      whereH: 'Where and who', where: 'Only Olivier Runge can see all data. The teacher only sees the summary of their own class. Olivier gets a weekly e-mail with counts, the hardest questions and teachers\' feedback. We use the data to improve the lessons, for example to see which question is too hard.',
       queue: 'Anything not yet sent is kept for a short time in the browser of the device (for example when there is no internet). As soon as it is sent, it is deleted there.',
       howLongH: 'How long', howLong: 'We delete all data by 31 January 2027 at the latest. If the project continues, by 31 August 2027 at the latest.', contactH: 'Contact',
       dpaH: 'For schools', dpa: 'We do not process personal data of pupils. So a school does not need a processing agreement (verwerkersovereenkomst) for this test version. Does your school\'s privacy officer want to check this? Contact Olivier Runge at the address below.', contactMissing: 'The contact address will follow.'
@@ -664,8 +914,11 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
   if (typeof module === 'object' && module.exports) module.exports = g.E18I18N;
 })(typeof window !== 'undefined' ? window : globalThis);
 
-/* Escape 18 results logging, following /home/claude/e18_dev/LOGGING_SPEC.md (v2, 6 Nov 2026), plus the coordinator's
-   additions of 6 Nov: `lang` in `start` and `teacher_start`, and `form` and `items` in `check`.
+/* Escape 18 results logging, following /home/claude/e18_dev/LOGGING_SPEC.md (v3, 7 Nov 2026): v2 plus `lang` in `start` and
+   `teacher_start`, `form` and `items` in `check`, the types `plan` and `reuse` (backend-v2/CLIENT_SPEC.md section 1) and three optional
+   fields: `ceil` in `check` (start score = max), `conf` (1 to 3) per check item, `wish` (a topic id) in `pupil_feedback`.
+   - Optional fields are marked with opt(): left out = fine, present and invalid = the whole event is refused. Any key that is not in the
+     whitelist of its type also refuses the whole event.
    - Endpoint comes only from window.E18_CONFIG.endpoint. Empty endpoint: every call is a no-op, nothing touches storage or the network.
    - Every event is checked against a whitelist per type before it is queued; anything else is dropped. No free text from pupils can pass:
      the only free text fields allowed are the teacher's `worked` and `notworked` in `feedback` (cut to 500 characters).
@@ -695,23 +948,36 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
   const text500 = v => typeof v === 'string' ? v.slice(0, 500) : undefined;
   const SEC = int(0, 86400);
   const lang = v => (typeof v === 'string' && /^[a-z]{2}$/.test(v)) ? v : undefined;
-  const items = v => (Array.isArray(v) && v.length >= 1 && v.length <= 50 && v.every(x => x && typeof x === 'object' && Object.keys(x).length === 2 && id(x.q) !== undefined && typeof x.right === 'boolean'))
-    ? v.map(x => ({ q: x.q, right: x.right })) : undefined;
+  const CONF = [1, 2, 3];
+  const itemOk = x => x && typeof x === 'object' && !Array.isArray(x) && id(x.q) !== undefined && typeof x.right === 'boolean'
+    && Object.keys(x).every(k => k === 'q' || k === 'right' || (k === 'conf' && CONF.includes(x.conf)));
+  const items = v => (Array.isArray(v) && v.length >= 1 && v.length <= 50 && v.every(itemOk))
+    ? v.map(x => x.conf === undefined ? { q: x.q, right: x.right } : { q: x.q, right: x.right, conf: x.conf }) : undefined;
+  const slug = v => (typeof v === 'string' && /^escape18-[a-z0-9-]{1,40}$/.test(v)) ? v : undefined;
+  const OPT = Symbol('optional'), opt = f => { const g2 = v => f(v); g2[OPT] = true; return g2; };
+  // Topic wish on the end screen (one tap, a fixed id, never text). The labels are in src/strings.js `wishes`.
+  const WISHES = ['zorgverzekering', 'abonnementen', 'verzekeringen', 'belasting', 'budget', 'anders'];
   const TYPES = {
     teacher_start: { variant: id, rooms: int(1, 50), lang },
     start: { variant: id, lang },
-    check: { phase: oneOf(['start', 'end']), form: oneOf(['A', 'B']), score: int(0, 100), max: int(1, 100), items },
+    check: { phase: oneOf(['start', 'end']), form: oneOf(['A', 'B']), score: int(0, 100), max: int(1, 100), items, ceil: opt(bool) },
     answer: { room: id, q: id, choice, first: bool, tries: int(1, 20), hint: bool, sec: SEC },
     room: { room: id, sec: SEC },
     lock: { opened: bool, sec: SEC },
-    pupil_feedback: { fun: int(1, 5), learned: int(1, 5) },
+    pupil_feedback: { fun: int(1, 5), learned: int(1, 5), wish: opt(oneOf(WISHES)) },
     end: { sec: SEC },
-    feedback: { again: oneOf(['ja', 'twijfel', 'nee']), used: oneOf(['heel', 'kort', 'deels']), pupils: int(0, 500), minutes: int(0, 600), worked: text500, notworked: text500 }
+    feedback: { again: oneOf(['ja', 'twijfel', 'nee']), used: oneOf(['heel', 'kort', 'deels']), pupils: int(0, 500), minutes: int(0, 600), worked: text500, notworked: text500 },
+    plan: { product: slug, when: oneOf(['deze week', 'deze maand', 'later']), level: opt(oneOf(['pro', 'vmbo', 'havo', 'vwo', 'mbo', 'anders'])) },
+    reuse: { product: slug, times: int(2, 5), since: oneOf(['week', 'maand', 'langer']) }
   };
   function clean(type, data) {
     const spec = TYPES[type]; if (!spec || !data || typeof data !== 'object') return null;
+    if (Array.isArray(data) || Object.keys(data).some(k => !Object.prototype.hasOwnProperty.call(spec, k))) return null; // unknown key: refuse
     const out = {};
-    for (const k of Object.keys(spec)) { const v = spec[k](data[k]); if (v === undefined) return null; out[k] = v; }
+    for (const k of Object.keys(spec)) {
+      if (spec[k][OPT] && data[k] === undefined) continue;
+      const v = spec[k](data[k]); if (v === undefined) return null; out[k] = v;
+    }
     return out;
   }
 
@@ -758,7 +1024,7 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
   }
   const newSession = () => rand(10, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789');
   const newClassCode = () => rand(5, ALPH);
-  g.E18Log = { on: () => !!endpoint(), send, flush, newSession, newClassCode, validCode: c => CODE_RE.test(c || ''), _clean: clean };
+  g.E18Log = { on: () => !!endpoint(), endpoint, send, flush, newSession, newClassCode, validCode: c => CODE_RE.test(c || ''), WISHES: WISHES.slice(), _clean: clean };
 })(typeof window !== 'undefined' ? window : globalThis);
 
 /* QR code: byte mode, error correction level M, versions 1 to 40. Copied from Escape 18 d32 src/teacher.js (written from ISO/IEC 18004). */
@@ -832,12 +1098,41 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
   g.E18QR = { qr, qrPath };
 })(typeof window !== 'undefined' ? window : globalThis);
 
+/* Plan slip ("Mijn volgende stap"): size estimate shared by the engine and the build validator, so a slip that cannot fit one A4 is refused at build time
+   and the teacher print puts as many slips on one A4 as fit cleanly (2 for a normal slip). The estimate is deliberately generous; tests/slip-e2e.js
+   checks it against the real print layout. Heights are millimetres of an A4 portrait page with 14 mm margins (269 mm usable, 266 mm used). */
+(function (g) {
+  'use strict';
+  const PAGE_MM = 266, MAX_PER_PAGE = 4, ROW_MM = 10.5, GAP_MM = 3.2, INLINE_MAX = 70;
+  const rows = (text, mmPerChar, widthMm) => Math.max(1, Math.ceil(String(text || '').length * mmPerChar / widthMm));
+  // A hint goes on its own row under the field's first line when label and hint together are long (it would wrap beside the label);
+  // a short hint (such as the choices to circle) stays on the label's row. The engine's print layout uses the same rule.
+  const hintBelow = f => !!(f && f.hint) && String(f.label).length + String(f.hint).length > INLINE_MAX;
+  function heightMm(S) {
+    let h = 9 + 9;                                                   // cell padding and the title (16 pt)
+    if (S.intro) h += rows(S.intro, 2, 170) * 5 + 1.5;
+    for (const f of S.fields) {                                      // labels 12 pt, hints 11 pt, writing lines 10.5 mm
+      const lines = f.lines == null ? 1 : f.lines, below = hintBelow(f), text = f.label + (f.hint && !below ? ' ' + f.hint : '');
+      h += GAP_MM + Math.max(ROW_MM, rows(text, 2.2, lines ? 140 : 170) * 5.4 + 1.5);
+      if (below) h += rows(f.hint, 2.1, 170) * 5 + 1.2;
+      h += Math.max(0, lines - 1) * ROW_MM;
+    }
+    if (S.footer) h += rows(S.footer, 2.1, 170) * 5 + 4;
+    return Math.round(h * 10) / 10;
+  }
+  // How many slips fit one A4 (0 when even one does not).
+  const perPage = S => Math.min(MAX_PER_PAGE, Math.floor(PAGE_MM / heightMm(S)));
+  g.E18Slip = { heightMm, perPage, hintBelow, PAGE_MM };
+  if (typeof module === 'object' && module.exports) module.exports = g.E18Slip;
+})(typeof window !== 'undefined' ? window : globalThis);
+
 /* Escape 18 topic escape engine. Renders one lesson from window.E18_LESSON (format: README.md) with the interface text from
    src/strings.js (window.E18I18N; nl default, en second). Pupil flow for pairs on one screen (start, start check, rooms with documents and
    questions, a digit per room, the lock, end check, debrief, if-then plan, optional tap feedback) and the teacher screen ("Voor de docent":
    forced sharing choice, class code, short link and QR, board timer, lesson plan, answer sheet, paper version, discussion prompts, feedback).
-   Follows LOGGING_SPEC.md v2. No framework and no network use except the logging module (src/log.js). Anything a pupil types (the if-then
-   plan) stays in this page's memory and is never logged or stored. */
+   Follows LOGGING_SPEC.md v3: also the Klasresultaten panel after the stop (backend-v2/CLIENT_SPEC.md section 2), the local reuse record
+   (section 3), and the teacher kit: Klaar in 15 minuten, Probleem?, Projectiemodus and the Lesverslag (screen memory only, nothing sent). No framework and no network use except the logging module (src/log.js). Anything a pupil types (the if-then
+   plan, the optional plan-slip inputs) stays in this page's memory and is never logged or stored. */
 (function () {
   'use strict';
   const RAW = window.E18_LESSON, B = window.E18_BUILD || { version: 'dev' }, LOG = window.E18Log, QR = window.E18QR, I = window.E18I18N;
@@ -888,7 +1183,8 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
   const S = { view: 'start', klas: LOG.validCode(urlCode) ? urlCode : '', klasTyped: null, klasErr: false, run: null, phase: 'start' };
   const shareStored = ss.get('share');
   const T = { code: ss.get('code') || '', share: shareStored === 'ja' ? true : shareStored === 'nee' ? false : null, session: ss.get('session') || '',
-    dur: RAW.minutes || 30, left: (RAW.minutes || 30) * 60, running: false, endAt: 0, fb: '', fbErr: '', draft: {}, stopped: false };
+    dur: RAW.minutes || 30, left: (RAW.minutes || 30) * 60, running: false, endAt: 0, fb: '', fbErr: '', draft: {}, stopped: false,
+    qs: { on: false, run: false, fin: false, t0: 0, acc: 0, done: new Set() }, vs: {}, pbOpen: new Set(), pProb: false, devGone: false };
   if (T.code && !LOG.validCode(T.code)) T.code = '';
   const logActive = () => LOG.on() && pupilMayLog;
   function plog(type, data) { if (!pupilMayLog || !S.run) return; LOG.send({ type, product: PRODUCT, version: B.version, cls: S.run.klas, session: S.run.session, data }); }
@@ -909,18 +1205,18 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
 
   // ----- documents -----
   // point: list of line ids of this document that the retry pointer marks (one or more).
-  function docHtml(key, D, point) {
+  function docHtml(key, D, point, plainPart) {
     const pts = [].concat(point || []);
     const at = (id, extra) => `class="ln${extra ? ' ' + extra : ''}${pts.includes(id) ? ' point' : ''}" id="ln-${key}-${esc(id)}" tabindex="-1"`;
-    const plain = D.plain ? `<p class="esc-plain"><b>${t('hardWords')}</b>${esc(D.plain)}</p>` : '';
+    const plain = D.plain ? `<p class="esc-plain"><b>${t('hardWords')}</b>${plainPart ? markIn(D.plain, plainPart, 'ln-plain') : esc(D.plain)}</p>` : '';
     const note = D.note ? `<p class="esc-note">${esc(D.note)}</p>` : '';
     const kind = `<span class="doc-kind">${esc(D.kind || t('kind.' + D.type))}</span>`;
     if (D.type === 'letter') return `<article class="esc-letter" aria-label="${esc(t('letterFrom', D.from))}">${kind}<header><b>${esc(D.from)}</b><span>${esc(D.place || '')}</span></header>`
       + (D.greeting ? `<p>${esc(D.greeting)}</p>` : '') + D.lines.map(([id, x]) => `<p ${at(id)}>${esc(x)}</p>`).join('') + (D.sign ? `<p>${esc(D.sign)}</p>` : '') + note + plain + '</article>';
     if (D.type === 'table' && D.head) return `<section class="esc-doc esc-slip" aria-label="${esc(D.title)}">${kind}<div class="esc-slip-h"><h3>${esc(D.title)}</h3><span>${esc(D.from || '')}</span></div>`
-      + `<div class="esc-tscroll" role="region" tabindex="0" aria-label="${esc(t('tableScroll', D.title))}"><table class="esc-grid"><thead><tr>${D.head.map(h => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>`
+      + `<div class="esc-tscroll" role="region" tabindex="0" aria-label="${esc(t('tableScroll', D.title))}"><table class="esc-grid${D.head.length >= 4 ? ' wide c' + Math.min(5, D.head.length) : ''}"><thead><tr>${D.head.map(h => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>`
       + D.rows.map(r => { const [id, ...rest] = r, cells = rest.slice(0, D.head.length), flag = rest[D.head.length];
-        return `<tr ${at(id, flag === 'total' ? 'total' : '')}>${cells.map((c, i) => i === 0 ? `<th scope="row">${esc(c)}</th>` : `<td>${esc(c)}</td>`).join('')}</tr>`; }).join('') + `</tbody></table></div>${note}${plain}</section>`;
+        return `<tr ${at(id, flag === 'total' ? 'total' : '')}>${cells.map((c, i) => i === 0 ? `<th scope="row">${esc(c)}</th>` : `<td data-h="${esc(D.head[i])}">${esc(c)}</td>`).join('')}</tr>`; }).join('') + `</tbody></table></div>${note}${plain}</section>`;
     if (D.type === 'table') return `<section class="esc-doc esc-slip" aria-label="${esc(D.title)}">${kind}<div class="esc-slip-h"><h3>${esc(D.title)}</h3><span>${esc(D.from || '')}</span></div><dl>`
       + D.rows.map(([id, k, v, flag]) => { const pr = /\s/.test(String(v)) && String(v).length > 24; return `<div ${at(id, (flag === 'total' ? 'total' : '') + (pr ? ' row-prose' : ''))}><dt>${esc(k)}</dt><dd${pr ? ' class="dd-prose"' : ''}>${esc(v)}</dd></div>`; }).join('') + `</dl>${note}${plain}</section>`;
     if (D.type === 'chat') return `<section class="esc-phone" aria-label="${esc(t('chatFrom', D.name))}">${kind}<div class="esc-phone-top"><span class="esc-avatar" aria-hidden="true">${esc((D.name || '?').trim()[0])}</span><div><b>${esc(D.name)}</b><span>${esc(D.sub || '')}</span></div></div><div class="esc-chat">`
@@ -932,9 +1228,9 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
       + D.articles.map(([id, h, x]) => `<li ${at(id)}><b>${esc(h)}</b>${esc(x)}</li>`).join('') + `</ol>${note}${plain}</section>`;
     return '';
   }
-  // Retry pointer: { doc, line }, { doc, lines: [...] }, { rule: id }, { rules: [...] }, { situ: 'text' }, { intro: 'text' } or a list of those.
+  // Retry pointer: { doc, line }, { doc, lines: [...] }, { rule: id }, { rules: [...] }, { situ: 'text' }, { intro: 'text' }, { plain: 'text' } (a part of a document's "Moeilijke woorden") or a list of those.
   // Returns [{ doc, line, id }, ...] in the order given; doc is a document key or '@rules', '@situ', '@intro' (line = the quoted part).
-  const pointsOf = P => !P ? [] : [].concat(P).flatMap(p => p.situ != null ? [{ doc: '@situ', line: p.situ, id: 'ln-situ' }]
+  const pointsOf = P => !P ? [] : [].concat(P).flatMap(p => p.plain != null ? [{ doc: '@plain', line: p.plain, id: 'ln-plain' }] : p.situ != null ? [{ doc: '@situ', line: p.situ, id: 'ln-situ' }]
     : p.intro != null ? [{ doc: '@intro', line: p.intro, id: 'ln-intro' }]
     : (p.rules || p.rule != null) ? [].concat(p.rules || p.rule).map(line => ({ doc: '@rules', line, id: 'ln-rules-' + line }))
     : (p.lines || [p.line]).map(line => ({ doc: p.doc, line, id: `ln-${p.doc}-${line}` })));
@@ -955,7 +1251,8 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     const pts = (points || []).filter(p => p.doc[0] !== '@');
     pts.forEach(p => { if (!list.includes(p.doc)) list.push(p.doc); });
     const rules = withRules ? ruleBox(R, (points || []).filter(p => p.doc === '@rules').map(p => p.line)) : '';
-    return rules + list.map(k => docHtml(k, R.docs[k], pts.filter(p => p.doc === k).map(p => p.line))).join('');
+    const pp = (points || []).find(p => p.doc === '@plain');
+    return rules + list.map(k => docHtml(k, R.docs[k], pts.filter(p => p.doc === k).map(p => p.line), pp && R.docs[k].plain && R.docs[k].plain.includes(pp.line) ? pp.line : null)).join('');
   }
   const answerLabel = (Q, v) => {
     if (Q.type === 'number') return withUnit(v, Q);
@@ -1001,9 +1298,12 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
   function viewCheck(phase) {
     const r = run(), form = phase === 'start' ? r.forms[0] : r.forms[1];
     let qs = formQs(form); if (phase === 'end' && !hasB()) qs = qs.slice().reverse();
-    const mine = r.chkDraft || {};
+    const mine = r.chkDraft || {}, conf = r.confDraft || {};
+    // End check only: an optional "Hoe zeker zijn jullie?" per question (1 gok, 2 een beetje, 3 heel zeker), logged as items[].conf.
+    const confRow = Q => phase !== 'end' ? '' : `<fieldset class="conf"><legend>${t('confQ')} <small>${t('confOpt')}</small></legend><div class="conf-opts">`
+      + t('confs').map((x, i) => `<label class="opt conf-opt"><input type="radio" name="k-${esc(Q.id)}" value="${i + 1}" ${conf[Q.id] === i + 1 ? 'checked' : ''}><span>${esc(x)}</span></label>`).join('') + '</div></fieldset>';
     const body = qs.map((Q, i) => `<fieldset class="card"><legend>${i + 1}. ${esc(Q.prompt)}</legend><p class="opts-hint">${t('radioHint')}</p><div class="opts">`
-      + Q.options.map(([id, x]) => `<label class="opt"><input type="radio" name="c-${esc(Q.id)}" value="${esc(id)}" ${mine[Q.id] === id ? 'checked' : ''}><span>${esc(x)}</span></label>`).join('') + '</div></fieldset>').join('');
+      + Q.options.map(([id, x]) => `<label class="opt"><input type="radio" name="c-${esc(Q.id)}" value="${esc(id)}" ${mine[Q.id] === id ? 'checked' : ''}><span>${esc(x)}</span></label>`).join('') + `</div>${confRow(Q)}</fieldset>`).join('');
     return `<header class="top">${brand()}</header>
       <section class="esc-a"><p class="eyebrow">${phase === 'start' ? t('checkStart') : t('checkEnd')}</p><h1 class="t2" tabindex="-1">${phase === 'start' ? t('checkStartH') : t('checkEndH')}</h1>
       <p class="lead">${phase === 'start' ? t('checkStartLead') : t(hasB() ? 'checkEndLeadB' : 'checkEndLead')}</p></section>
@@ -1077,6 +1377,22 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
       <p>${t('pStopOr')}</p><div class="row"><button class="btn" data-act="p-skip" id="pskip">${L.check ? t('pStopSkip') : t('pStopSkipNoCheck')}</button><button class="btn ghost" data-act="p-back">${t('pStopBack')}</button></div></section>`;
   }
 
+  // Plan slip "Mijn volgende stap" (optional lesson data `slip`). Pupils fill the paper slip in; the end screen shows its fields as a read-only reminder, or with
+  // `slip.screen: true` as plain inputs that exist only in this page's memory: no form, no name, no autocomplete, never logged, never stored, never in the URL.
+  const slipLines = f => f.lines == null ? 1 : f.lines;
+  const slipLabel = f => esc(f.label) + (f.hint ? ` <small class="slip-hint">${esc(f.hint)}</small>` : '');
+  function slipCard(r) {
+    const S = L.slip; if (!S) return '';
+    const head = `<h2 class="h3">${esc(S.title)}</h2>${S.intro ? `<p>${esc(S.intro)}</p>` : ''}`;
+    if (S.screen) {
+      const inputs = S.fields.map((f, i) => {
+        const v = esc(r.slipDraft[i] || ''), at = `id="slip-in-${i}" data-slip="${i}" maxlength="300" autocomplete="off" autocapitalize="off" spellcheck="false"`;
+        return `<label class="field" for="slip-in-${i}">${i + 1}. ${slipLabel(f)}${slipLines(f) > 1 ? `<textarea ${at} rows="${Math.min(slipLines(f), 4)}">${v}</textarea>` : `<input ${at} type="text" value="${v}">`}</label>`;
+      }).join('');
+      return `<section class="card esc-wide slip-card" id="slipcard"><div class="slip-body">${head}<p class="slip-note"><b>${t('slipScreenNote')}</b> ${t('slipScreenMore')}</p><div class="slip-fields">${inputs}</div>${S.footer ? `<p class="note">${esc(S.footer)}</p>` : ''}</div></section>`;
+    }
+    return `<section class="card esc-wide slip-card" id="slipcard"><div class="slip-body">${head}<p><b>${t('slipPaper')}</b> ${t('slipPaperMore')}</p><ol class="esc-talk slip-read">${S.fields.map(f => `<li>${slipLabel(f)}</li>`).join('')}</ol>${S.footer ? `<p class="note">${esc(S.footer)}</p>` : ''}</div></section>`;
+  }
   function viewWin() {
     const r = run(), code = lockCode(), A = r.chk.start, Z = r.chk.end;
     const rows = res => res ? formQs(res.form).map(Q => `<tr><th scope="row">${esc(Q.prompt)}</th><td>${esc(chkAns(Q))}</td><td>${res.ans[Q.id] === Q.correct ? t('ok') : t('wrong')}</td></tr>`).join('') : '';
@@ -1099,15 +1415,16 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     let fb = '';
     if (logActive()) {
       const row = (k, lab, lo, hi) => `<fieldset><legend>${lab}</legend><div class="taps" role="group">${[1, 2, 3, 4, 5].map(v => `<button class="tap" data-act="tap" data-k="${k}" data-v="${v}" aria-pressed="${r.fb[k] === v}" aria-label="${t('ofFive', v)}${v === 1 ? ', ' + lo : v === 5 ? ', ' + hi : ''}">${v}</button>`).join('')}</div><small class="note">1 = ${lo}, 5 = ${hi}</small></fieldset>`;
+      const wish = `<fieldset class="wish"><legend>${t('wishQ')} <small>${t('wishOpt')}</small></legend><div class="wish-opts" role="group">${LOG.WISHES.map(w => `<button class="tap wish-tap" data-act="wish" data-v="${w}" aria-pressed="${r.fb.wish === w}">${esc(t('wishes')[w])}</button>`).join('')}</div></fieldset>`;
       fb = r.fb.sent ? `<section class="card esc-wide" id="pfb" tabindex="-1"><p>${t('pfbThanks')}</p></section>`
-        : `<section class="card esc-wide"><h2 class="h3">${t('pfbTitle')}</h2>${row('fun', t('fun'), t('funLo'), t('funHi'))}${row('learned', t('learned'), t('learnedLo'), t('learnedHi'))}
+        : `<section class="card esc-wide"><h2 class="h3">${t('pfbTitle')}</h2>${row('fun', t('fun'), t('funLo'), t('funHi'))}${row('learned', t('learned'), t('learnedLo'), t('learnedHi'))}${wish}
           <div class="row"><button class="btn" data-act="send-pfb" ${r.fb.fun && r.fb.learned ? '' : 'disabled'}>${t('send')}</button></div><p class="note">${t('pfbNote')}</p></section>`;
     }
     const skipped = r.stopped === 'skip';
     return `<header class="top">${brand()}</header><section class="esc-win">${skipped ? '' : `<div class="esc-lockbig" aria-hidden="true">${code.split('').map(x => `<i>${esc(x)}</i>`).join('')}</div>`}
       <h1 class="esc-won" tabindex="-1">${skipped ? t('wonStop') : t('won')}</h1>${skipped ? `<p class="lead" id="stopnote">${t('wonStopNote')}</p>` : ''}
       <dl class="esc-stats"><div><dt>${t('statTime')}</dt><dd>${mmss(r.endSec + r.pen)}</dd></div><div><dt>${t('statHints')}</dt><dd>${r.hints}</dd></div><div><dt>${t('statFirst')}</dt><dd id="statfirst">${r.stopped ? t('statFirstOf', r.first, r.done) : r.first + '/' + nQ()}</dd></div></dl>
-      ${chk}${talk}${take}${plan}${fb}<div class="row"><button class="btn ghost" data-act="restart">${t('restart')}</button></div></section>`;
+      ${chk}${talk}${take}${plan}${slipCard(r)}${fb}<div class="row"><button class="btn ghost" data-act="restart">${t('restart')}</button></div></section>`;
   }
 
   // ----- teacher view -----
@@ -1129,9 +1446,10 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
       <div class="row"><button class="btn ghost" data-act="t-share" data-v="ja" aria-pressed="${T.share === true}" ${locked ? 'disabled' : ''}>${t('fbJa')}</button><button class="btn ghost" data-act="t-share" data-v="nee" aria-pressed="${T.share === false}" ${locked ? 'disabled' : ''}>${t('fbNee')}</button></div>
       <p>${t('shareWhat')} <a href="${privacyHref()}">${t('privacy')}</a></p>${T.share === false ? `<p class="note">${esc(t('shareNoNote'))}</p>` : ''}${locked ? `<p class="note">${t('shareLocked')}</p>` : ''}</div>`;
   }
+  const overNote = () => T.left <= 0 && !T.stopped ? `<p class="t-over" id="tover" role="status">${t('tOver')}</p>` : '';
   function timerBlock() {
     const durs = Array.from(new Set([20, 30, 40, RAW.minutes || 30])).sort((a, b) => a - b);
-    return `<section class="t-card t-timer${T.left <= 0 ? ' over' : ''}" aria-label="${t('timer')}"><h2>${t('timer')}</h2><p class="t-clock" id="tclock" role="timer">${mmss(T.left)}</p>
+    return `<section class="t-card t-timer${T.left <= 0 ? ' over' : ''}" aria-label="${t('timer')}"><h2>${t('timer')}</h2><p class="t-clock" id="tclock" role="timer">${mmss(T.left)}</p>${overNote()}
       <div class="t-durs" role="group" aria-label="${t('chooseTime')}">${durs.map(d => `<button class="t-dur" data-act="t-dur" data-v="${d}" aria-pressed="${T.dur === d}">${t('min', d)}</button>`).join('')}</div>
       <div class="row"><button class="btn ghost" data-act="t-run" id="trun">${T.running ? t('pause') : T.left < T.dur * 60 && T.left > 0 ? t('resume') : t('startTimer')}</button><button class="btn ghost" data-act="t-reset">${t('reset')}</button></div>
       <div class="row"><button class="btn t-stopbtn" data-act="t-stop" id="tstop" aria-pressed="${T.stopped}">${T.stopped ? t('stopUndo') : t('stopBtn')}</button></div></section>`;
@@ -1187,16 +1505,23 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
       + rows.map(r => `<tr>${r.slice(cut).map(c => `<td>${mdb(c)}</td>`).join('')}</tr>`).join('') + '</tbody></table></div>';
   }
   // The line under the spec table is shown only when it is the lesson's own wording, not a key of letters (the check key below replaces that).
-  const ansAfter = () => { const a = AS() && AS().after; return a && (AS().format === 'text' || !KEYISH.test(a)) ? `<p>${mdb(a)}</p>` : ''; };
   const chkForms = () => !L.check ? [] : hasB() ? ['A', 'B'] : ['A'];
+  const chkLabel = (f, i) => (hasB() ? f : 'V') + (i + 1);
+  // The specs write the check key with the question ids (C1 ... C4 for form A, B1 ... B4 for form B); the teacher sees the form's own labels.
+  function relabel(a) {
+    const map = {}; chkForms().forEach(f => formQs(f).forEach((Q, i) => { map[Q.id] = chkLabel(f, i); }));
+    const ids = Object.keys(map).filter(x => /\d/.test(x)).sort((x, y) => y.length - x.length).map(x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    return ids.length ? a.replace(new RegExp('\\b(' + ids.join('|') + ')\\b', 'g'), m => map[m]) : a;
+  }
+  const ansAfter = () => { const a = AS() && AS().after; return a && (AS().format === 'text' || !KEYISH.test(a)) ? `<p>${mdb(relabel(a))}</p>` : ''; };
   // Start and end check key: question and right answer text per form, as on the pupil screen.
   const checkKey = () => !L.check ? '' : `<h3 class="h3">${t('chkHead')}</h3>` + chkForms().map(f => `${hasB() ? `<p><b>${t('formN', f)}</b></p>` : ''}<table class="t-chk"><thead><tr><th scope="col">${t('colQ')}</th><th scope="col">${t('colRight')}</th></tr></thead><tbody>`
-    + formQs(f).map(Q => `<tr><td>${esc(Q.prompt)}</td><td>${esc(chkAns(Q))}</td></tr>`).join('') + '</tbody></table>').join('');
+    + formQs(f).map((Q, i) => `<tr><td><b class="t-cl">${chkLabel(f, i)}</b> ${esc(Q.prompt)}</td><td>${esc(chkAns(Q))}</td></tr>`).join('') + '</tbody></table>').join('');
   function sheet() {
     const TP = L.teacher || {}, plan = TP.plan || [];
     const lesplan = plan.length ? `<h2>${t('planH')}</h2>${planTable(plan, 's-plan')}<p>${esc(t('planTotal', planTotal(plan)))}</p>` : '';
     const top = `<h1>${esc(t('sheetTitle', L.title))}</h1>${lesplan}${planExtras(TP)}`;
-    const chk = chkForms().map(f => `<h2>${t('chkHead')}${hasB() ? ' ' + f : ''}</h2><table><tbody>${formQs(f).map(Q => `<tr><td>${esc(Q.prompt)}</td><td>${esc(chkAns(Q))}</td></tr>`).join('')}</tbody></table>`).join('');
+    const chk = chkForms().map(f => `<h2>${t('chkHead')}${hasB() ? ' ' + t('formN', f).replace(/^\S+/, w => w.toLowerCase()) : ''}</h2><table><tbody>${formQs(f).map((Q, i) => `<tr><td><b>${chkLabel(f, i)}</b> ${esc(Q.prompt)}</td><td>${esc(chkAns(Q))}</td></tr>`).join('')}</tbody></table>`).join('');
     if (AS()) return `<section class="sheet" aria-hidden="true">${top}<p>${t('sheetCode', esc(lockCode()))}</p>${ansTable(null)}${ansAfter()}${chk}</section>`;
     return `<section class="sheet" aria-hidden="true">${top}<p>${t('sheetCode', esc(lockCode()))}</p>`
       + L.rooms.map((R, i) => `<h2>${esc(t('roomItem', i + 1, R.title))}</h2><table><thead><tr><th>${t('colQ')}</th><th>${t('colAns')}</th><th>${t('colWhy')}</th></tr></thead><tbody>${R.questions.map(Q => `<tr><td>${esc(Q.prompt)}</td><td>${esc(sheetText(Q) || answerLabel(Q, Q.correct))}</td><td>${esc(Q.explain)}</td></tr>`).join('')}<tr><td>${t('digitForLock')}</td><td><b>${esc(R.digit)}</b></td><td></td></tr></tbody></table>`).join('') + chk + '</section>';
@@ -1209,13 +1534,13 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     const chk = (f, h) => !L.check ? '' : `<section class="room"><h2>${h}</h2>${formQs(f).map((Q, i) => q(Q, i)).join('')}</section>`;
     return `<section class="paper" aria-hidden="true"><h1>${esc(L.title)}</h1><p>${esc(L.fictional)}</p><p>${t('paperIntro')}</p>${chk('A', t('checkStart'))}`
       + L.rooms.map((R, i) => `<section class="room"><h2>${esc(t('roomItem', i + 1, R.title))}</h2><p>${esc(R.intro)}</p>${docsFor(R, null, null, true)}${R.questions.map((Q, n) => n === R.questions.length - 1 ? q(Q, n).replace(/<\/div>$/, `<p class="p-digit"><b>${t('digitForLock')}:</b> ${esc(R.clue)} <span class="box">&nbsp;</span></p></div>`) : q(Q, n)).join('')}</section>`).join('')
-      + `<section class="room"><h2>${t('lockTitle')}</h2><p>${esc((L.lock && L.lock.intro) || t('lockIntro'))}</p><p>${lockCode().split('').map(() => '<span class="box">&nbsp;</span>').join(' ')}</p></section>${chk(hasB() ? 'B' : 'A', t('checkEnd'))}</section>`;
+      + `<section class="lockp"><h2>${t('lockTitle')}</h2><p>${esc((L.lock && L.lock.intro) || t('lockIntro'))}</p><p>${lockCode().split('').map(() => '<span class="box">&nbsp;</span>').join(' ')}</p></section>${chk(hasB() ? 'B' : 'A', t('checkEnd'))}</section>`;
   }
   // Teacher answer page of Kamers op papier: a separate section (never inside .paper), printed after the rooms. Answers as on the pupil screen, no option letters.
   function paperKey() {
     return `<section class="paper-key" aria-hidden="true"><h1>${esc(t('paperKeyH'))}</h1><p><b>${esc(t('paperKeyWarn'))}</b></p><p>${esc(L.title)}. ${t('sheetCode', esc(lockCode()))}</p>`
       + L.rooms.map((R, i) => `<h2>${esc(t('roomItem', i + 1, R.title))}</h2><table><tbody>${R.questions.map((Q, n) => `<tr><td>${n + 1}. ${esc(Q.short || Q.prompt)}</td><td>${esc(sheetText(Q) || answerLabel(Q, Q.correct))}</td></tr>`).join('')}<tr><td>${t('digitForLock')}</td><td><b>${esc(R.digit)}</b></td></tr></tbody></table>`).join('')
-      + (L.check ? chkForms().map(f => `<h2>${t('chkHead')}${hasB() ? ' ' + f : ''}</h2><table><tbody>${formQs(f).map((Q, n) => `<tr><td>${n + 1}. ${esc(Q.prompt)}</td><td>${esc(chkAns(Q))}</td></tr>`).join('')}</tbody></table>`).join('') : '') + '</section>';
+      + (L.check ? chkForms().map(f => `<h2>${t('chkHead')}${hasB() ? ' ' + t('formN', f).replace(/^\S+/, w => w.toLowerCase()) : ''}</h2><table><tbody>${formQs(f).map((Q, n) => `<tr><td><b>${chkLabel(f, n)}</b> ${esc(Q.prompt)}</td><td>${esc(chkAns(Q))}</td></tr>`).join('')}</tbody></table>`).join('') : '') + '</section>';
   }
   // Lesson plan: rows { from, to, title, text } (lesson minutes; the length is to minus from) and a moment row { at, title, text }
   // such as the stop at minute 33 (no length). Older lessons give { min, title, text } with the length only.
@@ -1234,6 +1559,233 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
       + (TP.tip ? `<div class="t-tip"><p class="t-tip-h">${t('tipH')}</p><p>${esc(TP.tip)}</p></div>` : '')
       + (TP.care && TP.care.length ? `<div class="t-care"><p class="t-care-h">${t('careH')}</p><ul>${TP.care.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : '');
   }
+  // Print-only slips for the teacher: one A4 portrait page with as many slips as fit cleanly (2 for a normal slip), cut lines between them. Printing logs and stores nothing.
+  const SLIPS_N = () => Math.max(1, E18Slip.perPage(L.slip));
+  function slips() {
+    const S = L.slip; if (!S) return '';
+    // Each field: one row with the label (and a short hint, such as the choices to circle) and the first writing line; a long hint goes on its own row
+    // under that line (E18Slip.hintBelow), so it never wraps beside the label; further writing lines follow at full width.
+    const hint = f => `<small class="slip-hint">${esc(f.hint)}</small>`;
+    const n = SLIPS_N(), one = `<article class="slip-cell"><h2 class="slip-h">${esc(S.title)}</h2>${S.intro ? `<p class="slip-i">${esc(S.intro)}</p>` : ''}`
+      + S.fields.map((f, i) => { const below = E18Slip.hintBelow(f);
+        return `<div class="slip-f"><div class="slip-r"><span class="slip-l">${i + 1}. ${esc(f.label)}${f.hint && !below ? ' ' + hint(f) : ''}</span>${slipLines(f) ? '<span class="slip-w"></span>' : ''}</div>`
+          + `${below ? `<p class="slip-hb">${hint(f)}</p>` : ''}${'<span class="slip-x"></span>'.repeat(Math.max(0, slipLines(f) - 1))}</div>`; }).join('')
+      + `${S.footer ? `<p class="slip-foot">${esc(S.footer)}</p>` : ''}</article>`;
+    return `<section class="slips slips-n${n}" aria-hidden="true">${one.repeat(n)}</section>`;
+  }
+  // Teacher-only extras (optional): audience lines at the top of the teacher screen, and the "Dit wordt vaak gevraagd" question and answer block under the plan.
+  const audienceBlock = TP => TP.audience ? `<section class="t-aud" id="taud">${[].concat(TP.audience).map(x => `<p>${esc(x)}</p>`).join('')}</section>` : '';
+  const faqBlock = TP => TP.faq && TP.faq.length ? `<section class="t-card"><h2>${t('faqH')}</h2><dl class="t-faq">${TP.faq.map(f => `<div><dt>${esc(f.q)}</dt><dd>${esc(f.a)}</dd></div>`).join('')}</dl></section>` : '';
+  // ----- v3: Klasresultaten (backend-v2/CLIENT_SPEC.md section 2). After the stop, with Ja and a valid class code, the teacher screen reads the
+  // class summary: GET, no request headers (no CORS preflight), no cookies. 20 s between reads, one in flight, abort after 10 s, pause while the
+  // page is hidden, offline or the panel is not on screen; back off on errors; stop 15 minutes after the stop (then a button reads once per click).
+  // Only #tres-body and #tres-status are updated, never a full render, so focus and typed text stay. The answer is untrusted: see resClean.
+  const RES_EVERY = 20, RES_MAX = 120, RES_ABORT_MS = 10000, RES_STOP_MS = 15 * 60000;
+  const RES = { data: null, json: '', state: 'wait', err: false, timer: 0, ctrl: null, inflight: false, wait: RES_EVERY, errs: 0, stoppedAt: 0, done: false, at: 0 };
+  const resWanted = () => S.view === 'teacher' && T.stopped === true && LOG.on() && T.share === true && LOG.validCode(T.code);
+  function resReset() { if (RES.ctrl) try { RES.ctrl.abort(); } catch (e) { /* already done */ } clearTimeout(RES.timer);
+    Object.assign(RES, { data: null, json: '', state: 'wait', err: false, timer: 0, ctrl: null, inflight: false, wait: RES_EVERY, errs: 0, stoppedAt: 0, done: false, at: 0 }); }
+  const fin = v => Number.isFinite(v) ? v : null;
+  function resClean(x) {
+    if (!x || typeof x !== 'object' || Array.isArray(x)) return null;
+    if (x.error != null) return { error: true, retry: Number.isFinite(x.retry) ? Math.max(0, Math.min(600, x.retry)) : 0 };
+    if (x.enough === false) return { enough: false };
+    if (x.enough !== true) return null;
+    const rooms = {};
+    (Array.isArray(x.rooms) ? x.rooms : []).forEach(r => {
+      const R = r && typeof r === 'object' && L.rooms.find(y => y.id === r.room); if (!R || rooms[R.id]) return;
+      const qs = {}; (Array.isArray(r.questions) ? r.questions : []).forEach(q => { const Q = q && typeof q === 'object' && R.questions.find(y => y.id === q.q); if (!Q || qs[Q.id]) return;
+        const w = q.wrong && typeof q.wrong === 'object' ? { choice: q.wrong.choice, n: fin(q.wrong.n) } : null;
+        qs[Q.id] = { firstRight: fin(q.firstRight), wrong: w }; });
+      rooms[R.id] = { started: fin(r.started), finished: fin(r.finished), firstRight: fin(r.firstRight), hardest: R.questions.some(Q => Q.id === r.hardest) ? r.hardest : null, qs };
+    });
+    const ck = k => x.check && x.check[k] && typeof x.check[k] === 'object' ? { mean: fin(x.check[k].mean), max: fin(x.check[k].max) } : { mean: null, max: null };
+    const lock = x.lock && typeof x.lock === 'object' ? { reached: fin(x.lock.reached), opened: fin(x.lock.opened) } : { reached: null, opened: null };
+    return { enough: true, updated: typeof x.updated === 'string' ? x.updated : '', pairs: fin(x.pairs), ended: fin(x.ended), lock, start: ck('start'), end: ck('end'),
+      startWith: L.rooms.some(R => R.id === x.startWith) ? x.startWith : null, rooms };
+  }
+  // The most chosen wrong answer as the pupils saw it; null when it is not an answer of this question.
+  function wrongText(Q, c) {
+    if (Q.type === 'number') return Number.isFinite(c) ? withUnit(c, Q) : null;
+    const lab = id => { const o = typeof id === 'string' && Q.options.find(x => x[0] === id); return o ? o[1] : null; };
+    if (Q.type === 'multi') { if (!Array.isArray(c) || !c.length) return null; const ls = c.map(lab); return ls.every(Boolean) ? ls.join(' + ') : null; }
+    return lab(c);
+  }
+  const dec = n => { const r = Math.round(n * 10) / 10; return lang === 'nl' ? String(r).replace('.', ',') : String(r); };
+  const hhmm = d => String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  const resQText = Q => { const x = Q.short || Q.prompt; return /[.?!:]$/.test(x) ? x : x + '.'; };
+  function resBody() {
+    const D = RES.data;
+    if (!D || !D.enough) return '';
+    const lead = D.startWith ? (() => { const i = L.rooms.findIndex(R => R.id === D.startWith); return `<p class="t-res-lead">${esc(t('resStart', i + 1, L.rooms[i].title))}</p>`; })() : '';
+    const rooms = L.rooms.map((R, i) => { const x = D.rooms[R.id], head = `<h3><span class="t-k">${t('roomN', i + 1)}</span> ${esc(R.title)}</h3>`;
+      if (!x || !x.started) return `<article class="t-room">${head}<p class="note">${t('resEmpty')}</p></article>`;
+      const Q = x.hardest ? R.questions.find(y => y.id === x.hardest) : null, q = Q ? x.qs[Q.id] : null;
+      const hard = Q && q && q.firstRight != null ? `<p><b>${t('resHard')}</b> ${esc(resQText(Q))} ${esc(t('resHardPct', Math.round(q.firstRight)))}</p>` : '';
+      const wt = Q && q && q.wrong && q.wrong.n != null ? wrongText(Q, q.wrong.choice) : null;
+      const wrong = wt ? `<p><b>${t('resWrong')}</b> ${esc(wt)} ${esc(t('resWrongN', q.wrong.n))}</p>` : '';
+      return `<article class="t-room">${head}<p>${esc(t('resDone', x.finished == null ? 0 : x.finished, x.started))}</p>${hard}${wrong}</article>`; }).join('');
+    const max = D.start.max || D.end.max;
+    const chk = D.start.mean != null && D.end.mean != null && max ? `<p>${esc(t('resCheck', dec(D.start.mean), dec(D.end.mean), max))}</p>` : '';
+    return `${lead}<div class="t-rooms">${rooms}</div>${chk}`;
+  }
+  function resStatus() {
+    const D = RES.data;
+    if (D && D.enough) { const u = new Date(D.updated), time = hhmm(isNaN(u) ? new Date(RES.at || now()) : u); return t('resFoot', time) + (RES.err ? ' ' + t('resErr') : ''); }
+    if (D && !D.enough) return RES.err ? t('resErr') : t('resFew');
+    return RES.err ? t('resErr') : t('resWait');
+  }
+  const resAct = () => RES.done ? `<button class="btn ghost small" data-act="res-refresh" id="tres-refresh" ${RES.inflight ? 'disabled' : ''}>${t('resRefresh')}</button>` : '';
+  function resBlock() {
+    if (!T.stopped) return '';
+    if (T.share === false) return `<p class="note t-resno" id="tresno">${t('resNo')}</p>`;
+    if (!(LOG.on() && T.share === true && LOG.validCode(T.code))) return '';
+    return `<section class="t-card t-res" id="tres" aria-labelledby="tres-h"><h2 id="tres-h">${t('resH')}</h2><div id="tres-body">${resBody()}</div><p class="note" id="tres-status" aria-live="polite">${esc(resStatus())}</p><div id="tres-act">${resAct()}</div></section>`;
+  }
+  function resUpdate() {
+    const b = document.getElementById('tres-body'), st = document.getElementById('tres-status'), ac = document.getElementById('tres-act'); if (!b) return;
+    const body = resBody(); if (b.innerHTML !== body) b.innerHTML = body; // the HTML only changes when the answer changed
+    const txt = resStatus(); if (st.textContent !== txt) st.textContent = txt;
+    const a = resAct(); if (ac.innerHTML !== a) ac.innerHTML = a;
+    const vo = document.getElementById('vsout'), vr = document.getElementById('vsres'); // the Lesverslag follows the summary
+    if (vo) { const h = vsOut(); if (vo.innerHTML !== h) vo.innerHTML = h; }
+    if (vr) { const x = t(RES.data && RES.data.enough && T.stopped ? 'vsResOn' : 'vsResOff'); if (vr.textContent !== x) vr.textContent = x; }
+  }
+  function resFetch(manual) {
+    const ep = LOG.endpoint(); if (!ep || RES.inflight) return;
+    const url = ep + (ep.includes('?') ? '&' : '?') + 'action=class&code=' + encodeURIComponent(T.code) + '&product=' + encodeURIComponent(PRODUCT), code = T.code;
+    const ctrl = typeof AbortController === 'function' ? new AbortController() : null, kill = setTimeout(() => { if (ctrl) ctrl.abort(); }, RES_ABORT_MS);
+    RES.inflight = true; RES.ctrl = ctrl;
+    const done = (x, raw) => {
+      clearTimeout(kill); if (code !== T.code || RES.ctrl !== ctrl) return; // a new class code or a reset in the meantime
+      RES.inflight = false; RES.ctrl = null; RES.at = now();
+      if (x && !x.error) { RES.err = false; RES.errs = 0; RES.wait = RES_EVERY; if (raw !== RES.json) { RES.json = raw; RES.data = x; } }
+      else { RES.err = true; RES.errs++; RES.wait = RES.errs === 1 ? Math.max(RES_EVERY, (x && x.retry) || 0) : Math.min(RES_MAX, RES.wait * 2); RES.wait = Math.min(RES_MAX, RES.wait); }
+      resUpdate(); if (!manual) resSync(true);
+    };
+    try {
+      fetch(url, { method: 'GET', credentials: 'omit', cache: 'no-store', redirect: 'follow', referrerPolicy: 'no-referrer', signal: ctrl ? ctrl.signal : undefined })
+        .then(r => r.ok ? r.text() : Promise.reject(new Error('http ' + r.status)))
+        .then(txt => { let j = null; try { j = JSON.parse(txt); } catch (e) { j = null; } const c = resClean(j); done(c, c ? JSON.stringify(c) : ''); })
+        .catch(() => done(null, ''));
+    } catch (e) { done(null, ''); }
+  }
+  // Called after every render and on visibility and connection changes. after: a read just ended, so the next one waits RES.wait seconds.
+  function resSync(after) {
+    if (!resWanted()) { clearTimeout(RES.timer); RES.timer = 0; return; }
+    if (!RES.stoppedAt) RES.stoppedAt = now();
+    if (document.visibilityState === 'hidden' || navigator.onLine === false) { clearTimeout(RES.timer); RES.timer = 0; return; }
+    if (RES.done || RES.inflight) return;
+    if (now() - RES.stoppedAt >= RES_STOP_MS) { RES.done = true; clearTimeout(RES.timer); RES.timer = 0; resUpdate(); return; }
+    if (RES.timer) return;
+    const go = () => { RES.timer = 0; if (!resWanted() || document.visibilityState === 'hidden' || navigator.onLine === false) return;
+      if (now() - RES.stoppedAt >= RES_STOP_MS) { RES.done = true; resUpdate(); return; } resFetch(false); };
+    if (after) RES.timer = setTimeout(go, RES.wait * 1000);
+    else { LOG.flush(); resFetch(false); }
+  }
+
+  // ----- v3: the local reuse record (CLIENT_SPEC.md section 3): which lessons this device started, on how many days and the last day. No id. -----
+  // Read and written only on the teacher screen and only when the teacher chose Ja; never by a pupil code path, never in a pupil event.
+  const DEV_KEY = 'e18-docent';
+  const localDate = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+  const dayNo = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) / 864e5 : NaN; };
+  const bucket = n => n <= 7 ? 'week' : n <= 31 ? 'maand' : 'langer';
+  function readRec() {
+    try { const x = JSON.parse(localStorage.getItem(DEV_KEY) || 'null');
+      if (x && x.v === 1 && x.les && typeof x.les === 'object' && !Array.isArray(x.les)) return x; } catch (e) { /* blocked or broken: start again */ }
+    return { v: 1, les: {} };
+  }
+  function writeRec(rec) { try { localStorage.setItem(DEV_KEY, JSON.stringify(rec)); return true; } catch (e) { return false; } }
+  const devOk = () => LOG.on() && T.share === true;
+  function devExists() { if (!devOk() || T.devGone) return false; try { return localStorage.getItem(DEV_KEY) != null; } catch (e) { return false; } }
+  function devReuse() {
+    if (!devOk()) return;
+    const today = localDate(), rec = readRec(), prev = rec.les[RAW.slug];
+    const pv = prev && Number.isInteger(prev.n) && prev.n >= 1 && !isNaN(dayNo(prev.d)) ? prev : null;
+    if (pv && pv.d !== today) tlog('reuse', { product: PRODUCT, times: Math.min(5, pv.n + 1), since: bucket(Math.max(0, dayNo(today) - dayNo(pv.d))) });
+    if (!pv || pv.d !== today) rec.les[RAW.slug] = { n: (pv ? pv.n : 0) + 1, d: today };
+    if (writeRec(rec)) T.devGone = false;
+  }
+  const devLine = () => devExists() ? `<p class="note t-dev" id="tdev">${t('devNote')} <button class="btn ghost small" data-act="dev-forget" id="tdevforget">${t('devForget')}</button></p>` : '';
+
+  // ----- v3 teacher kit, after lesson 1 (d34): "Klaar in 15 minuten", "Probleem?", Projectiemodus, Lesverslag. Screen memory only. -----
+  const qsMs = () => T.qs.acc + (T.qs.run ? now() - T.qs.t0 : 0);
+  const qsMin = () => Math.max(1, Math.round(qsMs() / 60000));
+  function qsTick(id, on) {
+    const Q = T.qs; if (on === false) Q.done.delete(id); else Q.done.add(id);
+    const all = t('qsSteps').every(x => Q.done.has(x[0]));
+    if (all && Q.run) { Q.acc = qsMs(); Q.run = false; Q.fin = true; } else if (!all && Q.fin) { Q.fin = false; if (Q.on) { Q.run = true; Q.t0 = now(); } }
+  }
+  function qsBlock() {
+    const Q = T.qs, steps = t('qsSteps'), n = steps.filter(x => Q.done.has(x[0])).length;
+    const act = id => id === 'print' ? `<button class="btn ghost small" data-act="qs-do" data-v="print">${t('print')}</button>` : id === 'paper' ? `<button class="btn ghost small" data-act="qs-do" data-v="print-paper">${t('paperBtn')}</button><button class="btn ghost small" data-act="qs-do" data-v="print-paper-key">${t('paperKeyBtn')}</button>`
+      : id === 'link' ? `<a class="btn ghost small" href="${esc(baseLink() + '?log=0' + (lang === 'nl' ? '' : '&lang=' + lang))}" target="_blank" rel="noopener" data-qs-link="1">${t('qsOpenPupil')}</a>`
+      : id === 'board' ? `<button class="btn ghost small" data-act="proj">${t('qsToProj')}</button>` : '';
+    const status = Q.fin ? t('qsFin', qsMin()) : t('qsStatus', n, steps.length);
+    return `<section class="t-card qs" id="tqs" aria-labelledby="qs-h"><div class="qs-top"><div><h2 id="qs-h" tabindex="-1">${t('qsH')}</h2><p>${t('qsLead')}</p></div>
+      <div class="qs-clock"><p class="t-k" id="qs-k">${t('qsTimeK')}</p><p class="qs-time"><span id="qstime" role="timer" aria-labelledby="qs-k">${mmss(qsMs() / 1000)}</span></p><p class="note" id="qsstatus">${esc(status)}</p>
+        <div class="row">${!Q.on ? `<button class="btn small" data-act="qs-start">${t('qsStart')}</button>` : Q.fin ? '' : `<button class="btn ghost small" data-act="qs-pause">${Q.run ? t('qsPause') : t('qsGo')}</button>`}${Q.on ? `<button class="btn ghost small" data-act="qs-reset">${t('qsReset')}</button>` : ''}</div></div></div>
+      <ol class="qs-steps">${steps.map(([id, title, text], i) => `<li class="${Q.done.has(id) ? 'done' : ''}"><input type="checkbox" id="qs-${id}" data-qs="${id}" ${Q.done.has(id) ? 'checked' : ''}><div><label for="qs-${id}"><span class="t-k">${t('qsStep', i + 1)}</span> ${esc(title)}</label><p>${esc(text)}</p><div class="row">${act(id)}</div></div></li>`).join('')}</ol>
+      <p class="note">${t('qsLocal')}</p></section>`;
+  }
+  const probList = () => `<div class="t-pbs">${t('probs').map(([id, title, lines]) => `<details class="t-pb" data-pb="${id}" ${T.pbOpen.has(id) ? 'open' : ''}><summary>${esc(title)}</summary>${lines.map(l => `<p>${esc(l)}</p>`).join('')}</details>`).join('')}</div>`;
+  const probBlock = () => `<section class="t-card t-prob" id="tprob" aria-labelledby="tprob-h"><h2 id="tprob-h" tabindex="-1">${t('probH')}</h2>${probList()}</section>`;
+  // Lesverslag: the class summary from the Klasresultaten when it is on screen (whole class only, no answers), otherwise the teacher's own counts.
+  function vsLines() {
+    const V = T.vs, errs = [], lines = [t('vsTitle', L.title)], txt = (k, max) => String(V[k] == null ? '' : V[k]).replace(/\s+/g, ' ').trim().slice(0, max);
+    const whole = (k, lo, hi) => { const x = txt(k, 4); if (!x) return undefined; return /^\d{1,3}$/.test(x) && +x >= lo && +x <= hi ? +x : null; };
+    const date = txt('date', 10), group = txt('group', 40), pupils = whole('pupils', 1, 60), note = txt('note', 240);
+    let prep = whole('prep', 1, 120); if (prep === undefined && T.qs.fin) prep = qsMin();
+    if (/^\d{4}-\d{2}-\d{2}$/.test(date)) lines.push(t('vsLDate', fmtDate(date)));
+    if (group) lines.push(t('vsLGroup', group));
+    if (pupils === null) errs.push(t('vsErrPupils')); else if (pupils) lines.push(t('vsLPupils', pupils));
+    if (prep === null) errs.push(t('vsErrPrep')); else if (prep) lines.push(t('vsLPrep', prep));
+    const D = RES.data && RES.data.enough && T.stopped ? RES.data : null;
+    if (D) {
+      lines.push(t('vsLRes'));
+      if (D.pairs != null) lines.push('- ' + t('vsLPairs', D.pairs, D.ended == null ? 0 : D.ended));
+      if (D.lock.reached != null) lines.push('- ' + t('vsLLock', D.lock.opened == null ? 0 : D.lock.opened, D.lock.reached));
+      const max = D.start.max || D.end.max; if (D.start.mean != null && D.end.mean != null && max) lines.push('- ' + t('resCheck', dec(D.start.mean), dec(D.end.mean), max));
+      L.rooms.forEach((R, i) => { const x = D.rooms[R.id]; if (!x || !x.started) return; lines.push('- ' + t('vsLRoom', i + 1, R.title, x.finished == null ? 0 : x.finished, x.started));
+        const Q = x.hardest && R.questions.find(y => y.id === x.hardest), q = Q && x.qs[Q.id]; if (q && q.firstRight != null) lines.push('  ' + t('vsLHard', (Q.short || Q.prompt).replace(/[.:]$/, ''), Math.round(q.firstRight))); });
+    }
+    const hands = L.rooms.map((R, i) => { const v = whole('h-' + R.id, 0, pupils || 60); if (v === null) errs.push(t('vsErrHand', R.title, pupils || 60)); return v == null ? null : t('vsLHand', i + 1, R.title, v); }).filter(Boolean);
+    if (hands.length) { lines.push(t('vsLHands')); hands.forEach(h => lines.push('- ' + h)); } else if (!D) lines.push(t('vsLNoHands'));
+    if (note) lines.push(t('vsLNote', note.replace(/"/g, '\'')));
+    lines.push(t('vsLEnd'));
+    return { lines, errs };
+  }
+  const vsOut = () => { const V = vsLines(); return `${V.errs.length ? `<ul class="err" role="alert">${V.errs.map(e => `<li>${esc(e)}</li>`).join('')}</ul>` : ''}<div class="vs-text">${V.lines.map((l, i) => i === 0 ? `<h3>${esc(l)}</h3>` : `<p>${esc(l)}</p>`).join('')}</div>`; };
+  function vsBlock() {
+    const V = T.vs, f = (k, lab, type, help, extra = '') => `<label class="field" for="vs-${k}">${lab}${help ? ` <small>${help}</small>` : ''}<input id="vs-${k}" data-vs="${k}" type="${type}" autocomplete="off" value="${esc(V[k] || '')}" ${extra}></label>`;
+    const hasRes = !!(RES.data && RES.data.enough && T.stopped);
+    return `<section class="t-card t-vs" id="tvs" aria-labelledby="tvs-h"><h2 id="tvs-h">${t('vsH')}</h2><p>${t('vsLead')}</p>
+      <div class="vs-in"><div class="t-two">${f('date', t('vsDate'), 'date', '')}${f('group', t('vsGroup'), 'text', t('vsGroupHelp'), 'maxlength="40"')}${f('pupils', t('vsPupils'), 'text', '', 'inputmode="numeric" maxlength="3"')}${f('prep', t('vsPrep'), 'text', '', `inputmode="numeric" maxlength="3" placeholder="${T.qs.fin ? qsMin() : ''}"`)}</div>
+      <fieldset><legend>${t('vsHard')} <small>${t('vsHardHelp')}</small></legend><div class="t-two">${L.rooms.map((R, i) => f('h-' + R.id, esc(t('roomItem', i + 1, R.title)), 'text', '', 'inputmode="numeric" maxlength="3"')).join('')}</div></fieldset>
+      ${f('note', t('vsNote'), 'text', t('vsNoteHelp'), 'maxlength="240"')}<p class="note" id="vsres">${hasRes ? t('vsResOn') : t('vsResOff')}</p></div>
+      <h3 class="h3">${t('vsPreview')}</h3><div class="vs-out" id="vsout">${vsOut()}</div>
+      <div class="row"><button class="btn ghost" data-act="print-verslag">${t('vsPrint')}</button></div><p class="note">${t('vsLocal')}</p></section>`;
+  }
+  // Projectiemodus: the board view. Large timer, class code, short link and QR, the rules, per room a guide time; never an answer or the lock code.
+  const projRooms = () => { const n = L.rooms.length, dur = T.dur * 60, step = dur / n, used = dur - T.left, k = T.left <= 0 ? n : used <= 0 ? -1 : Math.min(n - 1, Math.floor(used / step));
+    return { k, list: L.rooms.map((R, i) => ({ R, until: mmss(dur - step * (i + 1)) })) }; };
+  function projNow() { const P = projRooms(); document.querySelectorAll('.p-rooms li').forEach((li, i) => { li.classList.toggle('now', i === P.k); li.classList.toggle('past', i < P.k); if (i === P.k) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); }); }
+  function viewProj() {
+    const link = T.code ? pupilLink() : '', web = /^https?:\/\//.test(link), M = web && QR ? QR.qr(link) : null, n = M ? M.length + 8 : 0, P = projRooms();
+    const join = T.code ? `${M ? `<div class="p-qr"><svg viewBox="0 0 ${n} ${n}" role="img" aria-label="${t('qrLabel')}" shape-rendering="crispEdges"><rect width="${n}" height="${n}" fill="#fff"/><path d="${QR.qrPath(M)}" fill="#000"/></svg></div>` : ''}
+        <div class="p-code"><p class="t-k">${t('classCode')}</p><p class="p-codev" id="pcode">${esc(T.code)}</p><p class="p-go">${t('projJoin')} <b id="pshort">${esc(shortOf(baseLink()))}</b> ${t('projJoinCode')}</p></div>`
+      : `<p class="p-wait">${t('projNoCode')}</p>`;
+    const stop = T.stopped ? `<section class="t-stop p-stop" id="tstoph" tabindex="-1" aria-live="polite"><h2>${t('stopH')}</h2><ol class="t-steps">${t(L.check ? 'stopBoard' : 'stopBoardNoCheck').map(x => `<li>${esc(x)}</li>`).join('')}</ol></section>` : '';
+    return `<div class="p-view"><header class="p-head"><div><p class="eyebrow">${esc(t('projEyebrow', T.dur))}</p><h1 class="p-h1" tabindex="-1">${esc(L.title)}</h1></div>
+      <div class="row"><button class="btn ghost small" data-act="p-prob" aria-expanded="${T.pProb}" aria-controls="pprob">${t('probBtn')}</button><button class="btn ghost small" data-act="proj-back" id="pback">${t('projBack')}</button></div></header>
+      <div class="p-main"><section class="t-timer p-timer${T.left <= 0 ? ' over' : ''}" aria-label="${t('timer')}"><p class="t-clock" id="tclock" role="timer">${mmss(T.left)}</p>${overNote()}
+          <div class="row"><button class="btn ghost" data-act="t-run" id="trun">${T.running ? t('pause') : T.left < T.dur * 60 && T.left > 0 ? t('resume') : t('startTimer')}</button><button class="btn ghost" data-act="t-reset">${t('reset')}</button><button class="btn t-stopbtn" data-act="t-stop" id="tstop" aria-pressed="${T.stopped}">${T.stopped ? t('stopUndo') : t('stopBtn')}</button></div>${stop}</section>
+        <section class="p-join" aria-label="${t('startTitle')}">${join}</section>
+        <section class="p-side"><ul class="p-rules">${t('projRules').map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+          <h2 class="p-rh">${t('projRoomsH')}</h2><ol class="p-rooms">${P.list.map((x, i) => `<li class="${i === P.k ? 'now' : ''}${i < P.k ? ' past' : ''}"${i === P.k ? ' aria-current="step"' : ''}><span class="p-rn" aria-hidden="true">${i + 1}</span><span class="p-rt"><span class="sr">${t('roomN', i + 1)}: </span>${esc(x.R.title)}</span><span class="p-ru">${esc(t('projUntil', x.until))}</span></li>`).join('')}</ol></section></div>
+      <div id="pprob" class="p-prob" ${T.pProb ? '' : 'hidden'}>${probList()}</div>
+      <p class="p-note">${t('projNote')}</p></div>`;
+  }
   function viewTeacher() {
     const TP = L.teacher || {}, plan = TP.plan || [], total = planTotal(plan);
     const canStart = !LOG.on() || T.share !== null;
@@ -1246,29 +1798,31 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     const allKey = `<details class="t-key t-secret" id="tans">${keySum}<p class="note">${t('keyWarnLong')}</p><h3 class="h3">${t('allAnswersH')}</h3><p class="t-lockcode">${t('lockCode')} <b class="t-url">${esc(lockCode())}</b></p>${AS() ? ansTable(null) + ansAfter() : ''}${checkKey()}</details>`;
     const anyDiscuss = L.rooms.some(R => R.discuss && R.discuss.length);
     return `<div class="t-view"><header class="t-head"><div><p class="eyebrow">${t('forTeacher')}</p><h1 class="t2" tabindex="-1">${esc(L.title)}</h1><p class="t-sub">${t('tSub', total || 45)}</p></div>
-      <div class="row">${langSwitch()}<button class="btn ghost" data-act="pupil">${t('toPupil')}</button></div></header>
-      <div class="t-top${T.code ? ' started' : ''}"><section class="t-card t-startc">${steps}${start}</section>${timerBlock()}</div>
+      <div class="row">${langSwitch()}<button class="btn" data-act="proj" id="tproj">${t('projBtn')}</button><button class="btn ghost" data-act="goto-prob">${t('probBtn')}</button><button class="btn ghost" data-act="pupil">${t('toPupil')}</button></div></header>
+      ${audienceBlock(TP)}<div class="t-top${T.code ? ' started' : ''}"><section class="t-card t-startc">${steps}${start}</section>${timerBlock()}</div>
+      ${resBlock()}${qsBlock()}
       <section class="t-card"><h2>${t('planH')}</h2>${TP.goal ? `<p><b>${t('goal')}</b> ${esc(TP.goal)}</p>` : ''}<div class="esc-tscroll" role="region" tabindex="0" aria-label="${esc(t('planH'))}">${planTable(plan, 't-plan')}</div>
-        ${planExtras(TP)}<div class="row"><button class="btn ghost" data-act="print">${t('print')}</button><button class="btn ghost" data-act="print-paper">${t('paperBtn')}</button></div><p class="note">${t('paperNote')}</p></section>
-      <section class="t-card"><h2>${anyDiscuss ? t('discussH') : t('perRoomH')}</h2><div class="t-rooms">${L.rooms.map((R, i) => `<article class="t-room"><h3><span class="t-k">${t('roomN', i + 1)}</span> ${esc(R.title)}</h3>
-        ${R.discuss && R.discuss.length ? `<ul class="esc-talk">${R.discuss.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${R.remember ? `<p class="esc-plain"><b>${t('core')}</b>${esc(R.remember)}</p>` : ''}${R.teacherNote ? `<p class="esc-plain"><b>${t('teacherNoteH')}</b>${esc(R.teacherNote)}</p>` : ''}
+        ${planExtras(TP)}<div class="row"><button class="btn ghost" data-act="print">${t('print')}</button><button class="btn ghost" data-act="print-paper">${t('paperBtn')}</button><button class="btn ghost" data-act="print-paper-key">${t('paperKeyBtn')}</button>${L.slip ? `<button class="btn ghost" data-act="print-slips">${t('slipBtn')}</button>` : ''}</div><p class="note">${t('paperNote')}</p>${L.slip ? `<p class="note" id="slipnote">${t('slipNote', SLIPS_N(), Math.ceil(30 / SLIPS_N()))}</p>` : ''}</section>
+      ${probBlock()}${faqBlock(TP)}<section class="t-card"><h2>${anyDiscuss ? t('discussH') : t('perRoomH')}</h2><div class="t-rooms">${L.rooms.map((R, i) => `<article class="t-room"><h3><span class="t-k">${t('roomN', i + 1)}</span> ${esc(R.title)}</h3>
+        ${R.discuss && R.discuss.length ? `<ul class="esc-talk">${R.discuss.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${R.remember ? `<p class="esc-plain"><b>${t('core')}</b>${esc(R.remember)}</p>` : ''}${R.teacherNote ? `<p class="esc-plain"><b>${t('teacherNoteH')}</b>${esc(R.teacherNote)}</p>` : ''}${R.teacherDetail ? `<details class="t-detail"><summary>${t('detailH')}</summary>${[].concat(R.teacherDetail).map(x => `<p>${esc(x)}</p>`).join('')}</details>` : ''}
         <details class="t-key t-secret">${keySum}${AS() ? ansTable(i + 1) : `<dl>${R.questions.map(Q => `<div><dt>${esc(Q.short || Q.prompt)}</dt><dd>${esc(sheetText(Q) || answerLabel(Q, Q.correct))}</dd></div>`).join('')}<div><dt>${t('digitForLock')}</dt><dd>${esc(R.digit)}</dd></div></dl>`}</details></article>`).join('')}</div>
         ${allKey}</section>
       <section class="t-card"><h2>${t('closeH')}</h2>${TP.closing ? `<p class="t-closing">${esc(TP.closing)}</p>` : ''}${L.debrief && L.debrief.length ? `<p>${t('debriefNote')}</p><ul class="esc-talk">${L.debrief.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</section>
-      ${sourcesBlock()}${feedbackBlock()}<p class="t-disc" id="tdisc">${esc(disc)}</p><p class="t-disc t-licence" id="tlicence">${esc(t('licenceA'))}<a href="${esc(t('licenceUrl'))}" rel="license noopener">${esc(t('licenceName'))}</a>${esc(t('licenceB'))}</p></div>${sheet()}${paper()}${paperKey()}`;
+      ${vsBlock()}${sourcesBlock()}${feedbackBlock()}${devLine()}<p class="t-disc" id="tdisc">${esc(disc)}</p><p class="t-disc t-licence" id="tlicence">${esc(t('licenceA'))}<a href="${esc(t('licenceUrl'))}" rel="license noopener">${esc(t('licenceName'))}</a>${esc(t('licenceB'))}</p></div>${sheet()}${paper()}${paperKey()}${slips()}`;
   }
 
   // ----- render and focus -----
   function render(focus, keepScroll) {
     const v = S.view;
     const html = v === 'start' ? viewStart() : v === 'check' ? viewCheck(S.phase) : v === 'intro' ? viewRoomIntro() : v === 'q' ? viewQuestion()
-      : v === 'clue' ? viewClue() : v === 'lock' ? viewLock() : v === 'stop' ? viewStop() : v === 'win' ? viewWin() : viewTeacher();
-    app.innerHTML = (outdated() ? `<p class="banner" role="note" id="outdated">${t('outdated')}</p>` : '') + html + (ESCAPE_VIEWS.includes(v) && S.run ? stopBar() : '');
-    document.body.dataset.view = v === 'teacher' ? 'teacher' : 'pupil';
-    document.title = (v === 'teacher' ? t('teacherTitle') : '') + L.title + ' · Escape 18';
+      : v === 'clue' ? viewClue() : v === 'lock' ? viewLock() : v === 'stop' ? viewStop() : v === 'win' ? viewWin() : v === 'proj' ? viewProj() : viewTeacher();
+    app.innerHTML = (outdated() ? `<p class="banner" role="note" id="outdated">${esc(L.staleText || t('outdated'))}</p>` : '') + html + (ESCAPE_VIEWS.includes(v) && S.run ? stopBar() : '');
+    document.body.dataset.view = v === 'teacher' ? 'teacher' : v === 'proj' ? 'proj' : 'pupil';
+    document.title = (v === 'teacher' || v === 'proj' ? t('teacherTitle') : '') + L.title + ' · Escape 18';
     if (!keepScroll) window.scrollTo(0, 0);
     const el = (focus && app.querySelector(focus)) || app.querySelector('h1');
     if (el) el.focus({ preventScroll: !!keepScroll });
+    resSync();
   }
 
   // ----- pupil actions -----
@@ -1276,7 +1830,7 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     const coin = new Uint8Array(1); crypto.getRandomValues(coin);
     S.run = { session: LOG.newSession(), klas: S.klas || 'GEEN', forms: hasB() && coin[0] & 1 ? ['B', 'A'] : ['A', hasB() ? 'B' : 'A'],
       t0: 0, pen: 0, hints: 0, first: 0, done: 0, stopAsk: false, ri: 0, qi: 0, q: null, clue: null, digits: [], lockTries: 0, lockErr: false,
-      chk: { start: null, end: null }, chkDraft: {}, chkErr: false, plan: null, planErr: false, fb: { fun: 0, learned: 0, sent: false }, endSec: 0, roomT0: 0 };
+      chk: { start: null, end: null }, chkDraft: {}, slipDraft: {}, chkErr: false, plan: null, planErr: false, fb: { fun: 0, learned: 0, wish: '', sent: false }, confDraft: {}, endSec: 0, roomT0: 0 };
     plog('start', { variant: L.variant || 'basis', lang });
     if (L.check) { S.view = 'check'; S.phase = 'start'; render(); } else enterRoom(0);
   }
@@ -1325,20 +1879,25 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
   function checkDone(form) {
     const r = run(), phase = form.dataset.phase, f = form.dataset.f, qs = formQs(f), ans = {};
     let all = true;
-    for (const Q of qs) { const el = form.querySelector(`input[name="c-${Q.id}"]:checked`); if (el) ans[Q.id] = el.value; else all = false; }
-    r.chkDraft = ans;
+    const conf = {};
+    for (const Q of qs) { const el = form.querySelector(`input[name="c-${Q.id}"]:checked`); if (el) ans[Q.id] = el.value; else all = false;
+      const k = form.querySelector(`input[name="k-${Q.id}"]:checked`); if (k) conf[Q.id] = parseInt(k.value, 10); }
+    r.chkDraft = ans; r.confDraft = conf;
     if (!all) { r.chkErr = true; render('#chkerr', true); return; }
-    r.chkErr = false; r.chkDraft = {};
-    const items = qs.map(Q => ({ q: Q.id, right: ans[Q.id] === Q.correct })), score = items.filter(x => x.right).length;
+    r.chkErr = false; r.chkDraft = {}; r.confDraft = {};
+    const items = qs.map(Q => Object.assign({ q: Q.id, right: ans[Q.id] === Q.correct }, conf[Q.id] ? { conf: conf[Q.id] } : {})), score = items.filter(x => x.right).length;
     r.chk[phase] = { form: f, score, max: qs.length, ans };
-    plog('check', { phase, form: f, score, max: qs.length, items });
+    // Measurement hygiene: forms are A/B or B/A at random per pair (startRun), never the same form twice; `ceil` flags a start check
+    // that is already all right (no room left to show learning).
+    plog('check', Object.assign({ phase, form: f, score, max: qs.length, items }, phase === 'start' ? { ceil: score === qs.length } : {}));
     if (phase === 'start') enterRoom(0); else finish();
   }
 
   // ----- teacher actions -----
   function teacherStart() {
     T.code = LOG.newClassCode(); T.session = LOG.newSession(); ss.set('code', T.code); ss.set('session', T.session);
-    tlog('teacher_start', { variant: L.variant || 'basis', rooms: L.rooms.length, lang }); LOG.flush();
+    resReset();
+    tlog('teacher_start', { variant: L.variant || 'basis', rooms: L.rooms.length, lang }); devReuse(); LOG.flush();
     render('#tcode', true);
   }
   function sendFeedback(form) {
@@ -1351,11 +1910,14 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     T.fbErr = ''; if (ok) { T.draft = {}; T.fb = 'sent'; } render(ok ? '#tfb' : null, true);
   }
   function tick() {
-    if (S.view === 'teacher' && T.running) {
+    if ((S.view === 'teacher' || S.view === 'proj') && T.running) {
       T.left = Math.max(0, Math.round((T.endAt - now()) / 1000));
       const c = document.getElementById('tclock'); if (c) c.textContent = mmss(T.left);
-      if (T.left <= 0) { T.running = false; const card = c && c.closest('.t-timer'); if (card) card.classList.add('over'); const b = document.getElementById('trun'); if (b) b.textContent = t('startTimer'); }
+      if (S.view === 'proj') projNow();
+      if (T.left <= 0) { T.running = false; const card = c && c.closest('.t-timer'); if (card) { card.classList.add('over'); if (!document.getElementById('tover') && !T.stopped) c.insertAdjacentHTML('afterend', overNote()); }
+        const b = document.getElementById('trun'); if (b) b.textContent = t('startTimer'); }
     }
+    if (S.view === 'teacher' && T.qs.run) { const q = document.getElementById('qstime'); if (q) q.textContent = mmss(qsMs() / 1000); }
     if (S.run && S.run.t0 && ESCAPE_VIEWS.includes(S.view)) {
       const c = document.getElementById('clock'); if (c) c.textContent = mmss(shownTime());
       // Calm notice once the escape time is over (real time since the first room); no re-render, so typed input and focus stay.
@@ -1367,7 +1929,7 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
   // ----- events -----
   app.addEventListener('click', e => {
     const b = e.target.closest('[data-act]'); if (!b || b.disabled) return;
-    const act = b.dataset.act, r = run();
+    const act = b.dataset.act === 'qs-do' ? b.dataset.v : b.dataset.act, r = run(); // the prep card's print buttons do what the plan card's buttons do
     if (act === 'teacher') { S.view = 'teacher'; render(); }
     else if (act === 'pupil') { S.view = 'start'; S.run = null; render(); }
     else if (act === 'lang') { setLang(b.dataset.v); render(`[data-act="lang"][data-v="${lang}"]`, true); }
@@ -1380,27 +1942,49 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     else if (act === 'next-q') nextQ();
     else if (act === 'next-room') nextRoom();
     else if (act === 'tap') { r.fb[b.dataset.k] = parseInt(b.dataset.v, 10); render(`[data-act="tap"][data-k="${b.dataset.k}"][data-v="${b.dataset.v}"]`, true); }
-    else if (act === 'send-pfb') { if (r.fb.fun && r.fb.learned && !r.fb.sent) { plog('pupil_feedback', { fun: r.fb.fun, learned: r.fb.learned }); LOG.flush(); r.fb.sent = true; render('#pfb', true); } }
+    else if (act === 'wish') { r.fb.wish = r.fb.wish === b.dataset.v ? '' : b.dataset.v; render(`[data-act="wish"][data-v="${b.dataset.v}"]`, true); }
+    else if (act === 'send-pfb') { if (r.fb.fun && r.fb.learned && !r.fb.sent) { plog('pupil_feedback', Object.assign({ fun: r.fb.fun, learned: r.fb.learned }, r.fb.wish ? { wish: r.fb.wish } : {})); LOG.flush(); r.fb.sent = true; render('#pfb', true); } }
     else if (act === 'plan-again') { r.plan = null; render('[name="when"]', true); }
     else if (act === 'we-stop' && b.dataset.bar && stopEarly()) { if (ESCAPE_VIEWS.includes(S.view)) { r.stopAsk = true; render('#westopyes', true); } }
     else if (act === 'we-stop' || act === 'we-stop-yes') { if (ESCAPE_VIEWS.includes(S.view)) { r.stopAsk = false; r.prevView = S.view; r.lockErr = false; S.view = 'stop'; render('#stoph'); } }
     else if (act === 'we-stop-no') { r.stopAsk = false; render('#westop', true); }
     else if (act === 'p-skip') stopExit('skip');
     else if (act === 'p-back') { S.view = r.prevView || 'intro'; r.lockErr = false; render(FOCUS[S.view]); }
-    else if (act === 't-stop') { T.stopped = !T.stopped; if (T.stopped && T.running) { T.left = Math.max(0, Math.round((T.endAt - now()) / 1000)); T.running = false; } render(T.stopped ? '#tstoph' : '#tstop', true); }
+    else if (act === 't-stop') { T.stopped = !T.stopped; if (T.stopped && T.running) { T.left = Math.max(0, Math.round((T.endAt - now()) / 1000)); T.running = false; }
+      if (T.stopped) { RES.stoppedAt = now(); RES.done = false; } render(T.stopped ? '#tstoph' : '#tstop', true); }
+    else if (act === 'res-refresh') { if (resWanted()) { LOG.flush(); resFetch(true); resUpdate(); } }
+    else if (act === 'dev-forget') { try { localStorage.removeItem(DEV_KEY); } catch (e) { /* nothing stored */ } T.devGone = true; const d = document.getElementById('tdev'); if (d) d.remove(); const h = app.querySelector('#tfb') || app.querySelector('h1'); if (h) h.focus({ preventScroll: true }); }
+    else if (act === 'proj') { S.view = 'proj'; if (T.code) qsTick('board'); render(); }
+    else if (act === 'proj-back') { S.view = 'teacher'; T.pProb = false; render('#tproj'); }
+    else if (act === 'p-prob') { T.pProb = !T.pProb; render('[data-act="p-prob"]', true); }
+    else if (act === 'goto-prob') { const h = document.getElementById('tprob-h'); if (h) { h.scrollIntoView({ block: 'start' }); h.focus({ preventScroll: true }); } }
+    else if (act === 'qs-start') { Object.assign(T.qs, { on: true, run: true, t0: now(), acc: 0, fin: false }); if (t('qsSteps').every(x => T.qs.done.has(x[0]))) Object.assign(T.qs, { run: false, fin: true }); render(T.qs.fin ? '#qs-h' : '[data-act="qs-pause"]', true); }
+    else if (act === 'qs-pause') { const Q = T.qs; if (Q.run) { Q.acc = qsMs(); Q.run = false; } else { Q.run = true; Q.t0 = now(); } render('[data-act="qs-pause"]', true); }
+    else if (act === 'qs-reset') { T.qs = { on: false, run: false, fin: false, t0: 0, acc: 0, done: new Set() }; render('[data-act="qs-start"]', true); }
     else if (act === 'restart') { S.run = null; S.view = 'start'; render(); }
     else if (act === 't-share') { T.share = b.dataset.v === 'ja'; ss.set('share', b.dataset.v); render(`[data-act="t-share"][data-v="${b.dataset.v}"]`, true); }
     else if (act === 't-start') teacherStart();
-    else if (act === 't-new') { T.code = ''; T.share = null; T.session = ''; T.fb = ''; T.draft = {}; ss.set('code', null); ss.set('share', null); ss.set('session', null); render('#shareq', true); }
+    else if (act === 't-new') { resReset(); T.code = ''; T.share = null; T.session = ''; T.fb = ''; T.draft = {}; ss.set('code', null); ss.set('share', null); ss.set('session', null); render('#shareq', true); }
     else if (act === 't-dur') { T.dur = parseInt(b.dataset.v, 10); T.running = false; T.left = T.dur * 60; render(`[data-act="t-dur"][data-v="${T.dur}"]`, true); }
     else if (act === 't-run') { if (T.running) T.running = false; else { if (T.left <= 0) T.left = T.dur * 60; T.running = true; T.endAt = now() + T.left * 1000; } render('#trun', true); }
     else if (act === 't-reset') { T.running = false; T.left = T.dur * 60; render('[data-act="t-reset"]', true); }
-    else if (act === 'print' || act === 'print-paper' || act === 'print-plan') { document.body.classList.add(act === 'print' ? 'print-sheet' : act); window.print(); }
+    else if (act === 'print' || act === 'print-paper' || act === 'print-paper-key' || act === 'print-plan' || act === 'print-slips' || act === 'print-verslag') {
+      if (act === 'print') qsTick('print'); if (act === 'print-paper' || act === 'print-paper-key') qsTick('paper');
+      if (S.view === 'teacher' && (act === 'print' || act === 'print-paper' || act === 'print-paper-key')) render(b.dataset.act === 'qs-do' ? `[data-act="qs-do"][data-v="${act}"]` : `[data-act="${act}"]`, true);
+      document.body.classList.add(act === 'print' ? 'print-sheet' : act); window.print(); }
   });
   // Feedback confirmation wording depends on connectivity; the log queue itself flushes on 'online' (log.js).
   const fbRefresh = () => { if (S.view === 'teacher' && T.fb === 'sent' && document.getElementById('tfb')) render(null, true); };
   window.addEventListener('online', fbRefresh); window.addEventListener('offline', fbRefresh);
-  window.addEventListener('afterprint', () => document.body.classList.remove('print-sheet', 'print-paper', 'print-plan'));
+  window.addEventListener('afterprint', () => document.body.classList.remove('print-sheet', 'print-paper', 'print-paper-key', 'print-plan', 'print-slips', 'print-verslag'));
+  document.addEventListener('visibilitychange', () => resSync());
+  window.addEventListener('online', () => resSync()); window.addEventListener('offline', () => resSync());
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && S.view === 'proj') { S.view = 'teacher'; T.pProb = false; render('#tproj'); } });
+  // The "Test de link" step ticks when the teacher opens the pupil screen from the card (a new tab, with log=0 so the test sends nothing).
+  app.addEventListener('click', e => { const a = e.target.closest('a[data-qs-link]'); if (!a) return; qsTick('link'); // no re-render: the link must stay in the page while it opens
+    const c = document.getElementById('qs-link'); if (c) { c.checked = true; c.closest('li').classList.add('done'); }
+    const st = document.getElementById('qsstatus'); if (st) { const n = t('qsSteps').filter(x => T.qs.done.has(x[0])).length; st.textContent = T.qs.fin ? t('qsFin', qsMin()) : t('qsStatus', n, t('qsSteps').length); } });
+  app.addEventListener('toggle', e => { const d = e.target; if (d && d.dataset && d.dataset.pb) { if (d.open) T.pbOpen.add(d.dataset.pb); else T.pbOpen.delete(d.dataset.pb); } }, true);
   app.addEventListener('submit', e => {
     const f = e.target.closest('form[data-form]'); if (!f) return;
     e.preventDefault();
@@ -1424,8 +2008,11 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
     const x = e.target;
     if (x.dataset && x.dataset.dial != null) { x.value = x.value.replace(/\D/g, '').slice(-1); if (x.value) { const nx = document.getElementById('d' + (+x.dataset.dial + 1)); if (nx) nx.focus(); } }
     if (x.closest && x.closest('form[data-form="fb"]') && x.name) T.draft[x.name] = x.value;
+    if (x.dataset && x.dataset.slip != null && S.run) S.run.slipDraft[x.dataset.slip] = x.value; // memory only, see slipCard
+    if (x.dataset && x.dataset.vs != null) { T.vs[x.dataset.vs] = x.value; const o = document.getElementById('vsout'); if (o) o.innerHTML = vsOut(); } // memory only, see vsBlock
   });
-  app.addEventListener('change', e => { const x = e.target; if (x.closest && x.closest('form[data-form="fb"]') && x.name) T.draft[x.name] = x.value; });
+  app.addEventListener('change', e => { const x = e.target; if (x.closest && x.closest('form[data-form="fb"]') && x.name) T.draft[x.name] = x.value;
+    if (x.dataset && x.dataset.qs) { qsTick(x.dataset.qs, x.checked); render('#qs-' + x.dataset.qs, true); } });
   app.addEventListener('keydown', e => {
     const x = e.target;
     if (x.dataset && x.dataset.dial != null && e.key === 'Backspace' && !x.value) { const pv = document.getElementById('d' + (+x.dataset.dial - 1)); if (pv) { e.preventDefault(); pv.focus(); pv.value = ''; } }
@@ -1433,6 +2020,7 @@ window.E18_LESSON={"slug":"op-kamers","title":"Op kamers","lead":"Een kamer hure
 
   document.documentElement.lang = lang;
   if (location.hash === '#docent') S.view = 'teacher';
+  if (location.hash === '#bord') S.view = 'proj';
   render();
 })();
 </script>

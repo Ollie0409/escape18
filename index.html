@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-4Bl05dJy9043FuGgOIUEb9YUmAaqTPhqgv+BReapQGU='; style-src 'sha256-vfSeu+iSav4TMk3Qq0tw0q9TU8CRIXpH+rAOg3Z5gRw='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-Npsu1+G/xV+VOUIf2c8WNFJKiBn2VkIsVPkGF/e5Yy8='; style-src 'sha256-Aq3LXF2VY5C62/IO+d6xO6q2TMQ7o03lrfQtnKJ1ZBk='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Escape 18: gratis escape-lessen voor havo en vwo over wat er verandert als je 18 wordt.">
 <title>Escape 18</title>
@@ -161,6 +161,7 @@ label.opt:has(input:checked){border-color:var(--teal);background:var(--teal-soft
 .esc-web-price{font:800 clamp(26px,3vw,34px)/1 var(--display);font-stretch:110%;color:var(--teal)}
 .esc-web dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0}
 .esc-web dl div{display:contents}
+@supports (grid-template-columns:subgrid){.esc-web dl div{display:grid;grid-column:1/-1;grid-template-columns:subgrid}}  /* a box of its own, so a pointed fact can be focused and marked */
 .esc-web dt,.esc-web dd{padding:5px 4px;border-bottom:1px dashed var(--line);margin:0}
 .esc-web dt{color:var(--muted);padding-right:14px}
 .esc-web dd{font-weight:700}
@@ -298,9 +299,12 @@ footer.foot{border-top:1px solid var(--line);padding-top:14px;color:var(--muted)
 .paper .box{display:inline-block;min-width:3.5em;border-bottom:1.5px solid #000;margin-left:6px}
 @media print{
   @page{size:A4;margin:14mm}
-  body.print-paper .wrap>*:not(.paper):not(.paper-key){display:none!important}
+  /* S5 (G4): two separate prints. Pupil pages never carry the answer pages or the lock code. */
+  body.print-paper .wrap>*:not(.paper){display:none!important}
   body.print-paper .paper{display:block!important;font-size:11.5pt}
-  body.print-paper .paper-key{display:block!important;font-size:11pt;break-before:page}
+  body.print-paper-key .wrap>*:not(.paper-key){display:none!important}
+  body.print-paper-key .paper-key{display:block!important;font-size:11pt}
+  .paper .lockp{break-inside:avoid;margin-top:14pt;padding-top:8pt;border-top:1.5px solid #000}
   .paper-key table{border-collapse:collapse;width:100%}.paper-key td{border-bottom:1px solid #999;padding:4pt;vertical-align:top}
   .paper-key h1{font-size:18pt}.paper-key h2{font-size:13pt;margin:10pt 0 4pt;break-after:avoid}.paper-key table{break-inside:avoid}
   .paper h1,.paper h2{break-after:avoid}.paper img,.paper table{max-width:100%}
@@ -397,27 +401,192 @@ details.esc-recap dd{margin:0;font-weight:700;overflow-wrap:anywhere}
 
 .opts-hint{margin:0 0 8px;font-size:12px;line-height:1.4;color:var(--muted)}
 .esc-slip dd.dd-prose{font:400 16px/1.55 var(--body);font-variant-numeric:normal;text-align:left;flex:1 1 100%}.esc-slip .row-prose dt{flex:1 1 100%;font-weight:600}
+/* Plan slip: pupil end-screen card and the teacher's print-only slips (one A4, cut lines between the slips) */
+.slip-card .slip-fields{display:flex;flex-direction:column;gap:12px}
+.slip-card .slip-note{border-left:4px solid var(--teal);padding-left:12px}
+.slip-hint{font-weight:400;color:var(--muted)}
+.slips{display:none}
+@media print{
+  body.print-slips .wrap{padding:0;margin:0;max-width:none;display:block}
+  body.print-slips .wrap>*:not(.slips){display:none!important}
+  body.print-slips .slips{display:grid!important;height:266mm;width:100%;break-inside:avoid;font-size:12pt;line-height:1.3;color:#000;background:#fff}
+  .slips-n1{grid-template-rows:1fr}.slips-n2{grid-template-rows:repeat(2,1fr)}.slips-n3{grid-template-rows:repeat(3,1fr)}.slips-n4{grid-template-rows:repeat(4,1fr)}
+  .slip-cell{box-sizing:border-box;padding:5mm 6mm 4mm;min-height:0;display:block}
+  .slip-cell:not(:last-child){border-bottom:.4mm dashed #444}
+  .slip-h{font:700 16pt/1.2 var(--body);margin:0}
+  .slip-i{margin:1.5mm 0 0;font-size:11pt}
+  .slip-f{margin-top:3.2mm}
+  .slip-r{display:flex;align-items:flex-end;gap:0 2.5mm;min-height:10.5mm}
+  .slip-l{flex:0 1 auto;line-height:1.25;padding-bottom:.8mm}
+  .slip-hint{font-size:11pt;font-weight:400;color:#222}
+  .slip-w{flex:1 1 30mm;min-width:30mm;border-bottom:.3mm solid #000;height:10.5mm}
+  .slip-hb{margin:1.2mm 0 0;line-height:1.25}
+  .slip-x{display:block;border-bottom:.3mm solid #000;height:10.5mm}
+  .slip-foot{margin:4mm 0 0;font-size:11pt;line-height:1.3;color:#222}
+}
+/* Teacher extras: audience lines, closed per-room detail, question and answer block */
+.t-aud{border-left:4px solid var(--teal);padding:2px 0 2px 14px;margin:0 0 14px}.t-aud p{margin:4px 0}
+.t-detail{margin:8px 0}.t-detail summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}.t-detail p{margin:6px 0}
+.t-faq{display:flex;flex-direction:column;gap:12px;margin:0}.t-faq dt{font-weight:700}.t-faq dd{margin:2px 0 0}
+@media print{.t-detail,.t-aud{display:none}}
+/* Paper version: a wide document table wraps inside the page instead of running off the edge */
+@media print{.paper .esc-grid{min-width:0;font-size:9.5pt}.paper .esc-grid th,.paper .esc-grid td{white-space:normal;padding:3pt 5pt 3pt 2pt}.paper .esc-grid thead th{font-size:8.5pt}}
+
+/* ===== v3 (7 Nov 2026): Klasresultaten, teacher kit, projection mode, confidence and wish taps, wide tables ===== */
+/* S7 (G4): document tables wrap; a table with 4 or more columns becomes one block per row in a narrow box, so every column stays visible */
+.esc-grid{min-width:0}
+.esc-grid th,.esc-grid td{white-space:normal;overflow-wrap:break-word}
+.esc-tscroll{container-type:inline-size}
+@container (max-width:620px){
+  .esc-grid.wide thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .esc-grid.wide,.esc-grid.wide tbody,.esc-grid.wide tr,.esc-grid.wide th,.esc-grid.wide td{display:block;width:auto}
+  .esc-grid.wide tr{border-bottom:1px solid var(--line);padding:6px 2px}
+  .esc-grid.wide tbody th{border:0;padding:2px 4px 4px;font-size:1.02em}
+  .esc-grid.wide td{border:0;padding:1px 4px;display:grid;grid-template-columns:minmax(6.5em,38%) minmax(0,1fr);gap:2px 10px}
+  .esc-grid.wide td::before{content:attr(data-h);font:600 12.5px/1.5 var(--mono);color:var(--muted)}
+}
+@container (max-width:780px){
+  .esc-grid.wide.c5 thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .esc-grid.wide.c5,.esc-grid.wide.c5 tbody,.esc-grid.wide.c5 tr,.esc-grid.wide.c5 th,.esc-grid.wide.c5 td{display:block;width:auto}
+  .esc-grid.wide.c5 tr{border-bottom:1px solid var(--line);padding:6px 2px}
+  .esc-grid.wide.c5 tbody th{border:0;padding:2px 4px 4px;font-size:1.02em}
+  .esc-grid.wide.c5 td{border:0;padding:1px 4px;display:grid;grid-template-columns:minmax(6.5em,38%) minmax(0,1fr);gap:2px 10px}
+  .esc-grid.wide.c5 td::before{content:attr(data-h);font:600 12.5px/1.5 var(--mono);color:var(--muted)}
+}
+@media print{.esc-tscroll{container-type:normal}}
+/* end check: optional confidence; end screen: optional topic wish */
+fieldset.conf{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+fieldset.conf legend{font-weight:700;font-size:15px}
+fieldset.conf legend small,fieldset.wish legend small{font-weight:400;color:var(--muted)}
+.conf-opts{display:flex;flex-wrap:wrap;gap:8px}
+label.opt.conf-opt{min-height:44px;padding:6px 12px;font-size:15px}
+fieldset.wish{margin-top:12px}
+.wish-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px}
+.tap.wish-tap{font:700 15px/1.25 var(--body);text-align:left;padding:8px 12px}
+.tap[aria-pressed="true"]{background:var(--teal);color:var(--teal-ink);border-color:var(--teal)}
+/* N4 (G4): the teacher timer at 00:00 */
+.t-timer.over{box-shadow:inset 0 0 0 6px var(--sun)}
+.t-over{margin:0;align-self:flex-start;background:var(--sun);color:var(--sun-ink);font:800 clamp(18px,1.8vw,24px)/1.2 var(--display);padding:8px 14px;border-radius:10px}
+/* Klasresultaten */
+.t-res{border:3px solid var(--teal)}
+#tres-body{display:flex;flex-direction:column;gap:14px}
+.t-res-lead{font:700 clamp(18px,1.7vw,23px)/1.3 var(--body);margin:0}
+.t-res .t-room p{margin:0}
+.t-resno{margin:0}
+.t-dev{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+/* Klaar in 15 minuten */
+.qs-top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.qs-top>div:first-child{flex:1 1 320px;min-width:0}
+.qs-clock{flex:0 0 auto;background:var(--sunk);border-radius:14px;padding:10px 14px;display:flex;flex-direction:column;gap:6px}
+.qs-time{font:600 40px/1 var(--mono);font-variant-numeric:tabular-nums;margin:0}
+.qs-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.qs-steps li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.qs-steps li.done{background:var(--ok-soft);border-color:var(--ok)}
+.qs-steps input[type=checkbox]{width:24px;height:24px;margin-top:4px;accent-color:var(--teal)}
+.qs-steps label{font-weight:700;cursor:pointer}.qs-steps label .t-k{display:inline;margin-right:6px}
+.qs-steps p{margin:4px 0 6px;font-size:.92em}
+/* Probleem? */
+.t-pbs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+details.t-pb{border:1px solid var(--line);border-left:6px solid var(--sun);border-radius:12px;padding:6px 14px;background:var(--panel)}
+details.t-pb summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}
+details.t-pb p{margin:6px 0}
+/* Lesverslag */
+.t-vs fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.t-vs legend{font-weight:700;margin-bottom:6px}.t-vs legend small,.t-vs .field small{font-weight:400;color:var(--muted)}
+.t-vs .t-two{align-items:end}
+.vs-in{display:flex;flex-direction:column;gap:12px;max-width:820px}
+.vs-out{border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--sunk);max-width:820px}
+.vs-text p{margin:2px 0}.vs-text h3{font:800 18px/1.25 var(--display);margin:0 0 6px}
+.vs-out ul.err{margin:0 0 8px;padding-left:18px}
+@media print{
+  body.print-verslag .wrap>*:not(.t-view){display:none!important}
+  body.print-verslag .t-view>*:not(#tvs){display:none!important}
+  body.print-verslag #tvs>*:not(.vs-out){display:none!important}
+  body.print-verslag #tvs{border:0;padding:0}
+  body.print-verslag .vs-out{border:0;background:none;padding:0;font-size:12pt;max-width:none}
+  body.print-verslag .vs-out ul.err{display:none}
+}
+/* Projectiemodus: one board screen; fits 1280x720 and 1366x768 without scrolling, larger on 1920x1080 */
+body[data-view="proj"] .wrap{max-width:none;padding-block:12px 12px;gap:10px}
+.p-view{display:flex;flex-direction:column;gap:12px;min-height:calc(100vh - 24px)}
+.p-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.p-h1{font:800 clamp(24px,2.6vw,44px)/1.05 var(--display);font-stretch:110%;margin:0}
+.p-main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.95fr) minmax(0,1fr);gap:14px;align-items:stretch;flex:1}
+.p-timer{border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;justify-content:flex-start}
+.p-timer .t-clock{font-size:clamp(84px,min(11vw,22vh),220px)}
+.p-stop{color:var(--ink);padding:10px 14px}.p-stop h2{font:800 22px/1.1 var(--display)}.p-stop .t-steps li{font-size:clamp(16px,1.5vw,24px)}
+.p-join{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;min-width:0}
+.p-qr svg{display:block;width:clamp(150px,min(17vw,34vh),330px);height:auto;border-radius:8px;forced-color-adjust:none}
+.p-code p{margin:0}.p-codev{font:700 clamp(40px,4.6vw,80px)/1 var(--mono);letter-spacing:.14em;color:var(--teal)}
+.p-go{font-size:clamp(16px,1.4vw,24px);overflow-wrap:anywhere}.p-go b{font-family:var(--mono)}
+.p-wait{font:700 20px/1.35 var(--body)}
+.p-side{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.p-rules{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font:700 clamp(16px,1.4vw,24px)/1.3 var(--body)}
+.p-rh{font:800 clamp(16px,1.3vw,22px)/1.1 var(--display);margin:4px 0 0}
+.p-rooms{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.p-rooms li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:clamp(15px,1.25vw,21px)}
+.p-rooms li.now{background:var(--sun);color:var(--sun-ink);border-color:var(--sun);font-weight:700}
+.p-rooms li.past{opacity:.6}
+.p-rn{width:1.7em;height:1.7em;border-radius:50%;background:var(--teal);color:var(--teal-ink);display:grid;place-items:center;font:800 .9em/1 var(--display)}
+.p-ru{font:600 .9em/1.2 var(--mono)}
+.p-prob{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px}
+.p-note{font-size:14px;color:var(--muted);margin:0}
+@media (max-width:1100px){.p-main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.p-side{grid-column:1/-1}}
+@media (max-width:700px){.p-main{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .p-timer{background:var(--panel);color:var(--ink);border:2px solid var(--line)}}
+:root[data-theme="dark"] .p-timer{background:var(--panel);color:var(--ink);border:2px solid var(--line)}
+@media print{.t-res,.t-resno,.qs,.t-prob,.t-dev{display:none!important}}
 </style>
 <script src="config.js"></script>
 </head>
 <body>
 <main class="wrap" data-lang="nl" lang="nl"><header class="top"><a class="brand" href="./" data-keep><span class="mark" aria-hidden="true">18</span><span><b>Escape 18</b><small>Klaar voor later</small></span></a><nav class="langs" aria-label="Taal / Language"><a class="btn ghost small" lang="nl" href="./">Nederlands</a><a class="btn ghost small" lang="en" href="./?lang=en">English</a></nav></header>
 <section class="l-hero"><p class="eyebrow">Gratis lessen voor havo en vwo</p><h1>Escape 18</h1><p class="lead">Escape 18 is een escape voor in de klas. Leerlingen van 16 tot 18 jaar oefenen met wat er verandert als je 18 wordt. Ze werken met z'n tweeën op één scherm en lossen opdrachten op met echte soorten documenten, zoals een brief, een loonstrook of een huurcontract. Je eigen docent leidt de les. Leerlingen hebben geen account nodig.</p><p class="l-test">Dit is een gratis testversie die we nog verder ontwikkelen. Gebruik en test hem gerust; we horen graag wat werkte en wat niet.</p></section>
-<h2>De lessen</h2><div class="l-cards"><article class="l-card"><h3>Je eerste maand als 18-jarige</h3><p>Je loonstrook nakijken, een brief van je zorgverzekeraar lezen, een nepbericht herkennen en op tijd aanmelden voor een vervolgopleiding.</p><a class="btn" href="eerste-maand/">Open de les</a><a class="btn ghost small" href="eerste-maand/docent.pdf">Docentblad (PDF)</a></article>
-<article class="l-card"><h3>Op kamers</h3><p>Een kamer huren: een nepadvertentie herkennen, je huurcontract lezen, je inschrijven bij de gemeente en nagaan of je huurtoeslag krijgt.</p><a class="btn" href="op-kamers/">Open de les</a><a class="btn ghost small" href="op-kamers/docent.pdf">Docentblad (PDF)</a></article>
-<article class="l-card"><h3>Studiefinanciering</h3><p>Studiefinanciering aanvragen bij DUO, thuis of op kamers wonen, extra geld of lenen, en wat je later terugbetaalt.</p><a class="btn" href="studiefinanciering/">Open de les</a><a class="btn ghost small" href="studiefinanciering/docent.pdf">Docentblad (PDF)</a></article>
-<article class="l-card"><h3>Je eerste bijbaan</h3><p>Je eerste bijbaan: je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen.</p><a class="btn" href="eerste-bijbaan/">Open de les</a><a class="btn ghost small" href="eerste-bijbaan/docent.pdf">Docentblad (PDF)</a></article>
-</div>
+<h2>De lessen</h2><div class="l-cards"><article class="l-card"><h3>Je eerste maand als 18-jarige</h3><p>Je loonstrook nakijken, een brief van je zorgverzekeraar lezen, een nepbericht herkennen en op tijd aanmelden voor een vervolgopleiding.</p><a class="btn" href="eerste-maand/">Open de les</a><a class="btn ghost small" href="eerste-maand/docent.pdf">Docentblad (PDF)</a><details class="l-plan" hidden data-product="escape18-eerste-maand" data-thanks="Dank je wel. Veel plezier met de les!"><summary class="btn ghost small">Ik ga dit geven</summary>
+<form class="l-plan-f" novalidate><fieldset><legend>Wanneer ongeveer?</legend><p class="err l-plan-err" role="alert" hidden>Kies wanneer ongeveer.</p><div class="opts"><label class="opt"><input type="radio" name="when" value="deze week"><span>deze week</span></label><label class="opt"><input type="radio" name="when" value="deze maand"><span>deze maand</span></label><label class="opt"><input type="radio" name="when" value="later"><span>later</span></label></div></fieldset>
+<fieldset><legend>Welk niveau?</legend><div class="opts"><label class="opt"><input type="radio" name="level" value="pro"><span>praktijkonderwijs</span></label><label class="opt"><input type="radio" name="level" value="vmbo"><span>vmbo</span></label><label class="opt"><input type="radio" name="level" value="havo"><span>havo</span></label><label class="opt"><input type="radio" name="level" value="vwo"><span>vwo</span></label><label class="opt"><input type="radio" name="level" value="mbo"><span>mbo</span></label><label class="opt"><input type="radio" name="level" value="anders"><span>anders</span></label></div></fieldset>
+<button type="submit" class="btn small">Verstuur</button><p class="note">Dit stuurt alleen anoniem naar het Escape 18-team: welke les, wanneer ongeveer en welk niveau. Geen naam en geen school.</p></form></details></article>
+<article class="l-card"><h3>Op kamers</h3><p>Een kamer huren: een nepadvertentie herkennen, je huurcontract lezen, je inschrijven bij de gemeente en nagaan of je huurtoeslag krijgt.</p><a class="btn" href="op-kamers/">Open de les</a><a class="btn ghost small" href="op-kamers/docent.pdf">Docentblad (PDF)</a><details class="l-plan" hidden data-product="escape18-op-kamers" data-thanks="Dank je wel. Veel plezier met de les!"><summary class="btn ghost small">Ik ga dit geven</summary>
+<form class="l-plan-f" novalidate><fieldset><legend>Wanneer ongeveer?</legend><p class="err l-plan-err" role="alert" hidden>Kies wanneer ongeveer.</p><div class="opts"><label class="opt"><input type="radio" name="when" value="deze week"><span>deze week</span></label><label class="opt"><input type="radio" name="when" value="deze maand"><span>deze maand</span></label><label class="opt"><input type="radio" name="when" value="later"><span>later</span></label></div></fieldset>
+<fieldset><legend>Welk niveau?</legend><div class="opts"><label class="opt"><input type="radio" name="level" value="pro"><span>praktijkonderwijs</span></label><label class="opt"><input type="radio" name="level" value="vmbo"><span>vmbo</span></label><label class="opt"><input type="radio" name="level" value="havo"><span>havo</span></label><label class="opt"><input type="radio" name="level" value="vwo"><span>vwo</span></label><label class="opt"><input type="radio" name="level" value="mbo"><span>mbo</span></label><label class="opt"><input type="radio" name="level" value="anders"><span>anders</span></label></div></fieldset>
+<button type="submit" class="btn small">Verstuur</button><p class="note">Dit stuurt alleen anoniem naar het Escape 18-team: welke les, wanneer ongeveer en welk niveau. Geen naam en geen school.</p></form></details></article>
+<article class="l-card"><h3>Studiefinanciering</h3><p>Studiefinanciering aanvragen bij DUO, thuis of op kamers wonen, extra geld of lenen, en wat je later terugbetaalt.</p><a class="btn" href="studiefinanciering/">Open de les</a><a class="btn ghost small" href="studiefinanciering/docent.pdf">Docentblad (PDF)</a><details class="l-plan" hidden data-product="escape18-studiefinanciering" data-thanks="Dank je wel. Veel plezier met de les!"><summary class="btn ghost small">Ik ga dit geven</summary>
+<form class="l-plan-f" novalidate><fieldset><legend>Wanneer ongeveer?</legend><p class="err l-plan-err" role="alert" hidden>Kies wanneer ongeveer.</p><div class="opts"><label class="opt"><input type="radio" name="when" value="deze week"><span>deze week</span></label><label class="opt"><input type="radio" name="when" value="deze maand"><span>deze maand</span></label><label class="opt"><input type="radio" name="when" value="later"><span>later</span></label></div></fieldset>
+<fieldset><legend>Welk niveau?</legend><div class="opts"><label class="opt"><input type="radio" name="level" value="pro"><span>praktijkonderwijs</span></label><label class="opt"><input type="radio" name="level" value="vmbo"><span>vmbo</span></label><label class="opt"><input type="radio" name="level" value="havo"><span>havo</span></label><label class="opt"><input type="radio" name="level" value="vwo"><span>vwo</span></label><label class="opt"><input type="radio" name="level" value="mbo"><span>mbo</span></label><label class="opt"><input type="radio" name="level" value="anders"><span>anders</span></label></div></fieldset>
+<button type="submit" class="btn small">Verstuur</button><p class="note">Dit stuurt alleen anoniem naar het Escape 18-team: welke les, wanneer ongeveer en welk niveau. Geen naam en geen school.</p></form></details></article>
+<article class="l-card"><h3>Je eerste bijbaan</h3><p>Je eerste bijbaan: je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen.</p><a class="btn" href="eerste-bijbaan/">Open de les</a><a class="btn ghost small" href="eerste-bijbaan/docent.pdf">Docentblad (PDF)</a><details class="l-plan" hidden data-product="escape18-eerste-bijbaan" data-thanks="Dank je wel. Veel plezier met de les!"><summary class="btn ghost small">Ik ga dit geven</summary>
+<form class="l-plan-f" novalidate><fieldset><legend>Wanneer ongeveer?</legend><p class="err l-plan-err" role="alert" hidden>Kies wanneer ongeveer.</p><div class="opts"><label class="opt"><input type="radio" name="when" value="deze week"><span>deze week</span></label><label class="opt"><input type="radio" name="when" value="deze maand"><span>deze maand</span></label><label class="opt"><input type="radio" name="when" value="later"><span>later</span></label></div></fieldset>
+<fieldset><legend>Welk niveau?</legend><div class="opts"><label class="opt"><input type="radio" name="level" value="pro"><span>praktijkonderwijs</span></label><label class="opt"><input type="radio" name="level" value="vmbo"><span>vmbo</span></label><label class="opt"><input type="radio" name="level" value="havo"><span>havo</span></label><label class="opt"><input type="radio" name="level" value="vwo"><span>vwo</span></label><label class="opt"><input type="radio" name="level" value="mbo"><span>mbo</span></label><label class="opt"><input type="radio" name="level" value="anders"><span>anders</span></label></div></fieldset>
+<button type="submit" class="btn small">Verstuur</button><p class="note">Dit stuurt alleen anoniem naar het Escape 18-team: welke les, wanneer ongeveer en welk niveau. Geen naam en geen school.</p></form></details></article>
+<article class="l-card"><h3>Route 18</h3><p>Je route na school: welk diploma waarheen leidt, tot wanneer je je aanmeldt en welke dag je gaat meelopen.</p><a class="btn" href="route-18/">Open de les</a><a class="btn ghost small" href="route-18/docent.pdf">Docentblad (PDF)</a><details class="l-plan" hidden data-product="escape18-route-18" data-thanks="Dank je wel. Veel plezier met de les!"><summary class="btn ghost small">Ik ga dit geven</summary>
+<form class="l-plan-f" novalidate><fieldset><legend>Wanneer ongeveer?</legend><p class="err l-plan-err" role="alert" hidden>Kies wanneer ongeveer.</p><div class="opts"><label class="opt"><input type="radio" name="when" value="deze week"><span>deze week</span></label><label class="opt"><input type="radio" name="when" value="deze maand"><span>deze maand</span></label><label class="opt"><input type="radio" name="when" value="later"><span>later</span></label></div></fieldset>
+<fieldset><legend>Welk niveau?</legend><div class="opts"><label class="opt"><input type="radio" name="level" value="pro"><span>praktijkonderwijs</span></label><label class="opt"><input type="radio" name="level" value="vmbo"><span>vmbo</span></label><label class="opt"><input type="radio" name="level" value="havo"><span>havo</span></label><label class="opt"><input type="radio" name="level" value="vwo"><span>vwo</span></label><label class="opt"><input type="radio" name="level" value="mbo"><span>mbo</span></label><label class="opt"><input type="radio" name="level" value="anders"><span>anders</span></label></div></fieldset>
+<button type="submit" class="btn small">Verstuur</button><p class="note">Dit stuurt alleen anoniem naar het Escape 18-team: welke les, wanneer ongeveer en welk niveau. Geen naam en geen school.</p></form></details></article></div>
 <section class="card"><h2>Voor docenten: zo gaat een les van 45 minuten</h2><p>Open een les en kies <b>Voor de docent</b>. Daar vind je het lesplan, een klascode met QR-code, een klastimer, een antwoordblad om te printen en vragen voor het nabespreken.</p>
 <table class="l-steps"><tbody><tr><td>5 min</td><td><b>Uitleg en inloggen</b><br>Zet het docentenscherm op het bord. Leerlingen openen de korte link of scannen de QR-code. Ze werken met z'n tweeën op één scherm.</td></tr><tr><td>2 min</td><td><b>Startcheck</b><br>Elk tweetal beantwoordt vier vragen. Ze zien nog niet wat goed is.</td></tr><tr><td>26 min</td><td><b>Escape</b><br>Start de klastimer. Tweetallen lossen de kamers op en schrijven per kamer een cijfer op. Met alle cijfers openen ze het slot.</td></tr><tr><td>minuut 33</td><td><b>Stop</b><br>Tik op Stop de escape. Iedereen stopt, ook wie nog niet klaar is. Lees de cijfers van het slot voor van je geprinte antwoordblad. Tweetallen tikken op We stoppen.</td></tr><tr><td>2 min</td><td><b>Eindcheck</b><br>Andere vragen over dezelfde regels. Elk tweetal ziet wat het goed had, voor en na.</td></tr><tr><td>5 min</td><td><b>Nabespreken</b><br>Begin bij de kamer die het lastigst was. Op het docentenscherm staan gespreksvragen en de antwoorden.</td></tr><tr><td>2 min</td><td><b>Afsluiten</b><br>Laat twee of drie leerlingen hun als-dan-plan hardop zeggen. Stel daarna de slotvraag en vul het korte feedbackformulier in.</td></tr><tr><td>3 min</td><td><b>Reserve</b><br>Voor inloggen dat uitloopt, of een gesprek dat langer duurt.</td></tr></tbody></table><p>De minuten verschillen per les een beetje. Het precieze lesplan staat op het docentenscherm van elke les.</p><p>Nodig: een laptop, tablet of telefoon per tweetal, pen en papier, en een digibord.</p></section>
 <footer class="foot"><a href="privacy.html" data-keep>Privacy</a><span class="contact" data-none="Vragen of feedback? Vul na de les het korte formulier in op het docentenscherm van de les." data-pre="Vragen of feedback? Neem contact op: "></span><span>Escape 18 begon als studentenproject van team Klaar voor Later (Erasmus Universiteit Rotterdam). Olivier Runge zet het nu voort als gratis testversie.</span><span>Lesmateriaal: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl" rel="license noopener">CC BY-NC-SA 4.0</a>. Gratis gebruiken en aanpassen, niet commercieel, met naamsvermelding.</span></footer></main>
 <main class="wrap" data-lang="en" lang="en" hidden><header class="top"><a class="brand" href="./" data-keep><span class="mark" aria-hidden="true">18</span><span><b>Escape 18</b><small>Ready for later</small></span></a><nav class="langs" aria-label="Taal / Language"><a class="btn ghost small" lang="nl" href="./">Nederlands</a><a class="btn ghost small" lang="en" href="./?lang=en">English</a></nav></header>
 <section class="l-hero"><p class="eyebrow">Free lessons for havo and vwo</p><h1>Escape 18</h1><p class="lead">Escape 18 is a classroom escape. Pupils aged 16 to 18 practise what changes when you turn 18. They work in pairs on one screen and solve tasks with real kinds of documents, such as a letter, a payslip or a rental contract. Their own teacher leads the lesson. Pupils do not need an account.</p><p class="l-test">This is a free test version that we are still developing. Feel free to use and test it; we would love to hear what worked and what did not.</p></section>
-<h2>The lessons</h2><div class="l-cards"><article class="l-card"><h3>Je eerste maand als 18-jarige (your first month at 18)</h3><p>Checking your payslip, reading a letter from your health insurer, spotting a fake message and applying for further study in time.</p><a class="btn" href="eerste-maand/?lang=en">Open the lesson</a><a class="btn ghost small" href="eerste-maand/docent.pdf">Teacher sheet (PDF, in Dutch)</a></article>
-<article class="l-card"><h3>Op kamers (renting a room)</h3><p>Renting a room: spotting a fake advert, reading your rental contract, registering with the municipality and checking if you get huurtoeslag (rent benefit). The lesson is in Dutch.</p><a class="btn" href="op-kamers/?lang=en">Open the lesson</a><a class="btn ghost small" href="op-kamers/docent.pdf">Teacher sheet (PDF, in Dutch)</a></article>
-<article class="l-card"><h3>Studiefinanciering (student finance from DUO)</h3><p>Applying for studiefinanciering at DUO, living at home or in a rented room, extra money or a loan, and what you pay back later. The lesson is in Dutch.</p><a class="btn" href="studiefinanciering/?lang=en">Open the lesson</a><a class="btn ghost small" href="studiefinanciering/docent.pdf">Teacher sheet (PDF, in Dutch)</a></article>
-<article class="l-card"><h3>Je eerste bijbaan</h3><p>Je eerste bijbaan: je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen.</p><a class="btn" href="eerste-bijbaan/?lang=en">Open the lesson</a><a class="btn ghost small" href="eerste-bijbaan/docent.pdf">Teacher sheet (PDF, in Dutch)</a></article>
-</div>
+<h2>The lessons</h2><div class="l-cards"><article class="l-card"><h3>Je eerste maand als 18-jarige (your first month at 18)</h3><p>Checking your payslip, reading a letter from your health insurer, spotting a fake message and applying for further study in time.</p><a class="btn" href="eerste-maand/?lang=en">Open the lesson</a><a class="btn ghost small" href="eerste-maand/docent.pdf">Teacher sheet (PDF, in Dutch)</a><details class="l-plan" hidden data-product="escape18-eerste-maand" data-thanks="Thank you. Enjoy the lesson!"><summary class="btn ghost small">I am going to teach this</summary>
+<form class="l-plan-f" novalidate><fieldset><legend>Roughly when?</legend><p class="err l-plan-err" role="alert" hidden>Choose roughly when.</p><div class="opts"><label class="opt"><input type="radio" name="when" value="deze week"><span>this week</span></label><label class="opt"><input type="radio" name="when" value="deze maand"><span>this month</span></label><label class="opt"><input type="radio" name="when" value="later"><span>later</span></label></div></fieldset>
+<fieldset><legend>Which level?</legend><div class="opts"><label class="opt"><input type="radio" name="level" value="pro"><span>praktijkonderwijs</span></label><label class="opt"><input type="radio" name="level" value="vmbo"><span>vmbo</span></label><label class="opt"><input type="radio" name="level" value="havo"><span>havo</span></label><label class="opt"><input type="radio" name="level" value="vwo"><span>vwo</span></label><label class="opt"><input type="radio" name="level" value="mbo"><span>mbo</span></label><label class="opt"><input type="radio" name="level" value="anders"><span>other</span></label></div></fieldset>
+<button type="submit" class="btn small">Send</button><p class="note">This only sends, anonymously, to the Escape 18 team: which lesson, roughly when and which level. No name and no school.</p></form></details></article>
+<article class="l-card"><h3>Op kamers (renting a room)</h3><p>Renting a room: spotting a fake advert, reading your rental contract, registering with the municipality and checking if you get huurtoeslag (rent benefit). The lesson is in Dutch.</p><a class="btn" href="op-kamers/?lang=en">Open the lesson</a><a class="btn ghost small" href="op-kamers/docent.pdf">Teacher sheet (PDF, in Dutch)</a><details class="l-plan" hidden data-product="escape18-op-kamers" data-thanks="Thank you. Enjoy the lesson!"><summary class="btn ghost small">I am going to teach this</summary>
+<form class="l-plan-f" novalidate><fieldset><legend>Roughly when?</legend><p class="err l-plan-err" role="alert" hidden>Choose roughly when.</p><div class="opts"><label class="opt"><input type="radio" name="when" value="deze week"><span>this week</span></label><label class="opt"><input type="radio" name="when" value="deze maand"><span>this month</span></label><label class="opt"><input type="radio" name="when" value="later"><span>later</span></label></div></fieldset>
+<fieldset><legend>Which level?</legend><div class="opts"><label class="opt"><input type="radio" name="level" value="pro"><span>praktijkonderwijs</span></label><label class="opt"><input type="radio" name="level" value="vmbo"><span>vmbo</span></label><label class="opt"><input type="radio" name="level" value="havo"><span>havo</span></label><label class="opt"><input type="radio" name="level" value="vwo"><span>vwo</span></label><label class="opt"><input type="radio" name="level" value="mbo"><span>mbo</span></label><label class="opt"><input type="radio" name="level" value="anders"><span>other</span></label></div></fieldset>
+<button type="submit" class="btn small">Send</button><p class="note">This only sends, anonymously, to the Escape 18 team: which lesson, roughly when and which level. No name and no school.</p></form></details></article>
+<article class="l-card"><h3>Studiefinanciering (student finance from DUO)</h3><p>Applying for studiefinanciering at DUO, living at home or in a rented room, extra money or a loan, and what you pay back later. The lesson is in Dutch.</p><a class="btn" href="studiefinanciering/?lang=en">Open the lesson</a><a class="btn ghost small" href="studiefinanciering/docent.pdf">Teacher sheet (PDF, in Dutch)</a><details class="l-plan" hidden data-product="escape18-studiefinanciering" data-thanks="Thank you. Enjoy the lesson!"><summary class="btn ghost small">I am going to teach this</summary>
+<form class="l-plan-f" novalidate><fieldset><legend>Roughly when?</legend><p class="err l-plan-err" role="alert" hidden>Choose roughly when.</p><div class="opts"><label class="opt"><input type="radio" name="when" value="deze week"><span>this week</span></label><label class="opt"><input type="radio" name="when" value="deze maand"><span>this month</span></label><label class="opt"><input type="radio" name="when" value="later"><span>later</span></label></div></fieldset>
+<fieldset><legend>Which level?</legend><div class="opts"><label class="opt"><input type="radio" name="level" value="pro"><span>praktijkonderwijs</span></label><label class="opt"><input type="radio" name="level" value="vmbo"><span>vmbo</span></label><label class="opt"><input type="radio" name="level" value="havo"><span>havo</span></label><label class="opt"><input type="radio" name="level" value="vwo"><span>vwo</span></label><label class="opt"><input type="radio" name="level" value="mbo"><span>mbo</span></label><label class="opt"><input type="radio" name="level" value="anders"><span>other</span></label></div></fieldset>
+<button type="submit" class="btn small">Send</button><p class="note">This only sends, anonymously, to the Escape 18 team: which lesson, roughly when and which level. No name and no school.</p></form></details></article>
+<article class="l-card"><h3>Je eerste bijbaan</h3><p>Je eerste bijbaan: je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen.</p><a class="btn" href="eerste-bijbaan/?lang=en">Open the lesson</a><a class="btn ghost small" href="eerste-bijbaan/docent.pdf">Teacher sheet (PDF, in Dutch)</a><details class="l-plan" hidden data-product="escape18-eerste-bijbaan" data-thanks="Thank you. Enjoy the lesson!"><summary class="btn ghost small">I am going to teach this</summary>
+<form class="l-plan-f" novalidate><fieldset><legend>Roughly when?</legend><p class="err l-plan-err" role="alert" hidden>Choose roughly when.</p><div class="opts"><label class="opt"><input type="radio" name="when" value="deze week"><span>this week</span></label><label class="opt"><input type="radio" name="when" value="deze maand"><span>this month</span></label><label class="opt"><input type="radio" name="when" value="later"><span>later</span></label></div></fieldset>
+<fieldset><legend>Which level?</legend><div class="opts"><label class="opt"><input type="radio" name="level" value="pro"><span>praktijkonderwijs</span></label><label class="opt"><input type="radio" name="level" value="vmbo"><span>vmbo</span></label><label class="opt"><input type="radio" name="level" value="havo"><span>havo</span></label><label class="opt"><input type="radio" name="level" value="vwo"><span>vwo</span></label><label class="opt"><input type="radio" name="level" value="mbo"><span>mbo</span></label><label class="opt"><input type="radio" name="level" value="anders"><span>other</span></label></div></fieldset>
+<button type="submit" class="btn small">Send</button><p class="note">This only sends, anonymously, to the Escape 18 team: which lesson, roughly when and which level. No name and no school.</p></form></details></article>
+<article class="l-card"><h3>Route 18</h3><p>Je route na school: welk diploma waarheen leidt, tot wanneer je je aanmeldt en welke dag je gaat meelopen.</p><a class="btn" href="route-18/?lang=en">Open the lesson</a><a class="btn ghost small" href="route-18/docent.pdf">Teacher sheet (PDF, in Dutch)</a><details class="l-plan" hidden data-product="escape18-route-18" data-thanks="Thank you. Enjoy the lesson!"><summary class="btn ghost small">I am going to teach this</summary>
+<form class="l-plan-f" novalidate><fieldset><legend>Roughly when?</legend><p class="err l-plan-err" role="alert" hidden>Choose roughly when.</p><div class="opts"><label class="opt"><input type="radio" name="when" value="deze week"><span>this week</span></label><label class="opt"><input type="radio" name="when" value="deze maand"><span>this month</span></label><label class="opt"><input type="radio" name="when" value="later"><span>later</span></label></div></fieldset>
+<fieldset><legend>Which level?</legend><div class="opts"><label class="opt"><input type="radio" name="level" value="pro"><span>praktijkonderwijs</span></label><label class="opt"><input type="radio" name="level" value="vmbo"><span>vmbo</span></label><label class="opt"><input type="radio" name="level" value="havo"><span>havo</span></label><label class="opt"><input type="radio" name="level" value="vwo"><span>vwo</span></label><label class="opt"><input type="radio" name="level" value="mbo"><span>mbo</span></label><label class="opt"><input type="radio" name="level" value="anders"><span>other</span></label></div></fieldset>
+<button type="submit" class="btn small">Send</button><p class="note">This only sends, anonymously, to the Escape 18 team: which lesson, roughly when and which level. No name and no school.</p></form></details></article></div>
 <section class="card"><h2>For teachers: how a 45-minute lesson runs</h2><p>Open a lesson and choose <b>For the teacher</b>. There you find the lesson plan, a class code with a QR code, a class timer, an answer sheet to print and questions for the discussion.</p>
 <table class="l-steps"><tbody><tr><td>5 min</td><td><b>Explain and log in</b><br>Put the teacher screen on the board. Pupils open the short link or scan the QR code. They work in pairs on one screen.</td></tr><tr><td>2 min</td><td><b>Start check</b><br>Each pair answers four questions. They do not see yet what is right.</td></tr><tr><td>26 min</td><td><b>Escape</b><br>Start the class timer. Pairs solve the rooms and write down a digit per room. With all the digits they open the lock.</td></tr><tr><td>minute 33</td><td><b>Stop</b><br>Tap Stop de escape. Everyone stops, also pairs that are not done. Read out the digits of the lock from your printed answer sheet. Pairs tap We stoppen.</td></tr><tr><td>2 min</td><td><b>End check</b><br>Other questions on the same rules. Each pair sees what it got right, before and after.</td></tr><tr><td>5 min</td><td><b>Discussion</b><br>Start with the room that was hardest. The teacher screen has discussion questions and the answers.</td></tr><tr><td>2 min</td><td><b>Closing</b><br>Ask two or three pupils to say their if-then plan out loud. Then ask the closing question and fill in the short feedback form.</td></tr><tr><td>3 min</td><td><b>Buffer</b><br>For logging in that takes longer, or a talk that runs over.</td></tr></tbody></table><p>The minutes differ a little per lesson. The exact lesson plan is on the teacher screen of each lesson.</p><p>You need: a laptop, tablet or phone per pair, pen and paper, and a digital board.</p></section>
 <footer class="foot"><a href="privacy.html" data-keep>Privacy</a><span class="contact" data-none="Questions or feedback? After the lesson, fill in the short form on the teacher screen of the lesson." data-pre="Questions or feedback? Get in touch: "></span><span>Escape 18 began as a student project by team Klaar voor Later (Erasmus University Rotterdam). Olivier Runge now continues it as a free test version.</span><span>Course material: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="license noopener">CC BY-NC-SA 4.0</a>. Free to use and adapt, not commercial, with credit to the author.</span></footer></main>
@@ -427,6 +596,18 @@ Array.prototype.forEach.call(document.querySelectorAll('a[data-keep]'),function(
 var c=(window.E18_CONFIG&&typeof window.E18_CONFIG.contact==='string')?window.E18_CONFIG.contact.trim():'';
 Array.prototype.forEach.call(document.querySelectorAll('.contact'),function(el){if(!c){el.textContent=el.getAttribute('data-none');return;}
 el.textContent=el.getAttribute('data-pre');var href=/^https:\/\//.test(c)?c:(/@/.test(c)?'mailto:'+c.replace(/^mailto:/,''):'');
-if(!href){el.appendChild(document.createTextNode(c));return;}var a=document.createElement('a');a.href=href;a.textContent=c.replace(/^mailto:/,'');el.appendChild(a);});})();</script>
+if(!href){el.appendChild(document.createTextNode(c));return;}var a=document.createElement('a');a.href=href;a.textContent=c.replace(/^mailto:/,'');el.appendChild(a);});})();
+(function(){'use strict';var C=window.E18_CONFIG||{},ep=typeof C.endpoint==='string'?C.endpoint.trim():'';
+if(!/^https:\/\/script\.google(usercontent)?\.com\//.test(ep))return;
+var sent={},AL='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+function sid(){var a=new Uint8Array(10),s='';window.crypto.getRandomValues(a);for(var i=0;i<10;i++)s+=AL[a[i]%62];return s;}
+function post(json){var ok=false;try{ok=!!(navigator.sendBeacon&&navigator.sendBeacon(ep,new Blob([json],{type:'text/plain'})));}catch(e){ok=false;}
+if(!ok){try{fetch(ep,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:json,keepalive:true}).catch(function(){});}catch(e){}}}
+Array.prototype.forEach.call(document.querySelectorAll('details.l-plan'),function(d){d.hidden=false;var f=d.querySelector('form'),er=f.querySelector('.l-plan-err');
+f.addEventListener('submit',function(e){e.preventDefault();var p=d.getAttribute('data-product'),w=f.querySelector('input[name="when"]:checked'),l=f.querySelector('input[name="level"]:checked');
+if(!w){er.hidden=false;var r=f.querySelector('input[name="when"]');if(r)r.focus();return;}er.hidden=true;
+if(!sent[p]){sent[p]=true;var data={product:p,when:w.value};if(l)data.level=l.value;
+post(JSON.stringify([{type:'plan',product:'escape18-site',version:"site-20261107-0efc6f0",class:'GEEN',session:sid(),data:data}]));}
+var t=document.createElement('p');t.setAttribute('role','status');t.className='l-plan-ok';t.textContent=d.getAttribute('data-thanks');f.parentNode.replaceChild(t,f);t.tabIndex=-1;t.focus();});});})();</script>
 </body>
 </html>

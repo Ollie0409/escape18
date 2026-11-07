@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-4Bl05dJy9043FuGgOIUEb9YUmAaqTPhqgv+BReapQGU='; style-src 'sha256-vfSeu+iSav4TMk3Qq0tw0q9TU8CRIXpH+rAOg3Z5gRw='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-4Bl05dJy9043FuGgOIUEb9YUmAaqTPhqgv+BReapQGU='; style-src 'sha256-Aq3LXF2VY5C62/IO+d6xO6q2TMQ7o03lrfQtnKJ1ZBk='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Wat Escape 18 bewaart, wat nooit, waar, wie het ziet en hoe lang.">
 <title>Privacy · Escape 18</title>
@@ -161,6 +161,7 @@ label.opt:has(input:checked){border-color:var(--teal);background:var(--teal-soft
 .esc-web-price{font:800 clamp(26px,3vw,34px)/1 var(--display);font-stretch:110%;color:var(--teal)}
 .esc-web dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0}
 .esc-web dl div{display:contents}
+@supports (grid-template-columns:subgrid){.esc-web dl div{display:grid;grid-column:1/-1;grid-template-columns:subgrid}}  /* a box of its own, so a pointed fact can be focused and marked */
 .esc-web dt,.esc-web dd{padding:5px 4px;border-bottom:1px dashed var(--line);margin:0}
 .esc-web dt{color:var(--muted);padding-right:14px}
 .esc-web dd{font-weight:700}
@@ -298,9 +299,12 @@ footer.foot{border-top:1px solid var(--line);padding-top:14px;color:var(--muted)
 .paper .box{display:inline-block;min-width:3.5em;border-bottom:1.5px solid #000;margin-left:6px}
 @media print{
   @page{size:A4;margin:14mm}
-  body.print-paper .wrap>*:not(.paper):not(.paper-key){display:none!important}
+  /* S5 (G4): two separate prints. Pupil pages never carry the answer pages or the lock code. */
+  body.print-paper .wrap>*:not(.paper){display:none!important}
   body.print-paper .paper{display:block!important;font-size:11.5pt}
-  body.print-paper .paper-key{display:block!important;font-size:11pt;break-before:page}
+  body.print-paper-key .wrap>*:not(.paper-key){display:none!important}
+  body.print-paper-key .paper-key{display:block!important;font-size:11pt}
+  .paper .lockp{break-inside:avoid;margin-top:14pt;padding-top:8pt;border-top:1.5px solid #000}
   .paper-key table{border-collapse:collapse;width:100%}.paper-key td{border-bottom:1px solid #999;padding:4pt;vertical-align:top}
   .paper-key h1{font-size:18pt}.paper-key h2{font-size:13pt;margin:10pt 0 4pt;break-after:avoid}.paper-key table{break-inside:avoid}
   .paper h1,.paper h2{break-after:avoid}.paper img,.paper table{max-width:100%}
@@ -397,6 +401,141 @@ details.esc-recap dd{margin:0;font-weight:700;overflow-wrap:anywhere}
 
 .opts-hint{margin:0 0 8px;font-size:12px;line-height:1.4;color:var(--muted)}
 .esc-slip dd.dd-prose{font:400 16px/1.55 var(--body);font-variant-numeric:normal;text-align:left;flex:1 1 100%}.esc-slip .row-prose dt{flex:1 1 100%;font-weight:600}
+/* Plan slip: pupil end-screen card and the teacher's print-only slips (one A4, cut lines between the slips) */
+.slip-card .slip-fields{display:flex;flex-direction:column;gap:12px}
+.slip-card .slip-note{border-left:4px solid var(--teal);padding-left:12px}
+.slip-hint{font-weight:400;color:var(--muted)}
+.slips{display:none}
+@media print{
+  body.print-slips .wrap{padding:0;margin:0;max-width:none;display:block}
+  body.print-slips .wrap>*:not(.slips){display:none!important}
+  body.print-slips .slips{display:grid!important;height:266mm;width:100%;break-inside:avoid;font-size:12pt;line-height:1.3;color:#000;background:#fff}
+  .slips-n1{grid-template-rows:1fr}.slips-n2{grid-template-rows:repeat(2,1fr)}.slips-n3{grid-template-rows:repeat(3,1fr)}.slips-n4{grid-template-rows:repeat(4,1fr)}
+  .slip-cell{box-sizing:border-box;padding:5mm 6mm 4mm;min-height:0;display:block}
+  .slip-cell:not(:last-child){border-bottom:.4mm dashed #444}
+  .slip-h{font:700 16pt/1.2 var(--body);margin:0}
+  .slip-i{margin:1.5mm 0 0;font-size:11pt}
+  .slip-f{margin-top:3.2mm}
+  .slip-r{display:flex;align-items:flex-end;gap:0 2.5mm;min-height:10.5mm}
+  .slip-l{flex:0 1 auto;line-height:1.25;padding-bottom:.8mm}
+  .slip-hint{font-size:11pt;font-weight:400;color:#222}
+  .slip-w{flex:1 1 30mm;min-width:30mm;border-bottom:.3mm solid #000;height:10.5mm}
+  .slip-hb{margin:1.2mm 0 0;line-height:1.25}
+  .slip-x{display:block;border-bottom:.3mm solid #000;height:10.5mm}
+  .slip-foot{margin:4mm 0 0;font-size:11pt;line-height:1.3;color:#222}
+}
+/* Teacher extras: audience lines, closed per-room detail, question and answer block */
+.t-aud{border-left:4px solid var(--teal);padding:2px 0 2px 14px;margin:0 0 14px}.t-aud p{margin:4px 0}
+.t-detail{margin:8px 0}.t-detail summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}.t-detail p{margin:6px 0}
+.t-faq{display:flex;flex-direction:column;gap:12px;margin:0}.t-faq dt{font-weight:700}.t-faq dd{margin:2px 0 0}
+@media print{.t-detail,.t-aud{display:none}}
+/* Paper version: a wide document table wraps inside the page instead of running off the edge */
+@media print{.paper .esc-grid{min-width:0;font-size:9.5pt}.paper .esc-grid th,.paper .esc-grid td{white-space:normal;padding:3pt 5pt 3pt 2pt}.paper .esc-grid thead th{font-size:8.5pt}}
+
+/* ===== v3 (7 Nov 2026): Klasresultaten, teacher kit, projection mode, confidence and wish taps, wide tables ===== */
+/* S7 (G4): document tables wrap; a table with 4 or more columns becomes one block per row in a narrow box, so every column stays visible */
+.esc-grid{min-width:0}
+.esc-grid th,.esc-grid td{white-space:normal;overflow-wrap:break-word}
+.esc-tscroll{container-type:inline-size}
+@container (max-width:620px){
+  .esc-grid.wide thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .esc-grid.wide,.esc-grid.wide tbody,.esc-grid.wide tr,.esc-grid.wide th,.esc-grid.wide td{display:block;width:auto}
+  .esc-grid.wide tr{border-bottom:1px solid var(--line);padding:6px 2px}
+  .esc-grid.wide tbody th{border:0;padding:2px 4px 4px;font-size:1.02em}
+  .esc-grid.wide td{border:0;padding:1px 4px;display:grid;grid-template-columns:minmax(6.5em,38%) minmax(0,1fr);gap:2px 10px}
+  .esc-grid.wide td::before{content:attr(data-h);font:600 12.5px/1.5 var(--mono);color:var(--muted)}
+}
+@container (max-width:780px){
+  .esc-grid.wide.c5 thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .esc-grid.wide.c5,.esc-grid.wide.c5 tbody,.esc-grid.wide.c5 tr,.esc-grid.wide.c5 th,.esc-grid.wide.c5 td{display:block;width:auto}
+  .esc-grid.wide.c5 tr{border-bottom:1px solid var(--line);padding:6px 2px}
+  .esc-grid.wide.c5 tbody th{border:0;padding:2px 4px 4px;font-size:1.02em}
+  .esc-grid.wide.c5 td{border:0;padding:1px 4px;display:grid;grid-template-columns:minmax(6.5em,38%) minmax(0,1fr);gap:2px 10px}
+  .esc-grid.wide.c5 td::before{content:attr(data-h);font:600 12.5px/1.5 var(--mono);color:var(--muted)}
+}
+@media print{.esc-tscroll{container-type:normal}}
+/* end check: optional confidence; end screen: optional topic wish */
+fieldset.conf{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+fieldset.conf legend{font-weight:700;font-size:15px}
+fieldset.conf legend small,fieldset.wish legend small{font-weight:400;color:var(--muted)}
+.conf-opts{display:flex;flex-wrap:wrap;gap:8px}
+label.opt.conf-opt{min-height:44px;padding:6px 12px;font-size:15px}
+fieldset.wish{margin-top:12px}
+.wish-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px}
+.tap.wish-tap{font:700 15px/1.25 var(--body);text-align:left;padding:8px 12px}
+.tap[aria-pressed="true"]{background:var(--teal);color:var(--teal-ink);border-color:var(--teal)}
+/* N4 (G4): the teacher timer at 00:00 */
+.t-timer.over{box-shadow:inset 0 0 0 6px var(--sun)}
+.t-over{margin:0;align-self:flex-start;background:var(--sun);color:var(--sun-ink);font:800 clamp(18px,1.8vw,24px)/1.2 var(--display);padding:8px 14px;border-radius:10px}
+/* Klasresultaten */
+.t-res{border:3px solid var(--teal)}
+#tres-body{display:flex;flex-direction:column;gap:14px}
+.t-res-lead{font:700 clamp(18px,1.7vw,23px)/1.3 var(--body);margin:0}
+.t-res .t-room p{margin:0}
+.t-resno{margin:0}
+.t-dev{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+/* Klaar in 15 minuten */
+.qs-top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.qs-top>div:first-child{flex:1 1 320px;min-width:0}
+.qs-clock{flex:0 0 auto;background:var(--sunk);border-radius:14px;padding:10px 14px;display:flex;flex-direction:column;gap:6px}
+.qs-time{font:600 40px/1 var(--mono);font-variant-numeric:tabular-nums;margin:0}
+.qs-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.qs-steps li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.qs-steps li.done{background:var(--ok-soft);border-color:var(--ok)}
+.qs-steps input[type=checkbox]{width:24px;height:24px;margin-top:4px;accent-color:var(--teal)}
+.qs-steps label{font-weight:700;cursor:pointer}.qs-steps label .t-k{display:inline;margin-right:6px}
+.qs-steps p{margin:4px 0 6px;font-size:.92em}
+/* Probleem? */
+.t-pbs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+details.t-pb{border:1px solid var(--line);border-left:6px solid var(--sun);border-radius:12px;padding:6px 14px;background:var(--panel)}
+details.t-pb summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}
+details.t-pb p{margin:6px 0}
+/* Lesverslag */
+.t-vs fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.t-vs legend{font-weight:700;margin-bottom:6px}.t-vs legend small,.t-vs .field small{font-weight:400;color:var(--muted)}
+.t-vs .t-two{align-items:end}
+.vs-in{display:flex;flex-direction:column;gap:12px;max-width:820px}
+.vs-out{border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--sunk);max-width:820px}
+.vs-text p{margin:2px 0}.vs-text h3{font:800 18px/1.25 var(--display);margin:0 0 6px}
+.vs-out ul.err{margin:0 0 8px;padding-left:18px}
+@media print{
+  body.print-verslag .wrap>*:not(.t-view){display:none!important}
+  body.print-verslag .t-view>*:not(#tvs){display:none!important}
+  body.print-verslag #tvs>*:not(.vs-out){display:none!important}
+  body.print-verslag #tvs{border:0;padding:0}
+  body.print-verslag .vs-out{border:0;background:none;padding:0;font-size:12pt;max-width:none}
+  body.print-verslag .vs-out ul.err{display:none}
+}
+/* Projectiemodus: one board screen; fits 1280x720 and 1366x768 without scrolling, larger on 1920x1080 */
+body[data-view="proj"] .wrap{max-width:none;padding-block:12px 12px;gap:10px}
+.p-view{display:flex;flex-direction:column;gap:12px;min-height:calc(100vh - 24px)}
+.p-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.p-h1{font:800 clamp(24px,2.6vw,44px)/1.05 var(--display);font-stretch:110%;margin:0}
+.p-main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.95fr) minmax(0,1fr);gap:14px;align-items:stretch;flex:1}
+.p-timer{border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;justify-content:flex-start}
+.p-timer .t-clock{font-size:clamp(84px,min(11vw,22vh),220px)}
+.p-stop{color:var(--ink);padding:10px 14px}.p-stop h2{font:800 22px/1.1 var(--display)}.p-stop .t-steps li{font-size:clamp(16px,1.5vw,24px)}
+.p-join{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;min-width:0}
+.p-qr svg{display:block;width:clamp(150px,min(17vw,34vh),330px);height:auto;border-radius:8px;forced-color-adjust:none}
+.p-code p{margin:0}.p-codev{font:700 clamp(40px,4.6vw,80px)/1 var(--mono);letter-spacing:.14em;color:var(--teal)}
+.p-go{font-size:clamp(16px,1.4vw,24px);overflow-wrap:anywhere}.p-go b{font-family:var(--mono)}
+.p-wait{font:700 20px/1.35 var(--body)}
+.p-side{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.p-rules{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font:700 clamp(16px,1.4vw,24px)/1.3 var(--body)}
+.p-rh{font:800 clamp(16px,1.3vw,22px)/1.1 var(--display);margin:4px 0 0}
+.p-rooms{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.p-rooms li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:clamp(15px,1.25vw,21px)}
+.p-rooms li.now{background:var(--sun);color:var(--sun-ink);border-color:var(--sun);font-weight:700}
+.p-rooms li.past{opacity:.6}
+.p-rn{width:1.7em;height:1.7em;border-radius:50%;background:var(--teal);color:var(--teal-ink);display:grid;place-items:center;font:800 .9em/1 var(--display)}
+.p-ru{font:600 .9em/1.2 var(--mono)}
+.p-prob{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px}
+.p-note{font-size:14px;color:var(--muted);margin:0}
+@media (max-width:1100px){.p-main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.p-side{grid-column:1/-1}}
+@media (max-width:700px){.p-main{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .p-timer{background:var(--panel);color:var(--ink);border:2px solid var(--line)}}
+:root[data-theme="dark"] .p-timer{background:var(--panel);color:var(--ink);border:2px solid var(--line)}
+@media print{.t-res,.t-resno,.qs,.t-prob,.t-dev{display:none!important}}
 </style>
 <script src="config.js"></script>
 </head>
@@ -404,10 +543,12 @@ details.esc-recap dd{margin:0;font-weight:700;overflow-wrap:anywhere}
 <main class="wrap" data-lang="nl" lang="nl"><header class="top"><a class="brand" href="./" data-keep><span class="mark" aria-hidden="true">18</span><span><b>Escape 18</b><small>Klaar voor later</small></span></a><nav class="langs" aria-label="Taal / Language"><a class="btn ghost small" lang="nl" href="privacy.html">Nederlands</a><a class="btn ghost small" lang="en" href="privacy.html?lang=en">English</a></nav></header>
 <article class="prose"><p class="eyebrow">Privacy</p><h1>Wat we bewaren en wat niet</h1><p>Escape 18 is een gratis les in ontwikkeling, geen bedrijf. We willen weten wat goed werkt in de les en wat niet. Daarom bewaren we <b>anoniem</b> welke antwoorden de klas kiest. Dat gebeurt alleen als de docent op het docentenscherm bij "Anonieme antwoorden van deze klas delen met het Escape 18-team?" kiest voor Ja. Kiest de docent Nee, dan wordt er niets verstuurd uit die klas. Ook de papieren versie stuurt niets.</p>
 <h2>Wie is verantwoordelijk</h2><p>Olivier Runge, voor Escape 18. Escape 18 begon als studentenproject van team Klaar voor Later (Erasmus Universiteit Rotterdam). Olivier Runge zet het nu voort als gratis testversie, geen bedrijf.</p><p class="contact" data-none="Het contactadres volgt nog." data-pre="Vragen of feedback? Neem contact op: "></p>
-<h2>Wat we bewaren</h2><table><thead><tr><th scope="col">Wat</th><th scope="col">Wanneer</th><th scope="col">Welke gegevens</th></tr></thead><tbody><tr><td><b>Start van de les</b></td><td>De docent start de les (alleen bij Ja)</td><td>Welke les het is, hoeveel kamers die heeft en in welke taal.</td></tr><tr><td><b>Start</b></td><td>Een tweetal begint</td><td>Dat er een tweetal begint, welke versie van de les en in welke taal.</td></tr><tr><td><b>Start- en eindcheck</b></td><td>Na de check</td><td>Welke versie van de check (A of B), welke vragen goed waren en hoeveel, bijvoorbeeld 2 van de 3.</td></tr><tr><td><b>Antwoord</b></td><td>Na elke vraag</td><td>Welk antwoord het tweetal als eerste koos (een letter of een getal), of het in één keer goed was, hoe vaak ze het probeerden, of ze een hint namen en hoeveel seconden de vraag duurde.</td></tr><tr><td><b>Kamer</b></td><td>Na elke kamer</td><td>Hoeveel seconden de kamer duurde.</td></tr><tr><td><b>Slot</b></td><td>Bij het slot</td><td>Of het slot openging en na hoeveel seconden.</td></tr><tr><td><b>Mening</b></td><td>Aan het eind, als het tweetal dat wil</td><td>Twee tikken van 1 tot 5: hoe leuk de les was en hoeveel ze leerden.</td></tr><tr><td><b>Einde</b></td><td>Aan het eind</td><td>Hoe lang de escape duurde.</td></tr><tr><td><b>Feedback van de docent</b></td><td>Als de docent het formulier verstuurt</td><td>Of je de les nog eens geeft, hoeveel je ervan gebruikte, het aantal leerlingen, het aantal minuten, en wat werkte en wat niet. Die laatste twee schrijf je zelf, zonder namen van leerlingen.</td></tr></tbody></table>
-<p>Bij elk van deze regels staan ook: de naam en versie van de les, de klascode en een willekeurige code voor deze ene keer spelen. De klascode is 5 tekens en wordt door het docentenscherm verzonnen, bijvoorbeeld K7MQX. De willekeurige code is bij elke keer spelen nieuw. Hij blijft niet op het apparaat staan.</p>
+<h2>Wat we bewaren</h2><table><thead><tr><th scope="col">Wat</th><th scope="col">Wanneer</th><th scope="col">Welke gegevens</th></tr></thead><tbody><tr><td><b>Start van de les</b></td><td>De docent start de les (alleen bij Ja)</td><td>Welke les het is, hoeveel kamers die heeft en in welke taal.</td></tr><tr><td><b>Start</b></td><td>Een tweetal begint</td><td>Dat er een tweetal begint, welke versie van de les en in welke taal.</td></tr><tr><td><b>Start- en eindcheck</b></td><td>Na de check</td><td>Welke versie van de check (A of B), welke vragen goed waren en hoeveel, bijvoorbeeld 2 van de 3. Bij de startcheck ook of alles al goed was. Bij de eindcheck per vraag hoe zeker het tweetal was: gok, een beetje of heel zeker. Dat tikt het tweetal alleen aan als het wil.</td></tr><tr><td><b>Antwoord</b></td><td>Na elke vraag</td><td>Welk antwoord het tweetal als eerste koos (een letter of een getal), of het in één keer goed was, hoe vaak ze het probeerden, of ze een hint namen en hoeveel seconden de vraag duurde.</td></tr><tr><td><b>Kamer</b></td><td>Na elke kamer</td><td>Hoeveel seconden de kamer duurde.</td></tr><tr><td><b>Slot</b></td><td>Bij het slot</td><td>Of het slot openging en na hoeveel seconden.</td></tr><tr><td><b>Mening</b></td><td>Aan het eind, als het tweetal dat wil</td><td>Twee tikken van 1 tot 5: hoe leuk de les was en hoeveel ze leerden. Als het tweetal wil ook één tik: over welk onderwerp het hierna een les wil, gekozen uit een vaste lijst.</td></tr><tr><td><b>Einde</b></td><td>Aan het eind</td><td>Hoe lang de escape duurde.</td></tr><tr><td><b>Feedback van de docent</b></td><td>Als de docent het formulier verstuurt</td><td>Of je de les nog eens geeft, hoeveel je ervan gebruikte, het aantal leerlingen, het aantal minuten, en wat werkte en wat niet. Die laatste twee schrijf je zelf, zonder namen van leerlingen. E-mailadressen en telefoonnummers in je tekst halen we automatisch weg.</td></tr><tr><td><b>Ik ga dit geven</b></td><td>Als een docent op de startpagina bij een les op Ik ga dit geven tikt en het verstuurt</td><td>Welke les, wanneer ongeveer (deze week, deze maand of later) en welk niveau, bijvoorbeeld havo. Geen naam en geen school.</td></tr><tr><td><b>Les opnieuw gestart</b></td><td>Als een docent een les start die op hetzelfde apparaat al eens op een eerdere dag gestart is (alleen bij Ja)</td><td>Dat het de 2e, 3e, 4e of 5e keer of vaker is, en of de vorige keer deze week, deze maand of langer geleden was.</td></tr></tbody></table>
+<p>Bij elk van deze regels staan ook: de naam en versie van de les, de klascode en een willekeurige code voor deze ene keer spelen. De klascode is 5 tekens en wordt door het docentenscherm verzonnen, bijvoorbeeld K7MQX. De willekeurige code is bij elke keer spelen nieuw. Hij blijft niet op het apparaat staan. Bij Ik ga dit geven staat geen klascode.</p>
 <h2>Wat we nooit bewaren</h2><ul><li>Namen of e-mailadressen van leerlingen.</li><li>Tekst die leerlingen zelf typen, zoals hun als-dan-plan. Dat plan blijft op hun eigen scherm.</li><li>Het internetadres (IP-adres), het soort apparaat of de browser.</li><li>Iets anders waarmee we een leerling of een apparaat kunnen herkennen.</li></ul>
-<h2>Waar en wie</h2><p>De gegevens staan in een Google Sheet in het Google-account van Escape 18 (beheerd door Olivier Runge). Google is de host. Daarom krijgt Google bij het versturen technisch het internetadres (IP-adres) van de verbinding. Wij bewaren dat adres niet en wij zien het ook niet.</p><p>Alleen Olivier Runge kan de gegevens zien. We gebruiken ze om de lessen beter te maken, bijvoorbeeld om te zien welke vraag te moeilijk is.</p><p>Wat nog niet verstuurd is, staat even in de browser van het apparaat (bijvoorbeeld als er geen internet is). Zodra het verstuurd is, wordt het daar gewist.</p>
+<h2>Wat het docentenscherm onthoudt</h2><p>Kies je Ja en start je de les? Dan onthoudt de browser op jouw apparaat welke les je startte, hoe vaak en op welke dag. Dat blijft op jouw apparaat. We sturen alleen het bericht Les opnieuw gestart uit de tabel hierboven. Daarin staat geen code van jou of van je apparaat. Wissen kan met de knop Vergeet dit apparaat op het docentenscherm. Je kunt ook de sitegegevens in je browser wissen.</p>
+<h2>Wat de docent na de les ziet</h2><p>Na de stop ziet de docent op het docentenscherm een samenvatting van de hele klas. Per kamer: hoeveel tweetallen klaar waren, welke vraag het lastigst was en welk fout antwoord het vaakst gekozen werd. Dat kan alleen als de docent Ja koos en als minstens 3 tweetallen meededen. Je ziet nooit welk tweetal wat antwoordde. Iedereen die de klascode kent, kan deze samenvatting opvragen. Er staat geen naam in en niets over één leerling.</p>
+<h2>Waar en wie</h2><p>De gegevens staan in een Google Sheet in het Google-account van Escape 18 (beheerd door Olivier Runge). Google is de host. Daarom krijgt Google bij het versturen technisch het internetadres (IP-adres) van de verbinding. Wij bewaren dat adres niet en wij zien het ook niet.</p><p>Alleen Olivier Runge kan alle gegevens zien. De docent ziet alleen de samenvatting van de eigen klas. Olivier krijgt elke week een e-mail met aantallen, de moeilijkste vragen en de feedback van docenten. We gebruiken de gegevens om de lessen beter te maken, bijvoorbeeld om te zien welke vraag te moeilijk is.</p><p>Wat nog niet verstuurd is, staat even in de browser van het apparaat (bijvoorbeeld als er geen internet is). Zodra het verstuurd is, wordt het daar gewist.</p>
 <h2>Hoe lang</h2><p>We verwijderen alle gegevens uiterlijk op 31 januari 2027. Gaat het project door, dan uiterlijk op 31 augustus 2027.</p>
 <h2>Voor scholen</h2><p>We verwerken geen persoonsgegevens van leerlingen. Een school heeft voor deze testversie daarom geen verwerkersovereenkomst nodig. Wil de privacy officer van je school dit controleren? Neem dan contact op met Olivier Runge via het adres hieronder.</p>
 <h2>Contact</h2><p class="contact" data-none="Het contactadres volgt nog." data-pre="Vragen of feedback? Neem contact op: "></p>
@@ -415,10 +556,12 @@ details.esc-recap dd{margin:0;font-weight:700;overflow-wrap:anywhere}
 <main class="wrap" data-lang="en" lang="en" hidden><header class="top"><a class="brand" href="./" data-keep><span class="mark" aria-hidden="true">18</span><span><b>Escape 18</b><small>Ready for later</small></span></a><nav class="langs" aria-label="Taal / Language"><a class="btn ghost small" lang="nl" href="privacy.html">Nederlands</a><a class="btn ghost small" lang="en" href="privacy.html?lang=en">English</a></nav></header>
 <article class="prose"><p class="eyebrow">Privacy</p><h1>What we keep and what we do not</h1><p>Escape 18 is a free lesson in development, not a company. We want to know what works well in the lesson and what does not. That is why we keep <b>anonymous</b> records of which answers the class chooses. This only happens if the teacher chooses Yes for "Share anonymous answers of this class with the Escape 18 team?" on the teacher screen. If the teacher chooses No, nothing is sent from that class. The paper version sends nothing either.</p>
 <h2>Who is responsible</h2><p>Olivier Runge, for Escape 18. Escape 18 began as a student project by team Klaar voor Later (Erasmus University Rotterdam). Olivier Runge now continues it as a free test version, not a company.</p><p class="contact" data-none="The contact address will follow." data-pre="Questions or feedback? Get in touch: "></p>
-<h2>What we keep</h2><table><thead><tr><th scope="col">What</th><th scope="col">When</th><th scope="col">Which data</th></tr></thead><tbody><tr><td><b>Lesson start</b></td><td>The teacher starts the lesson</td><td>Which lesson it is, how many rooms it has and in which language.</td></tr><tr><td><b>Start</b></td><td>A pair starts</td><td>That a pair starts, which version of the lesson and in which language.</td></tr><tr><td><b>Start and end check</b></td><td>After the check</td><td>Which version of the check (A or B), which questions were right and how many, for example 2 of 3.</td></tr><tr><td><b>Answer</b></td><td>After each question</td><td>Which answer the pair chose first (a letter or a number), whether it was right first time, how often they tried, whether they took a hint and how many seconds the question took.</td></tr><tr><td><b>Room</b></td><td>After each room</td><td>How many seconds the room took.</td></tr><tr><td><b>Lock</b></td><td>At the lock</td><td>Whether the lock opened and after how many seconds.</td></tr><tr><td><b>Opinion</b></td><td>At the end, if the pair wants to</td><td>Two taps from 1 to 5: how much fun the lesson was and how much they learned.</td></tr><tr><td><b>End</b></td><td>At the end</td><td>How long the escape took.</td></tr><tr><td><b>Teacher feedback</b></td><td>When the teacher sends the form</td><td>Whether you would teach the lesson again, how much you used, the number of pupils, the number of minutes, and what worked and what did not. You write those last two yourself, without names of pupils.</td></tr></tbody></table>
-<p>Each of these records also has: the name and version of the lesson, the class code and a random code for this one play. The class code has 5 characters and is made up by the teacher screen, for example K7MQX. The random code is new every time. It does not stay on the device.</p>
+<h2>What we keep</h2><table><thead><tr><th scope="col">What</th><th scope="col">When</th><th scope="col">Which data</th></tr></thead><tbody><tr><td><b>Lesson start</b></td><td>The teacher starts the lesson</td><td>Which lesson it is, how many rooms it has and in which language.</td></tr><tr><td><b>Start</b></td><td>A pair starts</td><td>That a pair starts, which version of the lesson and in which language.</td></tr><tr><td><b>Start and end check</b></td><td>After the check</td><td>Which version of the check (A or B), which questions were right and how many, for example 2 of 3. For the start check also whether everything was already right. For the end check, per question, how sure the pair was: a guess, a bit or very sure. The pair only taps this if it wants to.</td></tr><tr><td><b>Answer</b></td><td>After each question</td><td>Which answer the pair chose first (a letter or a number), whether it was right first time, how often they tried, whether they took a hint and how many seconds the question took.</td></tr><tr><td><b>Room</b></td><td>After each room</td><td>How many seconds the room took.</td></tr><tr><td><b>Lock</b></td><td>At the lock</td><td>Whether the lock opened and after how many seconds.</td></tr><tr><td><b>Opinion</b></td><td>At the end, if the pair wants to</td><td>Two taps from 1 to 5: how much fun the lesson was and how much they learned. If the pair wants, also one tap: which topic it would like a lesson about next, chosen from a fixed list.</td></tr><tr><td><b>End</b></td><td>At the end</td><td>How long the escape took.</td></tr><tr><td><b>Teacher feedback</b></td><td>When the teacher sends the form</td><td>Whether you would teach the lesson again, how much you used, the number of pupils, the number of minutes, and what worked and what did not. Those last two you write yourself, without names of pupils. We automatically remove e-mail addresses and phone numbers from your text.</td></tr><tr><td><b>I am going to teach this</b></td><td>When a teacher taps I am going to teach this for a lesson on the home page and sends it</td><td>Which lesson, roughly when (this week, this month or later) and which level, for example havo. No name and no school.</td></tr><tr><td><b>Lesson started again</b></td><td>When a teacher starts a lesson that was already started on the same device on an earlier day (only with Yes)</td><td>That it is the 2nd, 3rd, 4th or 5th time or more, and whether the last time was this week, this month or longer ago.</td></tr></tbody></table>
+<p>Each of these records also has: the name and version of the lesson, the class code and a random code for this one play. The class code has 5 characters and is made up by the teacher screen, for example K7MQX. The random code is new every time. It does not stay on the device. I am going to teach this has no class code.</p>
 <h2>What we never keep</h2><ul><li>Names or e-mail addresses of pupils.</li><li>Text that pupils type themselves, such as their if-then plan. That plan stays on their own screen.</li><li>The internet address (IP address), the kind of device or the browser.</li><li>Anything else that could identify a pupil or a device.</li></ul>
-<h2>Where and who</h2><p>The data is kept in a Google Sheet in the Google account of Escape 18 (managed by Olivier Runge). Google is the host, so when data is sent Google technically receives the internet address (IP address) of the connection. We do not store that address and we do not see it.</p><p>Only Olivier Runge can see the data. We use it to improve the lessons, for example to see which question is too hard.</p><p>Anything not yet sent is kept for a short time in the browser of the device (for example when there is no internet). As soon as it is sent, it is deleted there.</p>
+<h2>What the teacher screen remembers</h2><p>Do you choose Yes and start the lesson? Then the browser on your device remembers which lesson you started, how often and on which day. That stays on your device. We only send the message Lesson started again from the table above. It contains no code of you or your device. You can delete it with the Forget this device button on the teacher screen, or by clearing the site data in your browser.</p>
+<h2>What the teacher sees after the lesson</h2><p>After the stop the teacher sees a summary of the whole class on the teacher screen. Per room: how many pairs finished, which question was hardest and which wrong answer was chosen most. This only works if the teacher chose Yes and at least 3 pairs took part. You never see which pair answered what. Anyone who knows the class code can request this summary. It contains no name and nothing about one pupil.</p>
+<h2>Where and who</h2><p>The data is kept in a Google Sheet in the Google account of Escape 18 (managed by Olivier Runge). Google is the host, so when data is sent Google technically receives the internet address (IP address) of the connection. We do not store that address and we do not see it.</p><p>Only Olivier Runge can see all data. The teacher only sees the summary of their own class. Olivier gets a weekly e-mail with counts, the hardest questions and teachers' feedback. We use the data to improve the lessons, for example to see which question is too hard.</p><p>Anything not yet sent is kept for a short time in the browser of the device (for example when there is no internet). As soon as it is sent, it is deleted there.</p>
 <h2>How long</h2><p>We delete all data by 31 January 2027 at the latest. If the project continues, by 31 August 2027 at the latest.</p>
 <h2>For schools</h2><p>We do not process personal data of pupils. So a school does not need a processing agreement (verwerkersovereenkomst) for this test version. Does your school's privacy officer want to check this? Contact Olivier Runge at the address below.</p>
 <h2>Contact</h2><p class="contact" data-none="The contact address will follow." data-pre="Questions or feedback? Get in touch: "></p>
