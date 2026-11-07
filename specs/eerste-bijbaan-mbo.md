@@ -2,7 +2,7 @@
 
 Bedragen geldig voor: 1 januari 2027 tot de indexering van 1 juli 2027 (de les speelt van augustus 2026 tot april 2027; alleen kamer 2 heeft bedragen, en die gaan over januari 2027); gecontroleerd op 7 november 2026; validUntil: 30 juni 2027
 
-Status: **Revision 1** (7 Nov 2026), after fact check A (`content_new/factcheck_A_eerste-bijbaan-mbo.md`: PASS, 0 ERROR, 7 RISK) and the five-persona gate (`qa/gate_bijbaan_mbo_personas.md`: READY WITH FIXES). Every review item is answered in the changelog at the end. Written first on 7 Nov 2026 as the mbo niveau 3-4 variant of `content_new/eerste-bijbaan.md` (havo/vwo, code 3521, including its 2027 update), after reading that spec in full, `kamers-engine/README.md` (v3), `kamers-engine/lessons/eerste-bijbaan.js` and the audience section of `research/next_topics.md`. Every rule below was read on its official page or in the official law text on **7 November 2026** (source table at the end). Nothing is from memory. wetten.overheid.nl was unreachable (proxy 502); law texts were read as the official BWB XML from repository.officiele-overheidspublicaties.nl (version named per row). Same engine, same quality bar: one defensible answer per question, hints that do not give the answer, no option-length or option-start give-aways, every rule sourced, fictional employers checked against the KvK Handelsregister. Data file: `kamers-engine/lessons/eerste-bijbaan-mbo.js` (product `escape18-eerste-bijbaan-mbo`, variant `mbo`); `tests/spec-compare.js` compares the two.
+Status: **Revision 2** (7 Nov 2026), after ChatGPT check B round 1 (`qa/checkB/eerste-bijbaan-mbo_round1.md`: FAIL, 3 ERROR, 7 RISK) and the pupil playtest (`qa/gate_bijbaan_mbo_G4.md`, content items), with the room text cut from about 1,780 to 1,349 data words. Revision 1 (7 Nov 2026) followed fact check A (`content_new/factcheck_A_eerste-bijbaan-mbo.md`: PASS, 0 ERROR, 7 RISK) and the five-persona gate (`qa/gate_bijbaan_mbo_personas.md`: READY WITH FIXES). Every review item is answered in the changelog at the end. Written first on 7 Nov 2026 as the mbo niveau 3-4 variant of `content_new/eerste-bijbaan.md` (havo/vwo, code 3521, including its 2027 update), after reading that spec in full, `kamers-engine/README.md` (v3), `kamers-engine/lessons/eerste-bijbaan.js` and the audience section of `research/next_topics.md`. Every rule below was read on its official page or in the official law text on **7 November 2026** (source table at the end). Nothing is from memory. wetten.overheid.nl was unreachable (proxy 502); law texts were read as the official BWB XML from repository.officiele-overheidspublicaties.nl (version named per row). Same engine, same quality bar: one defensible answer per question, hints that do not give the answer, no option-length or option-start give-aways, every rule sourced, fictional employers checked against the KvK Handelsregister. Data file: `kamers-engine/lessons/eerste-bijbaan-mbo.js` (product `escape18-eerste-bijbaan-mbo`, variant `mbo`); `tests/spec-compare.js` compares the two.
 
 ## Why this variant, and the design choices it forces
 
@@ -64,11 +64,11 @@ De student kan (mbo says "student"; pupil text uses "je"):
 
 ## Kamer 1: Leren en werken
 
-**Date:** maandag 31 augustus tot maandag 7 september 2026. **Where:** Zorgcentrum Zeestad en Installatiebedrijf Zeestad.
+**Date:** maandag 31 augustus tot maandag 7 september 2026 (on screen: "september 2026"). **Where:** Zorgcentrum Zeestad en Installatiebedrijf Zeestad.
 
-**Intro:** "Je bent 17. Je begint aan de bbl Verzorgende IG bij Zorgcentrum Zeestad. Je vriendin Amira doet een bol-opleiding in de techniek. Amira begint met stage."
+**Intro:** "Je bent 17 en begint met de bbl bij Zorgcentrum Zeestad. Je vriendin Amira doet bol en loopt stage."
 
-### Document 1 `pok` (type: letter, kind "Praktijkovereenkomst", lines p1 to p6)
+### Document 1 `pok` (type: letter, kind "Praktijkovereenkomst", lines p1 to p4 and p6)
 
 > **ROC Zeestad**, 31 augustus 2026
 >
@@ -76,105 +76,102 @@ De student kan (mbo says "student"; pupil text uses "je"):
 > p2. Student: Luca Bos
 > p3. Leerbedrijf: Zorgcentrum Zeestad, erkend leerbedrijf
 > p4. Opleiding: Verzorgende IG, niveau 3
-> p5. Periode: 1 september 2026 tot en met 31 augustus 2028
 > p6. Je hebt ook een arbeidsovereenkomst met Zorgcentrum Zeestad.
 >
-> Note: "Vereenvoudigd voorbeeld. Een echte pok is langer."
+> Note: "Vereenvoudigd voorbeeld."
 
-(No signature line, so 1.1 cannot be answered by counting signatures.)
+(Rev 2: the period line p5 is cut, no question used it; p6 keeps its id.)
 
-### Document 2 `app` (type: chat, title "Appjes van Amira")
+### Document 2 `app` (type: chat, title "Berichten van Amira")
 
 > **Amira**, maandag 7 september, 19:05
 > a1. "Ik loop stage bij Installatiebedrijf Zeestad. Ik heb een begeleider en leerdoelen."
-> a2. "Ik heb alleen een praktijkovereenkomst. Geen arbeidsovereenkomst."
-> a3. "Het bedrijf zegt: je moet veiligheidsschoenen dragen."
-> a4. "Ik moest ze zelf kopen. Ze kostten € 50."
+> a2. "Ik heb geen arbeidsovereenkomst."
+> a3. "Ik moest veiligheidsschoenen kopen voor de stage: € 50."
+> a4. "Ik kreeg dat geld nergens terug."
 
-(Sender name on the chat: "Amira". Revision 1: a3 no longer has the relative clause "dat ik die moet dragen" (gate T10). The safety shoes stay: fact check A found that they are protective equipment under the Arbowet, which makes the answer € 50 firmer, not weaker; see the teacher detail and source row `stage-kosten`.)
+(Sender name: "Amira"; the time shows on the first message only. Rev 2: a4 says that nobody else paid the costs back, so the rule card condition "betaalt niemand anders het?" is met (check B 4). Title "Berichten" instead of "Appjes" (G4 N6).)
 
 ### Document 3 `regel` (type: rule card, title "Regels")
 
-> r1. Heb je een arbeidsovereenkomst? Dan krijg je loon: minstens het minimumloon.
-> r2. Loop je stage zonder arbeidsovereenkomst? Dan is loon niet verplicht.
-> r3. Je stage mag jou geen geld kosten. Moest je iets kopen voor je stage? Dan krijg je dat geld van het bedrijf.
-> r4. Een stage of leerbaan mag alleen bij een erkend leerbedrijf. Op stagemarkt.nl zie je welke bedrijven erkend zijn.
+> r1. Heb je een arbeidsovereenkomst? Dan krijg je minstens het minimumloon.
+> r2. Stage zonder arbeidsovereenkomst? Dan is loon niet verplicht.
+> r3. Moest je iets kopen voor je stage? En betaalt niemand anders het? Dan betaalt het bedrijf het.
+> r4. Stage of leerbaan? Alleen bij een erkend leerbedrijf. Dat zie je op stagemarkt.nl.
 
-**Moeilijke woorden:** "Bbl: je werkt 3 of 4 dagen per week bij een bedrijf. De andere dagen ga je naar school. Praktijkovereenkomst (pok): de afspraken over je stage of leerbaan. Arbeidsovereenkomst: je contract om te werken voor loon. Erkend leerbedrijf: een bedrijf dat studenten mag opleiden. Bol: je zit vooral op school en loopt stage. Veiligheidsschoenen: stevige werkschoenen die je voeten beschermen."
+(Rev 2, check B 4: r3 has the condition of the source, "Maak je kosten en krijg je die niet op een andere manier vergoed?" (Rijksoverheid), instead of the absolute "Je stage mag jou geen geld kosten".)
 
-(Split over the documents in this order: `pok` gets the first five sentences, Bbl to Erkend leerbedrijf, so 1.1 and 1.3 show them; `app` gets Bol and Veiligheidsschoenen, so 1.1 and 1.2 show them.)
+**Moeilijke woorden:** "Bbl: 3 of 4 dagen werken, de andere dagen school. Pok: afspraken over je stage of leerbaan. Arbeidsovereenkomst: contract om te werken voor loon. Erkend leerbedrijf: mag studenten opleiden."
+
+(All on `pok`. Rev 2: the second box (Bol, Veiligheidsschoenen) is cut (G4 S1); the intro says what bol means in practice.)
 
 ### Vraag 1.1 `loon` (pick, docs: pok, app, regel)
 
 - **Prompt:** "Jij en Amira leren bij een bedrijf. Wie heeft recht op loon?"
 - **Options:** a "Jij en Amira: jullie werken bij een bedrijf" · b "Alleen Amira: Amira heeft een begeleider" · c "Niemand: jullie zijn nog student" · d "Alleen jij: je hebt een arbeidsovereenkomst"
 - **Correct:** d
-- **Lengths:** 8, 6, 5, 6 words; 43, 40, 32, 43 characters (the right one is not the only long one); starts "Jij en Amira", "Alleen", "Niemand", "Alleen".
-- **Retry points to:** rule r1 "Heb je een arbeidsovereenkomst? Dan krijg je loon: minstens het minimumloon."
+- **Lengths:** 43, 40, 32, 43 characters; starts "Jij en Amira", "Alleen", "Niemand", "Alleen".
+- **Retry points to:** rule r1 "Heb je een arbeidsovereenkomst? Dan krijg je minstens het minimumloon."
 - **Nudge:** "Wie van jullie heeft een arbeidsovereenkomst?"
-- **Hint (30 s):** "Kijk onderaan je pok en in het tweede appje van Amira."
-- **Explanation:** "Jij hebt een arbeidsovereenkomst, dus je krijgt minstens het minimumloon. Amira loopt stage en leert daar: loon is dan niet verplicht."
+- **Hint (30 s):** "Kijk onderaan je pok en in bericht 2."
+- **Explanation:** "Jij hebt een arbeidsovereenkomst. Amira loopt stage: dan is loon niet verplicht."
 - **Rules:** bbl-ao-loon, stage-geen-loon
 
 ### Vraag 1.2 `schoenen` (number, euro, docs: app, regel)
 
-- **Prompt:** "Hoeveel euro moet het installatiebedrijf aan Amira terugbetalen?"
+- **Prompt:** "Hoeveel euro moet het bedrijf aan Amira geven?"
 - **Correct:** € 50 (5000 cents)
-- **Retry points to:** rule r3 "Je stage mag jou geen geld kosten. Moest je iets kopen voor je stage? Dan krijg je dat geld van het bedrijf."
-- **Nudge:** "Mag een stage jou geld kosten?"
-- **Hint (30 s):** "Kijk in het laatste appje van Amira."
-- **Explanation:** "Je stage mag jou geen geld kosten. Amira krijgt dus alle € 50 van het bedrijf."
+- **Retry points to:** rule r3 "Moest je iets kopen voor je stage? En betaalt niemand anders het? Dan betaalt het bedrijf het."
+- **Nudge:** "Moest Amira iets kopen voor de stage?"
+- **Hint (30 s):** "Lees bericht 3 en 4."
+- **Explanation:** "Niemand anders betaalt de € 50. Dus het bedrijf betaalt."
 - **Rules:** stage-kosten
 
 ### Vraag 1.3 `erkend` (pick, docs: pok, regel)
 
-- **Situation:** "Amira wil volgend jaar stage lopen bij een ander bedrijf."
-- **Prompt:** "Waar ziet Amira of dat bedrijf een erkend leerbedrijf is?"
+- **Situation:** "Amira wil stage lopen bij een ander bedrijf."
+- **Prompt:** "Waar ziet Amira of dat bedrijf erkend is?"
 - **Options:** a "Bij de Belastingdienst" · b "Op de website van de KvK" · c "In de app van het bedrijf" · d "Op stagemarkt.nl"
 - **Correct:** d
-- **Lengths:** 3, 6, 6, 2 words (the right one is the shortest); two options are websites (b, d), so the right one is no longer the only web address (fact check A row 4).
-- **Retry points to:** rule r4 "Een stage of leerbaan mag alleen bij een erkend leerbedrijf. Op stagemarkt.nl zie je welke bedrijven erkend zijn."
-- **Nudge:** "Lees de regel over een erkend leerbedrijf."
-- **Hint (30 s):** "De Kamer van Koophandel (KvK) kent bedrijven, maar geeft geen erkenning."
-- **Explanation:** "Op stagemarkt.nl zie je of een bedrijf erkend is. Een leerbaan voor de bbl vind je op leerbanenmarkt.nl."
+- **Lengths:** 22, 24, 25, 16 characters (the right one is the shortest); two options are websites.
+- **Retry points to:** rule r4 "Stage of leerbaan? Alleen bij een erkend leerbedrijf. Dat zie je op stagemarkt.nl."
+- **Nudge:** "Welke regel gaat over een erkend leerbedrijf?"
+- **Hint (30 s):** "Lees die regel tot het einde."
+- **Explanation:** "Op stagemarkt.nl zie je welke bedrijven erkend zijn."
 - **Rules:** erkend
-- **Defensibility:** "Bij je school" is not an option (the school can also tell). The KvK registers companies, not the erkenning (SBB, WEB art. 5.2.3 via art. 7.2.8 lid 4); its website is no source for erkenning.
+- **Defensibility:** "Bij je school" is not an option (the school can also tell). The KvK registers companies, not the erkenning (SBB, WEB art. 5.2.3 via art. 7.2.8 lid 4). Rev 2 (G4 N3): the hint no longer repeats a struck option.
 
 ### Cijfer kamer 1
 
-- **Clue:** "Het 1e cijfer van het slot: hoeveel euro krijgt Amira van het bedrijf? Neem het eerste cijfer."
+- **Clue:** "Het 1e cijfer van het slot: hoeveel euro krijgt Amira? Neem het eerste cijfer."
 - **Shown with:** app, rules
 - **Digit:** **5** (€ 50; "half" gives 2, "nothing" gives 0).
-- **Remember:** "Leerbaan met arbeidsovereenkomst: je krijgt loon. Stage: loon is niet verplicht, maar je stage mag jou geen geld kosten."
+- **Remember:** "Arbeidsovereenkomst: loon. Stage: loon niet verplicht. Iets gekocht voor je stage? Vraag het geld terug."
 
 ---
 
 ## Kamer 2: Je loon
 
-**Date:** maandag 1 februari 2027. **Where:** thuis, met je loonoverzicht van Zorgcentrum Zeestad.
+**Date:** maandag 1 februari 2027 (on screen: "februari 2027"). **Where:** thuis, met je loonoverzicht van Zorgcentrum Zeestad.
 
-**Intro:** "Op 12 december 2026 ben je 18 geworden. Je woont nog thuis bij je ouders. Het is maandag 1 februari 2027. Je kijkt naar je loon van januari."
+**Intro:** "Op 12 december 2026 ben je 18 geworden. Het is 1 februari 2027. Je kijkt naar je loon van januari."
 
-(The 2026 bbl table is not shown to pupils: it expired on 31 December 2026 and would add a third document. It is in the teacher detail.)
-
-### Document 1 `strook` (type: table without header, title "Loonoverzicht januari 2027, Zorgcentrum Zeestad")
+### Document 1 `strook` (type: table without header, title "Loonoverzicht januari 2027")
 
 > | | |
 > |---|---|
-> | Naam | Luca Bos |
-> | Geboren | 12 december 2008 |
 > | Gewerkte uren | 100 uur |
 > | Uurloon | € 6,82 |
 > | Brutoloon | € 682,00 |
 >
-> Note: "Vereenvoudigd voorbeeld. Een echte loonstrook laat meer zien."
+> Note: "Vereenvoudigd voorbeeld."
 
-(100 uur in January: 3 diensten of 8 uur a week for about 4,3 weeks is 103 uur; 100 is rounded for an easy sum. € 6,82 was the bbl minimum for 18 from 1 July to 31 December 2026.)
+(100 uur in January: 3 diensten of 8 uur a week for about 4,3 weeks is 103 uur; 100 is rounded for an easy sum. € 6,82 was the bbl minimum for 18 from 1 July to 31 December 2026. Rev 2: name and birth date cut; the age is in the intro.)
 
 ### Document 2 `tabel` (type: table with header; real amounts, labelled real)
 
 > **Minimumloon per uur, vanaf 1 januari 2027**
-> Bron: Rijksoverheid, bedragen minimumloon 2027. Deze tabel is echt.
+> Bron: Rijksoverheid. Deze tabel is echt.
 >
 > | Leeftijd | Bruto per uur |
 > |---|---|
@@ -185,20 +182,16 @@ De student kan (mbo says "student"; pupil text uses "je"):
 > | 20 jaar | € 13,38 |
 > | 21 jaar en ouder | € 15,29 |
 >
-> Note: "Deze bedragen gelden ook in de bbl. Ze zijn bruto, zonder vakantiegeld. Je krijgt daarnaast minstens 8% vakantiegeld. Een cao kan meer loon geven dan het minimumloon."
-
-(Revision 1, gate S1 and I3: the last sentence is on screen now, for the zorg and retail students who know their cao pays more. The gate proposed "Veel cao's betalen meer"; "Een cao kan" is used because the source names zorg, techniek and bouw (Stb. 2026, 279, nota van toelichting 4b) and says retail jobs are often near the minimum, so "veel" is not sourced for every sector.)
+> Note: "Dit geldt ook in de bbl. Bruto, zonder vakantiegeld. Een cao kan meer geven."
 
 ### Document 3 `regel` (type: rule card, title "Regels")
 
 > r1. Vanaf 1 januari 2027 krijg je in de bbl het gewone minimumloon.
 > r2. Je werkgever betaalt minstens het minimumloon voor jouw leeftijd.
-> r3. Krijg je te weinig? Praat dan eerst met je werkgever.
-> r4. Wil je werkgever het niet veranderen? Meld het bij de Nederlandse Arbeidsinspectie.
+> r3. Krijg je te weinig? Praat eerst met je werkgever.
+> r4. Helpt dat niet? Meld het bij de Nederlandse Arbeidsinspectie.
 
-(r1 is about a bbl student with an arbeidsovereenkomst, as Luca is; room 1 rule r1 gives the condition. Revision 1: r1, r3 and r4 without "is er geen ... meer", "aanspreken" and "oplossen" (gate T6, T7).)
-
-**Moeilijke woorden:** "Minimumloon: het laagste loon dat je werkgever je mag betalen. Brutoloon: je loon voordat er belasting af gaat. Vakantiegeld: extra loon bovenop je gewone loon. Cao: afspraken over loon en werk voor een sector of een bedrijf. Nederlandse Arbeidsinspectie: deze dienst controleert of werkgevers de regels voor werk volgen."
+**Moeilijke woorden:** "Minimumloon: het laagste loon dat mag. Brutoloon: loon voordat de belasting eraf gaat. Cao: afspraken over loon in een sector. Arbeidsinspectie: let op de regels voor werk."
 
 (All on `tabel`.)
 
@@ -207,53 +200,54 @@ De student kan (mbo says "student"; pupil text uses "je"):
 - **Prompt:** "Welk minimumloon per uur geldt in januari 2027 voor jou?"
 - **Options:** a "€ 6,82" · b "€ 7,65" · c "€ 11,47" · d "€ 9,56"
 - **Correct:** d
-- **Distractors:** a € 6,82 = your uurloon (the old bbl rate for 18, 1 juli tot en met 31 december 2026); b € 7,65 = 17 jaar in 2027; c € 11,47 = 19 jaar in 2027. The 2026 regular rate € 7,50 is not an option and not on screen.
+- **Distractors:** a € 6,82 = your uurloon (the old bbl rate for 18); b € 7,65 = 17 jaar; c € 11,47 = 19 jaar.
 - **Retry points to:** tabel row "18 jaar: € 9,56"
 - **Nudge:** "Hoe oud ben je in januari 2027?"
-- **Hint (30 s):** "Zoek je leeftijd in de tabel. Kijk niet naar je loonoverzicht."
-- **Explanation:** "Je bent 18, dus je krijgt minstens € 9,56 per uur. Ook in de bbl: een lager bbl-loon bestaat niet meer."
+- **Hint (30 s):** "Zoek je leeftijd in de tabel."
+- **Explanation:** "Je bent 18: minstens € 9,56. Een lager bbl-loon bestaat niet meer."
 - **Rules:** wml-2027, bbl-2027, wml-leeftijd
 
 ### Vraag 2.2 `tekort` (number, euro, docs: strook, tabel, regel)
 
-- **Prompt:** "Hoeveel brutoloon kreeg je in januari te weinig? Reken zonder vakantiegeld."
+- **Prompt:** "Hoeveel euro kreeg je in januari minder dan het minimumloon? Reken zonder vakantiegeld."
 - **Correct:** € 274,00 (27400 cents)
-- **Derivation:** 100 × € 9,56 = € 956,00; € 956,00 min € 682,00 = € 274,00 (or 100 × € 2,74). Revision 1: "Reken zonder vakantiegeld" closes the second sum the table note invites (gate, other checks).
+- **Derivation:** 100 × € 9,56 = € 956,00; € 956,00 min € 682,00 = € 274,00 (or 100 × € 2,74). Rev 2 (check B 5): the prompt compares with the legal minimum, not with "what you should get", because a cao can pay more.
 - **Retry points to:** strook row "Uurloon: € 6,82"
-- **Nudge:** "Reken eerst het verschil per uur uit. Doe dat keer je uren."
-- **Hint (30 s):** "Reken eerst € 9,56 min € 6,82."
-- **Explanation:** "Je kreeg € 2,74 per uur te weinig. 100 × € 2,74 = € 274,00."
+- **Nudge:** "Wat is het verschil per uur?"
+- **Hint (30 s):** "Doe dat verschil keer je uren."
+- **Explanation:** "Je krijgt € 2,74 per uur te weinig. 100 × € 2,74 = € 274,00."
 - **Rules:** wml-2027, bbl-2027
 
 ### Vraag 2.3 `melden` (pick, docs: regel)
 
-- **Situation:** "Je vraagt je teamleider Marieke om meer loon. Marieke zegt: 'Nee, in de bbl krijg je minder.'"
+- **Situation:** "Je vraagt om meer loon. Marieke, je teamleider, zegt: 'In de bbl krijg je minder.'"
 - **Prompt:** "Wat kun je nu doen?"
 - **Options:** a "Niets: in de bbl mag je baas minder betalen" · b "Een melding doen bij de Belastingdienst" · c "Wachten tot je bbl klaar is" · d "Een melding doen bij de Arbeidsinspectie"
 - **Correct:** d
-- **Lengths:** 9, 6, 6, 6 words; 43, 39, 27, 40 characters.
-- **Retry points to:** rule r4 "Wil je werkgever het niet veranderen? Meld het bij de Nederlandse Arbeidsinspectie."
-- **Nudge:** "Je hebt het al aan je werkgever gevraagd. Wat is de volgende stap?"
+- **Lengths:** 43, 39, 27, 40 characters.
+- **Retry points to:** rule r4 "Helpt dat niet? Meld het bij de Nederlandse Arbeidsinspectie."
+- **Nudge:** "Je hebt het je werkgever al gevraagd. Wat nu?"
 - **Hint (30 s):** "De Belastingdienst gaat over belasting, niet over je loon."
-- **Explanation:** "Meld het bij de Nederlandse Arbeidsinspectie. Te weinig loon kun je tot 5 jaar terugvragen."
+- **Explanation:** "Meld het bij de Arbeidsinspectie."
 - **Rules:** onderbetaald-stappen, onderbetaald-5jaar
 
 ### Cijfer kamer 2
 
-- **Clue:** "Het 2e cijfer van het slot: hoeveel euro kreeg je te weinig? Schrijf het bedrag zonder centen. Neem het laatste cijfer."
+- **Clue:** "Het 2e cijfer van het slot: hoeveel euro was het verschil? Schrijf het zonder centen. Neem het laatste cijfer."
 - **Shown with:** strook, tabel
-- **Digit:** **4** (€ 274,00 without cents is 274, last digit 4; revision 1 replaces "hele euro's", gate S3). The 17-year rate gives € 83 (3); € 7,50 gives € 68 (8).
-- **Remember:** "Het minimumloon voor jouw leeftijd staat bij de Rijksoverheid. Dat geldt ook in de bbl. Krijg je te weinig? Praat met je werkgever. Helpt dat niet? Meld het bij de Arbeidsinspectie."
+- **Digit:** **4** (€ 274,00 without cents is 274, last digit 4). The 17-year rate gives € 83 (3); € 7,50 gives € 68 (8).
+- **Wrong digit (`clueWrong`):** "274" → "Dat is het hele bedrag. Typ alleen het laatste cijfer." · "2" → "Dat is het eerste cijfer van 274. Neem het laatste."
+- **Remember:** "Te weinig loon? Eerst je werkgever, dan de Arbeidsinspectie. Dat geldt ook in de bbl."
 
 ---
 
 ## Kamer 3: Je rooster
 
-**Date:** donderdag 11 maart 2027, rooster voor week 11 (15 tot en met 21 maart). **Where:** Zorgcentrum Zeestad.
+**Date:** donderdag 11 maart 2027, rooster voor week 11 (15 tot en met 21 maart) (on screen: "maart 2027"). **Where:** Zorgcentrum Zeestad.
 
-**Intro:** "Je bent 18. Je collega Jesse is 17 en doet ook bbl. Jesse vraagt: klopt mijn rooster wel?"
+**Intro:** "Je bent 18. Je collega Jesse is 17 en doet ook bbl. Jesse vraagt: klopt mijn rooster?"
 
-### Document 1 `rooster` (type: table with header, title "Rooster van Jesse, week 11 (15 tot en met 21 maart 2027)"; also the options of 3.1, keepOrder)
+### Document 1 `rooster` (type: table with header, title "Rooster van Jesse"; also the options of 3.1, keepOrder)
 
 > | Dag | Tijd | Wat |
 > |---|---|---|
@@ -262,28 +256,28 @@ De student kan (mbo says "student"; pupil text uses "je"):
 > | wo 17 mrt | 07:30 tot 13:00 | dienst |
 > | do 18 mrt | 15:00 tot 20:00 | dienst |
 > | vr 19 mrt | 23:00 tot 07:00 | nachtdienst |
->
-> Note: "Je pauze valt binnen deze tijden."
 
-### Document 2 `regels` (type: table with header, kind "Regels", from "Bron: Arbeidstijdenwet en Rijksoverheid. Deze regels zijn echt.")
+### Document 2 `regels` (type: table with header, kind "Regels", from "Bron: Arbeidstijdenwet. Deze regels zijn echt.")
 
 > | Regel | 16 en 17 jaar | 18 jaar en ouder |
 > |---|---|---|
-> | 's Nachts | Je werkt nooit tussen 23:00 en 06:00. | Je mag ook 's nachts werken. |
-> | Rust | Je hebt elke 24 uur minstens 12 uur vrij achter elkaar. | Je hebt elke 24 uur minstens 11 uur vrij achter elkaar. |
-> | Werken per dag | Maximaal 9 uur. Schooltijd telt mee. | Maximaal 12 uur. |
+> | 's Nachts | In de zorg nooit tussen 23:00 en 06:00. | Je mag ook 's nachts werken. |
+> | Per dienst | Maximaal 9 uur. Schooltijd telt mee. | Maximaal 12 uur. |
 >
-> Note: "Vanaf 18: 1 keer per week mag je rust 8 uur zijn, niet 11. Na een nachtdienst gelden extra regels."
+> Note: "Er zijn ook regels voor rust."
 
-(This room has a table of rules instead of a rule card: the two age columns are the point of the room, and all pointers go to table rows (ids `nacht`, `rust`, `dag`). "Werken per dag" is the pupil wording of the law's "per dienst", as in the havo spec. Revision 1: the cells have a verb and no inversion (gate T8), and the note no longer reads as if the 8 hours were a night-shift rule (fact check A row 7, gate N1); it now agrees with the 3.3 explanation. The Rust row stays, so a pair can check that Jesse's other shifts are fine; no question needs it (gate S5, kept on purpose).)
+(This room has a table of rules instead of a rule card: the two age columns are the point of the room; pointers go to the rows `nacht` and `dag`. Rev 2:
+- The Rust row and the note about 8 hours of rest are cut (check B 1: shortening the 11 hours to 8 needs a reason in the work, Arbeidstijdenwet art. 5:3 lid 2, "indien de aard van de arbeid of de bedrijfsomstandigheden dit met zich brengen"; and G4 S1: no question uses the row). The rest rules are in the teacher detail with their conditions.
+- "Werken per dag" is now "Per dienst", the word of the law (check B 6; art. 5:7 lid 1 and lid 2 onder a, "per dienst"; art. 1:7 "dienst"). With school 08:30 to 15:30 and work right after, school and work are one dienst, so 9 min 7 stays right.
+- "In de zorg nooit tussen 23:00 en 06:00" (check B 7): the one exception for 16 and 17, bakery trainees in bbl or bol by collectieve regeling (Arbeidstijdenbesluit art. 5.4:3, version from 1 Jan 2024), is not in the zorg; the teacher detail names it.)
 
-**Check of Jesse's rooster against every rule shown (16 en 17 jaar):** ma 07:30 to 13:00 (5,5 uur on site, 5 uur work with the 30-minute pause, under 9); rest ma 13:00 to di 08:30 is 19,5 uur. di school 08:30 to 15:30 is 7 uur arbeidstijd (Arbeidstijdenwet art. 4:4 lid 2, breaks included); rest to wo 07:30 is 16 uur. wo as ma; rest wo 13:00 to do 15:00 is 26 uur. do 15:00 to 20:00 is 5 uur; rest to vr 23:00 is 27 uur. vr 23:00 to za 07:00: work between 23:00 and 06:00, so it breaks the night rule (art. 5:3 lid 1); it is the only shift that does. Week: 7 + 5 + 5 + 5 (+ 7,5 night) = at most 29,5 uur, under 45. Weekly rest of 36 uur in the 7 × 24 uur from ma 07:30 (art. 5:5 lid 1): without the night, do 20:00 to the next ma 07:30 is 83,5 uur; with it, za 07:00 to ma 07:30 is 48,5 uur; satisfied either way. No Sunday work. With the 3.2 shift (di 15:30 to 17:30): 7 + 2 = 9 uur; rest 17:30 to wo 07:30 is 14 uur and includes 23:00 to 06:00.
+**Check of Jesse's rooster against the rules (16 en 17 jaar):** ma and wo 07:30 to 13:00 (5,5 uur on site, under 9); di school 08:30 to 15:30 is 7 uur arbeidstijd (Arbeidstijdenwet art. 4:4 lid 2, breaks included); do 15:00 to 20:00 is 5 uur. Rest periods (not on screen, art. 5:3 lid 1, 12 uur): 19,5, 16, 26 and 27 uur, all fine. vr 23:00 to za 07:00 breaks the night rule (art. 5:3 lid 1); it is the only shift that does. Week at most 29,5 uur, under 45. Weekly rest of 36 uur satisfied either way (art. 5:5 lid 1). No Sunday work. With the 3.2 shift (di 15:30 to 17:30): 7 + 2 = 9 uur in one dienst; rest 17:30 to wo 07:30 is 14 uur and includes 23:00 to 06:00.
 
-**Check of 3.3 for you (18 jaar en ouder):** the night 23:00 to 07:00 is 8 uur on site, under the 10 uur per night shift (art. 5:8 lid 1); it ends after 02:00, so 14 uur rest follows (art. 5:8 lid 4); the situation gives you no work on Friday daytime or Saturday, so the 11 uur before and the 14 uur after hold.
+**Check of 3.3 for you (18 jaar en ouder):** the night 23:00 to 07:00 is 8 uur on site, under the 10 uur per night shift (art. 5:8 lid 1); it ends after 02:00, so 14 uur rest follows (art. 5:8 lid 4); the situation gives you no work on Friday daytime or Saturday, so the 11 uur before and the 14 uur after hold without any shortening.
 
-**Moeilijke woorden:** "Dienst: de tijd dat je op je werk bent. Nachtdienst: een dienst waarin je ook tussen 00:00 en 06:00 werkt. Rust: tijd dat je niet werkt. Onder de 18 telt school als werk."
+**Moeilijke woorden:** "Dienst: de tijd dat je werkt. Onder de 18 telt school mee. Nachtdienst: je werkt meer dan 1 uur tussen 00:00 en 06:00."
 
-(All on `regels`. Revision 1: "Rust" no longer says "en niet op school", which was wrong for 18 and older: art. 4:4 lid 2 counts school only for jeugdige werknemers. The nachtdienst gloss follows art. 1:7, "een dienst waarin meer dan een uur arbeid wordt verricht tussen 00.00 uur en 06.00 uur"; "meer dan een uur" is left out for reading level and no question depends on it.)
+(All on `regels`. Rev 2, check B 3: the nachtdienst gloss now has the legal test of art. 1:7 onder d, "een dienst waarin meer dan een uur arbeid wordt verricht tussen 00.00 uur en 06.00 uur".)
 
 ### Vraag 3.1 `nacht` (pick, keepOrder, docs: rooster, regels)
 
@@ -292,52 +286,54 @@ De student kan (mbo says "student"; pupil text uses "je"):
 - **Correct:** d
 - **Retry points to:** rooster row "vr 19 mrt: 23:00 tot 07:00"
 - **Nudge:** "Kijk naar de tijden van elke dienst."
-- **Hint (30 s):** "Kijk in de regels: wat mag onder de 18 's nachts?"
-- **Explanation:** "Onder de 18 werk je nooit tussen 23:00 en 06:00. Een nachtdienst mag Jesse dus niet doen."
+- **Hint (30 s):** "Kijk in de rij 's Nachts."
+- **Explanation:** "Onder de 18 werk je in de zorg nooit tussen 23:00 en 06:00."
 - **Rules:** nacht-1617
 
 ### Vraag 3.2 `schooldag` (pick, docs: rooster, regels)
 
-- **Situation:** "Marieke vraagt Jesse: kun je dinsdag na school nog komen?"
-- **Prompt:** "Hoeveel uur mag Jesse dinsdag nog werken?"
+- **Situation:** "Marieke vraagt: kan Jesse dinsdag na school nog komen?"
+- **Prompt:** "Hoeveel uur mag Jesse dan nog werken?"
 - **Options:** a "1 uur" · b "3 uur" · c "4 uur" · d "2 uur"
 - **Correct:** d
-- **Retry points to:** regels row "Werken per dag: Maximaal 9 uur. Schooltijd telt mee."
-- **Nudge:** "Hoe lang is Jesse dinsdag op school?"
-- **Hint (30 s):** "Tel van 08:30 tot 15:30."
-- **Explanation:** "Schooltijd telt mee als werktijd, ook je pauzes op school. Maximaal 9 uur per dag: 9 min 7 uur school is 2 uur."
+- **Retry points to:** regels row "Per dienst: Maximaal 9 uur. Schooltijd telt mee."
+- **Nudge:** "Hoeveel uur mag Jesse per dienst werken? Haal de schooluren eraf."
+- **Hint (30 s):** "Kijk hoe lang Jesse op school is."
+- **Explanation:** "School telt mee. Maximaal 9 uur per dienst: 9 min 7 is 2 uur."
 - **Rules:** schooltijd, max-dienst-1617
+
+(Rev 2, G4 S5: the nudge now names the step "9 min de schooluren" instead of asking for the 7 hours the rooster already shows.)
 
 ### Vraag 3.3 `nacht18` (pick, docs: regels)
 
-- **Situation:** "Op vrijdag overdag en op zaterdag werk je niet."
+- **Situation:** "Op vrijdag overdag en op zaterdag werk jij niet."
 - **Prompt:** "Mag jij de nachtdienst van Jesse doen?"
-- **Options:** a "Nee: in de bbl werk je nooit 's nachts" · b "Pas vanaf 21 jaar mag dat" · c "Ja: vanaf 18 mag je 's nachts werken"
-- **Correct:** c
-- **Lengths:** 9, 6, 8 words; 38, 25, 36 characters; starts Nee, Pas, Ja (no odd one out; fact check A row 1).
+- **Options:** a "Nee: in de bbl mag dat nooit" · b "Nee: dat mag pas vanaf 21 jaar" · c "Ja: maar alleen als je 2 jaar bbl doet" · d "Ja: vanaf 18 mag dat"
+- **Correct:** d
+- **Lengths:** 28, 30, 38, 20 characters (the right one is the shortest); two start with Nee and two with Ja (G4 S6).
 - **Retry points to:** regels row "'s Nachts: Je mag ook 's nachts werken."
 - **Nudge:** "Hoe oud ben jij?"
 - **Hint (30 s):** "Kijk in de kolom 18 jaar en ouder."
-- **Explanation:** "Vanaf 18 mag je ook 's nachts werken. Wel gelden er extra regels, zoals over je rust na een nachtdienst."
+- **Explanation:** "Vanaf 18 mag nachtwerk, met extra regels."
 - **Rules:** nacht-18, rust-nacht-18
-- **Defensibility:** taking a shift is voluntary; the question asks whether it is allowed. No Sunday is involved (Friday night to Saturday).
+- **Defensibility:** taking a shift is voluntary; the question asks whether it is allowed. No law ties night work at 18 to a number of bbl years, so c is wrong. No Sunday is involved.
 
 ### Cijfer kamer 3
 
-- **Clue:** "Het 3e cijfer van het slot: hoeveel uur mag Jesse dinsdag na school nog werken?"
+- **Clue:** "Het 3e cijfer van het slot: hoeveel uur mag Jesse dinsdag nog werken?"
 - **Shown with:** rooster, regels
-- **Digit:** **2** (9 uur per dag min 7 uur school; the 12 uur rest still holds, 17:30 to 07:30).
-- **Remember:** "Onder de 18 werk je nooit tussen 23:00 en 06:00. School telt mee voor je 9 uur. Vanaf 18 mag je ook 's nachts werken."
+- **Digit:** **2** (9 uur per dienst min 7 uur school).
+- **Remember:** "Onder de 18 in de zorg geen nachtwerk. Vanaf 18 wel."
 
 ---
 
 ## Kamer 4: Een bijbaan erbij
 
-**Date:** donderdag 1 april tot zaterdag 10 april 2027. **Where:** Snackbar Zeestad.
+**Date:** donderdag 1 april tot zaterdag 10 april 2027 (on screen: "april 2027"). **Where:** Snackbar Zeestad.
 
-**Intro:** "Je bent 18 en doet nog steeds bbl. Vanaf 1 april werk je ook bij Snackbar Zeestad. Daar heb je een nulurencontract."
+**Intro:** "Je bent 18. Naast je bbl werk je vanaf 1 april bij Snackbar Zeestad. Je hebt daar een nulurencontract."
 
-### Document 1 `app` (type: chat, title "Appjes van Kevin")
+### Document 1 `app` (type: chat, title "Berichten van Kevin")
 
 > **Kevin (Snackbar Zeestad)**, donderdag 1 april, 19:30
 > k1. "Hoi Luca! Kun je morgen van 17:00 tot 21:00 komen?"
@@ -347,42 +343,41 @@ De student kan (mbo says "student"; pupil text uses "je"):
 
 (Sender name on the chat: "Kevin (Snackbar Zeestad)".)
 
-### Document 2 `formulier` (type: table without header, kind "Formulier", title "Snackbar Zeestad: jouw gegevens voor de loonheffingen")
+### Document 2 `formulier` (type: table without header, kind "Formulier", title "Snackbar Zeestad: gegevens voor de loonheffingen")
 
 > | | |
 > |---|---|
-> | Naam | Luca Bos |
 > | Start | donderdag 1 april 2027 |
-> | Wil je dat wij de loonheffingskorting toepassen? | [ ] ja [ ] nee |
+> | Wil je loonheffingskorting bij ons? | [ ] ja [ ] nee |
 >
-> Note: "Vereenvoudigd voorbeeld. Dit formulier is verzonnen en korter dan het echte."
+> Note: "Verzonnen formulier."
 
 ### Document 3 `regel` (type: rule card, title "Regels")
 
 > r1. Vraagt je baas je minder dan 4 dagen van tevoren? Dan mag je nee zeggen.
 > r2. Werk je minder dan 3 uur na een oproep? Dan krijg je 3 uur loon.
-> r3. Heb je twee banen tegelijk? Kies één werkgever voor de loonheffingskorting.
+> r3. Twee banen tegelijk? Kies één werkgever voor de loonheffingskorting.
 
-(Revision 1, gate T1 to T3: no "roept ... op", no "hoef je niet te komen", no "toch", no "laat ... toepassen". r1 says the legal term, BW 7:628a lid 2; the 4.1 situation rules out a shorter cao term. r2 cannot be changed by a cao: BW 7:628a lid 12 forbids any deviation to the worker's disadvantage, and the cao openings in lid 4 and lid 11 cover only the 4-day term and, for seasonal work, lid 2, 3 and 5, never lid 1 (verified 7 Nov 2026, gate "4.2 and cao").)
+(r1 says the legal term, BW 7:628a lid 2; the 4.1 situation rules out a shorter cao term. r2 cannot be changed by a cao: BW 7:628a lid 12 forbids any deviation to the worker's disadvantage, and the cao openings in lid 4 and lid 11 never reach lid 1.)
 
-**Moeilijke woorden:** "Nulurencontract: een oproepcontract zonder vaste uren. Oproep: je baas vraagt je om te komen werken. Loonheffingskorting: korting op je loonheffing. Je betaalt dan minder belasting over je loon."
+**Moeilijke woorden:** "Nulurencontract: een oproepcontract zonder vaste uren. Loonheffingskorting: je betaalt minder belasting over je loon."
 
-(`app` gets the first two sentences, `formulier` the last two. Revision 1: the gloss no longer has a relative clause with "afhaalt" (gate T4); "oproepcontract" links the pupil word to the teacher word (gate T13; Rijksoverheid lists the nulurencontract as one of three oproepcontracten).)
+(`app` gets the first sentence, `formulier` the second.)
 
 ### Vraag 4.1 `telaat` (pick, docs: app, regel)
 
-- **Situation:** "Je contract zegt: oproepen minstens 4 dagen van tevoren. Donderdag 1 april om 19:30 vraagt Kevin of je morgen komt."
-- **Prompt:** "Moet je morgen komen?"
-- **Options:** a "Ja: met een nulurencontract moet je altijd komen" · b "Alleen als het die avond heel druk is" · c "Nee: Kevin vraagt het te laat, je mag nee zeggen"
-- **Correct:** c
-- **Lengths:** 8, 8, 9 words; starts Ja, Alleen, Nee (no odd one out).
+- **Situation:** "Je contract zegt: je baas moet je minstens 4 dagen van tevoren vragen."
+- **Prompt:** "Kevin vraagt het op donderdag. Moet je op vrijdag komen?"
+- **Options:** a "Ja: ik heb een nulurencontract" · b "Ja: als het die avond druk is" · c "Nee: ik werk al bij het zorgcentrum" · d "Nee: het is te laat gevraagd"
+- **Correct:** d
+- **Lengths:** 30, 29, 35, 28 characters (the right one is the shortest); two Ja, two Nee (G4 S6). c is wrong: working elsewhere is no legal ground; the reason is the 4 days.
 - **Retry points to:** rule r1 "Vraagt je baas je minder dan 4 dagen van tevoren? Dan mag je nee zeggen."
 - **Nudge:** "Hoeveel dagen van tevoren vraagt Kevin het?"
-- **Hint (30 s):** "Tel de dagen tussen het appje en de dienst."
-- **Explanation:** "Kevin vraagt het maar 1 dag van tevoren. Dat is minder dan 4 dagen, dus je mag nee zeggen."
+- **Hint (30 s):** "Tel de dagen tussen het bericht en de dienst."
+- **Explanation:** "1 dag van tevoren is te laat. Je mag nee zeggen."
 - **Rules:** oproeptermijn
 
-(The contract sentence rules out the cao exception, as in havo 1.2: a cao may shorten the term, never below 24 hours, BW 7:628a lid 4. Even then, 19:30 for 17:00 the next day is 21,5 hours, so the answer holds either way.)
+(Rev 2, G4 S8: the contract sentence says "je baas moet je ... vragen" instead of "oproepen", which A2 readers took for a verb. A cao may shorten the term, never below 24 hours (BW 7:628a lid 4); 19:30 for 17:00 the next day is 21,5 hours, so the answer holds either way.)
 
 ### Vraag 4.2 `drieuur` (pick, docs: app, regel)
 
@@ -390,32 +385,32 @@ De student kan (mbo says "student"; pupil text uses "je"):
 - **Options:** a "2 uur" · b "4 uur" · c "3 uur"
 - **Correct:** c
 - **Retry points to:** rule r2 "Werk je minder dan 3 uur na een oproep? Dan krijg je 3 uur loon."
-- **Nudge:** "Hoe lang werk je zaterdag?"
-- **Hint (30 s):** "Werk je minder dan 3 uur? Lees dan de regel over 3 uur."
-- **Explanation:** "Je werkt 2 uur, maar je krijgt per oproep minstens 3 uur loon. Dat geldt bij een nulurencontract."
+- **Nudge:** "Lees regel 2 nog eens."
+- **Hint (30 s):** "Lees regel 2 tot het einde."
+- **Explanation:** "Per oproep krijg je minstens 3 uur loon."
 - **Rules:** oproep-3uur
-- **Defensibility:** the call came on Monday 5 April for Saturday 10 April, 5 days 7 hours ahead, and you worked exactly the hours called, so BW 7:628a lid 3 (pay for all called hours after a change within 4 days) does not come in and "4 uur" has no basis. No cao can remove the 3 hours (see the rule card note).
+- **Defensibility:** the call came 5 days 7 hours ahead and you worked exactly the hours called, so BW 7:628a lid 3 does not come in. Rev 2, G4 S5: the nudge no longer asks "Hoe lang werk je zaterdag?", which confirmed the wrong "2 uur".
 
 ### Vraag 4.3 `korting` (pick, docs: formulier, regel)
 
-- **Situation:** "Bij Zorgcentrum Zeestad heb je al loonheffingskorting."
+- **Situation:** "Bij het zorgcentrum heb je al loonheffingskorting."
 - **Prompt:** "Wat kies je op het formulier van de snackbar?"
 - **Options:** a "Ja: dan krijg je bij allebei korting" · b "Maakt niet uit: de Belastingdienst regelt het" · c "Nee: de korting loopt al bij het zorgcentrum"
 - **Correct:** c
-- **Lengths:** 7, 7, 8 words; starts Ja, Maakt, Nee.
-- **Retry points to:** rule r3 "Heb je twee banen tegelijk? Kies één werkgever voor de loonheffingskorting."
+- **Lengths:** 36, 45, 44 characters; starts Ja, Maakt, Nee.
+- **Retry points to:** rule r3 "Twee banen tegelijk? Kies één werkgever voor de loonheffingskorting."
 - **Nudge:** "Bij hoeveel werkgevers tegelijk mag je korting hebben?"
 - **Hint (30 s):** "Vanaf 1 april werk je bij twee werkgevers tegelijk."
-- **Explanation:** "Kies één werkgever voor de korting. Bij twee werkgevers krijg je te veel korting en moet je waarschijnlijk later bijbetalen."
+- **Explanation:** "Kies één werkgever. Anders betaal je later waarschijnlijk bij."
 - **Rules:** korting-een
-- **Option order:** "allebei" in option a means both employers, not the options (as havo 4.1); `ORDER_FREE` in `tests/spec-compare.js` says so; fixed shuffle.
+- **Option order:** "allebei" in option a means both employers, not the options (`ORDER_FREE`); fixed shuffle.
 
 ### Cijfer kamer 4
 
 - **Clue:** "Het 4e cijfer van het slot: hoeveel uur loon krijg je voor zaterdag?"
 - **Shown with:** app, rules
 - **Digit:** **3** (worked 18:00 to 20:00 = 2 uur, minimum 3 uur per call).
-- **Remember:** "Een oproep minder dan 4 dagen van tevoren? Dan mag je nee zeggen. Per oproep krijg je minstens 3 uur loon. Twee banen? Korting bij één werkgever."
+- **Remember:** "Te laat gevraagd? Je mag nee zeggen. Per oproep minstens 3 uur loon. Korting bij één werkgever."
 
 ---
 
@@ -429,35 +424,35 @@ De student kan (mbo says "student"; pupil text uses "je"):
 
 One question per room; question n of A and of B test the same rule at the same difficulty (one step, no sum, no document), with a different sector and situation. No check question copies a room question. Every pair gets A then B or B then A at random (engine v3). No feedback during a check. The options are listed in the order shown on screen.
 
-Revision 1 (fact check A row 1 and 2, gate C1 to C5): items 1 and 3 keep a Ja/Nee question but the three options start with three different words (Ja, Nee, Alleen), so no option is the odd one out; items 2 and 4 ask "Wat klopt?" with full statements that all start alike, so there is no "Ja" to a question about saying "nee" and no "tot je 21e" option with a true reading.
+Revision 1 (fact check A row 1 and 2, gate C1 to C5) made items 2 and 4 "Wat klopt?" items with statements that all start alike. Revision 2 (G4 S6) gives items 1 and 3 four options, two Ja and two Nee, so the right one is never the only "Nee"; A4 and B4 say "je baas moet je ... vragen" instead of "oproepen" (G4 S8).
 
 ### Vorm A
 
 | # | Room | Rule | Prompt (with situation) | Options (as shown) | Correct |
 |---|---|---|---|---|---|
-| A1 | leren | stage-geen-loon | "Je doet bol en loopt stage bij een garage. Je hebt een begeleider en leerdoelen. Je hebt geen arbeidsovereenkomst. Moet de garage je loon betalen?" | a "Ja: je werkt er elke dag mee" · b "Nee: loon is bij stage niet verplicht" · c "Alleen als je er langer dan 3 maanden bent" | b |
+| A1 | leren | stage-geen-loon | "Je doet bol en loopt stage bij een garage. Je hebt een begeleider en leerdoelen. Je hebt geen arbeidsovereenkomst. Moet de garage je loon betalen?" | a "Ja: je werkt er elke dag mee" · d "Nee: een stagiair mag geen geld krijgen" · c "Ja: na 3 maanden stage wel" · b "Nee: loon is bij stage niet verplicht" | b |
 | A2 | loon | bbl-2027 | "Je bent 19 en doet bbl bij een bouwbedrijf. Je hebt een arbeidsovereenkomst. Het is februari 2027. Wat klopt?" | c "Je krijgt pas het minimumloon na je diploma" · a "Je krijgt minstens het minimumloon voor 19 jaar" · d "Je krijgt alleen een vergoeding, zoals bij stage" · b "Je krijgt minder, want je doet een bbl-opleiding" | a |
-| A3 | rooster | nacht-1617 | "Je bent 17 en doet bbl in een ziekenhuis. Je baas wil je laten werken van 23:00 tot 07:00. Mag dat?" | a "Ja: in de zorg gelden andere regels" · c "Alleen als je de volgende dag helemaal vrij bent" · b "Nee: onder de 18 werk je niet 's nachts" | b |
-| A4 | bijbaan | oproeptermijn | "Je hebt een nulurencontract bij een supermarkt. Je contract zegt: oproepen minstens 4 dagen van tevoren. Maandag om 18:00 vraagt je baas of je woensdag komt. Wat klopt?" | a "Ik moet komen, want ik heb een nulurencontract" · c "Dat beslist mijn baas, niet ik" · b "Ik mag nee zeggen: de vraag komt te laat" | b |
+| A3 | rooster | nacht-1617 | "Je bent 17 en doet bbl in een ziekenhuis. Je baas wil je laten werken van 23:00 tot 07:00. Mag dat?" | b "Nee: in de zorg mag dat pas vanaf 18" · a "Ja: in de zorg gelden andere regels" · d "Nee: nachtwerk mag pas vanaf je 21e" · c "Ja: als je de volgende dag helemaal vrij bent" | b |
+| A4 | bijbaan | oproeptermijn | "Je hebt een nulurencontract bij een supermarkt. Je contract zegt: je baas moet je minstens 4 dagen van tevoren vragen. Maandag om 18:00 vraagt je baas of je woensdag komt. Wat klopt?" | a "Ik moet komen, want ik heb een nulurencontract" · c "Dat beslist mijn baas, niet ik" · b "Ik mag nee zeggen: de vraag komt te laat" | b |
 
 ### Vorm B
 
 | # | Room | Rule | Prompt (with situation) | Options (as shown) | Correct |
 |---|---|---|---|---|---|
-| B1 | leren | stage-geen-loon | "Je doet bol en loopt stage in een kapsalon. Je hebt een begeleider en leerdoelen. Je hebt geen arbeidsovereenkomst. Moet de kapsalon je loon betalen?" | c "Alleen als je al 18 jaar of ouder bent" · b "Nee: bij stage is loon niet verplicht" · a "Ja: je helpt er elke dag klanten" | b |
+| B1 | leren | stage-geen-loon | "Je doet bol en loopt stage in een kapsalon. Je hebt een begeleider en leerdoelen. Je hebt geen arbeidsovereenkomst. Moet de kapsalon je loon betalen?" | c "Ja: als je 18 bent wel" · b "Nee: bij stage is loon niet verplicht" · a "Ja: je helpt er elke dag klanten" · d "Nee: een stagiair mag geen geld krijgen" | b |
 | B2 | loon | bbl-2027 | "Je bent 20 en doet bbl bij een garage. Je hebt een arbeidsovereenkomst. Het is maart 2027. Wat klopt?" | b "Je krijgt minder, want je doet een bbl-opleiding" · d "Je krijgt alleen een vergoeding, zoals bij stage" · a "Je krijgt minstens het minimumloon voor 20 jaar" · c "Je krijgt pas het minimumloon na je diploma" | a |
-| B3 | rooster | nacht-1617 | "Je bent 16 en hebt een bijbaan in een hotel. Je baas vraagt of je van 22:00 tot 01:00 werkt. Mag dat?" | b "Nee: tot je 18e werk je niet 's nachts" · a "Ja: in een hotel gelden andere regels" · c "Alleen als je de volgende dag helemaal vrij bent" | b |
-| B4 | bijbaan | oproeptermijn | "Je hebt een nulurencontract bij een kledingwinkel. Je contract zegt: oproepen minstens 4 dagen van tevoren. Zaterdag om 10:00 vraagt je baas of je maandag komt. Wat klopt?" | c "Dat beslist mijn baas, niet ik" · b "Ik mag nee zeggen: dit is te laat gevraagd" · a "Ik moet komen, want ik heb een nulurencontract" | b |
+| B3 | rooster | nacht-1617 | "Je bent 16 en hebt een bijbaan in een hotel. Je baas vraagt of je van 22:00 tot 01:00 werkt. Mag dat?" | a "Ja: in een hotel gelden andere regels" · d "Nee: nachtwerk mag pas vanaf je 21e" · c "Ja: als je de volgende dag helemaal vrij bent" · b "Nee: in een hotel mag dat pas vanaf 18" | b |
+| B4 | bijbaan | oproeptermijn | "Je hebt een nulurencontract bij een kledingwinkel. Je contract zegt: je baas moet je minstens 4 dagen van tevoren vragen. Zaterdag om 10:00 vraagt je baas of je maandag komt. Wat klopt?" | c "Dat beslist mijn baas, niet ik" · b "Ik mag nee zeggen: dit is te laat gevraagd" · a "Ik moet komen, want ik heb een nulurencontract" | b |
 
-Answer pattern: place of the right option 2, 2, 3, 3 (form A) and 2, 3, 1, 2 (form B). Option starts per item: A1 and B1 Ja, Nee, Alleen; A3 and B3 Ja, Alleen, Nee; A2 and B2 all "Je krijgt"; A4 and B4 "Ik moet", "Dat", "Ik mag". No item has a right option that is the only one with its first word, so "pick the odd one out" gives nothing.
+Answer pattern (Rev 2, G4 S6): items 1 and 3 have four options, two starting with Ja and two with Nee, so the right one is never the only "Nee"; items 2 and 4 are "Wat klopt?" statements. Place of the right option: 4, 2, 1, 3 (form A) and 2, 3, 4, 2 (form B).
 
-Lengths (characters, in the order shown): A1 28, 37, 42 · A2 43, 47, 48, 48 · A3 35, 48, 39 · A4 46, 30, 40 · B1 38, 37, 32 · B2 48, 48, 47, 43 · B3 38, 37, 48 · B4 30, 42, 46. The right option is never the longest (gate C3).
+Lengths (characters, in the order shown): A1 28, 39, 26, 37 · A2 43, 47, 48, 48 · A3 36, 35, 35, 45 · A4 46, 30, 40 · B1 22, 37, 32, 39 · B2 48, 48, 47, 43 · B3 37, 35, 45, 38 · B4 30, 42, 46. The right option is never the only longest.
 
-Parallel checks and defensibility: A1 and B1 rule out "gewoon werk" (begeleider, leerdoelen) and an arbeidsovereenkomst, so "Nee" is the one right answer; "Alleen als ..." is wrong because no rule gives a stagiair a right to wage after 3 months or at 18. A2 and B2: in 2027 a bbl'er with an arbeidsovereenkomst gets at least the minimum for the own age (Stb. 2026, 279; Stcrt. 2026, 38817); "na je diploma", "alleen een vergoeding" and "minder, want bbl" are each wrong in 2027; "minstens" keeps the right statement true when a cao pays more. A3 (zorg) and B3 (horeca) both run past 23:00, so "Nee" holds whatever happened earlier that day; "in de zorg / in een hotel gelden andere regels" is wrong for 16 and 17 (the Arbeidstijdenbesluit's only mbo exception is bakery trainees by collectieve regeling, art. 5.4:3); "Alleen als je de volgende dag helemaal vrij bent" is wrong because the 23:00 to 06:00 rule has no such condition. A4 (supermarkt) and B4 (kledingwinkel): 2 days ahead against a 4-day contract term; "Ik mag nee zeggen" is the Rijksoverheid rule ("bent u niet verplicht om te komen werken"); "Dat beslist mijn baas" and "Ik moet komen" are wrong. B4 avoids Sunday.
+Parallel checks and defensibility: A1 and B1 rule out "gewoon werk" (begeleider, leerdoelen) and an arbeidsovereenkomst. "Nee: een stagiair mag geen geld krijgen" is wrong: a stagevergoeding is allowed (Rijksoverheid: "Het mag wel"); its "Nee" alone does not make it right, because the whole statement is false. A2 and B2: in 2027 a bbl'er with an arbeidsovereenkomst gets at least the minimum for the own age; the three other statements are false in 2027. A3 (zorg) and B3 (hotel): both run past 23:00; "in de zorg / in een hotel mag dat pas vanaf 18" is right for 16 and 17 (the only exception in the Arbeidstijdenbesluit of 1 Jan 2024 is bakery trainees, art. 5.4:3); "Nee: nachtwerk mag pas vanaf je 21e" is false (from 18). A4 and B4: 2 days ahead against a 4-day contract term. B4 avoids Sunday.
 
 **Antwoorden start- en eindcheck (voor de docent):**
-- Vorm A: A1 "Nee: loon is bij stage niet verplicht". A2 "Je krijgt minstens het minimumloon voor 19 jaar". A3 "Nee: onder de 18 werk je niet 's nachts". A4 "Ik mag nee zeggen: de vraag komt te laat".
-- Vorm B: B1 "Nee: bij stage is loon niet verplicht". B2 "Je krijgt minstens het minimumloon voor 20 jaar". B3 "Nee: tot je 18e werk je niet 's nachts". B4 "Ik mag nee zeggen: dit is te laat gevraagd".
+- Vorm A: A1 "Nee: loon is bij stage niet verplicht". A2 "Je krijgt minstens het minimumloon voor 19 jaar". A3 "Nee: in de zorg mag dat pas vanaf 18". A4 "Ik mag nee zeggen: de vraag komt te laat".
+- Vorm B: B1 "Nee: bij stage is loon niet verplicht". B2 "Je krijgt minstens het minimumloon voor 20 jaar". B3 "Nee: in een hotel mag dat pas vanaf 18". B4 "Ik mag nee zeggen: dit is te laat gevraagd".
 
 ## Lesplan (45 minuten)
 
@@ -466,7 +461,7 @@ Parallel checks and defensibility: A1 and B1 rule out "gewoon werk" (begeleider,
 | 0 tot 3 | Uitleg | Kies op het docentenscherm Ja of Nee bij het delen van anonieme antwoorden. Tik op Start de les en open de Projectiemodus: daar staan de link, de klascode en de timer. Studenten openen de link en werken met z'n tweeën op één scherm. Zeg: alles is verzonnen, behalve de regels en de tabel met het minimumloon. |
 | 3 tot 6 | Startcheck | Elk tweetal beantwoordt 4 vragen voordat de klok start en ziet nog niet wat goed is. Geef geen hints. |
 | 6 tot 28 | Escape | Start de klastimer op 22 minuten. Tweetallen spelen vier kamers en schrijven elk cijfer op. Loop rond; wijs bij vragen naar de regel op het scherm, niet naar het antwoord. Heb je het antwoordblad open op je telefoon? Dan zie je zelf of een tweetal goed zit. Klaar voor de tijd? Laat het tweetal de gespreksvragen op het eindscherm bespreken, ook de vraag voor snelle tweetallen. |
-| 28 | Stop | Tik op Stop de escape. Iedereen stopt, ook wie nog niet klaar is. Niet elk tweetal haalt alle vier de kamers; dat is niet erg. Lees de cijfers van het slot voor uit het antwoordblad op je eigen telefoon of laptop, niet op het bord. Tweetallen die nog niet klaar zijn, openen het slot met die cijfers, of tikken onderaan op We stoppen en dan op Naar de eindcheck. Iedereen doet de eindcheck en het als-dan-plan. |
+| 28 | Stop | Tik op Stop de escape. Iedereen stopt, ook wie nog niet klaar is. Niet elk tweetal haalt alle vier de kamers; dat is niet erg. Een tweetal dat langzaam leest, haalt kamer 4 vaak niet. Lees de cijfers van het slot voor uit het antwoordblad op je eigen telefoon of laptop, niet op het bord. Tweetallen die nog niet klaar zijn, openen het slot met die cijfers, of tikken onderaan op We stoppen en dan op Naar de eindcheck. Iedereen doet de eindcheck en het als-dan-plan. |
 | 28 tot 31 | Eindcheck | Elk tweetal beantwoordt 4 vragen over dezelfde regels. Daarna ziet het wat het goed had, voor en na. |
 | 31 tot 39 | Nabespreken | Vraag met handopsteken: wie doet bbl, wie loopt stage, wie heeft een bijbaan? Vraag welke kamer het lastigst was en begin daar. Kies een of twee gespreksvragen. Vraag naar ervaringen, niet naar punten. Ben je gast? Vertel twee minuten over je eerste baan of over iets uit je werk. |
 | 39 tot 42 | Afsluiten | Laat twee of drie studenten hun als-dan-plan hardop zeggen. Stel daarna de slotvraag. |
@@ -483,7 +478,7 @@ Tip voor de docent: Je hoeft niets voor te bereiden of uit te leggen: alle regel
 Care points ("Let op"):
 1. "Vraag niet wie te weinig loon krijgt. Studenten vertellen dat zelf als ze willen."
 2. "Vertelt een student dat het werk niet klopt? Zeg: kom na de les even langs."
-3. "Een fout antwoord wordt doorgestreept. Een tweetal kan dus gokken. Dat telt niet mee bij In één keer goed."
+3. "Na twee foute antwoorden laat de les het goede antwoord zien. Een tweetal kan dus doorklikken zonder te lezen. Dat telt niet mee bij In één keer goed. Zeg: goed lezen gaat sneller."
 
 (Spec notes, not shown: timing is an estimate. The gate counts about 1,450 words in the rooms, about 20 minutes for a pair without hints, 27 to 30 for a slow pair; the stop flow covers it. Not yet timed with real mbo students: time it with two classes before release. The button names ("Start de les", "Projectiemodus", "Stop de escape", "We stoppen", "Naar de eindcheck", "Kamers op papier (leerlingen)") are the engine's `strings.js` wording, read 7 Nov 2026.)
 
@@ -500,10 +495,10 @@ Care points ("Let op"):
 | | 2.3 Melden | Een melding doen bij de Arbeidsinspectie | Werkgever wil het niet veranderen. |
 | | **Cijfer 2** | **4** | € 274 |
 | 3 Je rooster | 3.1 Nachtdienst | vr 19 mrt · 23:00 tot 07:00 | Onder de 18 nooit tussen 23:00 en 06:00. |
-| | 3.2 Dinsdag | 2 uur | 9 uur per dag, 7 uur school telt mee. |
-| | 3.3 Nachtdienst doen | Ja: vanaf 18 mag je 's nachts werken | Jij bent 18. |
+| | 3.2 Dinsdag | 2 uur | 9 uur per dienst, 7 uur school telt mee. |
+| | 3.3 Nachtdienst doen | Ja: vanaf 18 mag dat | Jij bent 18. |
 | | **Cijfer 3** | **2** | 9 min 7 |
-| 4 Bijbaan erbij | 4.1 Te laat | Nee: Kevin vraagt het te laat, je mag nee zeggen | 1 dag van tevoren, de regel zegt 4 dagen. |
+| 4 Bijbaan erbij | 4.1 Te laat | Nee: het is te laat gevraagd | 1 dag van tevoren, de regel zegt 4 dagen. |
 | | 4.2 Drie uur | 3 uur | Per oproep minstens 3 uur loon. |
 | | 4.3 Korting | Nee: de korting loopt al bij het zorgcentrum | Eén werkgever tegelijk. |
 | | **Cijfer 4** | **3** | 3 uur |
@@ -550,21 +545,21 @@ Per kamer (`discuss`):
 **`teacher.goal`:** the seven leerdoelen above, in one line, "De student kan: 1. ... 7. ...".
 
 Kern (`teacherNote`):
-- Kamer 1: "Leerbaan met arbeidsovereenkomst: loon. Stage: loon is niet verplicht, maar de stage mag de student geen geld kosten."
+- Kamer 1: "Leerbaan met arbeidsovereenkomst: loon. Stage: loon is niet verplicht. Moet de student iets kopen voor de stage en betaalt niemand anders het? Dan betaalt het bedrijf."
 - Kamer 2: "Vanaf 1 januari 2027 geldt ook in de bbl het minimumloon voor je leeftijd. Een cao kan meer geven."
-- Kamer 3: "Onder de 18: geen werk tussen 23:00 en 06:00, en school telt mee voor de 9 uur. Vanaf 18 mag nachtwerk."
+- Kamer 3: "Onder de 18: in de zorg geen werk tussen 23:00 en 06:00, en school telt mee voor de 9 uur per dienst. Vanaf 18 mag nachtwerk."
 - Kamer 4: "Oproep minder dan 4 dagen van tevoren: je mag nee zeggen. Per oproep minstens 3 uur loon. Loonheffingskorting bij één werkgever."
 
 Bronnen en uitzonderingen (`teacherDetail`, closed; each point from the source table):
-- Kamer 1: Stagevergoeding is nu niet verplicht volgens de wet. Het kabinet wil dat veranderen: kijk op rijksoverheid.nl of het wetsvoorstel al in internetconsultatie is. In een deel van de cao's staat al een stagevergoeding. Doet een stagiair gewoon werk, zonder te leren? Dan kan die recht hebben op het minimumloon; de Nederlandse Arbeidsinspectie controleert dat. Kosten: veiligheidsschoenen zijn beschermingsmiddelen. Die moet het bedrijf gratis geven, ook aan een stagiair (Arbowet artikel 1, 3 en 44). Voor andere kosten, zoals reizen of een VOG, zegt de Rijksoverheid dat het bedrijf ze moet vergoeden. Dat staat ook in de modelafspraken voor de praktijkovereenkomst van de MBO Raad (Stagepact), maar niet in een wet. De praktijkovereenkomst teken je met je school en je leerbedrijf. Bij de bbl is in het Stagepact afgesproken dat er ook een arbeidscontract komt. Een leerbaan voor de bbl vind je op leerbanenmarkt.nl.
+- Kamer 1: Stagevergoeding is nu niet verplicht volgens de wet. Het kabinet wil dat veranderen: kijk op rijksoverheid.nl of het wetsvoorstel al in internetconsultatie is. In een deel van de cao's staat al een stagevergoeding. Doet een stagiair gewoon werk, zonder te leren? Dan kan die recht hebben op het minimumloon; de Nederlandse Arbeidsinspectie controleert dat. Kosten: veiligheidsschoenen zijn beschermingsmiddelen. Die moet het bedrijf gratis geven, ook aan een stagiair (Arbowet artikel 1, 3 en 44). Voor andere kosten, zoals reizen of een VOG, zegt de Rijksoverheid: krijg je ze niet op een andere manier vergoed, dan moet het bedrijf ze vergoeden. Dat staat ook in de modelafspraken voor de praktijkovereenkomst van de MBO Raad (Stagepact), maar niet in een wet. De praktijkovereenkomst teken je met je school en je leerbedrijf. Bij de bbl is in het Stagepact afgesproken dat er ook een arbeidscontract komt. Een leerbaan voor de bbl vind je op leerbanenmarkt.nl.
 - Kamer 2: Tot en met 31 december 2026 was het minimumloon in de bbl lager voor 18, 19 en 20 jaar: van 1 juli tot en met 31 december 2026 minstens € 6,82 voor 18, € 7,87 voor 19 en € 9,22 voor 20. Vanaf 1 januari 2027 krijgen alle bbl'ers met een arbeidsovereenkomst minstens het minimumloon voor hun leeftijd: 16 jaar € 6,12; 17 jaar € 7,65; 18 jaar € 9,56; 19 jaar € 11,47; 20 jaar € 13,38; 21 jaar en ouder € 15,29 per uur. In de zorg, de techniek en de bouw krijgen bbl'ers vaak al meer dan het minimumloon. Je krijgt daarnaast minstens 8% vakantiegeld. Te weinig loon of vakantiegeld kun je tot 5 jaar terugvragen. Op 1 juli 2027 komen er nieuwe bedragen; die staan dan op rijksoverheid.nl onder minimumloon. De les noemt alleen januari 2027, dus de antwoorden blijven goed.
-- Kamer 3: De regels voor 16 en 17 jaar gelden ook in de zorg. Er is één uitzondering voor het mbo: wie voor bakker leert, mag soms 's nachts werken als de cao dat regelt. Onder de 18 telt schooltijd mee als arbeidstijd, ook de pauzes. Begint school de volgende dag om 08:30? Dan moet het werk om 20:30 klaar zijn (12 uur rust). Vanaf 18 jaar: maximaal 12 uur per dienst en 60 uur per week. Een nachtdienst duurt maximaal 10 uur. Af en toe mag het 12 uur zijn, maar niet vaak. Eindigt een nachtdienst na 02:00? Dan volgt minstens 14 uur rust; 1 keer per week mag dat 8 uur zijn. Voor sommige regels kan een cao iets anders zeggen. Wie twee banen heeft, telt de uren van beide banen bij elkaar op, voor de werktijd en de rust. Antwoord op de vraag voor snelle tweetallen: ja, beide banen tellen mee; samen 10 uur.
+- Kamer 3: De regels voor 16 en 17 jaar gelden ook in de zorg. Er is één uitzondering voor het mbo: wie voor bakker leert, mag soms 's nachts werken als een collectieve regeling dat regelt. Onder de 18 telt schooltijd mee als arbeidstijd, ook de pauzes. Onder de 18 heb je elke 24 uur minstens 12 uur rust, met daarin 23:00 tot 06:00. Begint school de volgende dag om 08:30? Dan moet het werk om 20:30 klaar zijn. Vanaf 18 jaar: maximaal 12 uur per dienst en 60 uur per week. Elke 24 uur minstens 11 uur rust; 1 keer per week mag dat 8 uur zijn, alleen als het werk dat nodig maakt. Een nachtdienst duurt maximaal 10 uur. Af en toe mag het 12 uur zijn, maar niet vaak. Eindigt een nachtdienst na 02:00? Dan volgt minstens 14 uur rust. Ook die mag 1 keer per week 8 uur zijn, alleen als het werk dat nodig maakt. In de verpleging en verzorging kan een collectieve regeling voor 18 jaar en ouder de rust nog een keer per week tot 10 uur inkorten. Wie twee banen heeft, telt de uren van beide banen bij elkaar op, voor de werktijd en de rust. Antwoord op de vraag voor snelle tweetallen: ja, beide banen tellen mee; samen 10 uur.
 - Kamer 4: In een cao kan de oproeptermijn korter zijn, maar nooit korter dan 24 uur. Een te late oproep mag je ook gewoon aannemen. De regel van minstens 3 uur loon per oproep kan een cao niet afschaffen. Vanaf 1 januari 2028 verdwijnt het nulurencontract voor de meeste werknemers. Een oproepcontract mag dan nog wel voor wie jonger is dan 18, voor scholieren en voor studenten, ook mbo-studenten, als ze gemiddeld niet meer dan 16 uur per week bij die werkgever werken. Werk je bij werkgevers na elkaar, niet tegelijk? Dan mag je de korting bij elke werkgever laten toepassen. Belasting terugvragen met een aangifte zit niet in deze les.
 
 Dit wordt vaak gevraagd (`teacher.faq`; Revision 1 adds six, gate D4, G3, G4, G6, I2):
 - "Ik heb maar 30 minuten. Kan dat?" Antwoord: "Ja. Zet de klastimer op 16 minuten. Minuut 0 tot 2 uitleg, 2 tot 5 startcheck, 5 tot 21 escape, 21 tot 24 eindcheck, 24 tot 30 slotvraag en als-dan-plan. Niet alle tweetallen komen dan bij kamer 4."
 - "Ik heb 60 of 90 minuten." Antwoord: "Gebruik het lesplan van 45 minuten. Neem meer tijd voor het nabespreken en voor de vragen per kamer."
-- "Mijn klas doet geen zorg." Antwoord: "De regels in deze les gelden ook in andere sectoren. Alleen het verhaal speelt in de zorg. Een cao kan wel meer geven."
+- "Mijn klas doet geen zorg." Antwoord: "De basisregels gelden in bijna alle sectoren. Sommige sectoren hebben uitzonderingen, zoals de bakkerij. Het verhaal speelt in de zorg. Een cao kan wel meer geven."
 - "Mijn studenten doen allemaal bol. Werkt de les dan?" Antwoord: "Ja. Kamer 1 gaat over stage, kamer 4 over een bijbaan met een oproepcontract. Kamer 2 gaat over de bbl, maar de tabel en de som gelden ook voor een bijbaan."
 - "Is dit een examen?" Antwoord: "Nee. Het is oefenen met regels die je nodig hebt op je werk."
 - "In onze sector is het loon hoger dan het minimumloon. Klopt de les dan nog?" Antwoord: "Ja. Het minimumloon is de ondergrens. Een cao kan meer geven. Laat studenten hun eigen cao opzoeken."
@@ -572,7 +567,7 @@ Dit wordt vaak gevraagd (`teacher.faq`; Revision 1 adds six, gate D4, G3, G4, G6
 - "Tot wanneer kloppen de bedragen?" Antwoord: "De tabel geldt vanaf 1 januari 2027. Op 1 juli 2027 komen er nieuwe bedragen; die staan dan op rijksoverheid.nl. De vragen gaan over januari 2027, dus de antwoorden blijven goed."
 - "Een student zegt: ik krijg te weinig. Wat doe ik?" Antwoord: "Laat de student het minimumloon voor de eigen leeftijd opzoeken. Is het te weinig? Eerst de werkgever aanspreken. Helpt dat niet? Een melding kan bij de Nederlandse Arbeidsinspectie. Je kunt na de les met de student meedenken."
 - "Een student vraagt iets wat niet in de les staat." Antwoord: "Zeg eerlijk dat je het niet zeker weet. Zoek het samen op rijksoverheid.nl."
-- "Er zijn geen laptops of telefoons." Antwoord: "Print Kamers op papier (leerlingen) op dit scherm. Lees de antwoorden van je eigen scherm."
+- "Er zijn geen laptops of telefoons." Antwoord: "Print Kamers op papier (studenten) op dit scherm. Lees de antwoorden van je eigen scherm."
 
 (Sources for the FAQ: "Welke cao geldt" is BW 7:655 lid 1 onder l, the employer's written opgave names "de toepasselijke collectieve arbeidsovereenkomst" (BWBR0005290, version 1 Jan 2026, read 7 Nov 2026). The melding: row onderbetaald-stappen. "Je kunt na de les meedenken", "zoek het samen op" and the 60 or 90 minutes line are advice, not rules. "Een cao kan meer geven": row cao-meer.)
 
@@ -630,13 +625,13 @@ All read on **7 November 2026**. "Page date" is the modified date in the page me
 | vakantiegeld | Tabel kamer 2: zonder vakantiegeld; daarnaast minstens 8%. | Wet minimumloon en minimumvakantiebijslag art. 15 lid 1 (BWBR0002638, version 1 Jul 2026): "recht op een vakantiebijslag ten minste tot een bedrag van 8% van zijn ten laste van de werkgever komende loon" | Rijksoverheid 2027: "In de tabellen staan brutobedragen." | No end date known |
 | onderbetaald-stappen | Te weinig loon: eerst je werkgever aanspreken; lost die het niet op, melden bij de Nederlandse Arbeidsinspectie (r3, r4 kamer 2, 2.3). | [Rijksoverheid, wat kan ik doen als ik minder loon krijg dan het wettelijk minimumloon](https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/minimumloon/wat-kan-ik-doen-als-ik-minder-loon-krijg-dan-het-wettelijk-minimumloon) (page date 21 Jan 2026): "Spreek eerst uw werkgever hierop aan."; "Komt u er met uw werkgever niet uit, dan kunt u terecht bij de Nederlandse Arbeidsinspectie." | Same page: "Blijft uw werkgever weigeren om u het minimumloon te betalen? Dan kunt u dit melden bij de Nederlandse Arbeidsinspectie." (one page, two passages; the havo spec's second source, government.nl, was not re-read today) | No end date known |
 | onderbetaald-5jaar | Te weinig loon of vakantiegeld kun je tot 5 jaar terugvragen (explanation 2.3, teacher note). | Rijksoverheid (as above): "Dan kunt u uw achterstallig loon nog 5 jaar opeisen bij uw werkgever. Dit geldt ook voor uw achterstallige vakantietoeslag." | (single source read today; BW 3:308 not re-read) | No end date known |
-| nacht-1617 | 16 en 17 jaar: tussen 23:00 en 06:00 nooit werken (regels kamer 3, 3.1, A3, B3). | Law: Arbeidstijdenwet art. 5:3 lid 1 (BWBR0007671, version 1 Jul 2025): "een onafgebroken rusttijd ... van ten minste 12 uren in elke aaneengesloten periode van 24 uren, waarin zijn begrepen de uren tussen 23.00 uur en 06.00 uur." | [Rijksoverheid, hoeveel uur werken 16 of 17 jaar](https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/bijbaan-vakantiewerk-en-stage-door-jongeren/hoeveel-uur-werken-16-17-jaar) (page date 12 Dec 2025): "Je mag niet 's nachts werken"; [Rijksoverheid, hoeveel pauze 16 of 17 jaar](https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/bijbaan-vakantiewerk-en-stage-door-jongeren/hoeveel-pauze-16-17-jaar) (page date 12 Dec 2025): "In elk geval tussen 23.00 - 06.00 uur". Exception (teacher note only): Arbeidstijdenbesluit art. 5.4:3 (BWBR0007687, version 14 Nov 2018), bakery trainees in bbl or bol, only by collectieve regeling. | No end date known |
+| nacht-1617 | 16 en 17 jaar: tussen 23:00 en 06:00 nooit werken (regels kamer 3, 3.1, A3, B3). | Law: Arbeidstijdenwet art. 5:3 lid 1 (BWBR0007671, version 1 Jul 2025): "een onafgebroken rusttijd ... van ten minste 12 uren in elke aaneengesloten periode van 24 uren, waarin zijn begrepen de uren tussen 23.00 uur en 06.00 uur." | [Rijksoverheid, hoeveel uur werken 16 of 17 jaar](https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/bijbaan-vakantiewerk-en-stage-door-jongeren/hoeveel-uur-werken-16-17-jaar) (page date 12 Dec 2025): "Je mag niet 's nachts werken"; [Rijksoverheid, hoeveel pauze 16 of 17 jaar](https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/bijbaan-vakantiewerk-en-stage-door-jongeren/hoeveel-pauze-16-17-jaar) (page date 12 Dec 2025): "In elk geval tussen 23.00 - 06.00 uur". Exception (teacher detail only): Arbeidstijdenbesluit art. 5.4:3 (BWBR0007687, version from 1 Jan 2024, the current one; re-read in Rev 2), bakery trainees in bbl or bol, "uitsluitend mogelijk bij collectieve regeling". Rev 2: the pupil text says "in de zorg" (check B 7); the Arbeidstijdenbesluit of 1 Jan 2024 names jeugdige werknemers only in art. 2.1:2, 4.1:2, 5.4:3 and 5.6:2, none of them zorg. | No end date known |
 | rust-12 | 16 en 17 jaar: elke 24 uur minstens 12 uur achter elkaar vrij (regels kamer 3). | Arbeidstijdenwet art. 5:3 lid 1 and lid 3 | Rijksoverheid pauze 16 of 17: "Minimum dagelijkse rust 12 uur" | No end date known |
-| max-dienst-1617 | 16 en 17 jaar: maximaal 9 uur per dienst, pupil wording "per dag" (regels kamer 3, 3.2). | Arbeidstijdenwet art. 5:7 lid 1: "a. 9 uren per dienst; b. 45 uren per week"; art. 1:7 ("dienst": between two rests of at least 8 uren) | Rijksoverheid uur 16 of 17 (table: dienst 9 uur, week 45 uur) | No end date known |
+| max-dienst-1617 | 16 en 17 jaar: maximaal 9 uur per dienst (regels kamer 3 row "Per dienst", 3.2; Rev 2, check B 6, was "per dag"). | Arbeidstijdenwet art. 5:7 lid 1: "a. 9 uren per dienst; b. 45 uren per week"; art. 1:7 ("dienst": between two rests of at least 8 uren) | Rijksoverheid uur 16 of 17 (table: dienst 9 uur, week 45 uur) | No end date known |
 | schooltijd | Onder de 18 telt schooltijd mee als arbeidstijd, pauzes op school inbegrepen (3.2). | Arbeidstijdenwet art. 4:4 lid 2: "geldt de tijd waarop een jeugdige werknemer onderwijs volgt of pleegt te volgen, de onderbrekingen inbegrepen, als arbeidstijd." | Rijksoverheid uur 16 of 17: "De tijd die je op school bent telt ook mee als arbeidstijd." | No end date known |
 | nacht-18 | Vanaf 18 mag je ook 's nachts werken (regels kamer 3, 3.3). | Arbeidstijdenwet art. 5:8 lid 1 (night shifts of a werknemer, max 10 uren, no age bar from 18; the bar for jeugdigen is art. 5:3 lid 1) | [Rijksoverheid, hoe lang mag mijn nachtdienst duren](https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/werktijden/hoe-lang-mag-nachtdienst-duren) (page date 27 Feb 2019): "Als u regelmatig in nachtdienst werkt, mag uw nachtdienst maximaal 10 uur duren." | No end date known |
-| rust-nacht-18 | Teacher note and table note: na een nachtdienst die na 02:00 eindigt minstens 14 uur rust; 1 keer per week mag 8 uur. | Arbeidstijdenwet art. 5:8 lid 4 | Rijksoverheid nachtdienst: "Nachtdienst eindigt na 2.00 uur: Minimaal 14 uur rust. Hooguit 1 keer per week mag de rusttijd 8 uur duren." | No end date known |
-| rust-11 | 18 en ouder: elke 24 uur minstens 11 uur achter elkaar vrij; 1 keer per 7 dagen mag 8 uur (regels kamer 3 and note). | Arbeidstijdenwet art. 5:3 lid 2 | [Rijksoverheid, wettelijke regels werktijden en rusttijden](https://www.rijksoverheid.nl/themas/werk/werktijden/vraag-en-antwoord/werktijden/wettelijke-regels-werktijden-en-rusttijden) (page date 2 Jan 2026): "Na een werkdag mag u minimaal 11 aaneengesloten uren niet werken. De rustperiode van 11 uur mag eens in de 7 dagen ingekort worden tot minimaal 8 uur." | No end date known |
+| rust-nacht-18 | Teacher detail only (Rev 2: off the table): na een nachtdienst die na 02:00 eindigt minstens 14 uur rust; 1 keer per week 8 uur, alleen als het werk dat nodig maakt. | Arbeidstijdenwet art. 5:8 lid 4 (version 1 Jul 2025, current; re-read in Rev 2): "eenmaal in elke aaneengesloten periode van 7 maal 24 uren mag worden ingekort tot ten minste 8 uren, indien de aard van de arbeid of de bedrijfsomstandigheden dit met zich brengen" | Rijksoverheid nachtdienst: "Nachtdienst eindigt na 2.00 uur: Minimaal 14 uur rust. Hooguit 1 keer per week mag de rusttijd 8 uur duren." | No end date known |
+| rust-11 | Teacher detail only (Rev 2, check B 1: off the table): 18 en ouder elke 24 uur minstens 11 uur rust; 1 keer per 7 dagen 8 uur, alleen als het werk dat nodig maakt. Zorg: ATB 5.19:2. | Arbeidstijdenwet art. 5:3 lid 2 (version 1 Jul 2025, current; re-read in Rev 2): "eenmaal ... mag worden ingekort tot ten minste 8 uren, indien de aard van de arbeid of de bedrijfsomstandigheden dit met zich brengen"; Arbeidstijdenbesluit art. 5.19:1 and 5.19:2 (version 1 Jan 2024): for "verpleging of verzorging, verricht door de werknemer van 18 jaar of ouder", rest of 11 uren "eenmaal ... ingekort tot ten minste 8 uren alsmede eenmaal ... tot ten minste 10 uren", "uitsluitend mogelijk bij collectieve regeling" (check B 8) | [Rijksoverheid, wettelijke regels werktijden en rusttijden](https://www.rijksoverheid.nl/themas/werk/werktijden/vraag-en-antwoord/werktijden/wettelijke-regels-werktijden-en-rusttijden) (page date 2 Jan 2026): "Na een werkdag mag u minimaal 11 aaneengesloten uren niet werken. De rustperiode van 11 uur mag eens in de 7 dagen ingekort worden tot minimaal 8 uur." | No end date known |
 | max-12 | 18 en ouder: maximaal 12 uur per dienst (regels kamer 3). | Arbeidstijdenwet art. 5:7 lid 2 onder a | Rijksoverheid wettelijke regels: "U mag maximaal 12 uur per dienst werken en maximaal 60 uur per week." (the page adds "In uw cao kunnen afwijkende regels staan"; the table note says "Vanaf 18 jaar gelden extra regels voor nachtdiensten"; teacher note: "Voor sommige regels kan een cao iets anders zeggen") | No end date known |
 | meer-banen | Teacher note only: twee banen, uren tellen samen voor de Arbeidstijdenwet. | [Rijksoverheid, wat staat er in de Arbeidstijdenwet over mijn werktijden](https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/werktijden/wat-staat-er-in-de-arbeidstijdenwet-over-mijn-werktijden) (page date 3 Aug 2026): "Als u meerdere banen heeft, geldt de Arbeidstijdenwet op al uw werkzaamheden. Door de verschillende werktijden bij elkaar optellen, kunt u nagaan wat uw werktijden en rusttijden moeten zijn." | (single source; no Arbeidstijdenwet article found that says it in these words) | No end date known |
 | oproeptermijn | Oproep minder dan 4 dagen van tevoren: je hoeft niet te komen; cao kan het korter maken, niet korter dan 24 uur (r1 kamer 4, 4.1, A4, B4). | Law: BW 7:628a lid 2 (BWBR0005290, version 1 Jan 2026): "niet ten minste vier dagen van tevoren"; lid 4: "mits de termijn niet korter is dan 24 uur" | [Rijksoverheid, welke contracten zijn er voor oproepkrachten](https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/arbeidsovereenkomst-en-cao/welke-contracten-zijn-er-voor-oproepkrachten) (page date 13 Oct 2026): "Uw werkgever moet u minstens 4 kalenderdagen van tevoren oproepen voor werk. Als uw werkgever u minder dan 4 dagen van tevoren oproept, bent u niet verplicht om te komen werken."; "In een cao kan worden vastgelegd dat de oproeptermijn van 4 dagen wordt verkort tot (minimaal) 1 dag." | Until 1 Jan 2028 (Wet meer zekerheid flexwerkers renumbers and changes oproep rules; re-check) |
@@ -660,7 +655,7 @@ Word meanings without a rule: dienst, rust, pauze, oproep, brutoloon, vakantiege
 4. **stagemarkt.nl lookup** not tested with a real company name; the site says it can be used to check erkenning.
 5. **1 July 2027 amounts** not published; validUntil 30 juni 2027. Before 1 July 2027 decide: keep the January 2027 story (answers stay true, as in the havo option A) and add the new table in the intro only, or move kamer 2 to a later month.
 6. **Rijksoverheid vs law on 18+ hours.** Rijksoverheid adds "In uw cao kunnen afwijkende regels staan" to the 12-hour and 60-hour rules; Arbeidstijdenwet art. 5:7 lid 4 allows a cao deviation only from the 55-hour average, and the Arbeidstijdenbesluit has sector rules that apply via cao. No question uses the 12 hours; the table note and the teacher note say that for 18+ a cao can change some rules.
-7. **Arbeidstijdenbesluit version** on the BWB repository is from 14 November 2018 (latest item); not checked whether it has a later consolidated version outside the repository listing.
+7. **Arbeidstijdenbesluit version (solved in Rev 2, check B 10).** The repository's `_latestItem` attribute still points to 14 November 2018, but its expression list has a version from 1 January 2024 with no end date; that version was read for Rev 2 (art. 2.1:2, 4.1:2, 5.4:3, 5.6:2, 5.19:1, 5.19:2: same text as cited). The Arbeidstijdenwet current version is 1 July 2025 (expression list), also re-read. Checked on wetten.overheid.nl on 7 Nov 2026 (late in Rev 2): the ATB page shows "Geldend van 01-01-2024 t/m heden" and the Atw page "Geldend van 01-07-2025 t/m heden"; the Atw page gives art. 1:7 lid 1 onder d verbatim ("nachtdienst: een dienst waarin meer dan een uur arbeid wordt verricht tussen 00.00 uur en 06.00 uur"), which is the room 3 gloss. The site served only the first 63,000 characters (up to hoofdstuk 4), so the hoofdstuk 5 article texts (Atw 5:3, 5:7, 5:8; ATB 5.4:3, 5.19:1, 5.19:2) were read in the official BWB XML of the same two versions from repository.officiele-overheidspublicaties.nl, the source of wetten.overheid.nl. Both pages say "Wijziging(en) zonder datum inwerkingtreding aanwezig": an amendment is pending without a start date; recheck before 30 juni 2027 (validUntil).
 8. **"Zeestad" exists in the KvK** as Zeestad C.V. and Zeestad Beheer (Den Helder, urban redevelopment). This affects every lesson that uses Zeestad as a fictional town, not only this one. Risk judged low (no care home, school, installer or snackbar; the town is never placed); flagged for the coordinator.
 9. **Single-source items, teacher text only:** two jobs count together for the Arbeidstijdenwet (Rijksoverheid only), werkgevers na elkaar (Belastingdienst only), 5 jaar terugvragen (Rijksoverheid only, today).
 10. **Left out on purpose:** proeftijd (a leerbaan lasts 1,5 years on average, Stb. 2026, 279; for contracts of more than 6 months and under 2 years the 1-month cap can be changed by cao, BW 7:652 lid 7, so no clean question); pauze for 18+ (cao can change it, Arbeidstijdenwet art. 5:4 lid 3); the aangifte and terugvragen (the tax lesson); studiefinanciering and the studentenreisproduct (other rules, not checked); kostgeld (no rule; only a debrief question); minderjarigen and signing (BW 7:612 not re-read; MBO Raad: 16- and 17-year-olds may sign an arbeidsovereenkomst themselves).
@@ -770,3 +765,38 @@ Persona gate (READY WITH FIXES), top-10 and the named extras:
 | not taken | S2 label, S8 clue order, S9 frame, I2 (applied in FAQ), I5 (replaced by A-1 option), I6 (no source for "most hours"), D8 (applied as discuss prompt kamer 2), S6 (applied, debrief 3), S7 (explanation 1.3 keeps leerbanenmarkt.nl), T14 (applied as content rule) | | S2 is engine text (Uncertainties 12); S8 kept, the clue must stay derivable; S9 needs a class test. |
 
 Format: the spec now uses the layout `tests/spec-compare.js` reads (rule cards as `regel` documents, "Moeilijke woorden:" lines, Kern, Bronnen en uitzonderingen and Per kamer blocks, Materials, Tip and Care points lines). Room 3 has no rule card on purpose (its rules are the `regels` table); `tests/spec-compare.js` lists that exception.
+
+**7 Nov 2026, Revision 2** (ChatGPT check B round 1 and the pupil playtest G4, content items; one pass, spec and `kamers-engine/lessons/eerste-bijbaan-mbo.js` edited together). The law texts were checked against the current versions: Arbeidstijdenbesluit 1 Jan 2024 and Arbeidstijdenwet 1 Jul 2025. wetten.overheid.nl confirms both version dates and the nachtdienst definition (Atw 1:7 lid 1 onder d). The hoofdstuk 5 articles were read in the official BWB XML of the same versions, because the site served only up to hoofdstuk 4 (Uncertainties 7). **Code 5423 unchanged.** The meaning of every room answer is unchanged, except two choice answers that were reworded: 3.3 is now "Ja: vanaf 18 mag dat" and 4.1 is now "Nee: het is te laat gevraagd". The answer key was updated to match.
+
+Check B round 1 (FAIL, 3 ERROR, 7 RISK):
+
+| # | Finding | Decision | Change |
+|---|---|---|---|
+| B-1 | ERROR: the room 3 table row "1 keer per week 8 uur rust" leaves out werknoodzaak | Applied, by removing the row | The Rust row and the 8-hour note are off the pupil table. The table note now reads "Er zijn ook regels voor rust." The teacher detail kamer 3 says "1 keer per week mag dat 8 uur zijn, alleen als het werk dat nodig maakt" (Atw 5:3 lid 2). No question needed the row, and removing it also cuts words. |
+| B-2 | ERROR: the teacher detail on rest after a nachtdienst leaves out the condition | Applied | "Eindigt een nachtdienst na 02:00? Dan volgt minstens 14 uur rust. Ook die mag 1 keer per week 8 uur zijn, alleen als het werk dat nodig maakt." (Atw 5:8 lid 4). |
+| B-3 | ERROR: the nachtdienst gloss lacks the legal test | Applied | "Nachtdienst: je werkt meer dan 1 uur tussen 00:00 en 06:00." This is verbatim in meaning to Atw 1:7 lid 1 onder d, checked on wetten.overheid.nl. Jesse's 23:00 to 07:00 shift qualifies. |
+| B-4 | RISK: r3 on stage costs is too absolute | Applied, in A2 words | r3 "Moest je iets kopen voor je stage? En betaalt niemand anders het? Dan betaalt het bedrijf het." Message a4 "Ik kreeg dat geld nergens terug." makes the condition answerable. 1.2 and its explanation follow, and the answer stays € 50. |
+| B-5 | RISK: in 2.2, € 274 is only the shortfall against the legal minimum | Applied, in A2 words | "Hoeveel euro kreeg je in januari minder dan het minimumloon? Reken zonder vakantiegeld." The table note keeps "Een cao kan meer geven." The answer stays 274. |
+| B-6 | RISK: the law sets maxima per dienst, not per dag | Applied | The row label is "Per dienst". The 3.2 nudge, the explanation and the Kern say "per dienst". 9 min 7 = 2 is unchanged. |
+| B-7 | RISK: "nooit 's nachts" under 18 has a bakery exception (ATB 5.4:3) | Applied, adjusted | Cell "In de zorg nooit tussen 23:00 en 06:00." The 3.1 explanation and the remember line say "in de zorg". A3 says "in de zorg mag dat pas vanaf 18" and B3 says "in een hotel mag dat pas vanaf 18"; the hotel has no exception. The suggested "in dit zorgcentrum" was not used: the rule covers all of the zorg, not one employer. The bakery exception is in the teacher detail. |
+| B-8 | RISK: zorg rest times: ATB 5.19:2 allows a collective arrangement | Applied | Teacher detail kamer 3: "In de verpleging en verzorging kan een collectieve regeling voor 18 jaar en ouder de rust nog een keer per week tot 10 uur inkorten." (ATB 5.19:1 and 5.19:2, version 1 Jan 2024). Row `rust-11`. |
+| B-9 | RISK: the FAQ "Mijn klas doet geen zorg" is too broad | Applied | "De basisregels gelden in bijna alle sectoren. Sommige sectoren hebben uitzonderingen, zoals de bakkerij. Het verhaal speelt in de zorg. Een cao kan wel meer geven." |
+| B-10 | RISK: the ATB version of 14 Nov 2018 is outdated | Applied | The ATB was re-read in the version of 1 Jan 2024: art. 2.1:2, 4.1:2, 5.4:3, 5.6:2, 5.19:1 and 5.19:2, with the same text as cited. Source rows and Uncertainties 7 were updated. The Atw was re-read in the version of 1 Jul 2025. |
+
+Pupil playtest G4 (content items; the engine items S2, S3 and S4 were fixed by the coordinator):
+
+| # | Item | Decision | Change |
+|---|---|---|---|
+| S1 | The room text is about 2,390 words and should be well under 2,000 | Applied | The data pupil words went from 1,778 to 1,349 (rooms 340, 343, 334, 332), counted by script over intro, documents, rules, questions, hints, explanations, clue and remember. On the page this is estimated at about 1,800 words, because G4 measured 2,390 on 1,778 data words. It was not re-measured, because e2e may not run now. The cuts: Luca's naam and geboren rows, the pok period line, the "echte pok is langer" notes, "Je woont nog thuis", the place lines on screen (now "september 2026" and so on), the room 3 Rust row, and shorter glossaries, intros, rules, explanations and remember lines. Sources shown with a right answer were cut to one or two per question with short names (N1). Every question can still be answered from what is on screen (see the per-question docs and retry lines). |
+| S4 | The digit box: typing "274" in room 2 | Applied (content part) | `clueWrong`: "274" gives "Dat is het hele bedrag. Typ alleen het laatste cijfer."; "2" gives "Dat is het eerste cijfer van 274. Neem het laatste." The clue now says "hoeveel euro was het verschil? Schrijf het zonder centen. Neem het laatste cijfer." |
+| S5 | Some nudges confirm a wrong answer or give the step away | Applied | 4.2 "Lees regel 2 nog eens."; 3.2 "Hoeveel uur mag Jesse per dienst werken? Haal de schooluren eraf." with the hint "Kijk hoe lang Jesse op school is."; 2.2 "Wat is het verschil per uur?" with the hint "Doe dat verschil keer je uren."; 1.2 "Moest Amira iets kopen voor de stage?" with the hint "Lees bericht 3 en 4."; 1.3 "Welke regel gaat over een erkend leerbedrijf?" |
+| S6 | In 3.3, 4.1, A1, A3, B1 and B3 the right option is the longest and the only one with its Ja/Nee start | Applied | Every one of these items now has 4 options, two starting with Ja and two with Nee. The right option is the shortest or near it (see the lengths lines). 4.1 right "Nee: het is te laat gevraagd" no longer echoes rule 1. |
+| S7 | The care point says a struck option invites guessing, but the engine shows the answer after 2 wrong tries | Applied | Care 3: "Na twee foute antwoorden laat de les het goede antwoord zien. Een tweetal kan dus doorklikken zonder te lezen. Dat telt niet mee bij In één keer goed. Zeg: goed lezen gaat sneller." |
+| S8 | "oproepen minstens 4 dagen van tevoren" is read as a verb | Applied | "Je contract zegt: je baas moet je minstens 4 dagen van tevoren vragen." in 4.1, A4 and B4. |
+| N1 | Long source lines on the answer screens | Applied | As S1: fewer sources per question, short names (for example "Rijksoverheid, stage in het mbo" and "Arbowet, artikel 3 en 44"). The full citations stay in the source table. |
+| N3 | Hint 1.3 repeats the struck KvK option | Applied | The hint is now "Lees die regel tot het einde." |
+| N5 | 4.3 "waarschijnlijk later bijbetalen" | Not taken | The Belastingdienst page says "waarschijnlijk", and "je moet later belasting betalen" would be an unsourced certainty. The explanation is shortened to "Kies één werkgever. Anders betaal je later waarschijnlijk bij." |
+| N6 | The labels "Appjes van ..." and "Moeilijke woorden" sound childish | Partly applied | The chats are now "Berichten van Amira" and "Berichten van Kevin", and the hints say "bericht 2". "Moeilijke woorden" is engine text (`src/strings.js`), which is not mine to edit. |
+| N2, N4, N7 to N13 | Reveal heading, retry labels, teacher layout, timer, lock, check page, print, Ja text | Not taken: engine items | They are not content. N12 (the double "Cijfer voor het slot: Het 1e cijfer van het slot") is an engine print label. The clue keeps its "Het 1e cijfer van het slot:" start, because the screen needs it. |
+
+Other changes in this pass: the 1.3 explanation drops leerbanenmarkt.nl (now in the teacher detail kamer 1), and the 2.3 explanation drops "tot 5 jaar terugvragen" (in the teacher detail kamer 2 and the debrief). The room 1 intro now reads "begint met de bbl" without the opleiding name, and Verzorgende IG is in the teacher detail. The coordinator's edits are kept: teacher level, noun, groupExample, timers and the FAQ "Kamers op papier (studenten)". G4's idea to drop 4.3 was not taken: 4.3 is the only question on loonheffingskorting, a leerdoel. Script checks after this pass, on the pupil text: no sentences over 15 words, no options over 10 words, no explanations over 2 sentences or 28 words, and no en or em dashes. One teacher-screen sentence ("Past bij", 17 words) is over 15, which the rule allows because it is not pupil text. `tests/spec-compare.js`: 0 mismatches.
