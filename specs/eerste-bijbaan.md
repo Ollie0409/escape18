@@ -116,7 +116,7 @@ De leerling kan:
 - **Retry points to:** regel r3 "Zegt je baas binnen 4 dagen voor de dienst af? Dan krijg je loon over alle uren van de oproep."
 - **Nudge:** "Hoeveel dagen voor de dienst zegt Ilse af?"
 - **Hint (30 s):** "Tel de uren van 13:00 tot 16:00."
-- **Explanation:** "Ilse zegt 2 dagen van tevoren af. Dat is binnen 4 dagen, dus je krijgt loon over alle 3 uur."
+- **Explanation:** "Ilse zegt binnen 4 dagen af, dus je krijgt loon over alle 3 uur. Bij een nulurencontract krijg je per oproep minstens 3 uur loon, ook als je korter werkt."
 - **Rules:** afzeggen
 
 ### Cijfer kamer 1
@@ -192,7 +192,7 @@ De leerling kan:
 - **Retry points to:** tabel row "17 jaar: € 5,92"
 - **Nudge:** "Hoe oud ben je in november?"
 - **Hint (30 s):** "Je bent op 20 oktober jarig geweest."
-- **Explanation:** "In november 2026 ben je 17, dus je krijgt minstens € 5,92 per uur. Wachten tot januari mag niet."
+- **Explanation:** "Vanaf je verjaardag geldt het minimumloon voor je nieuwe leeftijd: minstens € 5,92 per uur. Wachten tot januari mag niet."
 - **Distractors, each with its valid period:** a € 5,17 = 16 jaar, 1 juli tot en met 31 december 2026; b € 5,81 = 17 jaar, 1 januari tot en met 30 juni 2026 (expired in November); c € 7,50 = 18 jaar, 1 juli tot en met 31 december 2026. Correct d € 5,92 = 17 jaar, 1 juli tot en met 31 december 2026.
 - **Rules:** wml-2026-2, wml-leeftijd
 
@@ -239,7 +239,7 @@ De leerling kan:
 - **Remember:** "Zoek het minimumloon voor jouw leeftijd op bij de Rijksoverheid. Krijg je te weinig? Spreek je werkgever aan. Helpt dat niet? Meld het dan bij de Nederlandse Arbeidsinspectie."
 
 **Voor de docent (kamer 2):**
-- Wachten tot januari mag niet: in november is Sam 17, dus geldt het bedrag voor 17 jaar.
+- Vanaf je verjaardag krijg je het minimumloon voor je nieuwe leeftijd. Sam heeft vanaf 20 oktober 2026 recht op minstens € 5,92 per uur. Wachten tot januari mag niet.
 - Op 1 januari 2027 gaat het minimumjeugdloon omhoog. Per uur: 15 jaar € 4,59; 16 jaar € 6,12; 17 jaar € 7,65; 18 jaar € 9,56; 19 jaar € 11,47; 20 jaar € 13,38; 21 jaar en ouder € 15,29 (Rijksoverheid, Bedragen minimumloon 2027, bijgewerkt op 6 november 2026). De link staat bij de bronnen.
 - De vragen gaan over november 2026, dus de antwoorden blijven goed. Noem de nieuwe bedragen bij het nabespreken.
 
@@ -294,7 +294,7 @@ School time is given as clock times, breaks included, because the whole time at 
 
 ("Per dag" in r3 is the pupil wording of the law's "per dienst": a dienst lies between two rests of at least 8 hours, art. 1:7, and with 12 hours of daily rest a school-and-work day is one dienst.)
 
-**Check of the rooster against every rule shown in the lesson:** vr 11 dec is the only shift that clearly breaks one; a single week cannot show the 4-week average of 40 hours. The 24-hour period starts at the first moment of the day with work, and school counts as work (art. 5:3 lid 3, art. 4:4 lid 2). di and do: school 6 + work 2 = 8 uur (max 9); rest from 18:00 to 08:30 the next day is 14,5 uur and includes 23:00 to 06:00. wo with the 3.2 shift: 7 + 2 = 9 uur; rest from 17:30 to 08:30 is 15 uur. vr: no school; the shift ends after 23:00, so it breaks r1, and the rest from 23:30 to za 12:00 (12,5 uur) does not include 23:00 to 23:30 (art. 5:3 lid 1); ending at 23:00 would give 13 uur rest, fine. za: 6 uur on site with a 30-minute pause is 5,5 uur work, so r4 applies. Week: school 26 + work 14,5 = 40,5 uur (max 45; 42,5 with the wo shift). Sunday free, so no Sunday rule comes in.
+**Check of the rooster against every rule shown in the lesson:** vr 11 dec is the only shift that clearly breaks one; a single week cannot show the 4-week average of 40 hours. The 24-hour period starts at the first moment of the day with work, and school counts as work (art. 5:3 lid 3, art. 4:4 lid 2). di and do: school 6 + work 2 = 8 uur (max 9); rest from 18:00 to 08:30 the next day is 14,5 uur and includes 23:00 to 06:00. wo with the 3.2 shift: 7 + 2 = 9 uur; rest from 17:30 to 08:30 is 15 uur. vr: no school; the shift ends after 23:00, so it breaks r1, and the rest from 23:30 to za 12:00 (12,5 uur) does not include 23:00 to 23:30 (art. 5:3 lid 1); ending at 23:00 would give 13 uur rest, fine. za: 6 uur on site with a 30-minute pause is 5,5 uur work, so r4 applies. Week: 26 uur schooltijd + 14 uur arbeid (2 + 2 + 4,5 + 5,5; the za pause is no arbeidstijd, Arbeidstijdenwet art. 1:7 onder e and k) = 40 uur (max 45). Met de extra woensdagdienst: maximaal 42 uur. Sunday free, so no Sunday rule comes in.
 
 **Moeilijke woorden:** "Dienst: de tijd dat je op je werk bent. Pauze: een rustmoment tijdens je werk. Studiedag: een schooldag zonder les."
 
@@ -329,7 +329,7 @@ School time is given as clock times, breaks included, because the whole time at 
 - **Retry points to:** regel r4 "Werk je meer dan 4,5 uur? Dan krijg je minstens een half uur pauze."
 - **Nudge:** "Hoe lang werk je zaterdag?"
 - **Hint (30 s):** "Het is meer dan een kwartier."
-- **Explanation:** "Werk je meer dan 4,5 uur, dan krijg je minstens een half uur pauze. Soms mag dat in twee keer een kwartier."
+- **Explanation:** "Werk je meer dan 4,5 uur, dan krijg je minstens een half uur pauze. Zo nodig mag die pauze in twee delen van minstens 15 minuten."
 - **Rules:** pauze
 
 ### Cijfer kamer 3
@@ -343,7 +343,7 @@ School time is given as clock times, breaks included, because the whole time at 
 - De regels gelden voor 16 en 17 jaar. Onder de 16 gelden strengere regels; die zitten niet in deze les.
 - 23:00 is de uiterste eindtijd, maar je hebt ook 12 uur rust achter elkaar nodig. Schooltijd telt als werktijd. Begint school de volgende dag om 08:30? Dan moet je werk om 20:30 klaar zijn.
 - Ook geldt: maximaal 45 uur per week en gemiddeld 40 uur per week over 4 weken, school meegeteld.
-- Pauze: minstens een half uur, zo nodig in twee keer een kwartier. De Rijksoverheid noemt daarbij een collectieve regeling; de Arbeidstijdenwet doet dat voor 16 en 17 jaar niet.
+- Pauze: minstens een half uur, zo nodig in twee keer een kwartier (Arbeidstijdenwet, artikel 5:4 lid 1). De Rijksoverheid noemt daarbij een collectieve regeling; de wet doet dat voor 16 en 17 jaar niet.
 
 ---
 
@@ -382,7 +382,7 @@ School time is given as clock times, breaks included, because the whole time at 
 
 > r1. Twee bijbanen tegelijk? Laat de loonheffingskorting bij één werkgever toepassen.
 > r2. Te veel belasting betaald? Vraag het na afloop van het jaar terug met een aangifte.
-> r3. Kreeg je geen brief dat je aangifte moet doen? Dan kun je tot 5 jaar na afloop van het jaar aangifte doen.
+> r3. Kreeg je geen bericht dat je aangifte moet doen? Dan kun je tot 5 jaar na afloop van het jaar aangifte doen.
 
 **Moeilijke woorden:** "Jaaropgaaf: een overzicht van je loon en je belasting over een heel jaar. Loonheffing: belasting en premies. Je werkgever haalt die van je loon af. Ingehouden: van je loon afgehaald. Loonheffingskorting: korting op je loonheffing. Aangifte: je geeft je inkomen van een jaar door aan de Belastingdienst."
 
@@ -422,13 +422,14 @@ School time is given as clock times, breaks included, because the whole time at 
 
 ### Vraag 4.4 `jaar` (pick, docs: jaaropgaaf, regel)
 
+- **Situation:** "Je hebt geen bericht gekregen dat je aangifte moet doen. Je wilt zelf aangifte doen, om belasting terug te vragen."
 - **Prompt:** "Tot en met welk jaar kun je over 2026 nog aangifte doen?"
 - **Options:** a "2027" · b "2028" · c "2036" · d "2031"
 - **Correct:** d
-- **Retry points to:** regel r3 "Kreeg je geen brief dat je aangifte moet doen? Dan kun je tot 5 jaar na afloop van het jaar aangifte doen."
+- **Retry points to:** regel r3 "Kreeg je geen bericht dat je aangifte moet doen? Dan kun je tot 5 jaar na afloop van het jaar aangifte doen."
 - **Nudge:** "Vanaf welk jaar tel je 5 jaar verder?"
 - **Hint (30 s):** "2026 is voorbij op 31 december 2026. Tel er 5 jaar bij op."
-- **Explanation:** "Je kunt tot 5 jaar na afloop van een jaar aangifte doen. Over 2026 kan dat dus tot en met 2031."
+- **Explanation:** "Zonder bericht kun je tot 5 jaar na afloop van een jaar aangifte doen. Over 2026 kan dat dus tot en met 31 december 2031."
 - **Rules:** vijf-jaar
 
 ### Cijfer kamer 4
@@ -441,7 +442,7 @@ School time is given as clock times, breaks included, because the whole time at 
 **Voor de docent (kamer 4):**
 - Werk je bij werkgevers na elkaar, niet tegelijk? Dan mag je de korting bij elke werkgever laten toepassen.
 - Beloof geen bedrag terug. Of er iets terugkomt, zie je pas in de aangifte.
-- De 5 jaar geldt als je geen bericht kreeg dat je aangifte moet doen (Belastingdienst). Kreeg je wel zo'n bericht, volg dan dat bericht. De uiterste datum voor 2026 is 31 december 2031.
+- De 5 jaar geldt als je geen bericht kreeg dat je aangifte moet doen (Belastingdienst). Kreeg je wel zo'n bericht, volg dan dat bericht. Ook zonder bericht moet je aangifte doen als je meer moet bijbetalen dan de aanslaggrens. De uiterste datum voor 2026 is 31 december 2031.
 - Op het echte formulier staat ook de studenten- en scholierenregeling. Die zit niet in deze les.
 
 ---
@@ -519,7 +520,7 @@ Tip voor de docent: een fout antwoord wordt doorgestreept. Een tweetal kan dus o
 | 4 Belasting | 4.1 Korting | Nee: de korting loopt al bij je eerste baan | Eén werkgever tegelijk. |
 | | 4.2 Ingehouden loonheffing | Ingehouden loonheffing | Lezen van de jaaropgaaf. |
 | | 4.3 Terug | Na afloop van het jaar aangifte doen bij de Belastingdienst | Geen bedrag beloven. |
-| | 4.4 Jaar | 2031 | Tot 5 jaar na afloop van 2026. |
+| | 4.4 Jaar | 2031 | Geen bericht gekregen: tot 5 jaar na afloop van 2026. |
 | | **Cijfer 4** | **1** | 2031 |
 | | **Code** | **3521** | |
 
@@ -575,7 +576,7 @@ All pages read on **6 Nov 2026** (the fact check B rows re-read in this revision
 | oproep-3uur | Teacher note only: per oproep minstens 3 uur loon, ook als je korter werkt. | Rijksoverheid oproepkrachten (page date 13 Oct 2026): "Iedere keer dat uw werkgever u oproept, heeft u recht op minimaal 3 uur loon. Ook als u maar 1 uur werkt." | Law: BW 7:628a lid 1: "voor iedere periode van minder dan drie uur waarin hij arbeid heeft verricht, recht op het loon ... indien hij drie uur arbeid zou hebben verricht" | 6 Nov 2026 | Until the 1 Jan 2028 change; re-check |
 | wml-2026-2 | Minimumloon per uur, bruto: 15 jaar € 4,50; 16 jaar € 5,17; 17 jaar € 5,92; 18 jaar € 7,50. | [Rijksoverheid, bedragen minimumloon 2026](https://www.rijksoverheid.nl/onderwerpen/minimumloon/bedragen-minimumloon/bedragen-minimumloon-2026) (page date 6 Nov 2026, 12:26 UTC; amounts re-read, unchanged; "In de tabellen staan brutobedragen") | [Government.nl, minimum wage amounts](https://www.government.nl/topics/minimum-wage/minimum-wage-amounts) (page date 17 Jun 2026) | 6 Nov 2026 | **Valid 1 Jul 2026 to 31 Dec 2026.** Changes 1 Jan 2027. |
 | wml-2026-1 | Distractor only: 17 jaar € 5,81 (16 jaar € 5,07, 18 jaar € 7,36). | Rijksoverheid bedragen 2026 | Government.nl amounts | 6 Nov 2026 | Valid 1 Jan 2026 to 30 Jun 2026 (expired) |
-| wml-leeftijd | Het minimumloon hangt af van je leeftijd; je werkgever betaalt minstens het bedrag voor jouw leeftijd. | Rijksoverheid bedragen 2026 (table by age) | Government.nl amounts (table by age) | 6 Nov 2026 | Ongoing |
+| wml-leeftijd | Het minimumloon hangt af van je leeftijd; je werkgever betaalt minstens het bedrag voor jouw leeftijd; vanaf je verjaardag geldt het bedrag voor je nieuwe leeftijd (explanation 2.1, teacher note kamer 2). | Rijksoverheid bedragen 2026 (table by age; re-read 7 Nov 2026: 17 jaar € 5,92 from 1 juli to 31 december 2026) | Government.nl amounts (table by age); law: [Besluit minimumjeugdloon](https://wetten.overheid.nl/BWBR0003599/2024-01-01) art. 1 and 2 (version from 1 Jan 2024, read on 7 Nov 2026 as the official BWB XML of BWBR0003599): the rate is set per age group, "de 17-jarigen: 39½", so on the birthday the worker moves to the next group; 39,5% matches € 5,92 | 6 Nov 2026 (birthday rule 7 Nov 2026) | Ongoing |
 | vakantiegeld | Tabel kamer 2: bedragen zonder vakantiegeld; daarnaast minstens 8% vakantiegeld. | Law: [Wet minimumloon art. 15 lid 1](https://wetten.overheid.nl/BWBR0002638/2026-07-01) (wetten.overheid.nl, version 1 Jul 2026): "recht op een vakantiebijslag ten minste tot een bedrag van 8% van zijn ten laste van de werkgever komende loon"; the minimumloon itself is art. 8 | Rijksoverheid bedragen 2026: the table gives the minimumloon as brutobedragen and lists no holiday pay | 6 Nov 2026 | No end date known |
 | wml-2027 | Teacher note only: euro amounts per 1 Jan 2027 (15: € 4,59; 16: € 6,12; 17: € 7,65; 18: € 9,56; 19: € 11,47; 20: € 13,38; 21+: € 15,29). | [Rijksoverheid, bedragen minimumloon 2027](https://www.rijksoverheid.nl/themas/werk/minimumloon/bedragen-minimumloon/bedragen-minimumloon-2027) (page date 6 Nov 2026, 12:16 UTC; re-read in this revision, same amounts) | [Rijksoverheid nieuws, hoger minimumjeugdloon vanaf 2027](https://www.rijksoverheid.nl/actueel/nieuws/2026/04/17/hoger-minimumjeugdloon-vanaf-2027) (17 Apr 2026): percentages 16: 40%, 17: 50%, 18: 62,5%, 19: 75%, 20: 87,5%; the euro amounts match them | 6 Nov 2026 | From 1 Jan 2027; no end date on the page. Not in any question. |
 | onderbetaald-stappen | Te weinig loon: spreek eerst je werkgever aan; lost hij het niet op, doe een melding bij de Nederlandse Arbeidsinspectie. | [Rijksoverheid, wat kan ik doen als ik minder loon krijg dan het wettelijk minimumloon](https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/minimumloon/wat-kan-ik-doen-als-ik-minder-loon-krijg-dan-het-wettelijk-minimumloon) (page date 21 Jan 2026): "Spreek eerst uw werkgever hierop aan."; "Komt u er met uw werkgever niet uit, dan kunt u terecht bij de Nederlandse Arbeidsinspectie." | [Government.nl, less than the minimum wage](https://www.government.nl/topics/minimum-wage/less-than-the-minimum-wage) (page date 5 Feb 2024) | 6 Nov 2026 | No end date known |
@@ -584,10 +585,10 @@ All pages read on **6 Nov 2026** (the fact check B rows re-read in this revision
 | rust-12 | 16 en 17 jaar: elke 24 uur minstens 12 uur achter elkaar vrij, met daarin 23:00 tot 06:00 uur. Teacher note: school de volgende dag om 08:30, dan werk om 20:30 klaar. | Rijksoverheid hoeveel pauze 16 of 17 jaar (table "Rusttijden jongeren van 16 en 17 jaar"): "Minimum dagelijkse rust 12 uur" | Law: Arbeidstijdenwet art. 5:3 lid 1 ("een onafgebroken rusttijd ... van ten minste 12 uren in elke aaneengesloten periode van 24 uren") and lid 3 (the period starts "op het eerste tijdstip van de dag, waarop de werknemer arbeid verricht"); art. 4:4 lid 2 (school is arbeidstijd). The 20:30 example is arithmetic from these articles (08:30 min 12 uur). | 6 Nov 2026 | No end date known |
 | max-dienst | 16 en 17 jaar: maximaal 9 uur per dienst, pupil wording "per dag" (45 per week, gemiddeld 40 over 4 weken: teacher note). | Rijksoverheid hoeveel uur 16 of 17 jaar (table: 9 uur per dienst, 45 per week, 160 per 4 weken) | Law: Arbeidstijdenwet art. 5:7 lid 1 (wetten.overheid.nl, geldend van 1 juli 2025 tot heden); art. 1:7 ("dienst": between two rests of at least 8 uren) | 6 Nov 2026 | No end date known |
 | schooltijd | Schooltijd telt mee als arbeidstijd, de pauzes op school inbegrepen. | Rijksoverheid hoeveel uur 16 of 17 jaar: "Schooltijd telt ook mee als arbeidstijd." | Law: Arbeidstijdenwet art. 4:4 lid 2: "de onderbrekingen inbegrepen, als arbeidstijd"; NLA BIM 2017 | 6 Nov 2026 | No end date known |
-| pauze | Meer dan 4,5 uur werken: minstens een half uur pauze, zo nodig in twee keer 15 minuten. | Rijksoverheid hoeveel pauze 16 of 17 jaar: "meer dan 4,5 uur werkt, heb je recht op een half uur pauze" (names a collectieve regeling for the split) | Law: Arbeidstijdenwet art. 5:4 lid 1: "ten minste 30 minuten, die zonodig kan worden gesplitst in pauzes van elk ten minste 15 minuten" (no collectieve regeling for jeugdigen) | 6 Nov 2026 | No end date known |
+| pauze | Meer dan 4,5 uur werken: minstens een half uur pauze, zo nodig in twee keer 15 minuten. | Rijksoverheid hoeveel pauze 16 of 17 jaar: "meer dan 4,5 uur werkt, heb je recht op een half uur pauze" (names a collectieve regeling for the split) | Law: Arbeidstijdenwet art. 5:4 lid 1: "ten minste 30 minuten, die zonodig kan worden gesplitst in pauzes van elk ten minste 15 minuten" (no collectieve regeling for jeugdigen; re-read 7 Nov 2026 in the BWB XML of BWBR0007671, version from 1 Jul 2025) | 6 Nov 2026 | No end date known |
 | korting-een | Loonheffingskorting bij één werkgever tegelijk; bij twee krijg je te veel korting en moet je waarschijnlijk bijbetalen. | [Belastingdienst, loonheffingskorting met een bijbaan](https://www.belastingdienst.nl/wps/wcm/connect/nl/jongeren/content/loonheffingskorting-met-een-bijbaan) (page date 17 Mar 2026): "Vraag dan bij 1 werkgever de loonheffingskorting aan." | [Belastingdienst, loonheffingskorting met meerdere inkomens](https://www.belastingdienst.nl/wps/wcm/connect/nl/werk-en-inkomen/content/loonheffingskorting-meerdere-inkomens) (page date 5 Aug 2026): "op maximaal 1 inkomen" | 6 Nov 2026 | No end date known |
 | terug-aangifte | Te veel betaalde belasting vraag je na afloop van het jaar terug met een aangifte (app of Mijn Belastingdienst); geen bedrag beloven. | [Belastingdienst, kan ik belasting terugvragen](https://www.belastingdienst.nl/wps/wcm/connect/nl/jongeren/content/kan-ik-belasting-terugvragen) (page date 8 Sep 2026): "na afloop van het jaar terugkrijgen via de aangifte" | [Belastingdienst, hoeveel jaar terug belastingaangifte doen](https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/hoe_werkt_inkomstenbelasting/aangifte_doen/hoeveel-jaar-terug-belastingaangifte-doen) (page date 9 Jun 2026) | 6 Nov 2026 | No end date known |
-| vijf-jaar | Kreeg je geen brief dat je aangifte moet doen? Dan kan aangifte tot 5 jaar na afloop van een jaar: over 2026 tot en met 2031 (pupil rule card kamer 4). | Belastingdienst hoeveel jaar terug (page date 9 Jun 2026, re-read): "Hebt u geen bericht gehad dat u aangifte moet doen voor de inkomstenbelasting? Dan kunt u dat tot 5 jaar terug doen. In 2026 kunt u dus nog aangifte doen over 2021."; table: 2025 "31 december 2030" | Belastingdienst jongeren terugvragen: "Je kunt tot 5 jaar na afloop van een jaar aangifte doen" | 6 Nov 2026 | No end date known |
+| vijf-jaar | Kreeg je geen bericht dat je aangifte moet doen? Dan kan aangifte tot 5 jaar na afloop van een jaar: over 2026 tot en met 2031 (pupil rule card kamer 4). | Belastingdienst hoeveel jaar terug (page date 9 Jun 2026, re-read): "Hebt u geen bericht gehad dat u aangifte moet doen voor de inkomstenbelasting? Dan kunt u dat tot 5 jaar terug doen. In 2026 kunt u dus nog aangifte doen over 2021."; table: 2025 "31 december 2030" | Belastingdienst jongeren terugvragen: "Je kunt tot 5 jaar na afloop van een jaar aangifte doen"; teacher note only: [Belastingdienst, moet ik aangifte inkomstenbelasting doen](https://www.belastingdienst.nl/wps/wcm/connect/nl/belastingaangifte/content/moet_ik_aangifte_doen) (page date 2 Mar 2026, read 7 Nov 2026): without a letter you must still file when you owe more than the aanslaggrens (€ 58 for 2025) | 6 Nov 2026 (aanslaggrens 7 Nov 2026) | No end date known |
 
 Word meanings without a rule: oproepen, dienst, pauze, studiedag, jaaropgaaf, ingehouden, aangifte, brutoloon, vakantiegeld and loonheffing (the last three as in content/SHARED_EXPLANATIONS.md and ESC-MAAND).
 
@@ -596,11 +597,19 @@ Word meanings without a rule: oproepen, dienst, pauze, studiedag, jaaropgaaf, in
 1. **2027 youth wage.** The euro amounts are on the Rijksoverheid page "Bedragen minimumloon 2027" (page date 6 Nov 2026) and match the percentages of the news item of 17 Apr 2026. The existing teacher text elsewhere in the project says only 18, 19 and 20 rise; Rijksoverheid says 16 to 20. That text is outside this spec and needs a fix there.
 2. **Night, rest and school time.** Every rule is in the Arbeidstijdenwet (art. 1:7, 4:4, 5:3, 5:4, 5:7, version geldend van 1 juli 2025 tot heden). The pupil wording "9 uur per dag" simplifies "per dienst". Neither source gives the exact worked example of 3.2 or the 20:30 example; both are arithmetic from the articles.
 3. **Left out, single source or unverified:** the 1 Jan 2028 change to on-call contracts (only Ondernemersplein; teacher note only), "melden mag anoniem" (only government.nl), the jaaropgaaf label "loonbelasting" (only Belastingdienst jongeren), the notice period (opzegtermijn, not checked), DigiD for the aangifte, and the date from which the 2026 aangifte can be filed (not on the two Belastingdienst pages read).
-4. **Birthday switch.** No official page read says on which day a higher youth rate starts; Wet minimumloon art. 7 lid 1 ("heeft bereikt") concerns 21 and older, and the youth-wage decree was not found on wetten.overheid.nl. Room 2 avoids it: November is a whole month at 17.
+4. **Birthday switch (solved in round 2).** Besluit minimumjeugdloon art. 1 and 2 set the youth rate per age group, so the new rate applies once you have the new age. The Rijksoverheid page named by check B round 2 (wanneer minimumloon) could not be opened on 7 Nov 2026; the rule rests on the decree and the 2026 table.
 5. **Small issues:** the Rijksoverheid table shows "€ 7,50<" for 18 jaar (stray character; government.nl gives € 7.50). Ondernemersplein pages show no date. The fictional jaaropgaaf amounts are not a real calculation; real withholding at this income may well be € 0.
 6. **Not measured:** readability (no Flesch-Douma score yet) and timing (the 27 minutes are not timed with real pupils; see the lesplan spec note).
 
 ## Changelog
+
+**Round 2 (ChatGPT, 7 Nov).** Findings 1 to 6 of `qa/checkB/round2/eerste-bijbaan.md`, each checked by me on 7 Nov 2026. Code stays **3521**; no digit, option or right answer changed. Two pages could not be opened (permission request not answered): Rijksoverheid "wanneer minimumloon" and Belastingdienst "hoeveel jaar terug belastingaangifte doen"; decisions below use the other sources named.
+- R2-1 (ERROR, 4.4 situation, explanation, Antwoordblad): applied adjusted. The 5-year rule holds only without a bericht (Belastingdienst "hoeveel jaar terug", quoted in row `vijf-jaar` from the 6 Nov reading: "Hebt u geen bericht gehad ..."; its table gives 2025: "31 december 2030"). Belastingdienst "Moet ik aangifte inkomstenbelasting doen?" (https://www.belastingdienst.nl/wps/wcm/connect/nl/belastingaangifte/content/moet_ik_aangifte_doen, page date 2 Mar 2026, read 7 Nov 2026): without a letter you must file if you owe more than the aanslaggrens. New situation 4.4: "Je hebt geen bericht gekregen dat je aangifte moet doen. Je wilt zelf aangifte doen, om belasting terug te vragen." ("zelf" instead of "vrijwillig", B1.) Explanation: "Zonder bericht kun je tot 5 jaar na afloop van een jaar aangifte doen. Over 2026 kan dat dus tot en met 31 december 2031." Antwoordblad "Waarom": "Geen bericht gekregen: tot 5 jaar na afloop van 2026." Answer 2031 and digit 1 unchanged.
+- R2-2 (RISK, regel r3 kamer 4, teacher note): applied. r3 now "Kreeg je geen bericht dat je aangifte moet doen?", the Belastingdienst's own word; also in the retry pointer and row `vijf-jaar`. Teacher note adds: "Ook zonder bericht moet je aangifte doen als je meer moet bijbetalen dan de aanslaggrens." (source as R2-1; no amount, it changes yearly).
+- R2-3 (ERROR, internal rooster check, spec only): applied. Arbeidstijdenwet art. 1:7 lid 1 onder e and k (BWB XML of BWBR0007671, version from 1 Jul 2025; https://wetten.overheid.nl/BWBR0007671/2025-07-01): a pauze is no arbeidstijd. Week now 26 + 2 + 2 + 4,5 + 5,5 = 40 uur; with the woensdag shift at most 42 uur. Not on any pupil or teacher screen; code unaffected.
+- R2-4 (RISK, kamer 2 birthday; reopens B-4): applied. Checked first: Sam is born 20 oktober 2009 (spec cast, contract c2), so 17 from 20 oktober 2026; Rijksoverheid "Bedragen minimumloon 2026" (re-read 7 Nov 2026): 17 jaar € 5,92 from 1 juli to 31 december 2026. The checker's Rijksoverheid page could not be opened; instead Besluit minimumjeugdloon art. 1 and 2 (BWB XML of BWBR0003599, version from 1 Jan 2024; https://wetten.overheid.nl/BWBR0003599/2024-01-01) set the rate per age group ("de 17-jarigen: 39½"), which fits € 5,92. Explanation 2.1 now: "Vanaf je verjaardag geldt het minimumloon voor je nieuwe leeftijd: minstens € 5,92 per uur. Wachten tot januari mag niet." Teacher note kamer 2 adds the checker's two sentences. Uncertainty 4 replaced by a note that it is solved. New source `bmjl` on 2.1; row `wml-leeftijd` updated. Not put in rule card r1, so the card stays short.
+- R2-5 (RISK, kamer 1, 3-hour rule; follows B-2): applied. BW 7:628a lid 1 (BWB XML of BWBR0005290, version from 8 Oct 2026): pay for 3 hours for every period under 3 hours worked; Rijksoverheid oproepkrachten as in row `oproep-3uur` (6 Nov reading, not re-opened). Put in explanation 1.3, shown only after the answer, so the B-2 reason (a second route to "3 uur") no longer holds. Explanation 1.3: "Ilse zegt binnen 4 dagen af, dus je krijgt loon over alle 3 uur. Bij een nulurencontract krijg je per oproep minstens 3 uur loon, ook als je korter werkt." (2 sentences, 28 words, so the old "2 dagen van tevoren" was shortened.)
+- R2-6 (RISK, 3.3 explanation, teacher note kamer 3): applied adjusted. Arbeidstijdenwet art. 5:4 lid 1 (same XML): "ten minste 30 minuten, die zonodig kan worden gesplitst in pauzes van elk ten minste 15 minuten", no cao condition. The PUC page named by the checker was not opened; the law text was read directly. Second sentence now "Zo nodig mag die pauze in twee delen van minstens 15 minuten." ("zo nodig" kept from the law, which the checker's wording drops). Teacher note cites "Arbeidstijdenwet, artikel 5:4 lid 1".
 
 **6 Nov 2026, third revision: gate round 2 (`qa/gate_round2.md`).** Code stays **3521**; no answer, option or digit changed.
 - Lesplan row Stop: named the real buttons ("Stop de escape" for the teacher; "We stoppen", then "Naar de eindcheck" for pupils, as the engine shows them). The teacher reads the digits from the printed answer sheet; no digits on the open plan.
