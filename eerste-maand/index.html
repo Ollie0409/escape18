@@ -895,6 +895,23 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
 .p-tell-t{font:700 clamp(22px,2.1vw,40px)/1.35 var(--body);overflow-wrap:anywhere}
 .p-tell-ask{display:flex;flex-direction:column;gap:6px;padding-left:1.3em}.p-tell-read{font-weight:700;color:var(--teal)}
 @media (forced-colors:active){.rd-hl,.esc-zin-p.rd-hl{outline:3px solid Highlight}mark.rd-mark,.t-tell mark,.p-tell mark{forced-color-adjust:none;background:Mark;color:MarkText}.esc-card.rd-off,.btn.rd-off{border:2px dashed GrayText;color:GrayText}.rd-bar span{forced-color-adjust:none;background:Highlight}}
+/* D38: Klasresultaten, the local record line, the optional confidence and topic taps */
+.t-res{border:3px solid var(--teal)}
+.t-res-lead{font:700 clamp(18px,1.7vw,23px)/1.3 var(--body);margin:0}
+#tres-body{display:flex;flex-direction:column;gap:14px}#tres-body:empty{display:none}
+.t-res .t-room p{margin:0}
+.t-resno{margin:0}
+.t-dev{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.esc-conf,.esc-wish{border:0;padding:0;margin:0 0 12px}.esc-wish{margin:12px 0}
+.esc-conf legend,.esc-wish legend{font-weight:700;margin-bottom:6px}
+.esc-conf-k{display:flex;flex-wrap:wrap;gap:8px}
+.esc-wish-k{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px}
+.esc-conf-b,.esc-wish-b{min-height:44px;padding:6px 14px;border-radius:12px;border:2px solid var(--line);background:var(--panel);color:var(--ink);font:700 15px/1.25 var(--body);cursor:pointer;text-align:left}
+.esc-conf-b:hover,.esc-wish-b:hover{border-color:var(--teal)}
+.esc-conf-b[aria-pressed="true"],.esc-wish-b[aria-pressed="true"]{background:var(--sun);border-color:var(--sun);color:var(--sun-ink)}
+.esc-conf-b:focus-visible,.esc-wish-b:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+@media (forced-colors:active){.esc-conf-b[aria-pressed="true"],.esc-wish-b[aria-pressed="true"]{border:4px double Highlight}}
+@media print{.t-res,.t-resno,.t-dev{display:none!important}}
 @media print{
   @page{size:A4;margin:12mm 14mm}
   html:has(.tplan),body:has(.tplan){background:#fff}
@@ -1036,7 +1053,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
 (function (g) {
   'use strict';
   const E18 = g.E18 = g.E18 || {};
-  const VERSIONS = { build: 'E18-D37', content: 'C21', save: 1 }; // D37 (7 Nov): 2027 content update: VALID_UNTIL 2027-07-31 and the Herhaling payslip h-loon at € 10,00 an hour (above the 2027 minimum for 18 years); no room, question, answer key, option id or digit changed. D36 (7 Nov): school-test fixes (teacher screen and Projectiemodus layout, live time-up notice, honest feedback message); no room, question, answer key or digit changed. D35 (7 Nov): who-runs-it, data-location and licence wording only (the About card, a licence line in the teacher footer); no room, question, answer key, option id, digit or the code 1725 changed. D34 (6 Nov): lesson 1 to the round-2 classroom standard (stop flow, plan with stop and reserve, check forms A and B; DECISIONS.md D-036). D33 (6 Nov): fixes from the 4 November adult and teacher tests (room 2 comparison line, numerus fixus and selectie in room 4's word line, a closing question, a one-page answer sheet, the rooms on paper) and anonymous results logging (src/e18log.js, LOGGING_SPEC.md v2, off unless config.js sets an endpoint). Texts only in the rooms; no question, option id, answer key, digit or the code 1725 changed and no action was added, so content stays C21 (as F7 and D30 did for texts, D-023). D32-candidate (3 Nov): D31b-candidate plus F10 (funder views in the pilot report tool), F9 (Herhaling na 4 weken, its own question set H1) and F8 (Eerst lezen), merged in that order (INTEGRATION.md, "D32"); no room, answer key, option id or the code 1725 changed, so content stays C21. D31b-candidate (3 Nov): D31-candidate plus F7, merged afterwards (INTEGRATION.md, "F7 merge"); content stays C21. D31-f8 (3 Nov, FEATURE_F8.md): Eerst lezen: in the escape the answers wait until the pair opened the question's document and read it a few seconds; "Waar staat dat?" marks the line after a wrong answer; the teacher screen and Projectiemodus get "Welke zin verraadde het?" per room and the lesverslag an optional show-of-hands count. Screen memory only, nothing in the action log, saves or storage; no room, question, answer key, option id, digit or the code 1725 changed, so content stays C21. D31-f9 (3 Nov, feature F9, FEATURE_F9.md): Herhaling na 4 weken (src/herhaling.js), additive: no room, answer key, option id or code changes and nothing enters a run or a save, so content stays C21 and save format 1; the follow-up's own question set is versioned apart as H1 (DECISIONS.md D-031-f9). D31-candidate (3 Nov): integration build of the feature branches (INTEGRATION.md); content stays C21 because no feature changes a room, answer key, option id or the code 1725. D31-f7 (3 Nov, F7): readability pass on ESC-MAAND (tools/readability.js, READABILITY.md): 15 flagged strings rewritten in plain Dutch, one-line 'Moeilijke woorden' hints under the letter, payslip, sms and Studielink list, and zorgtoeslag explained where it first shows; texts only, answer keys, option ids, digits and code 1725 unchanged, so content stays C21 (D-023). D31-f3 (3 Nov, feature F3): the close becomes "Mijn 18-plan" (src/plan18.js), an if-then plan per pupil after the lock with a card and an optional calendar file; screen memory only, nothing stored or sent. D31-f4 (3 Nov, FEATURE_F4.md): teacher screen only: "Klaar in 5 minuten" (five preparation steps, a bereidingstijd that can go into the lesverslag), "Probleem?", the Projectiemodus and a quick-start box on the printed plan; no pupil content change, so C21 stays. D31-f1 (3 Nov, feature branch F1, FEATURE_F1.md): a Startcheck before room 1 and an Eindcheck after the lock, made of existing room questions (same ids, options and answers). The check is a new optional action in the ESC-MAAND log: every C21 run without it replays exactly, so content stays C21 (as D24 did for the short lesson, D-023); a run with a check cannot be loaded by E18-D30 (unknown action), which fails loudly and is never rescored. D31-f2 (3 Nov): source freshness (src/freshness.js): every source of De les has a check date, the pupil's source links say when they were checked, the teacher screen lists every rule with its sources, the next check (January or July) and a printable upkeep checklist; tools/source-freshness.js fails on a rule with fewer than two sources or a check older than 7 months. No room, answer key or option id changed, so content stays C21. D30 (27 Oct): fixes from an AI persona walkthrough, each checked in the code first: room 3 asks for all signals in the plural and its digit names the first question (pupils counted the foreign number); room 2 digit text simplified; room 1 says 'Kies' not 'Tik'; numerus fixus explained on the list; the vwo curriculum fit no longer claims 4.5 eigen risico. Clue and prompt texts changed; answer keys, option ids and rooms unchanged, so content stays C21 (D-023). D29 merges an outside code review of D28 (ChatGPT, 25-26 Oct; every fix reproduced and retested here): Herhaling answers stayed visible because display:flex beat [hidden]; the short-lesson timer started at 30; a stale #les= kept a short lesson; a damaged save counter could overwrite progress; premium wording qualified (parents may pay). No answer key, option id or room changes, so C21 stays. D27 adds the Over en privacy screen and the fact-check link checker (no content change). D26 adds Nibud-competence fits on the teacher screen (no pupil content change). D25 embeds the fonts (no request to another server); no content change, so C21 stays. Before: D24 adds the short lesson as new ESC-MAAND variants and teacher-screen parts; no answer key or option id changed, so content stays C21 (D-023).
+  const VERSIONS = { build: 'E18-D38', content: 'C21', save: 1 }; // D38 (7 Nov): logging v3 (plan, reuse, ceil, conf, wish; src/e18log.js), the Klasresultaten panel after the stop and the local reuse record (src/classres.js), optional confidence and topic taps; no room, question, answer key, option id or digit changed. D37 (7 Nov): 2027 content update: VALID_UNTIL 2027-07-31 and the Herhaling payslip h-loon at € 10,00 an hour (above the 2027 minimum for 18 years); no room, question, answer key, option id or digit changed. D36 (7 Nov): school-test fixes (teacher screen and Projectiemodus layout, live time-up notice, honest feedback message); no room, question, answer key or digit changed. D35 (7 Nov): who-runs-it, data-location and licence wording only (the About card, a licence line in the teacher footer); no room, question, answer key, option id, digit or the code 1725 changed. D34 (6 Nov): lesson 1 to the round-2 classroom standard (stop flow, plan with stop and reserve, check forms A and B; DECISIONS.md D-036). D33 (6 Nov): fixes from the 4 November adult and teacher tests (room 2 comparison line, numerus fixus and selectie in room 4's word line, a closing question, a one-page answer sheet, the rooms on paper) and anonymous results logging (src/e18log.js, LOGGING_SPEC.md v2, off unless config.js sets an endpoint). Texts only in the rooms; no question, option id, answer key, digit or the code 1725 changed and no action was added, so content stays C21 (as F7 and D30 did for texts, D-023). D32-candidate (3 Nov): D31b-candidate plus F10 (funder views in the pilot report tool), F9 (Herhaling na 4 weken, its own question set H1) and F8 (Eerst lezen), merged in that order (INTEGRATION.md, "D32"); no room, answer key, option id or the code 1725 changed, so content stays C21. D31b-candidate (3 Nov): D31-candidate plus F7, merged afterwards (INTEGRATION.md, "F7 merge"); content stays C21. D31-f8 (3 Nov, FEATURE_F8.md): Eerst lezen: in the escape the answers wait until the pair opened the question's document and read it a few seconds; "Waar staat dat?" marks the line after a wrong answer; the teacher screen and Projectiemodus get "Welke zin verraadde het?" per room and the lesverslag an optional show-of-hands count. Screen memory only, nothing in the action log, saves or storage; no room, question, answer key, option id, digit or the code 1725 changed, so content stays C21. D31-f9 (3 Nov, feature F9, FEATURE_F9.md): Herhaling na 4 weken (src/herhaling.js), additive: no room, answer key, option id or code changes and nothing enters a run or a save, so content stays C21 and save format 1; the follow-up's own question set is versioned apart as H1 (DECISIONS.md D-031-f9). D31-candidate (3 Nov): integration build of the feature branches (INTEGRATION.md); content stays C21 because no feature changes a room, answer key, option id or the code 1725. D31-f7 (3 Nov, F7): readability pass on ESC-MAAND (tools/readability.js, READABILITY.md): 15 flagged strings rewritten in plain Dutch, one-line 'Moeilijke woorden' hints under the letter, payslip, sms and Studielink list, and zorgtoeslag explained where it first shows; texts only, answer keys, option ids, digits and code 1725 unchanged, so content stays C21 (D-023). D31-f3 (3 Nov, feature F3): the close becomes "Mijn 18-plan" (src/plan18.js), an if-then plan per pupil after the lock with a card and an optional calendar file; screen memory only, nothing stored or sent. D31-f4 (3 Nov, FEATURE_F4.md): teacher screen only: "Klaar in 5 minuten" (five preparation steps, a bereidingstijd that can go into the lesverslag), "Probleem?", the Projectiemodus and a quick-start box on the printed plan; no pupil content change, so C21 stays. D31-f1 (3 Nov, feature branch F1, FEATURE_F1.md): a Startcheck before room 1 and an Eindcheck after the lock, made of existing room questions (same ids, options and answers). The check is a new optional action in the ESC-MAAND log: every C21 run without it replays exactly, so content stays C21 (as D24 did for the short lesson, D-023); a run with a check cannot be loaded by E18-D30 (unknown action), which fails loudly and is never rescored. D31-f2 (3 Nov): source freshness (src/freshness.js): every source of De les has a check date, the pupil's source links say when they were checked, the teacher screen lists every rule with its sources, the next check (January or July) and a printable upkeep checklist; tools/source-freshness.js fails on a rule with fewer than two sources or a check older than 7 months. No room, answer key or option id changed, so content stays C21. D30 (27 Oct): fixes from an AI persona walkthrough, each checked in the code first: room 3 asks for all signals in the plural and its digit names the first question (pupils counted the foreign number); room 2 digit text simplified; room 1 says 'Kies' not 'Tik'; numerus fixus explained on the list; the vwo curriculum fit no longer claims 4.5 eigen risico. Clue and prompt texts changed; answer keys, option ids and rooms unchanged, so content stays C21 (D-023). D29 merges an outside code review of D28 (ChatGPT, 25-26 Oct; every fix reproduced and retested here): Herhaling answers stayed visible because display:flex beat [hidden]; the short-lesson timer started at 30; a stale #les= kept a short lesson; a damaged save counter could overwrite progress; premium wording qualified (parents may pay). No answer key, option id or room changes, so C21 stays. D27 adds the Over en privacy screen and the fact-check link checker (no content change). D26 adds Nibud-competence fits on the teacher screen (no pupil content change). D25 embeds the fonts (no request to another server); no content change, so C21 stays. Before: D24 adds the short lesson as new ESC-MAAND variants and teacher-screen parts; no answer key or option id changed, so content stays C21 (D-023).
   const COMPATIBLE_CONTENT = ['C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C20', 'C21']; // In order, oldest first. C21 changes the escape ESC-MAAND after review D22 (answer keys, option ids, room order, code 7135 became 1725): a mission that declares contentSince refuses its runs from an older content version loudly, like C12 did for every mission, and is never rescored silently (D-022); saves of C12 to C20 without an ESC-MAAND run still load. C20 adds the escape run ESC-MAAND and the one-retry rule in practice exercises (a retry is only sent with retry: true, so older practice saves replay unchanged). C12 changed answer keys after the content review (D-015); older saves are refused, never silently rescored. C13 only skips F01's pressure scene when the order is already done (a C12 run that answered it there fails loudly on import). C14 only adds Life Mode chapter 1. C16 adds Life Mode chapters 2 and 3; chapter 1 replays unchanged. C19 adds six practice exercises; C18 only adds the practice bank (new missions); both read older saves unchanged. C17 adds three starting profiles as chapter-1 variants; basis runs replay unchanged and carried data without a profile continues as basis. C15 adds its optional dating thread and review fixes (a C14 payslip answer that reported a missing shift after choosing 'nothing missing' now fails loudly).
   const MISSIONS = E18.MISSIONS = E18.MISSIONS || {};
   // D31-f2: the date this build was made; bump it with VERSIONS.build. The page computes the source status (op tijd / controle nodig) from it,
@@ -4258,14 +4275,14 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
 
   // ----- 2. Een brief van je zorgverzekeraar (LIFE-C01 rules; the 25 October request and € 150 are fictional) -----
   const LETTER = [['s1', 'Gefeliciteerd met je 18e verjaardag!'], ['s2', 'Vanaf nu ben je zelf verzekeringnemer van je zorgverzekering.'], ['s3', 'Je betaalt de premie zelf vanaf de 1e van de maand na je verjaardag.'], ['s4', 'Je premie is € 150 per maand.'],
-    ['s5', 'Geef uiterlijk 25 oktober 2026 in Mijn Kompas door hoe je wilt betalen: automatisch of zelf overmaken.'], ['s6', 'Wil je naar een andere verzekeraar? Dat kan tot een maand na je verjaardag.'], ['s7', 'Met vriendelijke groet, Klantenservice Kompas']];
-  const WHO_BRIEF = 'Jij · Zorgverzekeraar Kompas', SITU_BRIEF = 'Je bent op 12 oktober 2026 18 geworden. Je bent verzekerd bij Zorgverzekeraar Kompas, de verzekeraar van je ouders. Kompas stuurt je deze brief.';
+    ['s5', 'Geef uiterlijk 25 oktober 2026 in Mijn Wadlicht door hoe je wilt betalen: automatisch of zelf overmaken.'], ['s6', 'Wil je naar een andere verzekeraar? Dat kan tot een maand na je verjaardag.'], ['s7', 'Met vriendelijke groet, Klantenservice Wadlicht']];
+  const WHO_BRIEF = 'Jij · Zorgverzekeraar Wadlicht', SITU_BRIEF = 'Je bent op 12 oktober 2026 18 geworden. Je bent verzekerd bij Zorgverzekeraar Wadlicht, de verzekeraar van je ouders. Wadlicht stuurt je deze brief.';
   const BRIEF = { id: 'OEF-BRIEF', title: 'Een brief van je zorgverzekeraar', minutes: '2 tot 3',
-    fic: 'Verzonnen: Zorgverzekeraar Kompas, de brief en de premie. De regels in de uitleg zijn echt.',
+    fic: 'Verzonnen: Zorgverzekeraar Wadlicht, de brief en de premie. De regels in de uitleg zijn echt.',
     likes: [['lezen', 'Stukken lezen'], ['regelen', 'Dingen regelen']],
-    docs: { brief: { title: 'Brief van Zorgverzekeraar Kompas', sentences: LETTER } },
+    docs: { brief: { title: 'Brief van Zorgverzekeraar Wadlicht', sentences: LETTER } },
     steps: [
-      { id: 'actie', kind: 'sentence', who: WHO_BRIEF, title: 'Wat moet je doen?', situ: SITU_BRIEF, docTitle: 'Brief van Zorgverzekeraar Kompas',
+      { id: 'actie', kind: 'sentence', who: WHO_BRIEF, title: 'Wat moet je doen?', situ: SITU_BRIEF, docTitle: 'Brief van Zorgverzekeraar Wadlicht',
         prompt: 'Welke zin vraagt jou iets te doen?', sentences: LETTER, correct: 's5', nudge: 'Zoek de zin die zegt wat jij moet doen, niet wat je mag doen.',
         explain: 'Alleen zin 5 vraagt iets van jou. Zin 6 is een keuze, geen opdracht. De andere zinnen geven informatie.',
         sources: [], none: 'Dit haal je uit de brief zelf. Er is geen regel voor nodig.', remember: 'Zoek in een brief eerst de zin die iets van jou vraagt.' },
@@ -4280,10 +4297,10 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
         explain: 'In deze brief staat de polis op jouw naam en betaal jij. Dat geldt niet voor iedereen: je ouders mogen de premie betalen en soms kun je op hun polis blijven.',
         sources: ['cbZorg', 'dt18'], remember: 'Vanaf de maand na je 18e verjaardag is premie verschuldigd. Je ouders mogen die betalen; soms kun je op hun polis blijven.' },
       { id: 'premie', kind: 'pick', who: WHO_BRIEF, title: 'Vanaf wanneer betaal je zelf?', docs: ['brief'],
-        situ: 'Je werd op 12 oktober 2026 18. Je hebt de brief van Kompas gelezen en je wilt bij Kompas blijven.',
+        situ: 'Je werd op 12 oktober 2026 18. Je hebt de brief van Wadlicht gelezen en je wilt bij Wadlicht blijven.',
         prompt: 'Vanaf welke datum betaal je zelf de premie?',
         options: [['1nov', '1 november 2026'], ['12okt', '12 oktober 2026, je verjaardag'], ['25okt', '25 oktober 2026'], ['1jan', '1 januari 2027']], correct: '1nov', nudge: 'Lees zin 3 en kijk wanneer je jarig bent.',
-        explain: 'Volgens deze brief betaal jij vanaf 1 november, de maand na je 18e verjaardag. Je ouders mogen de premie betalen. Geef Kompas door hoe de betaling wordt geregeld.',
+        explain: 'Volgens deze brief betaal jij vanaf 1 november, de maand na je 18e verjaardag. Je ouders mogen de premie betalen. Geef Wadlicht door hoe de betaling wordt geregeld.',
         sources: ['cbZorg', 'dt18'], remember: 'Premie is verschuldigd vanaf de maand na je 18e verjaardag. Spreek af wie betaalt.' }
     ] };
 
@@ -4609,18 +4626,18 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   // ----- 8. Zorgtoeslag (Rijksoverheid, Dienst Toeslagen, Consumentenbond). No amounts and no exact deadline: sources disagree on the date. -----
   const WHO_TOESLAG = 'Jij · bijbaan bij Bakkerij Korrel';
   const TOESLAG = { id: 'OEF-TOESLAG', title: 'Zorgtoeslag', minutes: '2 tot 3',
-    fic: 'Verzonnen: Bakkerij Korrel, Zorgverzekeraar Kompas en Lotte. De regels in de uitleg zijn echt.',
+    fic: 'Verzonnen: Bakkerij Korrel, Zorgverzekeraar Wadlicht en Lotte. De regels in de uitleg zijn echt.',
     likes: [['regelen', 'Dingen regelen'], ['lezen', 'Stukken lezen']], docs: {},
     steps: [
       { id: 'wie', kind: 'pick', who: WHO_TOESLAG, title: 'Kun je zorgtoeslag krijgen?',
-        situ: 'Op 3 november 2026 word je 18 jaar. Je woont bij je ouders, werkt een paar uur per week bij Bakkerij Korrel en bent verzekerd bij Zorgverzekeraar Kompas.',
+        situ: 'Op 3 november 2026 word je 18 jaar. Je woont bij je ouders, werkt een paar uur per week bij Bakkerij Korrel en bent verzekerd bij Zorgverzekeraar Wadlicht.',
         prompt: 'Kun je zorgtoeslag krijgen, en vanaf wanneer?',
         options: [['dec', 'Misschien: als je inkomen en vermogen niet te hoog zijn, vanaf 1 december 2026'], ['nov', 'Misschien: als je inkomen en vermogen niet te hoog zijn, vanaf je verjaardag op 3 november 2026'], ['later', 'Misschien: als je inkomen en vermogen niet te hoog zijn, vanaf 1 januari 2027']], correct: 'dec',
         nudge: 'Kijk naar de maand waarin je 18 wordt, en naar de maand daarna.',
         explain: 'Zorgtoeslag kan als je 18 of ouder bent, een Nederlandse zorgverzekering hebt en je inkomen en vermogen niet te hoog zijn. Hij gaat in op de 1e van de maand nadat je 18 wordt: voor jou 1 december 2026.',
         sources: ['rijkToeslag', 'dt18'], remember: 'Zorgtoeslag kan vanaf de 1e van de maand nadat je 18 wordt, als je inkomen en vermogen niet te hoog zijn.' },
       { id: 'aanvragen', kind: 'pick', who: WHO_TOESLAG, title: 'Hoe vraag je het aan?',
-        situ: 'Je wilt op tijd zijn voor je zorgtoeslag vanaf december 2026. Zorgverzekeraar Kompas heeft je al een polis op je eigen naam gestuurd.',
+        situ: 'Je wilt op tijd zijn voor je zorgtoeslag vanaf december 2026. Zorgverzekeraar Wadlicht heeft je al een polis op je eigen naam gestuurd.',
         prompt: 'Hoe vraag je zorgtoeslag aan?',
         options: [['mijn', 'Zelf, online in Mijn toeslagen; je logt in met je DigiD'], ['verzekeraar', 'Je zorgverzekeraar doet het vanzelf zodra je 18 wordt en premie betaalt'], ['ouders', 'Je ouders vragen het voor je aan, met hun eigen DigiD']], correct: 'mijn',
         nudge: 'Gaat het vanzelf, en wie logt er in?',
@@ -4645,28 +4662,28 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   // ----- 9. Eigen risico (Rijksoverheid, Consumentenbond, Univé). € 385 is the 2026 amount; the treatment costs are fictional. -----
   // In the year you turn 18 only part of it applies, from the month after your birthday (Univé 18 jaar; Zvw art. 22, insurer conditions).
   // So the player turned 18 in December 2025: insured from 1 January 2026, the full 2026 amount applies (fact check 23 Oct 2026).
-  const WHO_RISICO = 'Jij · Zorgverzekeraar Kompas';
+  const WHO_RISICO = 'Jij · Zorgverzekeraar Wadlicht';
   const EIGEN = 38500, EERDER = 25000, NU = 50000;
   const RISICO = { id: 'OEF-RISICO', title: 'Eigen risico', minutes: '3 tot 4',
-    fic: 'Verzonnen: Zorgverzekeraar Kompas, je afspraken en de kosten van je behandelingen. Het eigen risico en de regels in de uitleg zijn echt.',
+    fic: 'Verzonnen: Zorgverzekeraar Wadlicht, je afspraken en de kosten van je behandelingen. Het eigen risico en de regels in de uitleg zijn echt.',
     likes: [['rekenen', 'Rekenen en controleren'], ['regels', 'Regels toepassen']], docs: {},
     steps: [
       { id: 'wat', kind: 'pick', who: WHO_RISICO, title: 'Wat is eigen risico?',
-        situ: 'Je werd in december 2025 18. Sinds 1 januari 2026 ben je zelf verzekerd bij Zorgverzekeraar Kompas, met alleen het verplichte eigen risico. Op je polis voor 2026 staat: "Verplicht eigen risico".',
+        situ: 'Je werd in december 2025 18. Sinds 1 januari 2026 ben je zelf verzekerd bij Zorgverzekeraar Wadlicht, met alleen het verplichte eigen risico. Op je polis voor 2026 staat: "Verplicht eigen risico".',
         prompt: 'Wat betekent dat?',
-        options: [['zelf', 'Een deel van je zorgkosten dat je per jaar eerst zelf betaalt'], ['premie', 'Het bedrag dat je elke maand aan premie betaalt voor je verzekering'], ['weigeren', 'Het risico dat Kompas je zorg helemaal niet vergoedt']], correct: 'zelf',
+        options: [['zelf', 'Een deel van je zorgkosten dat je per jaar eerst zelf betaalt'], ['premie', 'Het bedrag dat je elke maand aan premie betaalt voor je verzekering'], ['weigeren', 'Het risico dat Wadlicht je zorg helemaal niet vergoedt']], correct: 'zelf',
         nudge: 'Wie betaalt de eerste zorgkosten van het jaar?',
         explain: 'Vanaf 18 betaal je de eerste kosten van zorg uit de basisverzekering zelf, tot een maximum per jaar; daarna betaalt je verzekeraar. Je betaalt het alleen als je zorg gebruikt waarvoor het geldt.',
         sources: ['rijkRisico', 'cbRisico', 'uniRisico'], remember: 'Eigen risico: de eerste zorgkosten van het jaar betaal je zelf, daarna betaalt je verzekeraar.' },
       { id: 'huisarts', kind: 'pick', who: WHO_RISICO, title: 'Naar de huisarts',
-        situ: 'In maart 2026 ga je met keelpijn naar de huisarts. Je bent verzekerd bij Kompas en hebt dit jaar nog geen zorg gebruikt.',
+        situ: 'In maart 2026 ga je met keelpijn naar de huisarts. Je bent verzekerd bij Wadlicht en hebt dit jaar nog geen zorg gebruikt.',
         prompt: 'Gaat dit bezoek aan de huisarts van je eigen risico af?',
         options: [['nee', 'Nee: voor de huisarts geldt geen eigen risico'], ['ja', 'Ja: alle zorg gaat eerst van je eigen risico af'], ['later', 'Alleen als je daarna ook naar het ziekenhuis moet']], correct: 'nee',
         nudge: 'Niet alle zorg gaat van je eigen risico af. Hoe zit dat met de huisarts?',
         explain: 'Voor de huisarts en de huisartsenpost geldt geen eigen risico, en ook niet voor de verloskundige en de kraamzorg. Voor veel andere zorg uit de basisverzekering wel, zoals een behandeling in het ziekenhuis.',
         sources: ['rijkRisico', 'cbRisico', 'uniRisico'], remember: 'Voor de huisarts betaal je geen eigen risico; voor een behandeling in het ziekenhuis wel.' },
       { id: 'rest', kind: 'number', who: WHO_RISICO, title: 'Wat betaal je zelf?',
-        situ: `Je hebt bij Kompas alleen het verplichte eigen risico. In april 2026 had je een behandeling in het ziekenhuis van € ${EERDER / 100}; die betaalde je helemaal zelf. In september krijg je nog een ziekenhuisbehandeling van € ${NU / 100}.`,
+        situ: `Je hebt bij Wadlicht alleen het verplichte eigen risico. In april 2026 had je een behandeling in het ziekenhuis van € ${EERDER / 100}; die betaalde je helemaal zelf. In september krijg je nog een ziekenhuisbehandeling van € ${NU / 100}.`,
         prompt: `Hoeveel betaal je van die € ${NU / 100} zelf?`, hint: 'In euro, bijvoorbeeld 25 of 25,50.', correct: EIGEN - EERDER,
         nudge: `Het eigen risico is in 2026 € ${EIGEN / 100}. Hoeveel daarvan betaalde je al?`,
         explain: `Het verplichte eigen risico is in 2026 € ${EIGEN / 100}. Je betaalde al € ${EERDER / 100}, dus er is nog € ${EIGEN / 100} − € ${EERDER / 100} = € ${(EIGEN - EERDER) / 100} over. De rest van de € ${NU / 100} betaalt je verzekeraar.`,
@@ -4865,13 +4882,13 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
 
   // Pick options are written with the right answer last; the order the pupils see is a fixed shuffle per question (see SHOWN ORDER below).
 
-  // ----- Room 1, De brief en je DigiD. You turned 18 on 14 December 2026; Kompas and its letter are fictional (LIFE-C01 rules). -----
-  const LETTER = [['s1', 'Gefeliciteerd met je 18e verjaardag!'], ['s2', 'Vanaf nu ben je zelf verzekeringnemer bij Kompas.'], ['s3', 'Vanaf de 1e van de maand na je verjaardag betaal je de premie zelf.'],
-    ['s4', 'Je premie is € 142 per maand.'], ['s5', 'Geef uiterlijk 28 december 2026 in Mijn Kompas door hoe je wilt betalen.'], ['s6', 'Wil je naar een andere verzekeraar? Dat kan tot een maand na je verjaardag.'], ['s7', 'Met vriendelijke groet, Klantenservice Kompas']];
+  // ----- Room 1, De brief en je DigiD. You turned 18 on 14 December 2026; Wadlicht and its letter are fictional (LIFE-C01 rules). -----
+  const LETTER = [['s1', 'Gefeliciteerd met je 18e verjaardag!'], ['s2', 'Vanaf nu ben je zelf verzekeringnemer bij Wadlicht.'], ['s3', 'Vanaf de 1e van de maand na je verjaardag betaal je de premie zelf.'],
+    ['s4', 'Je premie is € 142 per maand.'], ['s5', 'Geef uiterlijk 28 december 2026 in Mijn Wadlicht door hoe je wilt betalen.'], ['s6', 'Wil je naar een andere verzekeraar? Dat kan tot een maand na je verjaardag.'], ['s7', 'Met vriendelijke groet, Klantenservice Wadlicht']];
   const START_MONTH = 1; // zorgtoeslag can start on 1 January 2027: the 1st of the month after the month you turn 18, the month of the first own premium
-  const ROOM_BRIEF = { id: 'brief', title: 'De brief en je DigiD', where: 'Zorgverzekeraar Kompas',
-    intro: 'Je bent op 14 december 18 geworden. Een dag later krijg je deze brief van je zorgverzekeraar Kompas.',
-    docs: { brief: { type: 'letter', from: 'Zorgverzekeraar Kompas', place: 'Zeestad, 15 december 2026', greeting: 'Beste verzekerde,', sentences: LETTER,
+  const ROOM_BRIEF = { id: 'brief', title: 'De brief en je DigiD', where: 'Zorgverzekeraar Wadlicht',
+    intro: 'Je bent op 14 december 18 geworden. Een dag later krijg je deze brief van je zorgverzekeraar Wadlicht.',
+    docs: { brief: { type: 'letter', from: 'Zorgverzekeraar Wadlicht', place: 'Zeestad, 15 december 2026', greeting: 'Beste verzekerde,', sentences: LETTER,
       plain: 'Verzekeringnemer: de verzekering staat op jouw naam. Premie: wat de verzekering per maand kost. Uiterlijk: op zijn laatst.' } }, // F7: the letter stays as it is; this line explains its three hard words
     qs: [
       { id: 'actie', short: 'Zin met een opdracht', kind: 'sentence', docs: [], prompt: 'Kies de zin die jou vraagt iets te doen.', sentences: LETTER, correct: 's5',
@@ -4882,7 +4899,8 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
         nudge: 'De datum hoort bij de zin die iets van je vraagt.', hint: 'Kijk in zin 5.',
         explain: 'Uiterlijk 28 december geef je door hoe je betaalt. Tot 14 januari, een maand na je verjaardag, kun je nog naar een andere verzekeraar.', sources: ['cbZorg', 'univeZorg18'] },
       { id: 'digid', short: 'Eerst regelen', kind: 'pick', docs: [], situ: 'Je wilt zorgtoeslag: geld als hulp bij de kosten van je zorgverzekering. Je hebt nog geen DigiD.', prompt: 'Wat regel je eerst?',
-        options: [['kompas', 'Zorgtoeslag aanvragen in Mijn Kompas'], ['wacht', 'Wachten op post van de Belastingdienst'], ['digid', 'Een DigiD aanvragen op DigiD.nl']], correct: 'digid',
+        // D38: the insurer is Wadlicht now (a real Kompas Verzekeringen exists); the option id 'kompas' stays, because ids are stored in runs, saves and logs.
+        options: [['kompas', 'Zorgtoeslag aanvragen in Mijn Wadlicht'], ['wacht', 'Wachten op post van de Belastingdienst'], ['digid', 'Een DigiD aanvragen op DigiD.nl']], correct: 'digid',
         nudge: 'Zorgtoeslag vraag je zelf online aan. Waarmee log je daar in?', hint: 'Zonder inlog kom je bij de overheid nergens binnen.',
         explain: 'Zorgtoeslag vraag je aan in Mijn toeslagen, met DigiD. De brief met je DigiD-code duurt een paar werkdagen: regel DigiD dus eerst.', sources: ['rijkToeslag', 'dtMijn', 'digidAanvr', 'rijkDigid'] },
       { id: 'premie', short: 'Zelf premie vanaf', kind: 'pick', docs: ['brief'], prompt: 'Vanaf welke datum betaal je zelf premie?',
@@ -4937,11 +4955,11 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     clue: 'het laatste cijfer van het bedrag dat je te weinig brutoloon kreeg. Kijk alleen naar de hele euro\'s.', clueDocs: ['loonstrook', 'saldo'], digit: DIGIT_LOON,
     remember: 'Leg je loonstrook naast je rooster. Kloppen de uren niet, dan kloppen brutoloon, vakantiegeld en nettoloon ook niet.' };
 
-  // ----- Room 3, Een verdacht berichtje "from Kompas". +44 7700 900xxx is a range reserved for fiction; .example can never be a real site. -----
+  // ----- Room 3, Een verdacht berichtje "from Wadlicht". +44 7700 900xxx is a range reserved for fiction; .example can never be a real site. -----
   // The threat ("anders stopt je zorgverzekering") is part of the haste sign, so a careful pair cannot count it twice (review D22 S2).
   // "Een onbekend nummer" is not offered as a sign: only Veilig Internetten names it, and with a caveat (review D22 S9; FACT_SOURCES.md).
   const NUMMER = '+44 7700 900318';
-  const SMS = 'Kompas: je premie van januari is niet betaald. Betaal binnen 24 uur € 142 via kompas-premie.example/betaal, anders stopt je zorgverzekering.';
+  const SMS = 'Wadlicht: je premie van januari is niet betaald. Betaal binnen 24 uur € 142 via wadlicht-premie.example/betaal, anders stopt je zorgverzekering.';
   const SIGNS = [['haast', 'Je moet binnen 24 uur betalen, anders stopt je verzekering'], ['naam', 'Het bericht noemt je eigen zorgverzekeraar'], ['link', 'Je moet betalen via een link'], ['tijd', 'Het bericht komt \'s avonds binnen']];
   const RED = ['haast', 'link'];
   const ROOM_SMS = { id: 'sms', title: 'Een verdacht berichtje', where: 'een onbekend nummer',
@@ -4953,10 +4971,10 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
         nudge: 'Kijk naar de tijdsdruk en naar hoe je moet betalen.', hint: 'Een naam die je kent, bewijst niet dat een bericht echt is.',
         explain: 'Haast met een dreiging en een betaallink zijn signalen. Een bekende naam bewijst niets: oplichters doen alsof ze een bedrijf zijn dat je kent.', sources: ['viSmishing', 'fhVerdacht', 'viHelpdesk'] },
       { id: 'doen', short: 'Wat je doet', kind: 'pick', docs: ['sms'], prompt: 'Wat doe je als je twijfelt?',
-        options: [['klik', 'Op de link tikken, maar niets invullen'], ['bel', 'Kompas bellen via het nummer in het sms\'je'], ['zelf', 'Zelf de site van Kompas opzoeken']], correct: 'zelf',
-        nudge: 'Gebruik niets uit het bericht zelf.', hint: 'Zoek zelf de weg naar Kompas.',
+        options: [['klik', 'Op de link tikken, maar niets invullen'], ['bel', 'Wadlicht bellen via het nummer in het sms\'je'], ['zelf', 'Zelf de site van Wadlicht opzoeken']], correct: 'zelf',
+        nudge: 'Gebruik niets uit het bericht zelf.', hint: 'Zoek zelf de weg naar Wadlicht.',
         explain: 'Tik niet op de link en antwoord niet: gebruik niets uit het bericht. Check het via een weg die je zelf opzoekt, zoals de officiële site.', sources: ['viSmishing', 'rijkPhishing', 'viHelpdesk'] },
-      { id: 'melden', short: 'Met het bericht', kind: 'pick', docs: ['sms'], situ: 'De echte site van Kompas zegt: niets te betalen.', prompt: 'Wat doe je met het bericht?',
+      { id: 'melden', short: 'Met het bericht', kind: 'pick', docs: ['sms'], situ: 'De echte site van Wadlicht zegt: niets te betalen.', prompt: 'Wat doe je met het bericht?',
         options: [['stop', 'Terug-sms\'en met STOP, dan houdt het op'], ['laten', 'Laten staan, er is niets gebeurd'], ['melden', 'Melden bij de Fraudehelpdesk en verwijderen']], correct: 'melden',
         nudge: 'Contact met het nummer uit het bericht is nooit een goed idee.', hint: 'Er is een helpdesk speciaal voor fraude.',
         explain: 'Meld een nepbericht bij de Fraudehelpdesk en verwijder het. Antwoord niet en bel het nummer niet terug.', sources: ['rijkPhishing', 'viHelpdesk', 'viSmishing'] }
@@ -5410,7 +5428,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   // "Waar staat dat?": where in the room's documents a question's answer can be read. Only where a document holds it: the DigiD question
   // (a rule, no document), "Wat doe je als je twijfelt?" and "Wat doe je met het bericht?" (rules, not in the sms) have none.
   // The letter's sentence question is answered in the letter itself, which already marks the right sentence, so it has none either.
-  const SMS_SIGNS = ['Betaal binnen 24 uur', 'anders stopt je zorgverzekering', 'via kompas-premie.example/betaal'];
+  const SMS_SIGNS = ['Betaal binnen 24 uur', 'anders stopt je zorgverzekering', 'via wadlicht-premie.example/betaal'];
   const WHERE = {
     datum: [{ doc: 'brief', at: 's5' }],
     premie: [{ doc: 'brief', at: 's3' }],
@@ -5949,8 +5967,12 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     if (klas) lines.push(`Klas: ${klas}.`);
     if (prep) lines.push(prepLine(prep));
     if (again) lines.push(`Opnieuw geven: ${again}.`);
+    // D38: the Klasresultaten when they are on the teacher screen (src/classres.js lines; the whole class only, no answers, no code). Then the
+    // teacher's own hand count is optional, so "niet geteld" is left out, as in the kamers-engine's lesverslag.
+    const CR = E18.classres || (typeof require === 'function' ? require('./classres.js') : null), res = input.res && input.res.enough && CR ? CR.lines(input.res, rooms) : [];
+    lines.push(...res);
     if (counted.length) { lines.push('Lastig volgens handopsteken:'); counted.forEach(h => lines.push(`- ${h.title}: ${h.n} ${pupils ? 'van de ' + pupils + ' ' : ''}leerling${h.n === 1 && !pupils ? '' : 'en'}`)); }
-    else lines.push('Lastig volgens handopsteken: niet geteld.');
+    else if (!res.length) lines.push('Lastig volgens handopsteken: niet geteld.');
     const check = checkLines(input, variant, pupils, errors); lines.push(...check.lines);
     // F8 (FEATURE_F8.md): Eerst lezen of doorklikken, two class counts by show of hands. F9's Herhaling (weeks later) follows it.
     const readFirst = readLines(input, check, pupils, errors); lines.push(...readFirst.lines);
@@ -5958,7 +5980,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     const herh = H ? H.lines(input.herh, variant, { pupils, lessonIso: date ? String(input.date).trim() : null, check }, errors) : { lines: [] }; lines.push(...herh.lines);
     if (note) lines.push(`Wat de docent zag: "${note.replace(/"/g, '\'')}"`);
     lines.push(VERSLAG_NOTE);
-    return { lines, text: lines.join('\n'), errors, rooms: hard, pupils, date, level, year, school, note, check, herh, prep, again, readFirst };
+    return { lines, text: lines.join('\n'), errors, rooms: hard, pupils, date, level, year, school, note, check, herh, prep, again, readFirst, res: res.length > 0 };
   }
   // ----- F1 (FEATURE_F1.md): the Startcheck and Eindcheck in the report, counted by show of hands, one hand per pair -----
   // Devices are separate and send nothing, so the teacher asks per question who had it right at the start and at the end, and types the counts.
@@ -6238,11 +6260,12 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   }
   // Sharing (LOGGING_SPEC.md v2): a forced Ja/Nee per class, no default. These lines say plainly what goes to the team and what never does.
   const SHARE_ASK = 'Anonieme antwoorden van deze klas delen met het Escape 18-team?';
-  const SHARE_WHAT = 'Wat we krijgen: per vraag het antwoord dat een tweetal kiest. Ook of het meteen goed was, hints en seconden. Nooit namen, en nooit iets wat leerlingen typen.';
+  // D38: the kamers-engine's wording (src/strings.js shareWhat), which privacy.html describes: after the stop the teacher sees the class summary.
+  const SHARE_WHAT = 'We krijgen dan alleen welke antwoorden de tweetallen kiezen, hoe lang ze erover doen en hoeveel hints ze nemen. Nooit namen. Na de stop zie je de resultaten van de hele klas samen.';
   const SHARE_NEE = 'Je koos Nee. Deze klas verstuurt niets. De link voor leerlingen zegt dat ook.';
   const SHARE_JA = 'Je koos Ja. Leerlingen met deze klascode delen anoniem hun antwoorden. Tot de klastimer start kun je dit nog veranderen.';
   const SHARE_LOCKED = 'De les is begonnen. Deze keuze blijft voor deze klas zo.';
-  const PRIVACY_SHARE = { ja: 'Delen staat aan. Het Escape 18-team krijgt anoniem welke antwoorden de klas kiest. Zonder namen en zonder wat leerlingen typen. Jij ziet geen scores.',
+  const PRIVACY_SHARE = { ja: 'Delen staat aan. Het Escape 18-team krijgt anoniem welke antwoorden de klas kiest. Zonder namen en zonder wat leerlingen typen. Na de stop zie je alleen de hele klas samen, nooit per tweetal.',
     nee: 'Delen staat uit: deze klas verstuurt niets. Wat leerlingen doen, blijft op hun eigen apparaat. Jij ziet geen scores.',
     open: 'Kies bij Zo begin je of deze klas anoniem antwoorden deelt. Tot je kiest, wordt niets verstuurd. Jij ziet geen scores.' };
   // Teacher footer (LOGGING_SPEC.md v2): the date is the oldest check of the lesson's sources (src/escaperun.js SRC, FACT_SOURCES.md).
@@ -6625,7 +6648,12 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
    Script origins the CSP allows (ORIGINS), anything else counts as off.
    What can be sent is fixed per type (TYPES): option ids, a number entered as an amount, booleans, counts and seconds. No pupil free text,
    name, IP, user agent or device id: validate() refuses any event with another key or value, and the queue never holds a refused event.
-   The 18-plan text, the lesverslag's school and note, and everything typed in the practice bank stay on the device; nothing here reads them. */
+   The 18-plan text, the lesverslag's school and note, and everything typed in the practice bank stay on the device; nothing here reads them.
+   D38 (LOGGING_SPEC.md v3, backend-v2/CLIENT_SPEC.md sections 1 and 6): the types plan and reuse, and three optional fields (OPTIONAL): ceil in
+   check (start check only, and only as score === max), conf (1, 2 or 3) per item of the end check, wish (one of WISHES) in pupil_feedback.
+   Optional means: left out is fine; present and invalid refuses the whole event, like any other bad value or unknown key.
+   The teacher screen reads its class summary with readClass: one GET to the same endpoint, no request headers (no CORS preflight), no cookies,
+   no referrer. That is the only other request this module makes, and it carries only the class code and the product. */
 (function (g) {
   'use strict';
   const E18 = g.E18 = g.E18 || {};
@@ -6647,17 +6675,28 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   const choice = v => isId(v) || amount(v) || (Array.isArray(v) && v.length >= 1 && v.length <= 12 && v.every(isId));
   const teacherText = v => typeof v === 'string' && v.length <= 500;
   const SEC = int(0, 86400);
+  const slug = v => typeof v === 'string' && /^escape18-[a-z0-9-]{1,40}$/.test(v);
+  // D38: the topic wish on the end screen, one fixed id (same list as the kamers-engine src/log.js and backend-v2/Code.gs WISHES); never text.
+  const WISHES = ['zorgverzekering', 'abonnementen', 'verzekeringen', 'belasting', 'budget', 'anders'];
+  const CONF = [1, 2, 3]; // end check, per item: 1 gok, 2 een beetje, 3 heel zeker
+  const item = x => x && typeof x === 'object' && !Array.isArray(x) && isId(x.q) && bool(x.right) && Object.keys(x).every(k => k === 'q' || k === 'right' || (k === 'conf' && CONF.includes(x.conf)));
   const TYPES = {
     teacher_start: { variant, rooms: v => Array.isArray(v) && v.length >= 1 && v.length <= 8 && v.every(isId) },
     start: { variant },
-    check: { phase: oneOf(['start', 'end']), form: oneOf(['A', 'B']), score: int(0, 20), max: int(1, 20), items: v => Array.isArray(v) && v.length >= 1 && v.length <= 20 && v.every(x => x && typeof x === 'object' && Object.keys(x).length === 2 && isId(x.q) && bool(x.right)) },
+    check: { phase: oneOf(['start', 'end']), form: oneOf(['A', 'B']), score: int(0, 20), max: int(1, 20), items: v => Array.isArray(v) && v.length >= 1 && v.length <= 20 && v.every(item), ceil: bool },
     answer: { room: isId, q: isId, choice, first: bool, tries: int(1, 20), hint: bool, sec: SEC },
     room: { room: isId, sec: SEC },
     lock: { opened: bool, sec: SEC },
-    pupil_feedback: { fun: int(1, 5), learned: int(1, 5) },
+    pupil_feedback: { fun: int(1, 5), learned: int(1, 5), wish: oneOf(WISHES) },
     end: { sec: SEC },
-    feedback: { again: orNull(oneOf(['ja', 'twijfel', 'nee'])), used: oneOf(['heel', 'kort', 'deels']), pupils: orNull(int(1, 60)), minutes: orNull(int(1, 240)), worked: teacherText, notworked: teacherText }
+    feedback: { again: orNull(oneOf(['ja', 'twijfel', 'nee'])), used: oneOf(['heel', 'kort', 'deels']), pupils: orNull(int(1, 60)), minutes: orNull(int(1, 240)), worked: teacherText, notworked: teacherText },
+    // D38 (LOGGING_SPEC.md v3): "Ik ga dit geven" on the landing page (the engine-built site sends it; lesson 1 never does, but accepts the shape)
+    // and "Les opnieuw gestart" from the teacher screen's local record (localStorage 'e18-docent', never sent itself; no device id).
+    plan: { product: slug, when: oneOf(['deze week', 'deze maand', 'later']), level: oneOf(['pro', 'vmbo', 'havo', 'vwo', 'mbo', 'anders']) },
+    reuse: { product: slug, times: int(2, 5), since: oneOf(['week', 'maand', 'langer']) }
   };
+  // Fields a type may leave out (LOGGING_SPEC.md v3 "Optional"). Every other field of TYPES is required.
+  const OPTIONAL = { check: ['ceil'], pupil_feedback: ['wish'], plan: ['level'] };
   const ENVELOPE = ['type', 'product', 'version', 'class', 'session', 'data'];
   const isCode = v => typeof v === 'string' && v.length === 5 && [...v].every(c => ALPHA.includes(c));
   const isSession = v => typeof v === 'string' && v.length === 10 && [...v].every(c => ALPHA.includes(c));
@@ -6674,9 +6713,12 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     if (!isSession(ev.session)) bad.push('session');
     const T = TYPES[ev.type], d = ev.data;
     if (!d || typeof d !== 'object' || Array.isArray(d)) return bad.concat('data');
-    const dk = Object.keys(d), want = Object.keys(T);
-    if (dk.length !== want.length || !want.every(k => own(d, k))) bad.push('data-velden: ' + dk.join(','));
+    const dk = Object.keys(d), want = Object.keys(T), opt = OPTIONAL[ev.type] || [];
+    if (!dk.every(k => want.includes(k)) || !want.every(k => own(d, k) || opt.includes(k))) bad.push('data-velden: ' + dk.join(','));
     want.forEach(k => { if (own(d, k) && !T[k](d[k])) bad.push('data.' + k); });
+    // D38: ceil only on the start check and only as what it says (the start score is the maximum); conf only on the end check.
+    if (ev.type === 'check' && own(d, 'ceil') && (d.phase !== 'start' || d.ceil !== (d.score === d.max))) bad.push('data.ceil');
+    if (ev.type === 'check' && d.phase !== 'end' && Array.isArray(d.items) && d.items.some(x => x && typeof x === 'object' && own(x, 'conf'))) bad.push('conf alleen bij de eindcheck');
     if (ev.type === 'check' && Number.isInteger(d.score) && Number.isInteger(d.max) && d.score > d.max) bad.push('score > max');
     // D34: forms A and B with per-item results (LOGGING_SPEC.md): one item per question, as many right as the score.
     if (ev.type === 'check' && Array.isArray(d.items) && Number.isInteger(d.max) && Number.isInteger(d.score) && (d.items.length !== d.max || d.items.filter(x => x && x.right === true).length !== d.score)) bad.push('items passen niet bij score en max');
@@ -6721,9 +6763,15 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   }
   const endpointOf = cfg => { const e = cfg && typeof cfg.endpoint === 'string' ? cfg.endpoint.trim() : '';
     return e && ORIGINS.some(o => e.startsWith(o + '/')) ? e : ''; };
+  // D38 (backend-v2/CLIENT_SPEC.md section 2): the class summary for the teacher screen, GET <endpoint>?action=class&code=CODE&product=SLUG.
+  const classUrl = (endpoint, code, product = PRODUCT) => endpoint && isCode(code) ? endpoint + (endpoint.includes('?') ? '&' : '?') + 'action=class&code=' + encodeURIComponent(code) + '&product=' + encodeURIComponent(product) : '';
+  // The fetch options: GET, no headers at all (a header triggers a CORS preflight that Apps Script cannot answer), not no-cors (the answer
+  // must be readable), no cookies, no referrer, never from a cache.
+  const CLASS_INIT = { method: 'GET', credentials: 'omit', cache: 'no-store', redirect: 'follow', referrerPolicy: 'no-referrer' };
 
   // ----- the queue and its transport (LOGGING_SPEC.md "Transport") -----
   // opt: { config, version, product, storage, online(), beacon(url, blob) -> bool, post(url, body) }. The browser defaults are filled in below.
+  // opt.get(url, init) -> Promise of the response text: only used by readClass.
   function make(opt) {
     const o = opt || {}, endpoint = endpointOf(o.config), version = o.version, product = o.product || PRODUCT;
     let mem = []; // the queue when storage is not available (private window, blocked site data)
@@ -6740,6 +6788,12 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
         return true;
       },
       queued: () => read().length,
+      // D38: read the class summary (teacher screen, after the stop). Resolves with the parsed JSON or null; rejects on a network error.
+      readClass(code, signal) {
+        const url = classUrl(endpoint, code, product);
+        if (!url || !o.get) return Promise.reject(new Error('uit'));
+        return Promise.resolve(o.get(url, Object.assign({}, CLASS_INIT, signal ? { signal } : {}))).then(txt => { try { return JSON.parse(txt); } catch (e) { return null; } });
+      },
       // Hand the queue over in batches of at most 200, each once: no answer comes back (no-cors), so sent items go at once. Never a retry loop.
       flush() {
         if (!endpoint) return 0;
@@ -6766,7 +6820,8 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     const L = make({ config: w && w.E18_CONFIG, version, storage,
       online: () => !(w && w.navigator && w.navigator.onLine === false),
       beacon: (url, json) => !!(w && w.navigator && typeof w.navigator.sendBeacon === 'function' && w.navigator.sendBeacon(url, new Blob([json], { type: 'text/plain' }))),
-      post: (url, json) => { if (!w || typeof w.fetch !== 'function') throw new Error('geen fetch'); w.fetch(url, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: json, keepalive: true }).catch(() => {}); } });
+      post: (url, json) => { if (!w || typeof w.fetch !== 'function') throw new Error('geen fetch'); w.fetch(url, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: json, keepalive: true }).catch(() => {}); },
+      get: (url, init) => { if (!w || typeof w.fetch !== 'function') return Promise.reject(new Error('geen fetch')); return w.fetch(url, init).then(r => r.ok ? r.text() : Promise.reject(new Error('http ' + r.status))); } });
     if (L.on && w) {
       setInterval(() => L.flush(), EVERY_MS);
       w.addEventListener('pagehide', () => L.flush());
@@ -6786,9 +6841,186 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     return s;
   }
 
-  const e18log = { PRODUCT, ALPHA, NONE, QKEY, QMAX, BATCH, EVERY_MS, ORIGINS, TYPES, validate, isCode, isSession, normCode, newCode, newSession, fromUrl, withKlas, shortLink, endpointOf, make, browser, sessionFor };
+  const e18log = { PRODUCT, ALPHA, NONE, QKEY, QMAX, BATCH, EVERY_MS, ORIGINS, TYPES, OPTIONAL, WISHES, CONF, CLASS_INIT, classUrl, validate, isCode, isSession, normCode, newCode, newSession, fromUrl, withKlas, shortLink, endpointOf, make, browser, sessionFor };
   E18.log = e18log;
   if (typeof module === 'object' && module.exports) module.exports = e18log;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
+/* D38: Klasresultaten for lesson 1 (backend-v2/CLIENT_SPEC.md section 2 and its "lesson 1" section 6; same behaviour and wording as the
+   kamers-engine src/engine.js panel). After "Stop de escape", with Ja, logging on and a valid class code, the teacher screen reads the class
+   summary (src/e18log.js readClass: one GET, no headers, no cookies) and shows per room how many pairs finished, the hardest question and the
+   wrong answer most pairs chose first. Never a right answer, never the lock code, never anything per pair: the board may be on.
+   This file has no network code and no DOM: clean() checks the untrusted answer against the lesson's own rooms and questions, body(),
+   status() and lines() make the texts, poller() runs the timing (20 s, one read in flight, abort after 10 s, back off on errors up to 120 s,
+   pause while hidden or offline, stop 15 minutes after the stop). The teacher screen (src/ui.js) wires them to the page.
+   Lesson 1's rooms: ids brief, loon, sms, aanmeld; questions pick (option id), sentence (sentence id s1 to s7), multi (item ids) and number
+   (euros with cents as a number, 1410.5); a short lesson has two of the four rooms, numbered 1 and 2 as the pupils see them.
+   Also the local reuse record (CLIENT_SPEC.md section 3): next() works out the record and the "reuse" event without touching storage. */
+(function (g) {
+  'use strict';
+  const E18 = g.E18 = g.E18 || {};
+  const X = () => E18.escaperun || (typeof require === 'function' ? require('./escaperun.js') : null);
+  const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const EVERY = 20, MAX = 120, ABORT_MS = 10000, STOP_MS = 15 * 60000;
+
+  // Dutch texts, word for word the kamers-engine's (src/strings.js nl), so the two teacher screens say the same.
+  const T = {
+    resH: 'Klasresultaten', resWait: 'Klasresultaten laden...', resStart: (n, title) => `Begin bij kamer ${n}, ${title}: daar ging het minst vaak in één keer goed.`,
+    resDone: (a, b) => `${a} van ${b} tweetallen klaar.`, resHard: 'Lastigste vraag:', resHardPct: p => `${p}% had het in één keer goed.`,
+    resWrong: 'Meest gekozen fout antwoord:', resWrongN: n => n === 1 ? '(1 tweetal)' : `(${n} tweetallen)`, resEmpty: 'Nog geen antwoorden.',
+    resCheck: (s, e, max) => `Startcheck gemiddeld ${s} van ${max}. Eindcheck gemiddeld ${e} van ${max}.`,
+    resFoot: time => `Alleen de hele klas samen, nooit per tweetal. Bijgewerkt om ${time}.`,
+    resFew: 'Nog te weinig tweetallen voor een samenvatting. Er zijn er minstens 3 nodig. Dit scherm probeert het elke 20 seconden opnieuw.',
+    resErr: 'De klasresultaten zijn nu niet te laden. Gebruik de vragen bij Nabespreken per kamer hieronder.',
+    resNo: 'Je koos Nee bij delen. Daarom zijn er geen klasresultaten. Gebruik de vragen bij Nabespreken per kamer hieronder.',
+    resRefresh: 'Vernieuw de klasresultaten',
+    vsResOn: 'In het verslag staan de klasresultaten hierboven: de hele klas samen, zonder antwoorden.', vsResOff: 'Geen klasresultaten op dit scherm. Tel daarom met handopsteken.',
+    vsLRes: 'Klasresultaten (anoniem, de hele klas samen):', vsLPairs: (p, e) => `Tweetallen: ${p}, aan het eind: ${e}.`, vsLLock: (o, r) => `Slot open: ${o} van ${r} tweetallen bij het slot.`,
+    vsLRoom: (n, title, a, b) => `Kamer ${n}, ${title}: ${a} van ${b} tweetallen klaar.`, vsLHard: (q, p) => `Lastigste vraag: ${q} (${p}% in één keer goed).`,
+    devNote: 'Dit apparaat onthoudt welke lessen je hier startte. Dat blijft op dit apparaat.', devForget: 'Vergeet dit apparaat',
+    confQ: 'Hoe zeker zijn jullie?', confOpt: 'Niet verplicht.', confs: ['Gok', 'Een beetje', 'Heel zeker'],
+    wishQ: 'Over welk onderwerp willen jullie hierna een les?', wishOpt: 'Niet verplicht. Kies er één.',
+    wishes: { zorgverzekering: 'Een zorgverzekering kiezen', abonnementen: 'Abonnementen en kleine lettertjes', verzekeringen: 'Andere verzekeringen, zoals voor schade of op reis', belasting: 'Belasting en toeslagen', budget: 'Rondkomen met je geld', anders: 'Iets anders' }
+  };
+  const ESC = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const fin = v => Number.isFinite(v) ? v : null;
+  const dec = n => String(Math.round(n * 10) / 10).replace('.', ',');
+  const hhmm = d => String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+
+  // The answer of doGet?action=class (backend-v2/Code.gs classSummary_) is untrusted input: a plain object only; only rooms of this lesson and
+  // questions of that room; every number finite; anything else is left out. {error} keeps only a retry of 0 to 600 seconds.
+  function clean(x, rooms) {
+    if (!x || typeof x !== 'object' || Array.isArray(x)) return null;
+    if (x.error != null) return { error: true, retry: Number.isFinite(x.retry) ? Math.max(0, Math.min(600, x.retry)) : 0 };
+    if (x.enough === false) return { enough: false };
+    if (x.enough !== true) return null;
+    const out = {};
+    (Array.isArray(x.rooms) ? x.rooms : []).forEach(r => {
+      const R = r && typeof r === 'object' && rooms.find(y => y.id === r.room); if (!R || out[R.id]) return;
+      const qs = {};
+      (Array.isArray(r.questions) ? r.questions : []).forEach(q => {
+        const Q = q && typeof q === 'object' && R.qs.find(y => y.id === q.q); if (!Q || qs[Q.id]) return;
+        const w = q.wrong && typeof q.wrong === 'object' && !Array.isArray(q.wrong) ? { choice: q.wrong.choice, n: fin(q.wrong.n) } : null;
+        qs[Q.id] = { firstRight: fin(q.firstRight), wrong: w };
+      });
+      out[R.id] = { started: fin(r.started), finished: fin(r.finished), firstRight: fin(r.firstRight), hardest: R.qs.some(Q => Q.id === r.hardest) ? r.hardest : null, qs };
+    });
+    const ck = k => x.check && x.check[k] && typeof x.check[k] === 'object' ? { mean: fin(x.check[k].mean), max: fin(x.check[k].max) } : { mean: null, max: null };
+    const lock = x.lock && typeof x.lock === 'object' ? { reached: fin(x.lock.reached), opened: fin(x.lock.opened) } : { reached: null, opened: null };
+    return { enough: true, updated: typeof x.updated === 'string' ? x.updated : '', pairs: fin(x.pairs), ended: fin(x.ended), lock, start: ck('start'), end: ck('end'),
+      startWith: rooms.some(R => R.id === x.startWith) ? x.startWith : null, rooms: out };
+  }
+  // The most chosen wrong answer as the pupils saw it, or null when it is not an answer of this question (then the line is left out).
+  // pick and sentence: one id; multi: ids, labels joined with " + "; number: euros (1410.5) in the lesson's own money format.
+  function wrongText(Q, c) {
+    const L = X().labelOf;
+    if (Q.kind === 'number') return Number.isFinite(c) && Math.abs(c) <= 1e7 ? L(Q, Math.round(c * 100)) : null;
+    if (Q.kind === 'multi') {
+      if (!Array.isArray(c) || !c.length || !c.every(id => typeof id === 'string' && Q.items.some(i => i[0] === id))) return null;
+      return c.map(id => Q.items.find(i => i[0] === id)[1]).join(' + ');
+    }
+    const list = Q.kind === 'pick' ? Q.options : Q.sentences;
+    return typeof c === 'string' && list && list.some(o => o[0] === c) ? L(Q, c) : null;
+  }
+  const qText = Q => { const x = Q.short || Q.prompt; return /[.?!:]$/.test(x) ? x : x + '.'; };
+  const hardOf = (x, R) => { const Q = x && x.hardest ? R.qs.find(y => y.id === x.hardest) : null; return { Q, q: Q ? x.qs[Q.id] : null }; };
+  const maxOf = D => D.start.max || D.end.max;
+  // The panel's body: the lead line, one card per room of this lesson in lesson order, the check averages. '' while there is nothing to show.
+  function body(D, rooms) {
+    if (!D || !D.enough) return '';
+    const i = D.startWith ? rooms.findIndex(R => R.id === D.startWith) : -1;
+    const lead = i >= 0 ? `<p class="t-res-lead">${ESC(T.resStart(i + 1, rooms[i].title))}</p>` : '';
+    const cards = rooms.map((R, j) => {
+      const x = D.rooms[R.id], head = `<h3><span class="t-rn">Kamer ${j + 1}</span> ${ESC(R.title)}</h3>`;
+      if (!x || !x.started) return `<article class="t-room t-res-room">${head}<p class="sub2">${ESC(T.resEmpty)}</p></article>`;
+      const { Q, q } = hardOf(x, R);
+      const hard = Q && q && q.firstRight != null ? `<p><b>${ESC(T.resHard)}</b> ${ESC(qText(Q))} ${ESC(T.resHardPct(Math.round(q.firstRight)))}</p>` : '';
+      const wt = Q && q && q.wrong && q.wrong.n != null ? wrongText(Q, q.wrong.choice) : null;
+      const wrong = wt ? `<p><b>${ESC(T.resWrong)}</b> ${ESC(wt)} ${ESC(T.resWrongN(q.wrong.n))}</p>` : '';
+      return `<article class="t-room t-res-room">${head}<p>${ESC(T.resDone(x.finished == null ? 0 : x.finished, x.started))}</p>${hard}${wrong}</article>`;
+    }).join('');
+    const max = maxOf(D), chk = D.start.mean != null && D.end.mean != null && max ? `<p>${ESC(T.resCheck(dec(D.start.mean), dec(D.end.mean), max))}</p>` : '';
+    return `${lead}<div class="t-rooms">${cards}</div>${chk}`;
+  }
+  // The one live line under the panel (aria-live polite in the page): it changes only when what it says changes.
+  function status(D, err, at) {
+    if (D && D.enough) { const u = new Date(D.updated), time = hhmm(isNaN(u) ? new Date(at || Date.now()) : u); return T.resFoot(time) + (err ? ' ' + T.resErr : ''); }
+    if (D && !D.enough) return err ? T.resErr : T.resFew;
+    return err ? T.resErr : T.resWait;
+  }
+  // The lesverslag lines from the summary (src/teacher.js report, input.res): the whole class only, no answers.
+  function lines(D, rooms) {
+    if (!D || !D.enough) return [];
+    const out = [T.vsLRes];
+    if (D.pairs != null) out.push('- ' + T.vsLPairs(D.pairs, D.ended == null ? 0 : D.ended));
+    if (D.lock.reached != null) out.push('- ' + T.vsLLock(D.lock.opened == null ? 0 : D.lock.opened, D.lock.reached));
+    const max = maxOf(D); if (D.start.mean != null && D.end.mean != null && max) out.push('- ' + T.resCheck(dec(D.start.mean), dec(D.end.mean), max));
+    rooms.forEach((R, i) => { const x = D.rooms[R.id]; if (!x || !x.started) return;
+      out.push('- ' + T.vsLRoom(i + 1, R.title, x.finished == null ? 0 : x.finished, x.started));
+      const { Q, q } = hardOf(x, R); if (q && q.firstRight != null) out.push('  ' + T.vsLHard((Q.short || Q.prompt).replace(/[.:]$/, ''), Math.round(q.firstRight))); });
+    return out;
+  }
+
+  // ----- the timing. o: { wanted(), hidden(), online(), key() (the class code now), read(key, signal) -> Promise, flush(), update(),
+  //   now(), setTimeout, clearTimeout, AbortController } -----
+  function poller(o) {
+    const st = o.setTimeout || ((f, ms) => setTimeout(f, ms)), ct = o.clearTimeout || (t => clearTimeout(t)), now = o.now || (() => Date.now());
+    const AC = o.AbortController !== undefined ? o.AbortController : (typeof AbortController === 'function' ? AbortController : null);
+    const S = { data: null, json: '', err: false, timer: 0, ctrl: null, inflight: false, wait: EVERY, errs: 0, stoppedAt: 0, done: false, at: 0, reads: 0 };
+    const fresh = () => ({ data: null, json: '', err: false, timer: 0, ctrl: null, inflight: false, wait: EVERY, errs: 0, stoppedAt: 0, done: false, at: 0 });
+    function reset() { if (S.ctrl) try { S.ctrl.abort(); } catch (e) { /* already done */ } if (S.timer) ct(S.timer); Object.assign(S, fresh()); }
+    function read(manual) {
+      if (S.inflight) return;
+      const key = o.key(), ctrl = AC ? new AC() : null, kill = st(() => { if (ctrl) ctrl.abort(); }, ABORT_MS);
+      S.inflight = true; S.ctrl = ctrl; S.reads++;
+      const done = (x, raw) => {
+        ct(kill); if (key !== o.key() || S.ctrl !== ctrl) return; // a new class code or a reset in the meantime
+        S.inflight = false; S.ctrl = null; S.at = now();
+        if (x && !x.error) { S.err = false; S.errs = 0; S.wait = EVERY; if (raw !== S.json) { S.json = raw; S.data = x; } }
+        else { S.err = true; S.errs++; S.wait = Math.min(MAX, S.errs === 1 ? Math.max(EVERY, (x && x.retry) || 0) : S.wait * 2); }
+        o.update(); if (!manual) sync(true);
+      };
+      let p; try { p = Promise.resolve(o.read(key, ctrl ? ctrl.signal : undefined)); } catch (e) { p = Promise.reject(e); }
+      p.then(j => { const c = o.clean(j); done(c, c ? JSON.stringify(c) : ''); }, () => done(null, ''));
+    }
+    // Called after every render and on visibility and connection changes. after: a read just ended, so the next one waits S.wait seconds.
+    function sync(after) {
+      if (!o.wanted()) { if (S.timer) ct(S.timer); S.timer = 0; return; }
+      if (!S.stoppedAt) S.stoppedAt = now();
+      if (o.hidden() || !o.online()) { if (S.timer) ct(S.timer); S.timer = 0; return; }
+      if (S.done || S.inflight) return;
+      if (now() - S.stoppedAt >= STOP_MS) { S.done = true; if (S.timer) ct(S.timer); S.timer = 0; o.update(); return; }
+      if (S.timer) return;
+      const go = () => { S.timer = 0; if (!o.wanted() || o.hidden() || !o.online()) return;
+        if (now() - S.stoppedAt >= STOP_MS) { S.done = true; o.update(); return; } read(false); };
+      if (after) S.timer = st(go, S.wait * 1000);
+      else { try { o.flush(); } catch (e) { /* the 15 s timer flushes */ } read(false); }
+    }
+    // "Vernieuw de klasresultaten" (after the 15 minutes): one read per click, same rules.
+    function manual() { if (!o.wanted() || S.inflight) return; try { o.flush(); } catch (e) { /* the 15 s timer flushes */ } read(true); }
+    return { S, sync, reset, manual };
+  }
+
+  // ----- the local reuse record (CLIENT_SPEC.md section 3): {"v":1,"les":{"eerste-maand":{"n":2,"d":"2026-11-16"}}}, no id -----
+  const KEY = 'e18-docent', SLUG = 'eerste-maand';
+  const dayNo = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ''); return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) / 864e5 : NaN; };
+  const bucket = n => n <= 7 ? 'week' : n <= 31 ? 'maand' : 'langer';
+  // raw: what localStorage holds (a string or null). Returns the record to write and the reuse data to send (null on a first start or a
+  // second start on the same day, which counts nothing).
+  function next(raw, today, slug = SLUG) {
+    let rec = null; try { rec = JSON.parse(raw || 'null'); } catch (e) { rec = null; }
+    if (!(rec && rec.v === 1 && rec.les && typeof rec.les === 'object' && !Array.isArray(rec.les))) rec = { v: 1, les: {} };
+    const prev = own(rec.les, slug) ? rec.les[slug] : null;
+    const pv = prev && Number.isInteger(prev.n) && prev.n >= 1 && !isNaN(dayNo(prev.d)) ? prev : null;
+    const reuse = pv && pv.d !== today ? { times: Math.min(5, pv.n + 1), since: bucket(Math.max(0, dayNo(today) - dayNo(pv.d))) } : null;
+    if (!pv || pv.d !== today) rec.les[slug] = { n: (pv ? pv.n : 0) + 1, d: today };
+    return { rec, reuse };
+  }
+  const localDate = d => { d = d || new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+
+  const classres = { T, EVERY, MAX, ABORT_MS, STOP_MS, KEY, SLUG, clean, wrongText, body, status, lines, poller, next, bucket, dayNo, localDate, dec };
+  E18.classres = classres;
+  if (typeof module === 'object' && module.exports) module.exports = classres;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
 </script>
@@ -6928,7 +7160,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   const logRunKey = id => 'e18k:' + id;
   const logRunGet = id => { try { const v = lesStore && JSON.parse(lesStore.getItem(logRunKey(id)) || 'null'); if (v && typeof v === 'object') return v; } catch (e) { /* memory only */ } return logRunMem[id] || null; };
   const logRunSet = (id, v) => { logRunMem[id] = v; try { if (lesStore) lesStore.setItem(logRunKey(id), JSON.stringify(v)); } catch (e) { /* memory only */ } };
-  const logRunMem = {}, logShown = {}, logFb = {};
+  const logRunMem = {}, logShown = {}, logFb = {}, logConf = {}; // D38 logConf: per run and end-check question the optional "Hoe zeker" tap (1 to 3), screen memory only
   const logKlasOf = id => { const v = logRunGet(id); return (v && LG.isCode(v.klas)) ? v.klas : logUrl.klas || LG.NONE; };
   const logCtx = r => ({ class: logKlasOf(r.id), session: LG.sessionFor(r.id, lesStore), off: logUrl.off });
   const logSend = (r, type, data) => { if (!logPupilOn() || !r) return false; try { return LOG.send(logCtx(r), type, data); } catch (e) { return false; } };
@@ -6963,11 +7195,15 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   const logEnd = (r, ms) => { logSend(r, 'end', { sec: logSec(ESCR.mission.result(ms).raw) }); logFlush(); };
   // The pupil's optional taps on the end screen (two 1 to 5 scales). Shown only when this class shares; sent once both are tapped.
   const LOG_SCALES = [['fun', 'Hoe leuk vond je de les?', 'helemaal niet leuk', 'heel leuk'], ['learned', 'Hoeveel heb je geleerd?', 'niets', 'heel veel']];
+  // D38 (LOGGING_SPEC.md v3): also one optional tap for the topic of a next lesson (a fixed id, never text), and a "Verstuur" button, as in the
+  // kamers-engine: nothing goes until the pair taps it, so a wish tapped after the two scales still goes with them. Sent once.
   function logFeedbackBox(r) {
     if (!logPupilOn()) return '';
-    const F = logFb[r.id] || {}, sent = !!F.sent;
-    return `<div class="card esc-pfb"><h2 class="h3">Wat vond je ervan? <span class="sub2">(mag je overslaan)</span></h2>${sent ? '<p>Dank je wel. Je antwoord is anoniem gedeeld.</p>' : `<p class="sub2">Tik op een cijfer van 1 tot 5. Je typt niets en we bewaren geen namen.</p>
-      ${LOG_SCALES.map(([k, q, lo, hi]) => `<div class="esc-scale" role="group" aria-labelledby="esc-pfb-${k}"><p id="esc-pfb-${k}" class="esc-scale-q">${esc(q)}</p><div class="esc-scale-k">${[1, 2, 3, 4, 5].map(n => `<button type="button" class="esc-key" data-action="esc-pfb:${k}:${n}" aria-pressed="${F[k] === n}">${n}<span class="sr">${n === 1 ? ', ' + lo : n === 5 ? ', ' + hi : ''}</span></button>`).join('')}</div><p class="sub2 esc-scale-l"><span>1 = ${esc(lo)}</span><span>5 = ${esc(hi)}</span></p></div>`).join('')}`}</div>`;
+    const F = logFb[r.id] || {}, sent = !!F.sent, CR = E18.classres;
+    const wish = CR ? `<fieldset class="esc-wish"><legend>${esc(CR.T.wishQ)} <span class="sub2">${esc(CR.T.wishOpt)}</span></legend><div class="esc-wish-k">${LG.WISHES.map(w => `<button type="button" class="esc-wish-b" data-action="esc-wish:${w}" aria-pressed="${F.wish === w}">${esc(CR.T.wishes[w])}</button>`).join('')}</div></fieldset>` : '';
+    return `<div class="card esc-pfb" id="esc-pfb"><h2 class="h3">Wat vond je ervan? <span class="sub2">(mag je overslaan)</span></h2>${sent ? '<p>Dank je wel. Je antwoord is anoniem gedeeld.</p>' : `<p class="sub2">Tik op een cijfer van 1 tot 5. Je typt niets en we bewaren geen namen.</p>
+      ${LOG_SCALES.map(([k, q, lo, hi]) => `<div class="esc-scale" role="group" aria-labelledby="esc-pfb-${k}"><p id="esc-pfb-${k}" class="esc-scale-q">${esc(q)}</p><div class="esc-scale-k">${[1, 2, 3, 4, 5].map(n => `<button type="button" class="esc-key" data-action="esc-pfb:${k}:${n}" aria-pressed="${F[k] === n}">${n}<span class="sr">${n === 1 ? ', ' + lo : n === 5 ? ', ' + hi : ''}</span></button>`).join('')}</div><p class="sub2 esc-scale-l"><span>1 = ${esc(lo)}</span><span>5 = ${esc(hi)}</span></p></div>`).join('')}
+      ${wish}<div class="row-acts">${btn('Verstuur', 'esc-pfb-send', '', F.fun && F.learned ? '' : 'disabled aria-describedby="esc-pfb-need"')}</div><p class="sub2" id="esc-pfb-need">${F.fun && F.learned ? 'Alleen jullie tikken worden verstuurd, zonder namen.' : 'Tik eerst bij allebei de vragen een cijfer.'}</p>`}</div>`;
   }
   // The start screen: one line on what is shared and a link to privacy, and the class code (from the link, or typed on a laptop).
   const LOG_PRIVACY = '../privacy.html';
@@ -7753,6 +7989,52 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
   const T_STOP_STEPS = ['Tik op We stoppen, onderaan je scherm.', 'Typ de cijfers die je docent voorleest. Of ga meteen naar de eindcheck.', 'Maak daarna de eindcheck en Mijn 18-plan.'];
   const tStopBox = () => tStopped ? `<section class="t-stop" id="t-stop-h" tabindex="-1" aria-live="polite"><h3 class="h4">De escape is gestopt</h3><ol>${T_STOP_STEPS.map(x => `<li>${esc(x)}</li>`).join('')}</ol><p class="t-note">Lees de cijfers voor van je geprinte antwoordblad. Of open Toon antwoorden als het bord uit staat.</p></section>` : '';
   const tStopBtn = () => btn(tStopped ? 'Verder met de escape' : 'Stop de escape', 't-stop', 'ghost', `aria-pressed="${tStopped}"`);
+  // ----- D38 (backend-v2/CLIENT_SPEC.md sections 2, 3 and 6; src/classres.js): Klasresultaten after the stop, and the local reuse record -----
+  // The panel shows only on this screen, after "Stop de escape", with logging on, Ja and a valid class code; with Nee only one note and no request.
+  // It reads the class summary every 20 s (src/classres.js poller, src/e18log.js readClass: a GET without headers or cookies) and updates only
+  // its own parts and the lesverslag, never the whole screen, so focus, an open answer key and typed text stay. It never shows an answer or
+  // the lock code. Rooms are this lesson's own rooms (tRooms) in lesson order, numbered as the pupils see them.
+  const CR = E18.classres || null;
+  const resWanted = () => !!CR && view === 'teach' && tStopped === true && logOn() && tLog.share === true && LG.isCode(tLog.klas);
+  const RESP = CR && LOG ? CR.poller({ wanted: resWanted, hidden: () => document.visibilityState === 'hidden', online: () => navigator.onLine !== false,
+    key: () => tLog.klas, read: (code, signal) => LOG.readClass(code, signal), clean: j => CR.clean(j, tRooms()), flush: logFlush, update: () => resUpdate() }) : null;
+  const resData = () => RESP && tStopped && RESP.S.data && RESP.S.data.enough ? RESP.S.data : null;
+  const resBody = () => RESP ? CR.body(RESP.S.data, tRooms()) : '';
+  const resStatus = () => RESP ? CR.status(RESP.S.data, RESP.S.err, RESP.S.at) : '';
+  const resAct = () => RESP && RESP.S.done ? btn(esc(CR.T.resRefresh), 'res-refresh', 'ghost small', `id="tres-refresh" ${RESP.S.inflight ? 'disabled' : ''}`) : '';
+  function resBlock() {
+    if (!CR || !tStopped || !logOn()) return '';
+    if (tLog.share === false) return `<p class="t-note t-resno" id="tresno">${esc(CR.T.resNo)}</p>`;
+    if (!(tLog.share === true && LG.isCode(tLog.klas)) || !RESP) return '';
+    return `<section class="t-card t-res" id="tres" aria-labelledby="tres-h"><h2 id="tres-h">${esc(CR.T.resH)}</h2><div id="tres-body">${resBody()}</div>
+      <p class="sub2" id="tres-status" aria-live="polite">${esc(resStatus())}</p><div id="tres-act">${resAct()}</div></section>`;
+  }
+  // Each part is replaced only when what it would show changed (the last HTML set is kept on the element), so the live line speaks only then.
+  const resSet = (el, h) => { if (el && el._h !== h) { el._h = h; el.innerHTML = h; } };
+  function resUpdate() {
+    resSet($('tres-body'), resBody()); resSet($('tres-act'), resAct());
+    const st = $('tres-status'), t = resStatus(); if (st && st.textContent !== t) st.textContent = t;
+    const o = $('t-vs-out'), r = $('t-vs-res'); // the lesverslag follows the summary
+    if (o) { const h = teachVsOut(); if (o._h !== h) { const changed = o._h !== undefined; o._h = h; if (changed || o.innerHTML !== h) { o.innerHTML = h; teachRefreshPrint(); } } }
+    if (r) { const x = resData() ? CR.T.vsResOn : CR.T.vsResOff; if (r.textContent !== x) r.textContent = x; }
+  }
+  const resSync = () => { if (RESP) RESP.sync(); };
+  document.addEventListener('visibilitychange', resSync);
+  window.addEventListener('online', resSync); window.addEventListener('offline', resSync);
+  // The reuse record (localStorage key CR.KEY, e18-docent): read and written only here, on the teacher screen, and only after Ja with logging on; never on
+  // a pupil path. It holds per lesson how many days it was started and the last day; only the coarse "reuse" event leaves the device, no id.
+  let devGone = false;
+  const devOk = () => !!CR && logOn() && tLog.share === true;
+  function devExists() { if (!devOk() || devGone) return false; try { return localStorage.getItem(CR.KEY) != null; } catch (e) { return false; } }
+  function devReuse() {
+    if (!devOk()) return;
+    let raw = null; try { raw = localStorage.getItem(CR.KEY); } catch (e) { return; } // no storage: nothing is recorded or sent
+    const N = CR.next(raw, CR.localDate());
+    try { localStorage.setItem(CR.KEY, JSON.stringify(N.rec)); devGone = false; } catch (e) { return; }
+    if (N.reuse) LOG.send(tCtx(), 'reuse', { product: LG.PRODUCT, times: N.reuse.times, since: N.reuse.since });
+  }
+  function devForget() { try { localStorage.removeItem(CR.KEY); } catch (e) { /* nothing stored */ } devGone = true; }
+  const devLine = () => devExists() ? `<p class="t-note t-dev" id="tdev">${esc(CR.T.devNote)} ${btn(esc(CR.T.devForget), 't-dev-forget', 'ghost small', 'id="tdevforget"')}</p>` : '';
   // D34 (gate round 2): four long teacher sections fold shut by default (details), so the screen fits 15 minutes of preparation. Which ones the
   // teacher opened is kept for this tab only (sessionStorage, a per-viewer convenience); it never holds anything about pupils.
   const T_FOLD_KEY = 'e18-tfold';
@@ -7824,7 +8106,8 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     readFirst: { read: val('t-vs-rd-read', ''), click: val('t-vs-rd-click', '') },
     pairs: val('t-vs-pairs', ''), pairsEnd: val('t-vs-pairs-end', ''), check: Object.fromEntries(ESCR.ROOMS.map(R => [R.id, { start: val(`t-vs-chk-${R.id}-start`, ''), eind: val(`t-vs-chk-${R.id}-eind`, '') }])), // D34: one row per room (forms A and B)
     herh: { date: val('t-vs-h9-date', ''), unit: val('t-vs-h9-unit', 'leerling'), n: val('t-vs-h9-n', ''), right: Object.fromEntries(ESCR.ROOMS.map(R => [R.id, val('t-vs-h9-right-' + R.id, '')])),
-      plan: Object.fromEntries((H9 ? H9.PLAN_OPTS : []).map(([k]) => [k, val('t-vs-h9-plan-' + k, '')])) } });
+      plan: Object.fromEntries((H9 ? H9.PLAN_OPTS : []).map(([k]) => [k, val('t-vs-h9-plan-' + k, '')])) },
+    res: resData() }); // D38: the Klasresultaten when they are on screen
   const tReport = () => TCH.report(tVsInput(), tVar() || 'basis');
   function teachVsOut() {
     const r = tReport();
@@ -7835,6 +8118,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     const field = (id, label, input) => `<label class="field" for="${id}">${label}${input}</label>`, opts = (id, list, d = '') => list.map(([v, l]) => `<option value="${v}" ${val(id, d) === v ? 'selected' : ''}>${l}</option>`).join('');
     return `<section class="t-card t-vs" aria-labelledby="t-vs-h">${tFoldOpen('vs')}<summary><h2 id="t-vs-h">Lesverslag</h2></summary>
       <p class="t-lead">Na de les. Vul in wat je weet, dan maakt dit scherm een kort verslag om te kopiëren of af te drukken. ${logOn() ? 'Het verslag zelf wordt niet verstuurd of bewaard.' : 'Er wordt niets verstuurd of bewaard.'}</p>
+      ${logOn() && CR ? `<p class="sub2" id="t-vs-res">${esc(resData() ? CR.T.vsResOn : CR.T.vsResOff)}</p>` : ''}
       <div class="t-vs-grid">${field('t-vs-school', 'School (mag leeg blijven)', `<input id="t-vs-school" maxlength="80" autocomplete="off" value="${esc(val('t-vs-school', ''))}">`)}
         ${field('t-vs-date', 'Datum', `<input id="t-vs-date" type="date" value="${esc(val('t-vs-date', tToday()))}">`)}
         ${field('t-vs-level', 'Niveau', `<select id="t-vs-level">${opts('t-vs-level', [['', 'Kies'], ...Object.keys(TCH.LEVELS).map(l => [l, l])])}</select>`)}
@@ -7849,19 +8133,21 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
       ${field('t-vs-note', 'Eén zin over de les. Schrijf geen namen van leerlingen.', `<input id="t-vs-note" maxlength="200" autocomplete="off" value="${esc(val('t-vs-note', ''))}">`)}
       <div id="t-vs-out">${teachVsOut()}</div>
       ${teachVsFeedback(field, opts)}
-      <div class="row-acts">${logOn() ? btn('Verslag opslaan', 't-vs-save') : ''}${btn('Kopieer verslag', 't-vs-copy', logOn() ? 'ghost' : '')}${btn('Verslag afdrukken', 't-vs-print', 'ghost')}</div>
-      <p class="t-privacy">${logOn() ? 'Dit verslag blijft op deze pagina. Sluit je de pagina, dan is het weg. Alleen de vragen voor het Escape 18-team gaan anoniem naar het team, en alleen als deze klas deelt.' : 'Dit verslag blijft op deze pagina. Sluit je de pagina, dan is het weg. Er gaat niets naar een server.'}</p></details></section>`;
+      <div class="row-acts">${btn('Kopieer verslag', 't-vs-copy')}${btn('Verslag afdrukken', 't-vs-print', 'ghost')}</div>
+      <p class="t-privacy">${logOn() ? 'Dit verslag blijft op deze pagina. Sluit je de pagina, dan is het weg. Alleen je feedback voor het Escape 18-team gaat naar het team, en alleen als je op Verstuur feedback tikt.' : 'Dit verslag blijft op deze pagina. Sluit je de pagina, dan is het weg. Er gaat niets naar een server.'}</p></details></section>`;
   }
-  // D33: the teacher's feedback for the team (spec type "feedback"): not part of the report text (the pilot report reads that), sent with
-  // "Verslag opslaan" only when this class shares. "Zou je deze les opnieuw geven?" above is reused as "again".
+  // D33: the teacher's feedback for the team (spec type "feedback"): not part of the report text (the pilot report reads that).
+  // D38 (LOGGING_SPEC.md v2 and v3, privacy.html): the teacher's own choice, independent of the class's Ja or Nee: always there when an endpoint
+  // is set, sent only with "Verstuur feedback". Without an endpoint (logging off) the form is not shown. "Zou je deze les opnieuw geven?" above is reused as "again".
+  const FB_WHERE = 'Je feedback gaat naar het Escape 18-team, los van je keuze over de antwoorden van de klas. E-mailadressen en telefoonnummers halen we weg.';
   function teachVsFeedback(field, opts) {
     if (!logOn()) return '';
     const area = (id, label) => field(id, `${label} <span class="sub2">${esc(TCH.FB_NOTE)} Hooguit ${TCH.FB_MAX} tekens.</span>`, `<textarea id="${id}" maxlength="${TCH.FB_MAX}" rows="3">${esc(val(id, ''))}</textarea>`);
-    const say = tLog.share === true ? 'Met Verslag opslaan gaan ze anoniem naar het Escape 18-team. Opnieuw geven en het aantal leerlingen gaan mee.' : 'Deze klas deelt niet, dus deze antwoorden worden niet verstuurd.';
-    return `<fieldset class="t-vs-fb"><legend>Voor het Escape 18-team (mag leeg blijven)</legend><p class="sub2">Deze vragen staan niet in het verslag. ${esc(say)}</p>
+    return `<fieldset class="t-vs-fb"><legend>Voor het Escape 18-team (mag leeg blijven)</legend><p class="sub2">Deze vragen staan niet in het verslag. Opnieuw geven en het aantal leerlingen gaan mee.</p>
       <div class="t-vs-grid">${field('t-vs-used', 'Hoeveel van de les gaf je?', `<select id="t-vs-used">${opts('t-vs-used', TCH.USED, tLes === 'short' ? 'kort' : 'heel')}</select>`)}
         ${field('t-vs-min', 'Hoeveel minuten duurde de les?', `<input id="t-vs-min" type="number" inputmode="numeric" min="1" max="240" value="${esc(val('t-vs-min', ''))}">`)}</div>
-      ${area('t-vs-worked', 'Wat werkte goed?')}${area('t-vs-notworked', 'Wat werkte niet?')}</fieldset>`;
+      ${area('t-vs-worked', 'Wat werkte goed?')}${area('t-vs-notworked', 'Wat werkte niet?')}
+      <p class="sub2" id="t-fb-where">${esc(FB_WHERE)}</p><div class="row-acts">${btn('Verstuur feedback', 't-fb-send')}</div></fieldset>`;
   }
   const tFeedback = () => { const n = (id, hi) => { const v = String(val(id, '')).trim(); return /^\d{1,3}$/.test(v) && +v >= 1 && +v <= hi ? +v : null; };
     const used = val('t-vs-used', tLes === 'short' ? 'kort' : 'heel'), again = val('t-vs-again', '');
@@ -8215,6 +8501,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
           <div class="t-durs" role="group" aria-label="Duur van de escape">${TCH.TIMES.map(m => `<button type="button" class="t-dur" data-action="t-dur:${m}" aria-pressed="${m === tDur}" ${run ? 'disabled' : ''}>${m} min</button>`).join('')}</div>
           <div class="row-acts">${btn(label, 't-run', 'esc-go big')}${btn('Opnieuw', 't-reset', 'ghost')}${tStopBtn()}</div>${tStopBox()}
           ${teachFlow(v)}</section></div>
+      ${resBlock()}
       ${teachProblems()}
       ${teachAims()}
       <section class="t-rooms-sec" aria-labelledby="t-rooms-h"><div class="t-rooms-top"><h2 id="t-rooms-h">Per kamer</h2>${btn(tShow ? 'Verberg antwoorden' : 'Toon antwoorden', 't-key', 'ghost', `aria-expanded="${tShow}" aria-controls="${ids}"`)}</div>
@@ -8225,7 +8512,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
       ${teachVerslag()}
       ${teachHerhaalCard()}
       ${FR ? teachFresh() : ''}
-      <div class="t-foot">${tFoot()}${btn('Over en privacy', 'view:about', 'ghost small')}${btn('Meer lessen', 'view:class', 'ghost small')}</div></div>
+      <div class="t-foot">${devLine()}${tFoot()}${btn('Over en privacy', 'view:about', 'ghost small')}${btn('Meer lessen', 'view:class', 'ghost small')}</div></div>
       ${v ? teachPlan(key, v) + teachSheetPrint(rooms) + teachPaperPrint(rooms) : ''}${teachVsPrint()}${teachHomePrint()}${FR ? teachFreshPrint() : ''}`;
   }
   // ----- D33: the closing question, the one-page answer sheet and the rooms on paper (4 Nov teacher reviews D-01 and D-02; LOGGING_SPEC.md v2) -----
@@ -8273,17 +8560,24 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
       if (!tLog.klas) { tLog.klas = LG.newCode(); tLog.sess = LG.newSession(); }
       tLog.share = v; tLogSave(); flash = { kind: 'info', title: v ? `Je koos Ja. Klascode ${tLog.klas}.` : `Je koos Nee. Klascode ${tLog.klas}; deze klas verstuurt niets.` };
       pendingFocus = { key: `[data-action="t-share:${v ? 'ja' : 'nee'}"]` }; render(); },
-    't-newclass': () => { tLog = { share: null, klas: null, sess: null, started: false, sent: null }; tLogSave(); flash = { kind: 'info', title: 'Nieuwe klas. Kies eerst Ja of Nee.' }; pendingFocus = { key: '[data-action="t-share:ja"]' }; render(); },
-    't-vs-save': () => { const r = tReport(); if (r.errors.length) { flash = { kind: 'warn', title: 'Kijk eerst het verslag na.', items: r.errors }; return render(); }
+    't-newclass': () => { tLog = { share: null, klas: null, sess: null, started: false, sent: null }; tLogSave(); if (RESP) RESP.reset(); flash = { kind: 'info', title: 'Nieuwe klas. Kies eerst Ja of Nee.' }; pendingFocus = { key: '[data-action="t-share:ja"]' }; render(); },
+    // D38: "Verstuur feedback", with Ja, with Nee, before a choice and on a page opened with log=0: the teacher's own feedback, with the class code
+    // when there is one (else GEEN) and the teacher session. Nothing from pupils depends on it. Sent once per unchanged text.
+    't-fb-send': () => { const r = tReport(); if (r.errors.length) { flash = { kind: 'warn', title: 'Kijk eerst het verslag na.', items: r.errors }; return render(); }
+      if (!logOn()) { flash = { kind: 'info', title: 'In deze versie is versturen niet ingesteld. Er wordt niets verstuurd.' }; return render(); }
       const data = tFeedback(), same = tLog.sent === JSON.stringify(data);
-      if (logOn() && tLog.share === true && !same) { const ok = LOG.send(tCtx(), 'feedback', data); if (ok) { tLog.sent = JSON.stringify(data); tLogSave(); logFlush(); } flash = ok ? (navigator.onLine === false ? { kind: 'info', title: 'Je bent offline. We versturen je feedback zodra je weer online bent.' } : { kind: 'ok', title: 'Opgeslagen. Je feedback wordt anoniem verstuurd naar het Escape 18-team. Dank je wel.' }) : { kind: 'warn', title: 'Delen lukte niet. Het verslag staat nog op deze pagina.' }; }
-      else flash = same && tLog.share === true ? { kind: 'info', title: 'Deze feedback is al gedeeld.' } : { kind: 'info', title: 'Opgeslagen op deze pagina. Er is niets verstuurd, want deze klas deelt niet.' };
+      if (!tLog.sess) tLog.sess = LG.newSession();
+      if (!same) { const ok = LOG.send({ class: tLog.klas || LG.NONE, session: tLog.sess, off: false }, 'feedback', data); if (ok) { tLog.sent = JSON.stringify(data); tLogSave(); logFlush(); } flash = ok ? (navigator.onLine === false ? { kind: 'info', title: 'Je bent offline. We versturen je feedback zodra je weer online bent.' } : { kind: 'ok', title: 'Dank je wel. Je feedback wordt anoniem verstuurd naar het Escape 18-team.' }) : { kind: 'warn', title: 'Delen lukte niet. Het verslag staat nog op deze pagina.' }; }
+      else flash = { kind: 'info', title: 'Deze feedback is al gedeeld.' };
       render(); },
-    't-run': () => { if (tEnd == null && tChosen() && !tLog.started && tVar()) { tLog.started = true; tLogSave(); LOG.send(tCtx(), 'teacher_start', { variant: tVar(), rooms: tRooms().map(R => R.id) }); logFlush(); }
+    't-run': () => { if (tEnd == null && tChosen() && !tLog.started && tVar()) { tLog.started = true; tLogSave(); LOG.send(tCtx(), 'teacher_start', { variant: tVar(), rooms: tRooms().map(R => R.id) }); devReuse(); logFlush(); }
       if (tEnd != null) { tLeft = Math.max(0, tEnd - Date.now()); tEnd = null; flash = { kind: 'info', title: 'Klastimer gepauzeerd op ' + tClock(tLeft) + '.' }; }
       else { if (tLeft <= 0) tLeft = tDur * 60000; tEnd = Date.now() + tLeft; flash = { kind: 'info', title: 'De klastimer loopt: ' + tClock(tLeft) + '.' + qsSet(5, true) }; } render(); },
     't-stop': () => { tStopped = !tStopped; if (tStopped && tEnd != null) { tLeft = Math.max(0, tEnd - Date.now()); tEnd = null; }
       flash = { kind: 'info', title: tStopped ? 'De escape is gestopt. Leerlingen tikken op We stoppen.' : 'Verder met de escape.' }; pendingFocus = { key: tStopped ? '#t-stop-h' : '[data-action="t-stop"]' }; render(); },
+    // D38: "Vernieuw de klasresultaten" (after 15 minutes of reading): one read per click. "Vergeet dit apparaat": the local record goes.
+    'res-refresh': () => { if (RESP) { RESP.manual(); resUpdate(); } const b = $('tres-refresh'); if (b) b.disabled = !!(RESP && RESP.S.inflight); },
+    't-dev-forget': () => { devForget(); flash = { kind: 'info', title: 'Dit apparaat is vergeten.' }; pendingFocus = { key: '.t-foot [data-action="view:about"]' }; render(); },
     't-reset': () => { tStopped = false; tEnd = null; tLeft = tDur * 60000; flash = { kind: 'info', title: `Klastimer opnieuw: ${tDur} minuten.` }; render(); },
     // F3: the close. The class timer goes to the 2 minutes of "Mijn 18-plan" (not while it runs, like the durations).
     't-close': () => { if (tEnd == null && P18) { tDur = P18.MIN; tLeft = tDur * 60000; flash = { kind: 'info', title: `Klastimer op ${P18.MIN} minuten: Mijn 18-plan.` }; } render(); },
@@ -8408,11 +8702,14 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
         <ul class="about-list">${[
           // D33: true with and without results logging; the second line says plainly what is shared and that the teacher can say Nee.
           'Geen account en geen namen. We vragen leerlingen nooit iets persoonlijks.',
-          logOn() ? 'Op deze website kiest de docent per klas Ja of Nee. Ja is: anonieme antwoorden delen met het team. Bij Ja gaat per vraag mee welk antwoord een tweetal koos. Ook hints en seconden. Nooit namen en nooit iets wat leerlingen typen. Verder haalt de pagina niets op bij andere servers.'
+          // D38: the class summary after the stop and the teacher screen's local record, as privacy.html describes them.
+          logOn() ? 'Op deze website kiest de docent per klas Ja of Nee. Ja is: anonieme antwoorden delen met het team. Bij Ja gaat per vraag mee welk antwoord een tweetal koos. Ook hints en seconden, en wat een tweetal zelf wil aantikken: hoe zeker het was bij de eindcheck en over welk onderwerp het een volgende les wil. Nooit namen en nooit iets wat leerlingen typen.'
+            + ' Na de stop haalt het docentenscherm bij Ja een samenvatting van de hele klas op, alleen als minstens 3 tweetallen meededen. Verder haalt de pagina niets op bij andere servers.'
             : 'Deze versie verstuurt niets naar ons of naar anderen. De pagina haalt niets op bij andere servers. Ook de lettertypen zitten in het bestand.',
           'In gastmodus onthoudt alleen dit tabblad de open les. Sluit je het, dan is die weg.',
           'Kies je zelf voor opslaan, dan staat je voortgang alleen in deze browser. Wissen kan via Opslaan en laden.',
-          logOn() ? 'Het lesverslag van de docent blijft op de pagina. Alleen de vragen voor het team gaan mee, en alleen als de klas deelt.' : 'Het lesverslag van de docent blijft op de pagina en wordt niet bewaard.',
+          logOn() ? 'Het lesverslag van de docent blijft op de pagina. Alleen de feedback van de docent gaat naar het team, als de docent op Verstuur feedback tikt, los van de keuze van de klas.' : 'Het lesverslag van de docent blijft op de pagina en wordt niet bewaard.',
+          ...(logOn() ? ['Kiest de docent Ja en start de les, dan onthoudt de browser van het docentenscherm welke les er startte, hoe vaak en op welke dag. Dat blijft op dat apparaat. Wissen kan met Vergeet dit apparaat op het docentenscherm.'] : []),
           'Wie de pagina aanbiedt, ziet zoals bij elke website je IP-adres. Het offline bestand werkt zonder internet.'
         ].map(li).join('')}</ul></div>
       <div class="card"><h2 class="h3"><span class="k">Bronnen</span>Gecontroleerd op ${esc(ABOUT_CHECKED)}</h2>
@@ -8634,7 +8931,11 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
       <ol class="esc-prog" aria-hidden="true">${list.map((x, j) => `<li class="${j < i ? 'done' : j === i ? 'now' : ''}"></li>`).join('')}</ol></section>`;
     const lead = start ? 'Kies wat jullie nu denken. Pas aan het eind zie je wat goed was.' : legacy ? 'De klok staat stil. Dezelfde vragen als bij de start, in een andere volgorde.' : 'De klok staat stil. Nieuwe vragen over dezelfde regels als in de kamers.';
     const a = `<div class="card act esc-q esc-chk"><p class="esc-chk-lead">${esc(lead)}</p><p class="esc-situ">${esc(Q.situ || R.intro)}</p><h2 id="esc-prompt" class="esc-prompt">${esc(Q.prompt)}</h2></div>`;
-    const b = `<div class="esc-cards ${long ? 'one' : ''}" role="group" aria-labelledby="esc-prompt">${opts.map(([v, l]) => `<button type="button" class="esc-card" data-action="esc-chk:${set}:${Q.id}:${v}">${esc(l)}</button>`).join('')}</div>${flash && flash.kind === 'warn' ? flashBox() : ''}`;
+    // D38 (LOGGING_SPEC.md v3): on the end check (forms A and B, with sharing on) an optional "Hoe zeker zijn jullie?" tap per question. Here an
+    // answer moves on at once, so the tap comes first; it is kept in screen memory and goes with the check event as items[].conf.
+    const CR = E18.classres, cf = (logConf[r.id] || {})[Q.id];
+    const conf = !start && !legacy && logPupilOn() && CR ? `<fieldset class="esc-conf"><legend>${esc(CR.T.confQ)} <span class="sub2">${esc(CR.T.confOpt)} Tik dit eerst, dan je antwoord.</span></legend><div class="esc-conf-k">${CR.T.confs.map((x, n) => `<button type="button" class="esc-conf-b" data-action="esc-conf:${Q.id}:${n + 1}" aria-pressed="${cf === n + 1}">${esc(x)}</button>`).join('')}</div></fieldset>` : '';
+    const b = `${conf}<div class="esc-cards ${long ? 'one' : ''}" role="group" aria-labelledby="esc-prompt">${opts.map(([v, l]) => `<button type="button" class="esc-card" data-action="esc-chk:${set}:${Q.id}:${v}">${esc(l)}</button>`).join('')}</div>${flash && flash.kind === 'warn' ? flashBox() : ''}`;
     return head + `<div class="esc-stage ${docs ? '' : 'nodocs'}"><div class="esc-a">${a}</div>${docs ? `<div class="esc-docs">${docs}</div>` : ''}<div class="esc-b">${b}</div></div>`;
   }
   // F1: the pair's own before and after, per question, on its own screen only. The teacher counts hands; nothing is sent.
@@ -8751,7 +9052,9 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
     'esc-chk': el => { const [set, q, v] = escArgs(el), res = escAct({ t: 'check', set, q, value: v }); if (!res.ok) return;
       if (res.complete) { const C = ESCR.checkResult(res.ms), form = ESCR.formOfRun(res.ms, set); // D34: form A or B and the per-item results (LOGGING_SPEC.md)
         // A D31 to D33 run (room questions, no form) sends no check event: the spec has no form for it.
-        if (form) logSend(run(), 'check', { phase: set === 'eind' ? 'end' : 'start', form, score: set === 'eind' ? C.eind : C.start, max: C.of, items: C.items[set] }); if (set === 'eind') logEnd(run(), res.ms); else logFlush(); }
+        // D38 (LOGGING_SPEC.md v3): ceil on the start check (the start score is the maximum), the optional confidence per end-check item.
+        const cf = logConf[runId] || {}, items = set === 'eind' ? C.items.eind.map(x => cf[x.q] ? Object.assign({}, x, { conf: cf[x.q] }) : x) : C.items.start;
+        if (form) logSend(run(), 'check', Object.assign({ phase: set === 'eind' ? 'end' : 'start', form, score: set === 'eind' ? C.eind : C.start, max: C.of, items }, set === 'start' ? { ceil: C.start === C.of } : {})); if (set === 'eind') logEnd(run(), res.ms); else logFlush(); }
       const list = ESCR.checkOf(res.ms.variant, set, res.ms), next = ESCR.checkNext(res.ms, set);
       if (next) flash = { kind: 'info', title: `Vraag ${list.indexOf(next) + 1} van ${list.length}` };
       else if (set === 'start') { escChk = null; flash = { kind: 'ok', title: 'Startcheck klaar', text: 'Start nu de klok.' }; }
@@ -8789,8 +9092,17 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
       const h = $('app').querySelector('.rd-hl'); if (h) h.scrollIntoView({ block: 'center' }); },
     'esc-pfb': el => { const [k, n] = escArgs(el), r = run(), v = parseInt(n, 10); if (!r || !logPupilOn() || !LOG_SCALES.some(x => x[0] === k) || !(v >= 1 && v <= 5)) return;
       const F = logFb[r.id] = logFb[r.id] || {}; if (F.sent) return; F[k] = v;
-      if (F.fun && F.learned) { F.sent = logSend(r, 'pupil_feedback', { fun: F.fun, learned: F.learned }); logFlush(); flash = { kind: 'ok', title: 'Dank je wel.' }; } else flash = { kind: 'info', title: `Je tikte ${v}.` };
-      pendingFocus = F.sent ? null : { key: `[data-action="esc-pfb:${k}:${v}"]` }; render(); },
+      flash = { kind: 'info', title: `Je tikte ${v}.` }; pendingFocus = { key: `[data-action="esc-pfb:${k}:${v}"]` }; render(); },
+    // D38: the topic wish (tap again to take it back) and the send button; the wish goes only with the two scales, in one event, once.
+    'esc-wish': el => { const [w] = escArgs(el), r = run(); if (!r || !logPupilOn() || !LG.WISHES.includes(w)) return;
+      const F = logFb[r.id] = logFb[r.id] || {}; if (F.sent) return; F.wish = F.wish === w ? undefined : w;
+      flash = { kind: 'info', title: F.wish ? 'Gekozen: ' + E18.classres.T.wishes[w] + '.' : 'Niet gekozen.' }; pendingFocus = { key: `[data-action="esc-wish:${w}"]` }; render(); },
+    'esc-pfb-send': () => { const r = run(); if (!r || !logPupilOn()) return; const F = logFb[r.id] || {}; if (F.sent || !(F.fun && F.learned)) return;
+      F.sent = logSend(r, 'pupil_feedback', Object.assign({ fun: F.fun, learned: F.learned }, F.wish ? { wish: F.wish } : {})); logFlush();
+      flash = F.sent ? { kind: 'ok', title: 'Dank je wel.' } : { kind: 'warn', title: 'Versturen lukte niet.' }; pendingFocus = { key: '#esc-pfb' }; render(); },
+    'esc-conf': el => { const [q, n] = escArgs(el), v = parseInt(n, 10); if (!runId || !logPupilOn() || !LG.CONF.includes(v)) return;
+      const C = logConf[runId] = logConf[runId] || {}; C[q] = C[q] === v ? undefined : v;
+      flash = { kind: 'info', title: C[q] ? 'Hoe zeker: ' + E18.classres.T.confs[v - 1] + '.' : 'Niet ingevuld.' }; pendingFocus = { key: `[data-action="esc-conf:${q}:${v}"]` }; render(); },
     'esc-rev': el => { const [room] = escArgs(el); escRev = { run: runId, room }; flash = null; render(); },
     'esc-back': () => { escRev = null; flash = null; render(); },
     'kort-tog': el => { const [room] = escArgs(el), pick = kortNow(), R = ESCR.BYROOM[room]; if (!R) return;
@@ -8993,6 +9305,7 @@ mark.rd-mark,.t-tell mark,.p-tell mark{background:var(--sun);color:var(--sun-ink
       if (target) { if (!target.matches('a,button,input,select,textarea,[tabindex]')) target.setAttribute('tabindex', '-1'); target.focus({ preventScroll: !moved }); if (moved) target.scrollIntoView({ block: 'start' }); }
     }
     announce();
+    resSync(); // D38: the Klasresultaten start, pause or stop with this screen
   }
   function renderInner() {
     let html;
