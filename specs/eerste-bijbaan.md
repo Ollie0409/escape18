@@ -1,8 +1,8 @@
 # Je eerste bijbaan (ESC-BIJBAAN): content spec
 
-Bedragen geldig voor: 1 juli 2026 tot en met 31 december 2026; gecontroleerd op 6 november 2026; validUntil: 31 december 2026
+Bedragen geldig voor: 1 juli 2026 tot en met 31 december 2026 (de les speelt in 2026; het 2027-overzicht in kamer 2 geldt vanaf 1 januari 2027); gecontroleerd op 6 november 2026; validUntil: 30 juni 2027
 
-(The kamer 2 table expires on 1 January 2027. The 2027 amounts in the kamer 2 teacher note apply from 1 January 2027; the Rijksoverheid page, modified 6 Nov 2026, gives no end date. Re-check every source before 1 January 2027.)
+(2027 update, 7 Nov 2026, option A: the story stays in November 2026 and the 2026 table stays, labelled "tot en met 31 december 2026". The official 2027 table (Stcrt. 2026, 38817) sits next to it as document `tabel2027`, shown in the room intro only, never with a question; it applies from 1 January 2027 until the 1 July 2027 indexation, hence validUntil 30 juni 2027. Re-check the Rijksoverheid page before 1 July 2027.)
 
 Status: draft content, no code. Written 6 Nov 2026 after reading `d32/src/escaperun.js`, `d32/FACT_SOURCES.md`, `d32/READABILITY.md`, `d32/src/teacher.js` (plan, DISCUSS), `d32/src/plan18.js` (als-dan-plan) and `d32/RESEARCH_C04.md`. Revised the same day after factcheck A, fact check B, gate G3 to G8 and playtest G4 (changelog at the end). Every rule below was read on its official page on 6 Nov 2026 (source table at the end).
 
@@ -184,6 +184,20 @@ De leerling kan:
 
 **Moeilijke woorden:** "Minimumloon: het laagste loon dat je werkgever je mag betalen. Brutoloon: je loon voordat er belasting af gaat. Vakantiegeld: extra loon bovenop je gewone loon."
 
+### Document 5 `tabel2027` (type: list; real amounts, labelled as real; shown in the room intro only, not with any question)
+
+> **Minimumloon per uur, vanaf 1 januari 2027**
+> Bron: Rijksoverheid, bedragen minimumloon 2027. Deze tabel is echt. Hij gaat over 2027, niet over november 2026.
+>
+> | Leeftijd | Bruto per uur |
+> |---|---|
+> | 15 jaar | € 4,59 |
+> | 16 jaar | € 6,12 |
+> | 17 jaar | € 7,65 |
+> | 18 jaar | € 9,56 |
+>
+> Deze bedragen gelden vanaf 1 januari 2027.
+
 ### Vraag 2.1 `minimum` (pick, docs: tabel, app)
 
 - **Prompt:** "Welk minimumloon per uur geldt in november voor jou?"
@@ -241,9 +255,9 @@ De leerling kan:
 **Voor de docent (kamer 2):**
 - Vanaf je verjaardag krijg je het minimumloon voor je nieuwe leeftijd. Sam heeft vanaf 20 oktober 2026 recht op minstens € 5,92 per uur. Wachten tot januari mag niet.
 - Op 1 januari 2027 gaat het minimumjeugdloon omhoog. Per uur: 15 jaar € 4,59; 16 jaar € 6,12; 17 jaar € 7,65; 18 jaar € 9,56; 19 jaar € 11,47; 20 jaar € 13,38; 21 jaar en ouder € 15,29 (Rijksoverheid, Bedragen minimumloon 2027, bijgewerkt op 6 november 2026). De link staat bij de bronnen.
-- De vragen gaan over november 2026, dus de antwoorden blijven goed. Noem de nieuwe bedragen bij het nabespreken.
+- De vragen gaan over november 2026, dus de antwoorden blijven goed. Noem de nieuwe bedragen bij het nabespreken. Het 2027-overzicht staat bij de start van deze kamer naast de tabel van 2026 en hoort niet bij de vragen: wie in 2027 speelt, antwoordt nog steeds voor november 2026.
 
-(Spec note, not shown: if the lesson is played after 1 January 2027, add the 2027 table next to the 2026 table, never instead of it; 2.1, 2.2 and digit 2 are about November 2026.)
+(Spec note, done in the 2027 update of 7 Nov 2026: the 2027 table is added next to the 2026 table as `tabel2027`, never instead of it; it is shown in the room intro, not with 2.1 or 2.2, and not on the digit screen; 2.1, 2.2 and digit 2 are about November 2026.)
 
 ---
 
@@ -557,7 +571,7 @@ Tip voor de docent: een fout antwoord wordt doorgestreept. Een tweetal kan dus o
 | € 7,00 per uur | vraag A2 | verzonnen | oktober 2026 |
 | € 4,90 per uur | vraag B2 | verzonnen | oktober 2026 |
 | € 480,00 loon en € 24,00 ingehouden loonheffing | jaaropgaaf kamer 4 | verzonnen voorbeeld, geen berekening | jaar 2026 (1 september tot en met 31 december 2026) |
-| € 4,59 / € 6,12 / € 7,65 / € 9,56 / € 11,47 / € 13,38 / € 15,29 per uur (15 / 16 / 17 / 18 / 19 / 20 / 21+ jaar) | alleen docentnoot kamer 2 | echt (Rijksoverheid, bedragen minimumloon 2027, page modified 6 Nov 2026 12:16 UTC) | vanaf 1 januari 2027; the page gives no end date |
+| € 4,59 / € 6,12 / € 7,65 / € 9,56 / € 11,47 / € 13,38 / € 15,29 per uur (15 / 16 / 17 / 18 / 19 / 20 / 21+ jaar) | docentnoot kamer 2; for 15 to 18 jaar also document `tabel2027` (room intro only) | echt (Stcrt. 2026, 38817; Rijksoverheid, bedragen minimumloon 2027, page modified 6 Nov 2026 12:16 UTC) | vanaf 1 januari 2027 tot de indexering van 1 juli 2027 |
 
 (The 2027 percentages, 16: 40%, 17: 50%, 18: 62,5%, 19: 75%, 20: 87,5%, are no longer in the teacher note; they remain in source row `wml-2027`.)
 
@@ -578,7 +592,7 @@ All pages read on **6 Nov 2026** (the fact check B rows re-read in this revision
 | wml-2026-1 | Distractor only: 17 jaar € 5,81 (16 jaar € 5,07, 18 jaar € 7,36). | Rijksoverheid bedragen 2026 | Government.nl amounts | 6 Nov 2026 | Valid 1 Jan 2026 to 30 Jun 2026 (expired) |
 | wml-leeftijd | Het minimumloon hangt af van je leeftijd; je werkgever betaalt minstens het bedrag voor jouw leeftijd; vanaf je verjaardag geldt het bedrag voor je nieuwe leeftijd (explanation 2.1, teacher note kamer 2). | Rijksoverheid bedragen 2026 (table by age; re-read 7 Nov 2026: 17 jaar € 5,92 from 1 juli to 31 december 2026) | Government.nl amounts (table by age); law: [Besluit minimumjeugdloon](https://wetten.overheid.nl/BWBR0003599/2024-01-01) art. 1 and 2 (version from 1 Jan 2024, read on 7 Nov 2026 as the official BWB XML of BWBR0003599): the rate is set per age group, "de 17-jarigen: 39½", so on the birthday the worker moves to the next group; 39,5% matches € 5,92 | 6 Nov 2026 (birthday rule 7 Nov 2026) | Ongoing |
 | vakantiegeld | Tabel kamer 2: bedragen zonder vakantiegeld; daarnaast minstens 8% vakantiegeld. | Law: [Wet minimumloon art. 15 lid 1](https://wetten.overheid.nl/BWBR0002638/2026-07-01) (wetten.overheid.nl, version 1 Jul 2026): "recht op een vakantiebijslag ten minste tot een bedrag van 8% van zijn ten laste van de werkgever komende loon"; the minimumloon itself is art. 8 | Rijksoverheid bedragen 2026: the table gives the minimumloon as brutobedragen and lists no holiday pay | 6 Nov 2026 | No end date known |
-| wml-2027 | Teacher note only: euro amounts per 1 Jan 2027 (15: € 4,59; 16: € 6,12; 17: € 7,65; 18: € 9,56; 19: € 11,47; 20: € 13,38; 21+: € 15,29). | [Rijksoverheid, bedragen minimumloon 2027](https://www.rijksoverheid.nl/themas/werk/minimumloon/bedragen-minimumloon/bedragen-minimumloon-2027) (page date 6 Nov 2026, 12:16 UTC; re-read in this revision, same amounts) | [Rijksoverheid nieuws, hoger minimumjeugdloon vanaf 2027](https://www.rijksoverheid.nl/actueel/nieuws/2026/04/17/hoger-minimumjeugdloon-vanaf-2027) (17 Apr 2026): percentages 16: 40%, 17: 50%, 18: 62,5%, 19: 75%, 20: 87,5%; the euro amounts match them | 6 Nov 2026 | From 1 Jan 2027; no end date on the page. Not in any question. |
+| wml-2027 | Teacher note, and for 15 to 18 jaar the pupil document `tabel2027` (room intro only): euro amounts per 1 Jan 2027 (15: € 4,59; 16: € 6,12; 17: € 7,65; 18: € 9,56; 19: € 11,47; 20: € 13,38; 21+: € 15,29). | [Staatscourant 2026, 38817](https://zoek.officielebekendmakingen.nl/stcrt-2026-38817.html) (Regeling van 29 oktober 2026, published 6 Nov 2026, read 7 Nov 2026: bedragen per 1 januari 2027) and [Rijksoverheid, bedragen minimumloon 2027](https://www.rijksoverheid.nl/themas/werk/minimumloon/bedragen-minimumloon/bedragen-minimumloon-2027) (page date 6 Nov 2026, 12:16 UTC; re-read in this revision, same amounts) | [Rijksoverheid nieuws, hoger minimumjeugdloon vanaf 2027](https://www.rijksoverheid.nl/actueel/nieuws/2026/04/17/hoger-minimumjeugdloon-vanaf-2027) (17 Apr 2026): percentages 16: 40%, 17: 50%, 18: 62,5%, 19: 75%, 20: 87,5%; the euro amounts match them | 6 Nov 2026 | From 1 Jan 2027 until the 1 July 2027 indexation. Not in any question. |
 | onderbetaald-stappen | Te weinig loon: spreek eerst je werkgever aan; lost hij het niet op, doe een melding bij de Nederlandse Arbeidsinspectie. | [Rijksoverheid, wat kan ik doen als ik minder loon krijg dan het wettelijk minimumloon](https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/minimumloon/wat-kan-ik-doen-als-ik-minder-loon-krijg-dan-het-wettelijk-minimumloon) (page date 21 Jan 2026): "Spreek eerst uw werkgever hierop aan."; "Komt u er met uw werkgever niet uit, dan kunt u terecht bij de Nederlandse Arbeidsinspectie." | [Government.nl, less than the minimum wage](https://www.government.nl/topics/minimum-wage/less-than-the-minimum-wage) (page date 5 Feb 2024) | 6 Nov 2026 | No end date known |
 | onderbetaald-5jaar | Te weinig loon kun je tot 5 jaar terugvragen. | Rijksoverheid (as above): "U rekent 5 jaar vanaf de dag waarop u recht had op het loon of vakantiegeld." | Government.nl (as above) | 6 Nov 2026 | No end date known |
 | nacht | 16 en 17 jaar: nooit na 23:00 uur werken; van 23:00 tot 06:00 uur altijd vrij. | [Rijksoverheid, hoeveel uur werken 16 of 17 jaar](https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/bijbaan-vakantiewerk-en-stage-door-jongeren/hoeveel-uur-werken-16-17-jaar) (page date 12 Dec 2025): "Je mag niet 's nachts werken"; [Rijksoverheid, hoeveel pauze 16 of 17 jaar](https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/bijbaan-vakantiewerk-en-stage-door-jongeren/hoeveel-pauze-16-17-jaar) (page date 12 Dec 2025): "In elk geval tussen 23.00 - 06.00 uur" | Law: [Arbeidstijdenwet art. 5:3 lid 1](https://wetten.overheid.nl/BWBR0007671/2025-07-01) (wetten.overheid.nl, geldend van 1 juli 2025 tot heden): "waarin zijn begrepen de uren tussen 23.00 uur en 06.00 uur"; also [NLA, BIM Arbeid door jeugdigen en kinderen](https://www.nlarbeidsinspectie.nl/binaries/nlarbeidsinspectie/documenten/richtlijnen/2017/04/06/bim-arbeidstijdenwet-arbeid-door-jeugdigen-en-kinderen/BIM-Arbeid-door-jeugdigen-en-kinderen.pdf) (7 Mar 2017) | 6 Nov 2026 | No end date known |
@@ -602,6 +616,8 @@ Word meanings without a rule: oproepen, dienst, pauze, studiedag, jaaropgaaf, in
 6. **Not measured:** readability (no Flesch-Douma score yet) and timing (the 27 minutes are not timed with real pupils; see the lesplan spec note).
 
 ## Changelog
+
+**2027 update (7 Nov).** Option A of `content_new/update_2027.md`. The November 2026 story, its 2026 table (labelled "tot en met 31 december 2026"), all questions, options, explanations, the Antwoordblad and the lock code **3521** are unchanged. Added: pupil document `tabel2027` "Minimumloon per uur, vanaf 1 januari 2027" (15 to 18 jaar, same layout as the 2026 table, labelled real and "niet over november 2026"), shown in the kamer 2 intro only and with no question or digit screen, so 2.1 and 2.2 keep one defensible answer (€ 7,65 is not an option and not in any question's documents); one teacher sentence in kamer 2; source row `wml-2027` now cites Stcrt. 2026, 38817 next to the Rijksoverheid page; validUntil 31 december 2026 becomes 30 juni 2027 (the 1 July 2027 indexation); `checked` stays 2026-11-06 for the lesson; the 2027 amounts were re-read on 7 Nov 2026 (Stcrt. 2026, 38817).
 
 **Round 2 (ChatGPT, 7 Nov).** Findings 1 to 6 of `qa/checkB/round2/eerste-bijbaan.md`, each checked by me on 7 Nov 2026. Code stays **3521**; no digit, option or right answer changed. Two pages could not be opened (permission request not answered): Rijksoverheid "wanneer minimumloon" and Belastingdienst "hoeveel jaar terug belastingaangifte doen"; decisions below use the other sources named.
 - R2-1 (ERROR, 4.4 situation, explanation, Antwoordblad): applied adjusted. The 5-year rule holds only without a bericht (Belastingdienst "hoeveel jaar terug", quoted in row `vijf-jaar` from the 6 Nov reading: "Hebt u geen bericht gehad ..."; its table gives 2025: "31 december 2030"). Belastingdienst "Moet ik aangifte inkomstenbelasting doen?" (https://www.belastingdienst.nl/wps/wcm/connect/nl/belastingaangifte/content/moet_ik_aangifte_doen, page date 2 Mar 2026, read 7 Nov 2026): without a letter you must file if you owe more than the aanslaggrens. New situation 4.4: "Je hebt geen bericht gekregen dat je aangifte moet doen. Je wilt zelf aangifte doen, om belasting terug te vragen." ("zelf" instead of "vrijwillig", B1.) Explanation: "Zonder bericht kun je tot 5 jaar na afloop van een jaar aangifte doen. Over 2026 kan dat dus tot en met 31 december 2031." Antwoordblad "Waarom": "Geen bericht gekregen: tot 5 jaar na afloop van 2026." Answer 2031 and digit 1 unchanged.
