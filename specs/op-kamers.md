@@ -350,7 +350,7 @@ Score: 1 point per right answer, 0 to 4, before and after, shown per pair on the
 
 Total 45 minutes: 2 + 1 + 30 + 2 + 5 + 2 + 3 = 45, of which 3 minutes buffer. Materials: a device per pair, pen and paper for the digits, a digital board or projector.
 
-Tip voor de docent: een fout antwoord wordt doorgestreept. Een tweetal kan dus ook gokken tot het goed is. Het telt dan alleen niet mee bij "In één keer goed". Vertel de klas dat goed lezen sneller gaat. (G4 fix 12.)
+Tip voor de docent: een fout antwoord wordt doorgestreept. Een tweetal krijgt na een fout een tip en nog één kans; daarna ziet het tweetal het goede antwoord. Dat telt niet mee bij "In één keer goed". Vertel de klas dat goed lezen sneller gaat. (G4 fix 12.)
 
 Note for developers: the stop at minute 33 uses the engine stop flow (G3, all lessons, row 1): the teacher taps "Stop de escape", pupils tap "We stoppen", type the digits the teacher reads out from the printed answer sheet or skip, then do the end check and the plan. The digits are never on the open lesson plan (gate round 2). Playtest estimate for a real pair: 14 to 20 minutes (G4), so a late start of a few minutes still leaves enough escape time.
 

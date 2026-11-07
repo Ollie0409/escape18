@@ -28,7 +28,7 @@ const SHEET_CELL_LIMIT = 10000000;
 const LEVELS = ['pro', 'vmbo', 'havo', 'vwo', 'mbo', 'anders'];
 const WHEN = ['deze week', 'deze maand', 'later'];
 const SINCE = ['week', 'maand', 'langer'];
-const WISHES = ['zorgverzekering', 'abonnementen', 'verzekeringen', 'belasting', 'budget', 'anders']; // pupil_feedback.wish: a fixed topic id, never text
+const WISHES = ['zorgverzekering', 'abonnementen', 'verzekeringen', 'belasting', 'budget', 'studiekeuze', 'studiefinanciering', 'wonen', 'werk', 'anders']; // pupil_feedback.wish: a fixed topic id, never text
 const MONTHS_NL = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
 
 const CODE_RE = /^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{5}$/;

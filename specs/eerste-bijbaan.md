@@ -511,7 +511,7 @@ Parallel checks: A1 and B1 both have a call 2 days ahead against a 4-day contrac
 
 Totaal: 4 + 2 + 27 + 2 + 5 + 2 + 3 (reserve) = 45 minuten. Materials: a device per pair, pen and paper for the digits, a digital board or projector.
 
-Tip voor de docent: een fout antwoord wordt doorgestreept. Een tweetal kan dus ook gokken tot het goed is. Het telt dan alleen niet mee bij "In één keer goed". Vertel de klas dat goed lezen sneller gaat. (G4 fix 12.)
+Tip voor de docent: een fout antwoord wordt doorgestreept. Een tweetal krijgt na een fout een tip en nog één kans; daarna ziet het tweetal het goede antwoord. Dat telt niet mee bij "In één keer goed". Vertel de klas dat goed lezen sneller gaat. (G4 fix 12.)
 
 (Spec notes, not shown: the minute-33 row uses the engine stop flow: the teacher taps "Stop de escape", pupils tap "We stoppen", type the read-out digits or tap "Naar de eindcheck". The digits are not on the open plan. Timing: playtest G4 estimated 24 minutes for a careful pair with 15 questions; this revision removes one question, two contract lines and three situation sentences, and the rule cards should cut first-try misses (7 to 8 of 15 in the playtest), so 27 minutes should fit most pairs. Not yet timed with real pupils.)
 

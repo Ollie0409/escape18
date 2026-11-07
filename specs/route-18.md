@@ -452,7 +452,7 @@ Scheduling advice for the decaan (from the gate): the week of 30 November or 7 D
 
 Total 45 minutes: 4 + 2 + 26 + 3 + 4 + 5 + 1 = 45 (gate T2). `minutes: 26` (board timer default). Materials: een apparaat per tweetal (laptop, Chromebook of telefoon), pen en papier voor de cijfers, een digibord of beamer. 1 papiertje "Mijn volgende stap" per leerling, vooraf geprint.
 
-Tip voor de docent: een fout antwoord wordt doorgestreept. Een tweetal kan dus gokken tot het goed is. Het telt dan alleen niet mee bij "In één keer goed". Vertel de klas dat goed lezen sneller gaat.
+Tip voor de docent: een fout antwoord wordt doorgestreept. Een tweetal krijgt na een fout een tip en nog één kans; daarna ziet het tweetal het goede antwoord. Dat telt niet mee bij "In één keer goed". Vertel de klas dat goed lezen sneller gaat.
 
 Care points ("Let op"):
 1. "Laat de leerlingen hun plan niet inleveren. Het papiertje is van hen. Wil je het in het LOB-dossier? Vraag de leerling het zelf te laten zien of te fotograferen. Verplicht het niet."
