@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-4Bl05dJy9043FuGgOIUEb9YUmAaqTPhqgv+BReapQGU='; style-src 'sha256-wxsicjrQO/TKXEmBbMoojg7fl7SO9m1+cmSs5Ngxr+Q='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-4Bl05dJy9043FuGgOIUEb9YUmAaqTPhqgv+BReapQGU='; style-src 'sha256-vfSeu+iSav4TMk3Qq0tw0q9TU8CRIXpH+rAOg3Z5gRw='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Escape 18: gratis escape-lessen voor havo en vwo over wat er verandert als je 18 wordt.">
 <title>Escape 18</title>
@@ -39,7 +39,7 @@ header.top{display:flex;align-items:center;justify-content:space-between;gap:12p
 .brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none}
 .mark{width:38px;height:38px;border-radius:9px;background:var(--sun);color:var(--sun-ink);display:grid;place-items:center;font:800 20px/1 var(--display);font-stretch:112%}
 .brand b{font:800 17px/1 var(--display);font-stretch:118%;letter-spacing:.04em;text-transform:uppercase}
-.brand small{display:block;font:600 11px/1.3 var(--mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
+.brand small{display:block;font:600 12px/1.3 var(--mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
 h1,h2,h3{font-family:var(--display);line-height:1.12;margin:0;text-wrap:balance}
 h1{font-size:clamp(30px,5.4vw,52px);font-weight:800;font-stretch:115%;letter-spacing:-.01em}
 h2{font-size:clamp(22px,3vw,30px);font-weight:750;font-stretch:108%}
@@ -58,7 +58,7 @@ p{margin:0}
 .btn.esc-go.big{min-height:62px;padding:14px 30px;font-size:20px}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.pill{display:inline-flex;align-items:center;gap:5px;font:600 11.5px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:5px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:5px;font:600 12px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:5px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
 .pill.fic{background:var(--sun);border-color:transparent;color:var(--sun-ink)}
 .note{font-size:14.5px;color:var(--muted);border-left:4px solid var(--sun);padding-left:10px}
 .err{color:var(--stop);font-weight:700}
@@ -127,13 +127,13 @@ label.opt:has(input:checked){border-color:var(--teal);background:var(--teal-soft
 /* documents */
 .esc-doc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .esc-doc h3{font:700 15.5px/1.3 var(--body)}
-.doc-kind{font:600 11.5px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.doc-kind{font:600 12px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .esc-note{font-size:13.5px;color:var(--muted)}
 .esc-plain{margin:0;font-size:14.5px;line-height:1.5;background:var(--sunk);border-left:4px solid var(--teal);border-radius:8px;padding:8px 12px;overflow-wrap:anywhere}
 .esc-plain b{display:block;font:600 12px/1.3 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
 .ln{border-radius:8px;scroll-margin:90px;transition:background-color .2s}
 .ln.point{outline:3px solid var(--sun);outline-offset:2px;background:var(--warn-soft)}
-.ln.point::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 11.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px;vertical-align:2px}
+.ln.point::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px;vertical-align:2px}
 .esc-letter{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;box-shadow:0 10px 22px -16px rgba(0,0,0,.45);font-size:16px;min-width:0}
 .esc-letter header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;border-bottom:3px solid var(--teal);padding-bottom:8px}
 .esc-letter header b{font:800 19px/1.1 var(--display);font-stretch:110%;color:var(--teal)}
@@ -143,9 +143,9 @@ label.opt:has(input:checked){border-color:var(--teal);background:var(--teal-soft
 .esc-slip-h{display:flex;justify-content:space-between;align-items:baseline;gap:4px 12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:8px}
 .esc-slip-h span{font:600 13px/1.3 var(--mono);color:var(--muted)}
 .esc-slip dl{margin:0}
-.esc-slip dl div{display:flex;justify-content:space-between;gap:10px;padding:6px 4px;border-bottom:1px solid var(--line)}
+.esc-slip dl div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 10px;padding:6px 4px;border-bottom:1px solid var(--line)}
 .esc-slip dl div.total{font-weight:700;border-top:2px solid var(--ink);border-bottom:0}
-.esc-slip dt{min-width:0}.esc-slip dd{margin:0;font:600 15px/1.5 var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.esc-slip dt{min-width:0;flex:0 1 38%}.esc-slip dd{margin:0;font:600 15px/1.5 var(--mono);font-variant-numeric:tabular-nums;white-space:normal;overflow-wrap:anywhere;text-align:right;flex:1 1 40%;min-width:0}
 .esc-phone{background:var(--sunk);border:2px solid var(--line);border-radius:26px;padding:12px 12px 14px;display:flex;flex-direction:column;gap:12px;max-width:440px;width:100%}
 .esc-phone-top{display:flex;align-items:center;gap:10px;padding:2px 6px 10px;border-bottom:1px solid var(--line)}
 .esc-phone-top b{display:block;font:600 15px/1.3 var(--mono)}.esc-phone-top span{font-size:13px;color:var(--muted)}
@@ -329,7 +329,7 @@ footer.foot{border-top:1px solid var(--line);padding-top:14px;color:var(--muted)
 .esc-grid tr.total th,.esc-grid tr.total td{font-weight:800;border-top:2px solid var(--ink)}
 .esc-grid tr.ln.point{outline:3px solid var(--sun);outline-offset:-3px;background:var(--warn-soft)}
 .esc-grid tr.ln.point::before{content:none}
-.esc-grid tr.ln.point th:first-child::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 11.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px}
+.esc-grid tr.ln.point th:first-child::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px}
 @media print{.esc-tscroll{overflow:visible}.t-ans{min-width:0}}
 /* v3: review fixes (lock on one row, pointer badge, answers hidden from the board, stopping the escape, smartboard) */
 .esc-dial{flex-wrap:nowrap}
@@ -338,7 +338,7 @@ footer.foot{border-top:1px solid var(--line);padding-top:14px;color:var(--muted)
 .esc-cards>.esc-card:last-child:nth-child(odd){grid-column:1/-1}
 .ln.point::before{white-space:nowrap;flex:none}
 .esc-web dl div.ln.point::before{content:none}
-.esc-web .ln.point dt::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 11.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px;white-space:nowrap;vertical-align:2px}
+.esc-web .ln.point dt::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px;white-space:nowrap;vertical-align:2px}
 .t-room h3 .t-k{display:block;margin-bottom:2px}
 details.t-key summary{flex-wrap:wrap;gap:4px 10px}
 .t-warn{font:700 12px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--stop-soft);color:var(--stop);border-radius:99px;padding:5px 9px;white-space:nowrap}
@@ -394,6 +394,9 @@ details.esc-recap dd{margin:0;font-weight:700;overflow-wrap:anywhere}
 .t-tip p,.t-care ul{margin:0}.t-care ul{padding-left:20px}
 .t-tip-h,.t-care-h{margin:0 0 2px!important;font:600 12px/1.3 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 @media print{.paper .esc-rules-box,.sheet .t-tip,.sheet .t-care{border:1px solid #999;background:none;break-inside:avoid}.sheet .s-plan tr.t-moment td{font-weight:700}}
+
+.opts-hint{margin:0 0 8px;font-size:12px;line-height:1.4;color:var(--muted)}
+.esc-slip dd.dd-prose{font:400 16px/1.55 var(--body);font-variant-numeric:normal;text-align:left;flex:1 1 100%}.esc-slip .row-prose dt{flex:1 1 100%;font-weight:600}
 </style>
 <script src="config.js"></script>
 </head>
@@ -403,7 +406,8 @@ details.esc-recap dd{margin:0;font-weight:700;overflow-wrap:anywhere}
 <h2>De lessen</h2><div class="l-cards"><article class="l-card"><h3>Je eerste maand als 18-jarige</h3><p>Je loonstrook nakijken, een brief van je zorgverzekeraar lezen, een nepbericht herkennen en op tijd aanmelden voor een vervolgopleiding.</p><a class="btn" href="eerste-maand/">Open de les</a><a class="btn ghost small" href="eerste-maand/docent.pdf">Docentblad (PDF)</a></article>
 <article class="l-card"><h3>Op kamers</h3><p>Een kamer huren: een nepadvertentie herkennen, je huurcontract lezen, je inschrijven bij de gemeente en nagaan of je huurtoeslag krijgt.</p><a class="btn" href="op-kamers/">Open de les</a><a class="btn ghost small" href="op-kamers/docent.pdf">Docentblad (PDF)</a></article>
 <article class="l-card"><h3>Studiefinanciering</h3><p>Studiefinanciering aanvragen bij DUO, thuis of op kamers wonen, extra geld of lenen, en wat je later terugbetaalt.</p><a class="btn" href="studiefinanciering/">Open de les</a><a class="btn ghost small" href="studiefinanciering/docent.pdf">Docentblad (PDF)</a></article>
-<article class="l-card"><h3>Je eerste bijbaan</h3><p>Je eerste bijbaan: je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen.</p><a class="btn" href="eerste-bijbaan/">Open de les</a><a class="btn ghost small" href="eerste-bijbaan/docent.pdf">Docentblad (PDF)</a></article></div>
+<article class="l-card"><h3>Je eerste bijbaan</h3><p>Je eerste bijbaan: je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen.</p><a class="btn" href="eerste-bijbaan/">Open de les</a><a class="btn ghost small" href="eerste-bijbaan/docent.pdf">Docentblad (PDF)</a></article>
+<article class="l-card"><h3>Voorbeeldles: de kamer in Zeestad</h3><p>Een verzonnen les om de engine te testen. Je zoekt een kamer en leest een advertentie en een contract.</p><a class="btn" href="voorbeeld/">Open de les</a><a class="btn ghost small" href="voorbeeld/docent.pdf">Docentblad (PDF)</a></article></div>
 <section class="card"><h2>Voor docenten: zo gaat een les van 45 minuten</h2><p>Open een les en kies <b>Voor de docent</b>. Daar vind je het lesplan, een klascode met QR-code, een klastimer, een antwoordblad om te printen en vragen voor het nabespreken.</p>
 <table class="l-steps"><tbody><tr><td>5 min</td><td><b>Uitleg en inloggen</b><br>Zet het docentenscherm op het bord. Leerlingen openen de korte link of scannen de QR-code. Ze werken met z'n tweeën op één scherm.</td></tr><tr><td>2 min</td><td><b>Startcheck</b><br>Elk tweetal beantwoordt vier vragen. Ze zien nog niet wat goed is.</td></tr><tr><td>26 min</td><td><b>Escape</b><br>Start de klastimer. Tweetallen lossen de kamers op en schrijven per kamer een cijfer op. Met alle cijfers openen ze het slot.</td></tr><tr><td>minuut 33</td><td><b>Stop</b><br>Tik op Stop de escape. Iedereen stopt, ook wie nog niet klaar is. Lees de cijfers van het slot voor van je geprinte antwoordblad. Tweetallen tikken op We stoppen.</td></tr><tr><td>2 min</td><td><b>Eindcheck</b><br>Andere vragen over dezelfde regels. Elk tweetal ziet wat het goed had, voor en na.</td></tr><tr><td>5 min</td><td><b>Nabespreken</b><br>Begin bij de kamer die het lastigst was. Op het docentenscherm staan gespreksvragen en de antwoorden.</td></tr><tr><td>2 min</td><td><b>Afsluiten</b><br>Laat twee of drie leerlingen hun als-dan-plan hardop zeggen. Stel daarna de slotvraag en vul het korte feedbackformulier in.</td></tr><tr><td>3 min</td><td><b>Reserve</b><br>Voor inloggen dat uitloopt, of een gesprek dat langer duurt.</td></tr></tbody></table><p>De minuten verschillen per les een beetje. Het precieze lesplan staat op het docentenscherm van elke les.</p><p>Nodig: een laptop, tablet of telefoon per tweetal, pen en papier, en een digibord.</p></section>
 <footer class="foot"><a href="privacy.html" data-keep>Privacy</a><span class="contact" data-none="Vragen of feedback? Vul na de les het korte formulier in op het docentenscherm van de les." data-pre="Vragen of feedback? Neem contact op: "></span><span>Escape 18 begon als studentenproject van team Klaar voor Later (Erasmus Universiteit Rotterdam). Olivier Runge zet het nu voort als gratis testversie.</span><span>Lesmateriaal: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.nl" rel="license noopener">CC BY-NC-SA 4.0</a>. Gratis gebruiken en aanpassen, niet commercieel, met naamsvermelding.</span></footer></main>
@@ -412,7 +416,8 @@ details.esc-recap dd{margin:0;font-weight:700;overflow-wrap:anywhere}
 <h2>The lessons</h2><div class="l-cards"><article class="l-card"><h3>Je eerste maand als 18-jarige (your first month at 18)</h3><p>Checking your payslip, reading a letter from your health insurer, spotting a fake message and applying for further study in time.</p><a class="btn" href="eerste-maand/?lang=en">Open the lesson</a><a class="btn ghost small" href="eerste-maand/docent.pdf">Teacher sheet (PDF, in Dutch)</a></article>
 <article class="l-card"><h3>Op kamers (renting a room)</h3><p>Renting a room: spotting a fake advert, reading your rental contract, registering with the municipality and checking if you get huurtoeslag (rent benefit). The lesson is in Dutch.</p><a class="btn" href="op-kamers/?lang=en">Open the lesson</a><a class="btn ghost small" href="op-kamers/docent.pdf">Teacher sheet (PDF, in Dutch)</a></article>
 <article class="l-card"><h3>Studiefinanciering (student finance from DUO)</h3><p>Applying for studiefinanciering at DUO, living at home or in a rented room, extra money or a loan, and what you pay back later. The lesson is in Dutch.</p><a class="btn" href="studiefinanciering/?lang=en">Open the lesson</a><a class="btn ghost small" href="studiefinanciering/docent.pdf">Teacher sheet (PDF, in Dutch)</a></article>
-<article class="l-card"><h3>Je eerste bijbaan</h3><p>Je eerste bijbaan: je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen.</p><a class="btn" href="eerste-bijbaan/?lang=en">Open the lesson</a><a class="btn ghost small" href="eerste-bijbaan/docent.pdf">Teacher sheet (PDF, in Dutch)</a></article></div>
+<article class="l-card"><h3>Je eerste bijbaan</h3><p>Je eerste bijbaan: je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen.</p><a class="btn" href="eerste-bijbaan/?lang=en">Open the lesson</a><a class="btn ghost small" href="eerste-bijbaan/docent.pdf">Teacher sheet (PDF, in Dutch)</a></article>
+<article class="l-card"><h3>Voorbeeldles: de kamer in Zeestad</h3><p>Een verzonnen les om de engine te testen. Je zoekt een kamer en leest een advertentie en een contract.</p><a class="btn" href="voorbeeld/?lang=en">Open the lesson</a><a class="btn ghost small" href="voorbeeld/docent.pdf">Teacher sheet (PDF, in Dutch)</a></article></div>
 <section class="card"><h2>For teachers: how a 45-minute lesson runs</h2><p>Open a lesson and choose <b>For the teacher</b>. There you find the lesson plan, a class code with a QR code, a class timer, an answer sheet to print and questions for the discussion.</p>
 <table class="l-steps"><tbody><tr><td>5 min</td><td><b>Explain and log in</b><br>Put the teacher screen on the board. Pupils open the short link or scan the QR code. They work in pairs on one screen.</td></tr><tr><td>2 min</td><td><b>Start check</b><br>Each pair answers four questions. They do not see yet what is right.</td></tr><tr><td>26 min</td><td><b>Escape</b><br>Start the class timer. Pairs solve the rooms and write down a digit per room. With all the digits they open the lock.</td></tr><tr><td>minute 33</td><td><b>Stop</b><br>Tap Stop de escape. Everyone stops, also pairs that are not done. Read out the digits of the lock from your printed answer sheet. Pairs tap We stoppen.</td></tr><tr><td>2 min</td><td><b>End check</b><br>Other questions on the same rules. Each pair sees what it got right, before and after.</td></tr><tr><td>5 min</td><td><b>Discussion</b><br>Start with the room that was hardest. The teacher screen has discussion questions and the answers.</td></tr><tr><td>2 min</td><td><b>Closing</b><br>Ask two or three pupils to say their if-then plan out loud. Then ask the closing question and fill in the short feedback form.</td></tr><tr><td>3 min</td><td><b>Buffer</b><br>For logging in that takes longer, or a talk that runs over.</td></tr></tbody></table><p>The minutes differ a little per lesson. The exact lesson plan is on the teacher screen of each lesson.</p><p>You need: a laptop, tablet or phone per pair, pen and paper, and a digital board.</p></section>
 <footer class="foot"><a href="privacy.html" data-keep>Privacy</a><span class="contact" data-none="Questions or feedback? After the lesson, fill in the short form on the teacher screen of the lesson." data-pre="Questions or feedback? Get in touch: "></span><span>Escape 18 began as a student project by team Klaar voor Later (Erasmus University Rotterdam). Olivier Runge now continues it as a free test version.</span><span>Course material: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="license noopener">CC BY-NC-SA 4.0</a>. Free to use and adapt, not commercial, with credit to the author.</span></footer></main>

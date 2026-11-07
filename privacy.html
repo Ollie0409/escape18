@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-4Bl05dJy9043FuGgOIUEb9YUmAaqTPhqgv+BReapQGU='; style-src 'sha256-wxsicjrQO/TKXEmBbMoojg7fl7SO9m1+cmSs5Ngxr+Q='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-4Bl05dJy9043FuGgOIUEb9YUmAaqTPhqgv+BReapQGU='; style-src 'sha256-vfSeu+iSav4TMk3Qq0tw0q9TU8CRIXpH+rAOg3Z5gRw='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Wat Escape 18 bewaart, wat nooit, waar, wie het ziet en hoe lang.">
 <title>Privacy · Escape 18</title>
@@ -39,7 +39,7 @@ header.top{display:flex;align-items:center;justify-content:space-between;gap:12p
 .brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none}
 .mark{width:38px;height:38px;border-radius:9px;background:var(--sun);color:var(--sun-ink);display:grid;place-items:center;font:800 20px/1 var(--display);font-stretch:112%}
 .brand b{font:800 17px/1 var(--display);font-stretch:118%;letter-spacing:.04em;text-transform:uppercase}
-.brand small{display:block;font:600 11px/1.3 var(--mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
+.brand small{display:block;font:600 12px/1.3 var(--mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
 h1,h2,h3{font-family:var(--display);line-height:1.12;margin:0;text-wrap:balance}
 h1{font-size:clamp(30px,5.4vw,52px);font-weight:800;font-stretch:115%;letter-spacing:-.01em}
 h2{font-size:clamp(22px,3vw,30px);font-weight:750;font-stretch:108%}
@@ -58,7 +58,7 @@ p{margin:0}
 .btn.esc-go.big{min-height:62px;padding:14px 30px;font-size:20px}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.pill{display:inline-flex;align-items:center;gap:5px;font:600 11.5px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:5px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:5px;font:600 12px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:5px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
 .pill.fic{background:var(--sun);border-color:transparent;color:var(--sun-ink)}
 .note{font-size:14.5px;color:var(--muted);border-left:4px solid var(--sun);padding-left:10px}
 .err{color:var(--stop);font-weight:700}
@@ -127,13 +127,13 @@ label.opt:has(input:checked){border-color:var(--teal);background:var(--teal-soft
 /* documents */
 .esc-doc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .esc-doc h3{font:700 15.5px/1.3 var(--body)}
-.doc-kind{font:600 11.5px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.doc-kind{font:600 12px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .esc-note{font-size:13.5px;color:var(--muted)}
 .esc-plain{margin:0;font-size:14.5px;line-height:1.5;background:var(--sunk);border-left:4px solid var(--teal);border-radius:8px;padding:8px 12px;overflow-wrap:anywhere}
 .esc-plain b{display:block;font:600 12px/1.3 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
 .ln{border-radius:8px;scroll-margin:90px;transition:background-color .2s}
 .ln.point{outline:3px solid var(--sun);outline-offset:2px;background:var(--warn-soft)}
-.ln.point::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 11.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px;vertical-align:2px}
+.ln.point::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px;vertical-align:2px}
 .esc-letter{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;box-shadow:0 10px 22px -16px rgba(0,0,0,.45);font-size:16px;min-width:0}
 .esc-letter header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;border-bottom:3px solid var(--teal);padding-bottom:8px}
 .esc-letter header b{font:800 19px/1.1 var(--display);font-stretch:110%;color:var(--teal)}
@@ -143,9 +143,9 @@ label.opt:has(input:checked){border-color:var(--teal);background:var(--teal-soft
 .esc-slip-h{display:flex;justify-content:space-between;align-items:baseline;gap:4px 12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:8px}
 .esc-slip-h span{font:600 13px/1.3 var(--mono);color:var(--muted)}
 .esc-slip dl{margin:0}
-.esc-slip dl div{display:flex;justify-content:space-between;gap:10px;padding:6px 4px;border-bottom:1px solid var(--line)}
+.esc-slip dl div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 10px;padding:6px 4px;border-bottom:1px solid var(--line)}
 .esc-slip dl div.total{font-weight:700;border-top:2px solid var(--ink);border-bottom:0}
-.esc-slip dt{min-width:0}.esc-slip dd{margin:0;font:600 15px/1.5 var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.esc-slip dt{min-width:0;flex:0 1 38%}.esc-slip dd{margin:0;font:600 15px/1.5 var(--mono);font-variant-numeric:tabular-nums;white-space:normal;overflow-wrap:anywhere;text-align:right;flex:1 1 40%;min-width:0}
 .esc-phone{background:var(--sunk);border:2px solid var(--line);border-radius:26px;padding:12px 12px 14px;display:flex;flex-direction:column;gap:12px;max-width:440px;width:100%}
 .esc-phone-top{display:flex;align-items:center;gap:10px;padding:2px 6px 10px;border-bottom:1px solid var(--line)}
 .esc-phone-top b{display:block;font:600 15px/1.3 var(--mono)}.esc-phone-top span{font-size:13px;color:var(--muted)}
@@ -329,7 +329,7 @@ footer.foot{border-top:1px solid var(--line);padding-top:14px;color:var(--muted)
 .esc-grid tr.total th,.esc-grid tr.total td{font-weight:800;border-top:2px solid var(--ink)}
 .esc-grid tr.ln.point{outline:3px solid var(--sun);outline-offset:-3px;background:var(--warn-soft)}
 .esc-grid tr.ln.point::before{content:none}
-.esc-grid tr.ln.point th:first-child::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 11.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px}
+.esc-grid tr.ln.point th:first-child::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px}
 @media print{.esc-tscroll{overflow:visible}.t-ans{min-width:0}}
 /* v3: review fixes (lock on one row, pointer badge, answers hidden from the board, stopping the escape, smartboard) */
 .esc-dial{flex-wrap:nowrap}
@@ -338,7 +338,7 @@ footer.foot{border-top:1px solid var(--line);padding-top:14px;color:var(--muted)
 .esc-cards>.esc-card:last-child:nth-child(odd){grid-column:1/-1}
 .ln.point::before{white-space:nowrap;flex:none}
 .esc-web dl div.ln.point::before{content:none}
-.esc-web .ln.point dt::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 11.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px;white-space:nowrap;vertical-align:2px}
+.esc-web .ln.point dt::before{content:"Kijk hier";display:inline-block;margin-right:8px;font:700 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--sun);color:var(--sun-ink);padding:4px 7px;border-radius:99px;white-space:nowrap;vertical-align:2px}
 .t-room h3 .t-k{display:block;margin-bottom:2px}
 details.t-key summary{flex-wrap:wrap;gap:4px 10px}
 .t-warn{font:700 12px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.05em;background:var(--stop-soft);color:var(--stop);border-radius:99px;padding:5px 9px;white-space:nowrap}
@@ -394,6 +394,9 @@ details.esc-recap dd{margin:0;font-weight:700;overflow-wrap:anywhere}
 .t-tip p,.t-care ul{margin:0}.t-care ul{padding-left:20px}
 .t-tip-h,.t-care-h{margin:0 0 2px!important;font:600 12px/1.3 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 @media print{.paper .esc-rules-box,.sheet .t-tip,.sheet .t-care{border:1px solid #999;background:none;break-inside:avoid}.sheet .s-plan tr.t-moment td{font-weight:700}}
+
+.opts-hint{margin:0 0 8px;font-size:12px;line-height:1.4;color:var(--muted)}
+.esc-slip dd.dd-prose{font:400 16px/1.55 var(--body);font-variant-numeric:normal;text-align:left;flex:1 1 100%}.esc-slip .row-prose dt{flex:1 1 100%;font-weight:600}
 </style>
 <script src="config.js"></script>
 </head>
