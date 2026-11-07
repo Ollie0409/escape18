@@ -365,7 +365,7 @@ School time is given as clock times, breaks included, because the whole time at 
 
 **Date:** zaterdag 30 januari 2027. **Where:** thuis, met post van Buurtsuper Zeezicht en Lunchroom Het Plein.
 
-**Intro:** "Het is zaterdag 30 januari 2027. Je jaaropgaaf over 2026 is binnen. Je werkt nog bij Buurtsuper Zeezicht, met loonheffingskorting. Op 1 februari begin je ook bij Lunchroom Het Plein."
+**Intro:** "Het is zaterdag 30 januari 2027. Je jaaropgaaf over 2026 is binnen. Je werkt nog bij Buurtsuper Zeezicht. In 2026 had je daar geen loonheffingskorting, sinds januari wel. Op 1 februari begin je ook bij Lunchroom Het Plein."
 
 ### Document 1 `jaaropgaaf` (type: slip)
 
@@ -376,8 +376,8 @@ School time is given as clock times, breaks included, because the whole time at 
 > | Naam | Sam de Vries |
 > | Periode | 1 september tot en met 31 december 2026 |
 > | Loon voor de loonheffing | € 480,00 |
-> | Ingehouden loonheffing | € 24,00 |
-> | Loonheffingskorting toegepast | ja |
+> | Ingehouden loonheffing | € 167,00 |
+> | Loonheffingskorting toegepast | nee |
 >
 > De bedragen zijn een voorbeeld, geen echte berekening.
 
@@ -417,7 +417,7 @@ School time is given as clock times, breaks included, because the whole time at 
 - **Prompt:** "Waar zie je hoeveel belasting er in 2026 van je loon af ging?"
 - **Options (jaaropgaaf order):** a "Loon voor de loonheffing" · b "Ingehouden loonheffing" · c "Loonheffingskorting toegepast"
 - **Correct:** b
-- **Retry points to:** jaaropgaaf row "Ingehouden loonheffing: € 24,00"
+- **Retry points to:** jaaropgaaf row "Ingehouden loonheffing: € 167,00"
 - **Nudge:** "Zoek het woord dat betekent: van je loon afgehaald."
 - **Hint (30 s):** "Loonheffing is belasting en premies."
 - **Explanation:** "Bij 'Ingehouden loonheffing' staat wat je werkgever van je loon afhaalde. 'Loon voor de loonheffing' is het loon waarover je belasting betaalt."
@@ -455,6 +455,7 @@ School time is given as clock times, breaks included, because the whole time at 
 
 **Voor de docent (kamer 4):**
 - Werk je bij werkgevers na elkaar, niet tegelijk? Dan mag je de korting bij elke werkgever laten toepassen.
+- Sam had in 2026 geen loonheffingskorting. Daarom hield Buurtsuper Zeezicht belasting in. Met korting was dat bij dit loon € 0 geweest.
 - Beloof geen bedrag terug. Of er iets terugkomt, zie je pas in de aangifte.
 - De 5 jaar geldt als je geen bericht kreeg dat je aangifte moet doen (Belastingdienst). Kreeg je wel zo'n bericht, volg dan dat bericht. Ook zonder bericht moet je aangifte doen als je meer moet bijbetalen dan de aanslaggrens. De uiterste datum voor 2026 is 31 december 2031.
 - Op het echte formulier staat ook de studenten- en scholierenregeling. Die zit niet in deze les.
@@ -570,7 +571,7 @@ Tip voor de docent: een fout antwoord wordt doorgestreept. Een tweetal kan dus o
 | 8% vakantiegeld (minstens) | tabel kamer 2, één regel | echt (Wet minimumloon art. 15) | geen einddatum bekend |
 | € 7,00 per uur | vraag A2 | verzonnen | oktober 2026 |
 | € 4,90 per uur | vraag B2 | verzonnen | oktober 2026 |
-| € 480,00 loon en € 24,00 ingehouden loonheffing | jaaropgaaf kamer 4 | verzonnen voorbeeld, geen berekening | jaar 2026 (1 september tot en met 31 december 2026) |
+| € 480,00 loon en € 167,00 ingehouden loonheffing, zonder loonheffingskorting | jaaropgaaf kamer 4 | verzonnen loon; de inhouding is berekend met de echte regels 2026 (bron `inhouding-2026`): 4 maanden van € 120, witte maandtabel zonder korting € 41,75 per maand. Met korting zou het € 0 zijn | jaar 2026 (1 september tot en met 31 december 2026) |
 | € 4,59 / € 6,12 / € 7,65 / € 9,56 / € 11,47 / € 13,38 / € 15,29 per uur (15 / 16 / 17 / 18 / 19 / 20 / 21+ jaar) | docentnoot kamer 2; for 15 to 18 jaar also document `tabel2027` (room intro only) | echt (Stcrt. 2026, 38817; Rijksoverheid, bedragen minimumloon 2027, page modified 6 Nov 2026 12:16 UTC) | vanaf 1 januari 2027 tot de indexering van 1 juli 2027 |
 
 (The 2027 percentages, 16: 40%, 17: 50%, 18: 62,5%, 19: 75%, 20: 87,5%, are no longer in the teacher note; they remain in source row `wml-2027`.)
@@ -603,6 +604,7 @@ All pages read on **6 Nov 2026** (the fact check B rows re-read in this revision
 | korting-een | Loonheffingskorting bij één werkgever tegelijk; bij twee krijg je te veel korting en moet je waarschijnlijk bijbetalen. | [Belastingdienst, loonheffingskorting met een bijbaan](https://www.belastingdienst.nl/wps/wcm/connect/nl/jongeren/content/loonheffingskorting-met-een-bijbaan) (page date 17 Mar 2026): "Vraag dan bij 1 werkgever de loonheffingskorting aan." | [Belastingdienst, loonheffingskorting met meerdere inkomens](https://www.belastingdienst.nl/wps/wcm/connect/nl/werk-en-inkomen/content/loonheffingskorting-meerdere-inkomens) (page date 5 Aug 2026): "op maximaal 1 inkomen" | 6 Nov 2026 | No end date known |
 | terug-aangifte | Te veel betaalde belasting vraag je na afloop van het jaar terug met een aangifte (app of Mijn Belastingdienst); geen bedrag beloven. | [Belastingdienst, kan ik belasting terugvragen](https://www.belastingdienst.nl/wps/wcm/connect/nl/jongeren/content/kan-ik-belasting-terugvragen) (page date 8 Sep 2026): "na afloop van het jaar terugkrijgen via de aangifte" | [Belastingdienst, hoeveel jaar terug belastingaangifte doen](https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/hoe_werkt_inkomstenbelasting/aangifte_doen/hoeveel-jaar-terug-belastingaangifte-doen) (page date 9 Jun 2026) | 6 Nov 2026 | No end date known |
 | vijf-jaar | Kreeg je geen bericht dat je aangifte moet doen? Dan kan aangifte tot 5 jaar na afloop van een jaar: over 2026 tot en met 2031 (pupil rule card kamer 4). | Belastingdienst hoeveel jaar terug (page date 9 Jun 2026, re-read): "Hebt u geen bericht gehad dat u aangifte moet doen voor de inkomstenbelasting? Dan kunt u dat tot 5 jaar terug doen. In 2026 kunt u dus nog aangifte doen over 2021."; table: 2025 "31 december 2030" | Belastingdienst jongeren terugvragen: "Je kunt tot 5 jaar na afloop van een jaar aangifte doen"; teacher note only: [Belastingdienst, moet ik aangifte inkomstenbelasting doen](https://www.belastingdienst.nl/wps/wcm/connect/nl/belastingaangifte/content/moet_ik_aangifte_doen) (page date 2 Mar 2026, read 7 Nov 2026): without a letter you must still file when you owe more than the aanslaggrens (€ 58 for 2025) | 6 Nov 2026 (aanslaggrens 7 Nov 2026) | No end date known |
+| inhouding-2026 | Teacher note kamer 4 and the jaaropgaaf amount: zonder loonheffingskorting houdt de werkgever bij € 120 per maand € 41,75 per maand in (4 maanden: € 167,00); met korting € 0 (bij de witte maandtabel 2026 houdt een werkgever met korting pas iets in vanaf ongeveer € 950 per maand: tabelloon € 949,50, jaarloon € 11.394). Korting alleen op schriftelijk verzoek. | [Belastingdienst, Rekenvoorschriften voor de geautomatiseerde loonadministratie 2026, januari 2026, versie 2](https://download.belastingdienst.nl/belastingdienst/docs/rekenvoorschriften_voor_geautomatiseerde_loonadministratie_lh991z62fd.pdf) (read 7 Nov 2026): par. 2.1 and 2.2: maandloon × 12, "naar beneden af op een veelvoud van Lv" (Lv € 54); tabel 2: tot € 38.883 "35,75"; tabel 3: AHK € 3.115; tabel 6: arko1 0,08324; par. 2.2.4: "als X1 ≥ AHK + OUK + ARK + AOK ... anders X = € 0 (nul)"; x = X/F, F = 12. Worked: € 120 × 12 = € 1.440, down to € 1.404; 35,75% = € 501; zonder korting € 501 / 12 = € 41,75; met korting AHK € 3.115 + ARK € 117 > € 501, dus € 0. | Law: [Wet LB 1964](https://repository.officiele-overheidspublicaties.nl/bwb/BWBR0002471/2026-10-08_0/xml/BWBR0002471_2026-10-08_0.xml) (version 8 Oct 2026, read 7 Nov 2026) art. 20a ("€ 38.883 ... 8,10%"), 22 lid 2 ("€ 3.115"), 22a lid 2 ("8,324%"), 23 lid 1 (korting "slechts ... ingeval de werknemer daartoe een schriftelijk ... verzoek" doet), 25 lid 2 (tabellen met de heffingskorting verwerkt); [Wet IB 2001](https://repository.officiele-overheidspublicaties.nl/bwb/BWBR0011353/2026-02-21_0/xml/BWBR0011353_2026-02-21_0.xml) (version 21 Feb 2026, the latest) art. 2.10 ("8,10%" tot "€ 38.883"), 8.10 lid 2 ("€ 3.115"), 8.11 lid 2 ("8,324%" ... "€ 996"); [Belastingdienst, tarieven en heffingskortingen 2026](https://www.belastingdienst.nl/wps/wcm/connect/nl/voorlopige-aanslag/content/voorlopige-aanslag-tarieven-en-heffingskortingen) (read 7 Nov 2026): "tot en met € 38.883 35,75%"; bdLhkBijbaan: "Die betaalt dan minder belasting" | 7 Nov 2026 | Amounts: 2026 only |
 
 Word meanings without a rule: oproepen, dienst, pauze, studiedag, jaaropgaaf, ingehouden, aangifte, brutoloon, vakantiegeld and loonheffing (the last three as in content/SHARED_EXPLANATIONS.md and ESC-MAAND).
 
@@ -612,10 +614,12 @@ Word meanings without a rule: oproepen, dienst, pauze, studiedag, jaaropgaaf, in
 2. **Night, rest and school time.** Every rule is in the Arbeidstijdenwet (art. 1:7, 4:4, 5:3, 5:4, 5:7, version geldend van 1 juli 2025 tot heden). The pupil wording "9 uur per dag" simplifies "per dienst". Neither source gives the exact worked example of 3.2 or the 20:30 example; both are arithmetic from the articles.
 3. **Left out, single source or unverified:** the 1 Jan 2028 change to on-call contracts (only Ondernemersplein; teacher note only), "melden mag anoniem" (only government.nl), the jaaropgaaf label "loonbelasting" (only Belastingdienst jongeren), the notice period (opzegtermijn, not checked), DigiD for the aangifte, and the date from which the 2026 aangifte can be filed (not on the two Belastingdienst pages read).
 4. **Birthday switch (solved in round 2).** Besluit minimumjeugdloon art. 1 and 2 set the youth rate per age group, so the new rate applies once you have the new age. The Rijksoverheid page named by check B round 2 (wanneer minimumloon) could not be opened on 7 Nov 2026; the rule rests on the decree and the 2026 table.
-5. **Small issues:** the Rijksoverheid table shows "€ 7,50<" for 18 jaar (stray character; government.nl gives € 7.50). Ondernemersplein pages show no date. The fictional jaaropgaaf amounts are not a real calculation; real withholding at this income may well be € 0.
+5. **Small issues:** the Rijksoverheid table shows "€ 7,50<" for 18 jaar (stray character; government.nl gives € 7.50). Ondernemersplein pages show no date. The jaaropgaaf amounts were made realistic on 7 Nov 2026 (see the changelog "Fix (7 Nov): jaaropgaaf bedrag" and source row `inhouding-2026`): € 167,00 without korting; with korting it would be € 0.
 6. **Not measured:** readability (no Flesch-Douma score yet) and timing (the 27 minutes are not timed with real pupils; see the lesplan spec note).
 
 ## Changelog
+
+**Fix (7 Nov): jaaropgaaf bedrag.** Finding of fact check A for `belasting-terug.md` (row "Cross-check with eerste-bijbaan", RISK): the kamer 4 jaaropgaaf showed € 24,00 loonheffing withheld on € 480,00 over 4 months with loonheffingskorting "ja". Checked by me on 7 Nov 2026 (source row `inhouding-2026`): with korting the 2026 white monthly table withholds € 0 at € 120 per month, so the slip was not realistic, and with € 0 withheld there would be nothing to reclaim in 4.3. Fix (minimal, one employer, no new document): Sam had no loonheffingskorting at Buurtsuper Zeezicht in 2026 and asked for it in January 2027. Slip: "Ingehouden loonheffing" € 24,00 becomes € 167,00 (4 × € 41,75, the 2026 white monthly table without korting at € 120 per month); "Loonheffingskorting toegepast" ja becomes nee. Intro: "Je werkt nog bij Buurtsuper Zeezicht, met loonheffingskorting." becomes "Je werkt nog bij Buurtsuper Zeezicht. In 2026 had je daar geen loonheffingskorting, sinds januari wel." (keeps B-10: the korting runs in February 2027, so 4.1 still has one answer, c). 4.2 retry pointer text now names € 167,00. Teacher note kamer 4: one bullet added (why tax was withheld; with korting € 0). Amounts table row, uncertainty 5 and the new source row `inhouding-2026` updated. Consistent with `belasting-terug.md` (Golfkoel without korting withholds 35,75%; Kwelderhof with korting € 0 on € 405 a month). Re-derived: 4.1 c, 4.2 b, 4.3 c, 4.4 d; no option, right answer, check item or digit depends on the amount. **Code stays 3521; no digit changed.** The slip note "De bedragen zijn een voorbeeld, geen echte berekening." is kept: the wage is invented.
 
 **2027 update (7 Nov).** Option A of `content_new/update_2027.md`. The November 2026 story, its 2026 table (labelled "tot en met 31 december 2026"), all questions, options, explanations, the Antwoordblad and the lock code **3521** are unchanged. Added: pupil document `tabel2027` "Minimumloon per uur, vanaf 1 januari 2027" (15 to 18 jaar, same layout as the 2026 table, labelled real and "niet over november 2026"), shown in the kamer 2 intro only and with no question or digit screen, so 2.1 and 2.2 keep one defensible answer (€ 7,65 is not an option and not in any question's documents); one teacher sentence in kamer 2; source row `wml-2027` now cites Stcrt. 2026, 38817 next to the Rijksoverheid page; validUntil 31 december 2026 becomes 30 juni 2027 (the 1 July 2027 indexation); `checked` stays 2026-11-06 for the lesson; the 2027 amounts were re-read on 7 Nov 2026 (Stcrt. 2026, 38817).
 
