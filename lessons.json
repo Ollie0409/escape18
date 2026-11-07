@@ -440,6 +440,105 @@
       "last_checked": "2026-11-07",
       "valid_until": "2027-06-30",
       "source_of_metadata": "content_new/eerste-bijbaan-mbo.md (Leerdoelen, Past bij)"
+    },
+    {
+      "slug": "rekening-blijft-liggen",
+      "status": "live",
+      "title": "De rekening die blijft liggen",
+      "url": "https://ollie0409.github.io/escape18/rekening-blijft-liggen/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/rekening-blijft-liggen/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo en vwo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: achteraf betalen, een herinnering of 14-dagenbrief lezen, weten wat BKR bijhoudt en waar je gratis hulp vindt. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Achteraf betalen, een herinnering of 14-dagenbrief lezen, weten wat BKR bijhoudt en waar je gratis hulp vindt.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna een herinnering van een 14-dagenbrief onderscheiden en zeggen waar gratis hulp is.",
+      "niveau": "havo en vwo",
+      "leerjaren": "havo 5, vwo 6 (ook bruikbaar in mbo niveau 3-4)",
+      "vak_moment": [
+        "Economie",
+        "Mentoruur",
+        "LOB"
+      ],
+      "onderwerpen": [
+        "Schulden en betalen"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "In de voorwaarden van achteraf betalen lezen aan wie en tot wanneer je betaalt, en wat er gebeurt als je te laat bent.",
+        "Een gewone herinnering onderscheiden van een 14-dagenbrief, de laatste dag zonder incassokosten bepalen en de hoogte van de incassokosten controleren.",
+        "Weten wat BKR bijhoudt, wanneer een achterstand gemeld mag worden en dat de aanbieder beslist over een lening.",
+        "Weten dat alleen een deurwaarder beslag kan leggen, meestal na een vonnis, om een betalingsregeling vragen en weten waar gratis hulp is."
+      ],
+      "curriculum_anchor_short": "Economie E1 Gezinnen ruilen over de tijd (E1.1, E1.4) · Mentoruur of LOB · Nibud: verantwoord besteden",
+      "curriculum": [
+        {
+          "kader": "Economie havo 2027",
+          "onderdeel": "E1 Gezinnen ruilen over de tijd: E1.1 inkomsten, uitgaven en schulden; E1.4 lenen (achteraf betalen is lenen)",
+          "status": "gecontroleerd"
+        },
+        {
+          "kader": "Mentoruur / LOB",
+          "onderdeel": "Geldzorgen en schulden voorkomen; geen examenstof voor incasso en BKR",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [
+        "Verantwoord besteden"
+      ],
+      "nibud_status": "voorstel",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-07",
+      "valid_until": "2027-08-31",
+      "source_of_metadata": "content_new/rekening-blijft-liggen.md (Doelgroep en moment, Leerdoelen)"
+    },
+    {
+      "slug": "studiefinanciering-mbo",
+      "status": "live",
+      "title": "Studiefinanciering in het mbo",
+      "url": "https://ollie0409.github.io/escape18/studiefinanciering-mbo/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/studiefinanciering-mbo/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor mbo niveau 3 en 4. Studenten werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: bijna 18 in de bol: wanneer begint je studiefinanciering, wat krijg je, gift of lening, en wat als je stopt of wisselt? Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Bijna 18 in de bol: wanneer begint je studiefinanciering, wat krijg je, gift of lening, en wat als je stopt of wisselt?",
+      "pupils_can_afterwards": "Studenten kunnen daarna zeggen wat ze bij DUO regelen en wanneer een beurs een gift wordt.",
+      "niveau": "mbo niveau 3 en 4",
+      "leerjaren": "mbo niveau 3-4 in de bol (niveau 2 met hulp bij het lezen)",
+      "vak_moment": [
+        "LOB"
+      ],
+      "onderwerpen": [
+        "Studie en keuze"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": true,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Zeggen wat een bol-student voor de 18e van DUO kan krijgen, en in welk kwartaal de studiefinanciering begint.",
+        "Zeggen dat je in de bbl geen studiefinanciering krijgt.",
+        "In een tabel van DUO de basisbeurs voor thuiswonend aflezen en zeggen waar de aanvullende beurs van afhangt.",
+        "Zeggen vanaf welk schooljaar je lesgeld betaalt.",
+        "Uitleggen wanneer de prestatiebeurs op niveau 3 en 4 een gift wordt, dat niveau 1 en 2 altijd een gift is en dat je een lening altijd terugbetaalt.",
+        "Zeggen wat je regelt als je stopt, en wat er met je beurs gebeurt als je stopt in je eerste jaar of van opleiding wisselt."
+      ],
+      "curriculum_anchor_short": "Mbo: loopbaan en burgerschap · geef de les vóór 1 augustus 2027",
+      "curriculum": [
+        {
+          "kader": "Mbo burgerschap en loopbaan",
+          "onderdeel": "Wat regel je bij DUO als je 18 wordt, en wat betekent stoppen of wisselen voor je geld",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [
+        "Geldzaken organiseren"
+      ],
+      "nibud_status": "voorstel",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-07",
+      "valid_until": "2027-07-31",
+      "source_of_metadata": "content_new/studiefinanciering-mbo.md (Leerdoelen, Past bij)"
     }
   ]
 }
