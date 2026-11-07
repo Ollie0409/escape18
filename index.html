@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-8AbjnT78FEw293Ud48MNeZ3Wd43XTm3EPHiN6gIGWAc='; style-src 'sha256-jaxvfPlPRv4+piq82HuncsutyOEnUnhxMZcVuv+y0bM='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-sSMxDdLPiSbMXeFrg6XpGfoUhuVYj2y8iiwg8xAtDIY='; style-src 'sha256-vCdbxJUuq8aICo41MwS3CcpknWStm4vn8FuDtImq4Ec='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Escape 18: gratis escape-lessen voor havo en vwo over wat er verandert als je 18 wordt.">
 <title>Escape 18</title>
@@ -276,7 +276,9 @@ footer.foot{border-top:1px solid var(--line);padding-top:14px;color:var(--muted)
   .btn,.switch,.t-durs,header.top button{display:none!important}
   body.print-sheet .wrap>*:not(.sheet){display:none!important}
   body.print-sheet .sheet{display:block!important;font-size:12pt}
-  body.print-plan .wrap>*:not(.print-me){display:none!important}
+  body.print-plan .wrap>*:not(.print-me):not(.esc-win){display:none!important}
+  body.print-plan .esc-win>*:not(.print-me){display:none!important}
+  body.print-plan .esc-win{display:block!important}
   body.print-plan .print-me>*:not(.plan-out){display:none!important}
   .sheet h1{font-size:20pt}.sheet h2{font-size:14pt;margin-top:10pt}
   .sheet table{border-collapse:collapse;width:100%}.sheet td,.sheet th{border-bottom:1px solid #999;padding:4pt;text-align:left;vertical-align:top}
@@ -536,6 +538,31 @@ body[data-view="proj"] .wrap{max-width:none;padding-block:12px 12px;gap:10px}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .p-timer{background:var(--panel);color:var(--ink);border:2px solid var(--line)}}
 :root[data-theme="dark"] .p-timer{background:var(--panel);color:var(--ink);border:2px solid var(--line)}
 @media print{.t-res,.t-resno,.qs,.t-prob,.t-dev{display:none!important}}
+
+/* ===== Optional lesson features (Werkproef, 7 Nov 2026; default off): reveal card, circling gate, Beroepenblad print, circle rows on the slip ===== */
+.esc-revealv .esc-a{max-width:780px}
+.esc-reveal .esc-reveal-h{margin:14px 0 6px;font-size:18px}
+.esc-reveal-l{margin:0 0 10px;padding-left:22px;display:flex;flex-direction:column;gap:8px}
+.esc-reveal-l li{font-size:17px;line-height:1.45}
+.esc-reveal-n{margin:0 0 12px;font-size:14.5px;line-height:1.45;color:var(--muted)}
+.esc-gate{border-left:4px solid var(--teal)}
+.bblad{display:none}
+@media print{
+  body.print-bblad .wrap>*:not(.bblad){display:none!important}
+  body.print-bblad .bblad{display:block!important;font-size:11.5pt;line-height:1.35;color:#000;background:#fff}
+  .bblad h1{font-size:17pt;margin:0 0 4pt}.bblad .bb-i{margin:0 0 6pt}
+  .bblad .bb-room{break-inside:avoid;border-top:.4mm dashed #444;padding-top:4pt;margin-top:6pt}
+  .bblad h2{font-size:13pt;margin:0 0 2pt}.bblad ul{margin:2pt 0;padding-left:16pt}.bblad li{margin:1.5pt 0}
+  .bblad .bb-src,.bblad .bb-n{font-size:9.5pt;color:#222;margin:2pt 0}
+  .slip-c{display:flex;align-items:center;flex-wrap:wrap;gap:0 4mm;min-height:8.5mm;margin-left:5mm}.slip-c.slip-ci{margin-left:0;min-height:0;padding-bottom:.5mm}.slip-fc .slip-l{flex:0 0 40mm}.slip-fc .slip-c:not(.slip-ci){margin-left:42.5mm}
+  .slip-cl{min-width:24mm;font-size:11.5pt}
+  .slip-o{display:inline-block;border:.3mm solid #000;border-radius:1.5mm;padding:1mm 3.5mm;font-size:11.5pt;line-height:1.2}
+}
+
+/* Engine-wide fixes (7 Nov 2026, insurance gate G4 S1): a long single word in an answer (such as "Aansprakelijkheidsverzekering") wraps instead of being cut off */
+.esc-card,label.opt,.esc-right,.esc-recap dd,.esc-explain,.esc-cluetext,.paper-opts li,.t-key dd{overflow-wrap:anywhere;hyphens:auto}
+.esc-card>span,label.opt>span{min-width:0}
+.esc-parts{display:block}.esc-part{display:block;padding-left:1.1em;text-indent:-1.1em}.esc-part::before{content:"\2022\00a0\00a0"}
 </style>
 <script src="config.js"></script>
 </head>
@@ -607,7 +634,7 @@ Array.prototype.forEach.call(document.querySelectorAll('details.l-plan'),functio
 f.addEventListener('submit',function(e){e.preventDefault();var p=d.getAttribute('data-product'),w=f.querySelector('input[name="when"]:checked'),l=f.querySelector('input[name="level"]:checked');
 if(!w){er.hidden=false;var r=f.querySelector('input[name="when"]');if(r)r.focus();return;}er.hidden=true;
 if(!sent[p]){sent[p]=true;var data={product:p,when:w.value};if(l)data.level=l.value;
-post(JSON.stringify([{type:'plan',product:'escape18-site',version:"site-20261107-915829a",class:'GEEN',session:sid(),data:data}]));}
+post(JSON.stringify([{type:'plan',product:'escape18-site',version:"site-20261107-da74d01",class:'GEEN',session:sid(),data:data}]));}
 var t=document.createElement('p');t.setAttribute('role','status');t.className='l-plan-ok';t.textContent=d.getAttribute('data-thanks');f.parentNode.replaceChild(t,f);t.tabIndex=-1;t.focus();});});})();</script>
 </body>
 </html>
