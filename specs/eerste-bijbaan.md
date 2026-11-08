@@ -340,7 +340,7 @@ School time is given as clock times, breaks included, because the whole time at 
 - **Prompt:** "Zaterdag ben je van 12:00 tot 18:00 op je werk. Hoeveel pauze krijg je minstens?"
 - **Options:** a "Geen pauze" · b "15 minuten" · c "Een uur" · d "Een half uur"
 - **Correct:** d
-- **Retry points to:** regel r4 "Werk je meer dan 4,5 uur? Dan krijg je minstens een half uur pauze."
+- **Retry points to:** rooster row "za 12 dec: 12:00 tot 18:00"
 - **Nudge:** "Hoe lang werk je zaterdag?"
 - **Hint (30 s):** "Het is meer dan een kwartier."
 - **Explanation:** "Werk je meer dan 4,5 uur, dan krijg je minstens een half uur pauze. Zo nodig mag die pauze in twee delen van minstens 15 minuten."
@@ -417,7 +417,7 @@ School time is given as clock times, breaks included, because the whole time at 
 - **Prompt:** "Waar zie je hoeveel belasting er in 2026 van je loon af ging?"
 - **Options (jaaropgaaf order):** a "Loon voor de loonheffing" · b "Ingehouden loonheffing" · c "Loonheffingskorting toegepast"
 - **Correct:** b
-- **Retry points to:** jaaropgaaf row "Ingehouden loonheffing: € 167,00"
+- **Retry points to:** plain box "Loonheffing: belasting en premies. Je werkgever haalt die van je loon af."
 - **Nudge:** "Zoek het woord dat betekent: van je loon afgehaald."
 - **Hint (30 s):** "Loonheffing is belasting en premies."
 - **Explanation:** "Bij 'Ingehouden loonheffing' staat wat je werkgever van je loon afhaalde. 'Loon voor de loonheffing' is het loon waarover je belasting betaalt."

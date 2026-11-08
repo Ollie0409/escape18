@@ -134,8 +134,8 @@ De student kan (mbo says "student"; pupil text uses "je"):
 - **Options:** a "Bij de Belastingdienst" · b "Op de website van de KvK" · c "In de app van het bedrijf" · d "Op stagemarkt.nl"
 - **Correct:** d
 - **Lengths:** 22, 24, 25, 16 characters (the right one is the shortest); two options are websites.
-- **Retry points to:** rule r4 "Stage of leerbaan? Alleen bij een erkend leerbedrijf. Dat zie je op stagemarkt.nl."
-- **Nudge:** "Welke regel gaat over een erkend leerbedrijf?"
+- **Retry points to:** plain box "Erkend leerbedrijf: mag studenten opleiden."
+- **Nudge:** "Wat betekent erkend leerbedrijf? Zoek dan waar je dat ziet."
 - **Hint (30 s):** "Lees die regel tot het einde."
 - **Explanation:** "Op stagemarkt.nl zie je welke bedrijven erkend zijn."
 - **Rules:** erkend
@@ -384,9 +384,9 @@ De student kan (mbo says "student"; pupil text uses "je"):
 - **Prompt:** "Zaterdag 10 april werk je van 18:00 tot 20:00. Voor hoeveel uur krijg je loon?"
 - **Options:** a "2 uur" · b "4 uur" · c "3 uur"
 - **Correct:** c
-- **Retry points to:** rule r2 "Werk je minder dan 3 uur na een oproep? Dan krijg je 3 uur loon."
-- **Nudge:** "Lees regel 2 nog eens."
-- **Hint (30 s):** "Lees regel 2 tot het einde."
+- **Retry points to:** app k2 "Zaterdag 10 april zet ik je op het rooster van 18:00 tot 20:00."
+- **Nudge:** "Hoeveel uur werk je zaterdag? Zoek dan de regel over korte diensten."
+- **Hint (30 s):** "Tel de uren van 18:00 tot 20:00. Is dat korter dan de regel zegt?"
 - **Explanation:** "Per oproep krijg je minstens 3 uur loon."
 - **Rules:** oproep-3uur
 - **Defensibility:** the call came 5 days 7 hours ahead and you worked exactly the hours called, so BW 7:628a lid 3 does not come in. Rev 2, G4 S5: the nudge no longer asks "Hoe lang werk je zaterdag?", which confirmed the wrong "2 uur".
