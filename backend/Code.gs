@@ -294,7 +294,7 @@ function addEvent_(A, ev, t) {
     if (Q.seen.has(ev.session)) return;
     Q.seen.add(ev.session);
     Q.n++;
-    if (d.first) Q.fr++;
+    if (d.first && !d.hint) Q.fr++; // first-try right without a hint (engine round 3)
     if (d.hint) Q.hints++;
     if (typeof d.sec === 'number') Q.secs.push(d.sec);
     if (ev.cls !== 'GEEN') Q.classes.add(ev.cls);
