@@ -316,7 +316,7 @@ Score: 1 point per right answer, 0 to 4, before and after.
 | 39 tot 41 | Afsluiten | Laat twee of drie leerlingen hun als-dan-plan hardop zeggen. Stel daarna de slotvraag. |
 | 41 tot 45 | Reserve | 4 minuten speling. Gebruik ze als inloggen of nabespreken langer duurt. |
 
-Total 45 minutes, of which 4 minutes buffer. Materials: a device per pair, pen and paper for the digits, a digital board or projector. Care point: room 3 is about parents' income. Do not ask pupils about their own family's money in class. The code of the slot is in the Antwoordblad; do not project it before minute 33. A wrong option is struck out, so a pair can find a single-choice answer by trying; the end screen shows how many were right the first time.
+Total 45 minutes, of which 4 minutes buffer. Materials: a device per pair, pen and paper for the digits, a digital board or projector. Care point: room 3 is about parents' income. Do not ask pupils about their own family's money in class. The code of the slot is in the Antwoordblad; do not project it before minute 33. A wrong option is struck out, and after a mistake a pair gets a tip and one more try, after which the pair sees the right answer; the end screen shows how many were right the first time.
 
 Build note (engine, not this spec): pairs that are still in a room at minute 33 cannot reach the end check on the pupil screen yet (G3 "all lessons", `src/engine.js`). Until the engine has a skip to the end check, those pairs do the end check on paper from the Antwoordblad.
 
