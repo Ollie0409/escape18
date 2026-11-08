@@ -539,6 +539,51 @@
       "last_checked": "2026-11-07",
       "valid_until": "2027-07-31",
       "source_of_metadata": "content_new/studiefinanciering-mbo.md (Leerdoelen, Past bij)"
+    },
+    {
+      "slug": "je-eerste-stem",
+      "status": "live",
+      "title": "Je eerste stem",
+      "url": "https://ollie0409.github.io/escape18/je-eerste-stem/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/je-eerste-stem/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo, vwo en mbo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: mag je stemmen, wat heb je nodig, hoe werkt een volmacht en hoe vul je het stembiljet in? Over de regels, niet over wie je kiest. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Mag je stemmen, wat heb je nodig, hoe werkt een volmacht en hoe vul je het stembiljet in? Over de regels, niet over wie je kiest.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna zeggen wie mag stemmen, wat je nodig hebt en hoe je een stembiljet geldig invult.",
+      "niveau": "havo, vwo en mbo",
+      "leerjaren": "havo 5, vwo 6, mbo niveau 3-4",
+      "vak_moment": [
+        "Maatschappijleer",
+        "Mentoruur",
+        "LOB"
+      ],
+      "onderwerpen": [
+        "Stemmen en politiek"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Weten wie mag stemmen voor de Provinciale Staten en het waterschap, en dat je leeftijd op de dag van de stemming telt.",
+        "Weten wanneer de stempas komt, welk identiteitsbewijs geldt en wat je doet als je stempas kwijt is.",
+        "Uitleggen hoe stemmen bij volmacht en met een kiezerspas werkt, met de regels en deadlines.",
+        "Een stembiljet geldig invullen, in neutrale woorden zeggen waarover de Provinciale Staten en het waterschap gaan en weten dat een stemhulp alleen een suggestie geeft."
+      ],
+      "curriculum_anchor_short": "Maatschappijleer of burgerschap · Mentoruur of LOB · voor de verkiezingen van 17 maart 2027 (les geldig tot 31 maart 2027)",
+      "curriculum": [
+        {
+          "kader": "Maatschappijleer / burgerschap",
+          "onderdeel": "Hoe stemmen praktisch werkt bij Provinciale Staten en waterschap; geen stemadvies",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [],
+      "nibud_status": "n.v.t.",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-08",
+      "valid_until": "2027-03-31",
+      "source_of_metadata": "content_new/je-eerste-stem.md (Leerdoelen, Doelgroep en moment)"
     }
   ]
 }
