@@ -1,5 +1,5 @@
 /** @OnlyCurrentDoc */
-/* Escape 18 results endpoint, v2 (7 Nov 2026). Google Apps Script bound to the results Sheet, deployed as a web app
+/* Escape 18 results endpoint, v2.3 (9 Nov 2026: own test events left out of tabs and digest). Google Apps Script bound to the results Sheet, deployed as a web app
    (Execute as: Me, Who has access: Anyone). Follows /home/claude/e18_dev/LOGGING_SPEC.md plus backend-v2/CLIENT_SPEC.md.
 
    What it does, all without the owner:
@@ -25,6 +25,9 @@ const GET_PER_MIN = 600, GET_COMPUTES_PER_MIN = 60;
 const LOW_PCT = 40, LOW_MIN_N = 5, ROOM_LOW_PCT = 30;
 const DELETE_BY = '2027-01-31', DELETE_BY_IF_CONTINUED = '2027-08-31'; // as promised on privacy.html
 const SHEET_CELL_LIMIT = 10000000;
+// Our own tests: events before DATA_FROM, class codes starting with TST, and codes listed in the script property TEST_CODES
+// (comma separated) are left out of the tabs and the weekly digest. Nothing is deleted. Script property DATA_FROM overrides the date.
+const DATA_FROM = '2026-11-09T12:00:00Z';
 const LEVELS = ['pro', 'vmbo', 'havo', 'vwo', 'mbo', 'anders'];
 const WHEN = ['deze week', 'deze maand', 'later'];
 const SINCE = ['week', 'maand', 'langer'];
@@ -356,13 +359,21 @@ function rowsToEvents_(values, fn) {
     if (ev) fn(ev, t);
   });
 }
+function testFilter_() {
+  const props = PropertiesService.getScriptProperties();
+  const from = new Date(props.getProperty('DATA_FROM') || DATA_FROM);
+  const codes = {};
+  String(props.getProperty('TEST_CODES') || '').toUpperCase().split(/[\s,;]+/).forEach(function (c) { if (c) codes[c] = true; });
+  return function (ev, t) { const c = String(ev.cls || '').toUpperCase(); return t < from || c.indexOf('TST') === 0 || codes[c] === true; };
+}
 function readAll_(since) {
-  const A = newAcc_(since || null);
+  const A = newAcc_(since || null), isTest = testFilter_();
+  A.skipped = 0;
   const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET);
   const last = sh ? sh.getLastRow() : 0;
   for (let r = 2; r <= last; r += 5000) {
     const n = Math.min(5000, last - r + 1);
-    rowsToEvents_(sh.getRange(r, 1, n, HEAD.length).getValues(), function (ev, t) { addEvent_(A, ev, t); });
+    rowsToEvents_(sh.getRange(r, 1, n, HEAD.length).getValues(), function (ev, t) { if (isTest(ev, t)) { A.skipped++; return; } addEvent_(A, ev, t); });
   }
   A.rows = Math.max(0, last - 1);
   return A;
@@ -599,6 +610,7 @@ function digest_(A, since, nowD, test, ignored) {
 
   L.push('GEZONDHEID');
   L.push('- Tab events: ' + (A.rows || 0) + ' rijen (' + Math.round((A.rows || 0) * HEAD.length / SHEET_CELL_LIMIT * 1000) / 10 + '% van wat een Sheet aankan).');
+  if (A.skipped) L.push('- Eigen testrijen niet meegeteld: ' + A.skipped + ' (van voor ' + dateNl_(new Date(PropertiesService.getScriptProperties().getProperty('DATA_FROM') || DATA_FROM)) + ', klascode TST... of in TEST_CODES).');
   const ign = Object.keys(ignored || {});
   L.push('- Geweigerde events, afgelopen 7 dagen: ' + (ign.length ? ign.map(function (k) { return k + ' ' + ignored[k]; }).join(', ') : 'geen') + '.');
   if (daysLeft > 28) L.push('- Bewaartermijn: alles verwijderen uiterlijk op ' + dateNl_(new Date(DELETE_BY + 'T12:00:00Z')) + ' (nog ' + daysLeft + ' dagen), of 31 augustus 2027 als het project doorgaat.');
