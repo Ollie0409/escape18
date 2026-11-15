@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-Al63BJm6/uV2TB8kiFYTEhqOO1QZR6TgePM5VN9ax40='; style-src 'sha256-FK2/oDGeBeQRv2bGno4NCtwjKONtpOI3kdeKyXm/ZzA=' 'sha256-4QXJUHvyS6EE4fSgPxyDgb/MwanDLlKqrgBLauerPdc='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-Al63BJm6/uV2TB8kiFYTEhqOO1QZR6TgePM5VN9ax40='; style-src 'sha256-rpr0Zu5tznH2Mqwqzt/fgws1lAkNZ0osFZd6BNQRNH0=' 'sha256-4QXJUHvyS6EE4fSgPxyDgb/MwanDLlKqrgBLauerPdc='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Bijna 18 in de bol: wanneer begint je studiefinanciering, en wat krijg je? Doe je bbl? Dan lees je in kamer 1 wat voor jou geldt.">
 <meta name="robots" content="noindex">
@@ -666,6 +666,20 @@ label.opt input:focus-visible{outline:none!important;box-shadow:none!important}
 @media print{.t-care-top{display:none!important}}
 .esc-title.long{font-size:clamp(34px,5vw,64px)}
 
+/* Tap targets on small screens (QA 15 Nov 2026): every button, link-button, summary, checkbox and stand-alone link is at least 44 px tall (and wide)
+   from 700 px down. Larger screens are unchanged. Links inside a sentence (a "Bron:" line, a privacy sentence) stay inline text. */
+@media (max-width:700px){
+  .btn.small{min-height:44px;padding:10px 14px}
+  .brand{min-height:44px}
+  details.esc-recap summary{min-height:44px}
+  .t-aud-more summary{padding:10px 0;margin:0}
+  .t-aud-more[open] summary{margin-bottom:0}
+  .t-care-top>summary{padding:12px 0;margin-top:-10px;margin-bottom:-10px!important}
+  .t-care-top[open]>summary{margin-bottom:-4px!important}
+  .qs-steps input[type="checkbox"]{transform:scale(1.85);transform-origin:center}
+  .t-src a,footer.foot a{display:inline-flex;align-items:center;min-height:44px}
+}
+
 /* Gemeente-editie (src/edition.js): the "Hulp in <gemeente>" card and the teacher lines. Only in edition pages; design tokens from engine.css, so light and dark work the same. */
 .ed-help h2{margin:0}
 .ed-items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
@@ -686,6 +700,8 @@ label.opt input:focus-visible{outline:none!important;box-shadow:none!important}
   .ed-age{border:1px solid #000;background:none}
   .paper .ed-paper{break-before:page}
 }
+/* Tap targets on small screens (QA 15 Nov 2026): the website and e-mail links of a help item are at least 44 px tall */
+@media (max-width:700px){.ed-contact a{display:inline-flex;align-items:center;min-height:44px}}
 </style>
 <script src="../../../config.js"></script>
 </head>
