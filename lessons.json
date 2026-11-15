@@ -1,6 +1,6 @@
 {
   "schema": "escape18-lessons/1",
-  "generated": "2026-11-14",
+  "generated": "2026-11-15",
   "site": "https://ollie0409.github.io/escape18/",
   "provider": {
     "name": "Escape 18 (Olivier Runge), gestart als studentenproject van team Klaar voor Later, Erasmus Universiteit Rotterdam",
@@ -17,7 +17,7 @@
   "language": "nl (leerling- en docentscherm ook in het Engels)",
   "format": "Digitale escape-les in de browser; tweetallen op één scherm; docentenscherm voor het digibord; papieren reserveversie",
   "materials_needed": [
-    "een laptop, Chromebook of telefoon per tweetal",
+    "een laptop of Chromebook per tweetal (een telefoon alleen als de school dat toestaat)",
     "pen en papier",
     "digibord of beamer"
   ],
@@ -398,12 +398,13 @@
       "title": "Je eerste baan (mbo)",
       "url": "https://ollie0409.github.io/escape18/eerste-bijbaan-mbo/",
       "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/eerste-bijbaan-mbo/docent.pdf",
-      "summary_400": "Escape-les van 45 minuten voor mbo niveau 2 tot 4. Studenten werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: leerbaan, stage of bijbaan: je loon nakijken, je rooster checken en een tweede baan goed regelen. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "summary_400": "Escape-les van 45 minuten voor mbo niveau 3 en 4. Studenten werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: leerbaan, stage of bijbaan: je loon nakijken, je rooster checken en een tweede baan goed regelen. Gratis, geen account, gegeven door de eigen docent. Testversie.",
       "description": "Leerbaan, stage of bijbaan: je loon nakijken, je rooster checken en een tweede baan goed regelen.",
       "pupils_can_afterwards": "Studenten kunnen daarna hun loon en rooster nakijken bij stage, leerbaan en bijbaan.",
-      "niveau": "mbo niveau 2 tot 4",
-      "leerjaren": "mbo niveau 2-4 (niveau 2 met hulp bij het lezen)",
+      "niveau": "mbo niveau 3 en 4",
+      "leerjaren": "mbo niveau 3-4 (niveau 2 kan ook, met hulp bij het lezen)",
       "vak_moment": [
+        "Burgerschap",
         "LOB"
       ],
       "onderwerpen": [
@@ -455,7 +456,8 @@
       "vak_moment": [
         "Economie",
         "Mentoruur",
-        "LOB"
+        "LOB",
+        "Burgerschap"
       ],
       "onderwerpen": [
         "Schulden en betalen"
@@ -505,6 +507,7 @@
       "niveau": "mbo niveau 3 en 4",
       "leerjaren": "mbo niveau 3-4 in de bol (niveau 2 met hulp bij het lezen)",
       "vak_moment": [
+        "Burgerschap",
         "LOB"
       ],
       "onderwerpen": [
@@ -553,6 +556,7 @@
       "leerjaren": "havo 5, vwo 6, mbo niveau 3-4",
       "vak_moment": [
         "Maatschappijleer",
+        "Burgerschap",
         "Mentoruur",
         "LOB"
       ],
