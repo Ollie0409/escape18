@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-MK9OaNUeIqYtRTXnd+3/0AWw3KrDLekGdCXpZZJUeTU='; style-src 'sha256-W7f/YL+eYYZJh4lA3INC5S5hgfQFWCvx6//dIr6mog4=' 'sha256-4QXJUHvyS6EE4fSgPxyDgb/MwanDLlKqrgBLauerPdc='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-MK9OaNUeIqYtRTXnd+3/0AWw3KrDLekGdCXpZZJUeTU='; style-src 'sha256-2M8ys0RqX4vqPwdalMnpMQwE2TMnvO8nLnd6ejsJpQQ=' 'sha256-4QXJUHvyS6EE4fSgPxyDgb/MwanDLlKqrgBLauerPdc='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Wat moet je verzekeren, wat kies je zelf en wat betaalt je polis? Reken met eigen risico en meld schade goed.">
 <meta name="robots" content="noindex">
@@ -555,6 +555,8 @@ body[data-view="proj"] .wrap{max-width:none;padding-block:12px 12px;gap:10px}
 
 /* Engine-wide fixes (7 Nov 2026, insurance gate G4 S1): a long single word in an answer (such as "Aansprakelijkheidsverzekering") wraps instead of being cut off */
 .esc-card,label.opt,.esc-right,.esc-recap dd,.esc-explain,.esc-cluetext,.paper-opts li,.t-key dd{overflow-wrap:anywhere;hyphens:auto}
+/* Test run 2 (17 Nov 2026): browsers with Dutch hyphenation split short words ("aan-gifte", "verhuur-der") in a 360 px answer card. Only words of 13 letters or more may get a hyphen; shorter words stay whole (E1). */
+.esc-card,label.opt,.esc-right,.esc-recap dd,.esc-explain,.esc-cluetext,.paper-opts li,.t-key dd{hyphenate-limit-chars:13 6 6}
 .esc-card>span,label.opt>span{min-width:0}
 .esc-parts{display:block}.esc-part{display:block;padding-left:1.1em;text-indent:-1.1em}.esc-part::before{content:"\2022\00a0\00a0"}
 
