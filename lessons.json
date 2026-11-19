@@ -4,8 +4,8 @@
   "site": "https://ollie0409.github.io/escape18/",
   "provider": {
     "name": "Escape 18 (Olivier Runge), gestart als studentenproject van team Klaar voor Later, Erasmus Universiteit Rotterdam",
-    "contact_email": null,
-    "contact_todo": "TODO EIGENAAR: nog geen contactadres; vul in zodra het bestaat. Formulieren (geldlessen.nl, Week van het geld) vragen naam, e-mail en telefoon: kies wat openbaar mag."
+    "contact_email": "olivierrunge@gmail.com",
+    "contact_note": "Hetzelfde adres als op de startpagina en de privacypagina (config.js contact). Formulieren (geldlessen.nl, Week van het geld) vragen ook naam en telefoon: kies wat openbaar mag."
   },
   "status_note": "Gratis testversie in ontwikkeling. Nog niet in de praktijk getest; geen effectonderzoek. Vermeld dit in elke listing.",
   "licence": {
@@ -224,7 +224,7 @@
         "Oplichting herkennen"
       ],
       "duur_minuten": 45,
-      "escape_minuten": 30,
+      "escape_minuten": 27,
       "korte_versie_30_min": false,
       "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
       "leerdoelen": [
@@ -248,7 +248,7 @@
       "licence": "CC BY-NC-SA 4.0",
       "cost": "Gratis",
       "last_checked": "2026-11-06",
-      "valid_until": "2026-12-31",
+      "valid_until": "2027-07-31",
       "source_of_metadata": "content_new/op-kamers.md (Leerdoelen)"
     },
     {
