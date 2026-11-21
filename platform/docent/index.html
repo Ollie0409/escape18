@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>Escape 18 voor docenten</title>
+<link rel="stylesheet" href="../core/ui.css">
+<link rel="stylesheet" href="app.css">
+<link rel="manifest" href="../manifest.webmanifest">
+</head>
+<body>
+<a class="skip" href="#main">Naar de inhoud</a>
+<div class="wrap">
+  <header class="top no-print">
+    <a class="brand" href="../index.html">
+      <span class="mark" aria-hidden="true">18</span>
+      <span><b>Escape 18</b><small>Docent</small></span>
+    </a>
+    <div class="row" id="topActions">
+      <a class="btn ghost small" href="hulp.html">Hulp en ICT-checklist</a>
+      <span class="badge" id="netBadge" hidden></span>
+    </div>
+  </header>
+
+  <!-- Polite live region: only team joins and minute changes (throttled in app.js) -->
+  <div id="live" class="sr" aria-live="polite" aria-atomic="true"></div>
+
+  <main id="main" tabindex="-1">
+
+    <!-- 1. Pick a lesson -->
+    <section id="vPick" class="view stack" aria-labelledby="hPick">
+      <div class="stack">
+        <p class="eyebrow">Stap 1 van 3</p>
+        <h1 id="hPick" tabindex="-1">Kies een les</h1>
+        <p class="lead">Leerlingen spelen in teams op hun telefoon of Chromebook. Ze hebben geen account nodig en typen geen namen. Live meekijken staat in deze testversie nog uit: aan het eind laat elk team een resultaatcode zien, die jij hier intypt.</p>
+      </div>
+
+      <div class="card flat options">
+        <label class="check" for="optResearch">
+          <input type="checkbox" id="optResearch">
+          <span><b>Resultaten zonder namen delen met Escape 18 om de lessen te verbeteren</b><br>
+          <span class="hint">Staat standaard uit. Als je dit aanzet, stuurt de les alleen antwoorden en tijden zonder namen naar het onderzoeksbestand van Escape 18. Zo verbeteren we de lessen.</span></span>
+        </label>
+        <details class="privacy">
+          <summary>Wat gebeurt er met de gegevens?</summary>
+          <div class="stack small">
+            <p>Er zijn geen accounts, geen namen en geen vrije tekst. Teams heten Team 1, Team 2 en zo verder, met een kleur.</p>
+            <p>Zodra live meekijken aanstaat, staat de klas alleen tijdelijk op de server. Na het afronden van de les wordt alles na 10 minuten gewist, en uiterlijk na 12 uur.</p>
+            <p>Er worden geen cookies, geen IP-adressen en geen apparaatgegevens bewaard.</p>
+            <p><a href="../docs/privacy.html">Lees de volledige privacynotitie voor scholen</a></p>
+          </div>
+        </details>
+      </div>
+
+      <div id="pickNote" class="note warn" role="status" hidden></div>
+      <div id="lessonList" class="grid" aria-busy="true">
+        <p class="muted">Lessen laden...</p>
+      </div>
+
+      <div class="card sunk">
+        <h2 class="h3">Slecht internet op school?</h2>
+        <p>Kies bij een les voor <b>Zonder internet</b>. Leerlingen spelen dan los, en typen aan het eind een resultaatcode over die jij hier invoert. Met <b>Maak klaar voor offline</b> bewaart deze computer alle lessen alvast.</p>
+        <div class="row">
+          <button type="button" class="btn ghost" id="btnPrecache">Maak klaar voor offline</button>
+          <span id="precacheMsg" class="small" role="status"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2/3. Class: lobby + running -->
+    <section id="vClass" class="view stack" aria-labelledby="hClass" hidden>
+      <div class="row between">
+        <div class="stack tight">
+          <p class="eyebrow" id="clsStep">Stap 2 van 3</p>
+          <h1 id="hClass" tabindex="-1">Les</h1>
+        </div>
+        <div class="row no-print">
+          <button type="button" class="btn ghost" id="btnProjector" aria-haspopup="dialog">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>
+            Projectorweergave
+          </button>
+        </div>
+      </div>
+
+      <div class="join card">
+        <div class="join-code">
+          <p class="label" aria-hidden="true">Klassencode</p>
+          <p class="codebox" id="classCode">-----</p>
+          <p class="small">Ga naar <a id="joinUrl" href="#">...</a><br>of scan de QR-code. Leerlingen typen de code in.</p>
+          <div class="row no-print">
+            <button type="button" class="btn ghost small" id="btnCopyUrl">Kopieer link</button>
+            <span id="copyUrlMsg" class="small" role="status"></span>
+          </div>
+        </div>
+        <div class="join-qr" id="joinQr" aria-hidden="true"></div>
+      </div>
+
+      <!-- Lobby -->
+      <div id="lobby" class="card stack">
+        <div class="row between">
+          <h2>Wachtruimte</h2>
+          <span class="badge teal" id="lobbyCount">0 teams</span>
+        </div>
+        <p class="muted">Teams verschijnen hier zodra ze meedoen. Elk team ziet zijn eigen naam en kleur groot op het scherm.</p>
+        <ul id="lobbyTeams" class="lobby-teams" aria-label="Teams in de wachtruimte"></ul>
+        <div class="minutes row">
+          <span class="label" id="minLabel">Speeltijd</span>
+          <span class="stepper" role="group" aria-labelledby="minLabel">
+            <button type="button" class="btn ghost small" id="minDown" aria-label="5 minuten minder">-5</button>
+            <span class="min-val" id="minVal">45 min</span>
+            <button type="button" class="btn ghost small" id="minUp" aria-label="5 minuten meer">+5</button>
+          </span>
+          <span class="hint">tussen 5 en 90 minuten</span>
+        </div>
+        <div class="row">
+          <button type="button" class="btn big" id="btnStart">Start de les</button>
+        </div>
+      </div>
+
+      <!-- Running -->
+      <div id="running" class="stack" hidden>
+        <div class="timer-card card">
+          <div class="timer-main">
+            <p class="label" id="timerLabel">Resterende tijd</p>
+            <p class="clock" id="clock" role="timer" aria-labelledby="timerLabel">00:00</p>
+            <p class="small" id="timerState"></p>
+          </div>
+          <div class="row timer-btns no-print">
+            <button type="button" class="btn" id="btnPause">Pauze</button>
+            <button type="button" class="btn ghost" id="btnMinus" aria-label="-5 min, 5 minuten eraf">-5 min</button>
+            <button type="button" class="btn ghost" id="btnPlus" aria-label="+5 min, 5 minuten erbij">+5 min</button>
+          </div>
+        </div>
+
+        <div class="summary" id="summary" aria-label="Samenvatting van de klas"></div>
+
+        <div class="row between no-print">
+          <h2>Teams</h2>
+          <label class="check inline" for="fltStuck">
+            <input type="checkbox" id="fltStuck">
+            <span>Alleen teams die vastzitten <span class="hint">(4 minuten geen voortgang)</span></span>
+          </label>
+        </div>
+        <p id="gridEmpty" class="muted" hidden></p>
+        <ul id="teamGrid" class="team-grid" aria-label="Voortgang per team"></ul>
+      </div>
+    </section>
+
+    <!-- Offline mode (level 2 and 3) -->
+    <section id="vOffline" class="view stack" aria-labelledby="hOffline" hidden>
+      <div class="row between">
+        <div class="stack tight">
+          <p class="eyebrow">Zonder internet</p>
+          <h1 id="hOffline" tabindex="-1">Les zonder live verbinding</h1>
+        </div>
+        <button type="button" class="btn ghost no-print" id="btnBackOff">Andere les kiezen</button>
+      </div>
+      <div id="offlineWhy" class="note warn" role="status" hidden></div>
+      <div class="join card">
+        <div class="stack">
+          <h2 class="h3">1. Laat leerlingen deze link openen</h2>
+          <p><a id="offUrl" href="#">...</a></p>
+          <p class="small">Ze spelen de les los op hun apparaat. Aan het eind zien ze een <b>resultaatcode</b> van 8 tekens, zoals ABCD-EFGH.</p>
+          <div class="row no-print">
+            <button type="button" class="btn ghost small" id="btnCopyOffUrl">Kopieer link</button>
+            <span id="copyOffMsg" class="small" role="status"></span>
+          </div>
+        </div>
+        <div class="join-qr" id="offQr" aria-hidden="true"></div>
+      </div>
+      <form id="codeForm" class="card stack no-print" novalidate>
+        <h2 class="h3">2. Typ de resultaatcodes in</h2>
+        <div class="field">
+          <label for="codeInput">Resultaatcode</label>
+          <span class="hint" id="codeHint">8 tekens, met of zonder streepje. Hoofdletters zijn niet nodig.</span>
+          <div class="row code-row">
+            <input type="text" id="codeInput" autocomplete="off" autocapitalize="characters" spellcheck="false" inputmode="text" maxlength="12" aria-describedby="codeHint codeErr">
+            <button type="submit" class="btn">Toevoegen</button>
+          </div>
+          <p id="codeErr" class="err" aria-live="assertive"></p>
+        </div>
+      </form>
+      <div class="card sunk">
+        <h2 class="h3">Geen apparaten?</h2>
+        <p>Gebruik de papieren versie van de les: <a id="paperLink" href="#">Docentenblad en papieren versie</a>.</p>
+      </div>
+    </section>
+
+    <!-- Results (shared by live and offline) -->
+    <section id="vResults" class="stack" aria-labelledby="hResults" hidden>
+      <div class="row between">
+        <h2 id="hResults">Resultaten</h2>
+        <div class="row no-print">
+          <button type="button" class="btn ghost" id="btnCsv">Download CSV</button>
+          <button type="button" class="btn ghost" id="btnCopy">Kopieer tabel</button>
+          <button type="button" class="btn ghost" id="btnPrint">Print</button>
+        </div>
+      </div>
+      <p id="resMsg" class="small" role="status"></p>
+      <p class="hint">Alleen teamnamen, kleuren en scores. Geen namen van leerlingen.</p>
+      <div class="table-wrap" id="resWrap" role="region" aria-label="Resultaten per team" tabindex="0"></div>
+    </section>
+
+    <!-- End -->
+    <section id="vEnd" class="stack no-print" hidden>
+      <div class="row">
+        <button type="button" class="btn stop" id="btnEnd" aria-haspopup="dialog">Les afronden</button>
+        <button type="button" class="btn ghost" id="btnNew" hidden>Nieuwe les kiezen</button>
+      </div>
+      <div id="endNote" class="note" role="status" hidden></div>
+    </section>
+  </main>
+</div>
+
+<!-- Projector overlay -->
+<div id="projector" class="projector" role="dialog" aria-modal="true" aria-labelledby="pjTitle" hidden>
+  <div class="pj-inner">
+    <div class="pj-top">
+      <p id="pjTitle" class="pj-title">Les</p>
+      <button type="button" class="btn ghost" id="pjClose">Sluiten <span class="hint">(Esc)</span></button>
+    </div>
+    <div class="pj-body">
+      <div class="pj-join">
+        <p class="pj-url" id="pjUrl"></p>
+        <p class="pj-code" id="pjCode"></p>
+        <div class="pj-qr" id="pjQr" aria-hidden="true"></div>
+      </div>
+      <div class="pj-status">
+        <p class="pj-clock" id="pjClock" role="timer">00:00</p>
+        <p class="pj-state" id="pjState"></p>
+        <div class="pj-bar" id="pjBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Kamers klaar van de hele klas"><span></span></div>
+        <p class="pj-bartext" id="pjBarText"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End confirmation (in-page, no window.confirm) -->
+<dialog id="dlgEnd" class="dialog" aria-labelledby="dlgEndTitle">
+  <div class="dlg-body">
+    <h2 id="dlgEndTitle">Les afronden?</h2>
+    <p>Alle teams zien dan het eindscherm en kunnen niet verder spelen. Download eerst de resultaten als je die wilt bewaren.</p>
+    <p class="small muted">De gegevens van deze klas worden 10 minuten na het afronden automatisch gewist.</p>
+    <div class="row">
+      <button type="button" class="btn stop" id="dlgEndYes">Ja, rond af</button>
+      <button type="button" class="btn ghost" id="dlgEndNo">Nee, ga terug</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="../core/config.js"></script>
+<script src="../core/protocol.js"></script>
+<script src="../core/relay-core.js"></script>
+<script src="../core/resultcode.js"></script>
+<script src="../core/catalog.js"></script>
+<script src="../core/transport.js"></script>
+<script src="../core/sw-register.js"></script>
+<script src="qr.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

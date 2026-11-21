@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape 18 platform: demo</title>
+<link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<main>
+<header class="top">
+  <h1>Escape 18 platform: demo</h1>
+  <p class="lead">Zo werkt het: de docent start een klas, leerlingen doen mee op hun telefoon en de docent ziet live per team hoe ver ze zijn. Hieronder draait alles in dit venster, zonder server.</p>
+  <form id="ctl" class="ctl" autocomplete="off">
+    <label>Les
+      <select id="lesson"></select>
+    </label>
+    <label>Gesimuleerde teams
+      <input id="bots" type="number" min="0" max="12" value="6" inputmode="numeric">
+    </label>
+    <label>Snelheid
+      <select id="speed">
+        <option value="1">1x</option>
+        <option value="5">5x</option>
+        <option value="20">20x</option>
+      </select>
+    </label>
+    <button id="go" type="submit" class="primary">Start demo</button>
+    <span id="status" class="status" role="status" aria-live="polite"></span>
+  </form>
+  <p class="note"><strong>Gesimuleerde teams:</strong> de teams in het docentenscherm zijn bots met verzonnen gegevens. Alleen het leerlingscherm rechts is echt speelbaar.</p>
+</header>
+<div id="stage" class="stage" hidden>
+  <section class="teacher" aria-labelledby="t-h">
+    <h2 id="t-h">Docentenscherm</h2>
+    <div class="frame-wrap"><iframe id="teacher" title="Docentenscherm"></iframe></div>
+  </section>
+  <section class="pupil" aria-labelledby="p-h">
+    <h2 id="p-h">Leerlingscherm (speel zelf mee)</h2>
+    <div class="phone-box" id="phoneBox">
+      <div class="phone" id="phone"><iframe id="pupil" title="Leerlingscherm"></iframe></div>
+    </div>
+  </section>
+</div>
+</main>
+<script src="../core/config.js"></script>
+<script src="../core/protocol.js"></script>
+<script src="../core/relay-core.js"></script>
+<script src="../core/transport.js"></script>
+<script src="../core/catalog.js"></script>
+<script src="bots.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>

@@ -588,6 +588,292 @@
       "last_checked": "2026-11-08",
       "valid_until": "2027-03-31",
       "source_of_metadata": "content_new/je-eerste-stem.md (Leerdoelen, Doelgroep en moment)"
+    },
+    {
+      "slug": "zorgpremie-achterstand",
+      "status": "live",
+      "title": "Zorgpremie niet betaald",
+      "url": "https://ollie0409.github.io/escape18/zorgpremie-achterstand/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/zorgpremie-achterstand/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo, vwo en mbo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: de zorgpremie die je vanaf 18 zelf betaalt, wat er na 2 en 6 maanden achterstand gebeurt en hoe je eruit komt. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Vanaf je 18e betaal je zelf zorgpremie. Wat gebeurt er als je die niet betaalt? En hoe kom je eruit?",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna zeggen wanneer je zelf zorgpremie betaalt, wat er na 2 en na 6 maanden achterstand gebeurt en hoe je eruit komt.",
+      "niveau": "havo, vwo en mbo",
+      "leerjaren": "havo 5, vwo 6, mbo niveau 3-4",
+      "vak_moment": [
+        "Burgerschap",
+        "LOB",
+        "Mentoruur",
+        "Economie"
+      ],
+      "onderwerpen": [
+        "Verzekeren",
+        "Schulden en betalen"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Weten dat je vanaf de maand na je 18e verjaardag zelf zorgpremie betaalt en dat je zorgtoeslag zelf aanvraagt.",
+        "Weten dat de verzekeraar na 2 maanden achterstand een betalingsregeling aanbiedt, dat de basisverzekering doorloopt en dat een aanvullende verzekering kan stoppen.",
+        "Weten dat je na 6 maanden achterstand bij het CAK komt, dat de premie dan vaak via je loon gaat en dat de oude schuld blijft.",
+        "Weten hoe je uit de regeling van het CAK komt (schuld aflossen, schuldhulp) en waar gratis hulp is."
+      ],
+      "curriculum_anchor_short": "Burgerschap · Mentoruur of LOB · Economie (inkomsten, uitgaven en schulden)",
+      "curriculum": [
+        {
+          "kader": "Burgerschap / LOB / economie",
+          "onderdeel": "Burgerschap: financiële zelfredzaamheid, betalingsachterstanden voorkomen; LOB: weten wie je om hulp kunt vragen; economie: inkomsten, uitgaven en schulden, zonder examenclaim",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [
+        "Problematische schulden voorkomen"
+      ],
+      "nibud_status": "voorstel",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-19",
+      "valid_until": "2027-08-31",
+      "source_of_metadata": "factory/out/zorgpremie-achterstand.json (lead, kamers, teacher.goal en teacher.audience)"
+    },
+    {
+      "slug": "lenen-en-rood-staan",
+      "status": "live",
+      "title": "Rood staan en lenen",
+      "url": "https://ollie0409.github.io/escape18/lenen-en-rood-staan/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/lenen-en-rood-staan/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo, vwo en mbo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: rood staan en een lening: de kosten uitrekenen, het JKP vergelijken, kredietcheck en BKR, en wat je doet als het niet lukt. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Rood staan of een lening? Reken de kosten uit, vergelijk het JKP en weet wat je kunt doen.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna de kosten van rood staan en van een lening uitrekenen, leningen vergelijken met het JKP en zeggen wat je doet bij betaalproblemen.",
+      "niveau": "havo, vwo en mbo",
+      "leerjaren": "havo 5, vwo 6, mbo niveau 3-4",
+      "vak_moment": [
+        "Economie",
+        "Burgerschap",
+        "Mentoruur",
+        "LOB"
+      ],
+      "onderwerpen": [
+        "Schulden en betalen"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Weten dat rood staan een lening is en de rente over een maand rood staan uitrekenen.",
+        "De totale kosten van een lening uitrekenen, leningen vergelijken met het JKP en uitleggen waarom \"Let op! Geld lenen kost geld\" in reclame staat.",
+        "Weten dat een aanbieder eerst moet checken of je kunt betalen en dat een lening bij BKR kan komen, bijvoorbeeld met gevolgen voor een hypotheek.",
+        "Weten dat je bij betaalproblemen meteen contact opneemt, een betalingsregeling vraagt en waar gratis hulp is."
+      ],
+      "curriculum_anchor_short": "Economie E1 Gezinnen ruilen over de tijd (lenen) · Burgerschap · Mentoruur of LOB",
+      "curriculum": [
+        {
+          "kader": "Burgerschap / LOB / economie havo 2027",
+          "onderdeel": "Burgerschap: financiële zelfredzaamheid; LOB: keuzes voor later; economie E1 Gezinnen ruilen over de tijd (lenen), zonder examenclaim",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [
+        "Problematische schulden voorkomen"
+      ],
+      "nibud_status": "voorstel",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-19",
+      "valid_until": "2027-08-31",
+      "source_of_metadata": "factory/out/lenen-en-rood-staan.json (lead, kamers, teacher.goal en teacher.audience)"
+    },
+    {
+      "slug": "huurder-rechten",
+      "status": "live",
+      "title": "Huren: borg, huurprijs en huurtoeslag",
+      "url": "https://ollie0409.github.io/escape18/huurder-rechten/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/huurder-rechten/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo, vwo en mbo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: huren als je al woont: de borg terugkrijgen, controleren of de huur te hoog is, huurverhoging en servicekosten, en huurtoeslag in 2027. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Je huurt al. Check je borg, je huurprijs en je servicekosten, en vraag huurtoeslag op tijd aan.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna uitrekenen hoeveel borg terugkomt, zien of de huur te hoog is, servicekosten narekenen en huurtoeslag op tijd aanvragen.",
+      "niveau": "havo, vwo en mbo",
+      "leerjaren": "havo 5, vwo 6, mbo niveau 3-4",
+      "vak_moment": [
+        "Mentoruur",
+        "LOB",
+        "Burgerschap",
+        "Economie"
+      ],
+      "onderwerpen": [
+        "Wonen"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Weten welke kosten een verhuurder van de borg mag afhalen, uitrekenen hoeveel borg terugkomt en de termijn van 30 dagen kennen.",
+        "In een puntenoverzicht het soort huur aflezen, uitrekenen hoeveel huur te veel is en weten dat de Huurcommissie kan beslissen.",
+        "Weten dat het maximum voor huurverhoging per jaar en per soort huur verschilt en een jaaroverzicht servicekosten narekenen.",
+        "De huurtoeslagregels voor jongeren sinds 2026 kennen, weten dat je ook achteraf kunt aanvragen en dat je veranderingen binnen 4 weken doorgeeft."
+      ],
+      "curriculum_anchor_short": "Burgerschap · Mentoruur of LOB · Economie (woningmarkt), vervolg op Op kamers",
+      "curriculum": [
+        {
+          "kader": "Burgerschap / LOB / economie",
+          "onderdeel": "Burgerschap: financiële zelfredzaamheid; LOB: zelfstandig wonen als stap na school; economie: woningmarkt en overheidsbeleid, zonder examenclaim",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [],
+      "nibud_status": "n.v.t.",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-19",
+      "valid_until": "2027-06-30",
+      "source_of_metadata": "factory/out/huurder-rechten.json (lead, kamers, teacher.goal en teacher.audience)"
+    },
+    {
+      "slug": "toeslag-terugbetalen",
+      "status": "live",
+      "title": "Je eerste belastingjaar: toeslag en aangifte",
+      "url": "https://ollie0409.github.io/escape18/toeslag-terugbetalen/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/toeslag-terugbetalen/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo, vwo en mbo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: je eerste toeslagjaar: een toeslag is een voorschot, wijzigingen doorgeven, de definitieve berekening en nepberichten. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Zorgtoeslag is een voorschot. Geef wijzigingen door, reken het verschil uit en herken nepberichten.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna uitleggen waarom een toeslag een voorschot is, een wijziging doorgeven, een terugbetaling uitrekenen en een nepbericht herkennen.",
+      "niveau": "havo, vwo en mbo",
+      "leerjaren": "havo 5, vwo 6, mbo niveau 3-4",
+      "vak_moment": [
+        "Burgerschap",
+        "LOB",
+        "Mentoruur",
+        "Economie"
+      ],
+      "onderwerpen": [
+        "Belasting en toeslagen",
+        "Oplichting herkennen"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Weten dat een toeslag een voorschot is en het voorschot voor een jaar uitrekenen.",
+        "Een nieuwe jaarschatting maken als je inkomen verandert en weten dat je die zelf doorgeeft in Mijn toeslagen.",
+        "Met een definitieve berekening uitrekenen wat je terugbetaalt, weten dat het inkomen van de Belastingdienst komt en de betalingsregeling kennen.",
+        "Signalen van een nepbericht over toeslagen herkennen, zelf nagaan wat klopt en weten waar gratis hulp is."
+      ],
+      "curriculum_anchor_short": "Burgerschap · Mentoruur of LOB · Economie (inkomen en overheid)",
+      "curriculum": [
+        {
+          "kader": "Burgerschap / LOB / economie",
+          "onderdeel": "Burgerschap: administratie bijhouden, betalingsachterstanden voorkomen; LOB: werkexploratie (meer uren werken en je toeslag); economie: inkomen en overheid, zonder examenclaim",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [
+        "Administratie bijhouden",
+        "Betalingsachterstanden voorkomen"
+      ],
+      "nibud_status": "voorstel",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-19",
+      "valid_until": "2027-08-31",
+      "source_of_metadata": "factory/out/toeslag-terugbetalen.json (lead, kamers, teacher.goal en teacher.audience)"
+    },
+    {
+      "slug": "studieschuld",
+      "status": "live",
+      "title": "DUO: lenen en later terugbetalen",
+      "url": "https://ollie0409.github.io/escape18/studieschuld/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/studieschuld/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo, vwo en mbo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: lenen bij DUO: je overzicht lezen, de rente uitrekenen, terugbetalen en je studieschuld later. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Wat kost lenen bij DUO? Lees je overzicht, reken de rente uit en zie hoe terugbetalen werkt.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna op een DUO-overzicht het leningdeel zien, de rente over een jaar uitrekenen en uitleggen hoe terugbetalen werkt.",
+      "niveau": "havo, vwo en mbo",
+      "leerjaren": "havo 5, vwo 6, mbo niveau 3-4",
+      "vak_moment": [
+        "Economie",
+        "LOB",
+        "Mentoruur",
+        "Burgerschap"
+      ],
+      "onderwerpen": [
+        "Studie en studiefinanciering",
+        "Schulden en betalen"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Op een overzicht zien welk deel van je studiegeld een lening is en weten dat de rente al tijdens de studie loopt.",
+        "Met een gegeven percentage de rente over een jaar uitrekenen en weten dat de rente na de studie steeds 5 jaar vaststaat.",
+        "De aanloopfase van 2 jaar en de termijn van 35 jaar kennen en uitrekenen wat 4% van het inkomen boven de drempel is.",
+        "Weten dat een studieschuld meetelt bij een hypotheek, dat extra aflossen altijd mag en hoe je een nepbericht van DUO herkent."
+      ],
+      "curriculum_anchor_short": "Burgerschap · Mentoruur of LOB · Economie (lenen en rente), vervolg op Studiefinanciering",
+      "curriculum": [
+        {
+          "kader": "Burgerschap / LOB / economie",
+          "onderdeel": "Burgerschap: financiële zelfredzaamheid; LOB: keuzes voor een vervolgopleiding en wat die kost; economie: lenen en rente, ruilen over de tijd, zonder examenclaim",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [],
+      "nibud_status": "n.v.t.",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-19",
+      "valid_until": "2027-08-31",
+      "source_of_metadata": "factory/out/studieschuld.json (lead, kamers, teacher.goal en teacher.audience)"
+    },
+    {
+      "slug": "werk-rechten",
+      "status": "live",
+      "title": "Je rechten op je werk",
+      "url": "https://ollie0409.github.io/escape18/werk-rechten/",
+      "teacher_sheet_pdf": "https://ollie0409.github.io/escape18/werk-rechten/docent.pdf",
+      "summary_400": "Escape-les van 45 minuten voor havo, vwo en mbo. Leerlingen werken in tweetallen op één scherm met verzonnen maar realistische documenten. Onderwerp: je rechten op je werk: ziek zijn, vakantie, oproepwerk en pauze. Gratis, geen account, gegeven door de eigen docent. Testversie.",
+      "description": "Ziek, vakantie, oproepwerk en pauze. Ken je rechten op je werk en weet waar je hulp vraagt.",
+      "pupils_can_afterwards": "Leerlingen kunnen daarna zeggen hoe je je ziek meldt, je vakantie-uren en vakantiegeld uitrekenen, oproepwerk beoordelen en weten waar je hulp vraagt.",
+      "niveau": "havo, vwo en mbo",
+      "leerjaren": "havo 5, vwo 6, mbo niveau 3-4",
+      "vak_moment": [
+        "LOB",
+        "Burgerschap",
+        "Mentoruur",
+        "Economie"
+      ],
+      "onderwerpen": [
+        "Werk"
+      ],
+      "duur_minuten": 45,
+      "escape_minuten": 26,
+      "korte_versie_30_min": false,
+      "werkvorm": "Escape room in tweetallen, start- en eindcheck van 4 vragen, nabespreking door de docent",
+      "leerdoelen": [
+        "Weten hoe je je ziek meldt, dat je minstens 70% loon krijgt en dat een ziektedag alleen met instemming een vakantiedag wordt.",
+        "Het minimum aan vakantie-uren en vakantiegeld uitrekenen en weten wanneer wettelijke vakantie-uren vervallen.",
+        "Weten dat een oproepkracht na 12 maanden een aanbod voor vaste uren krijgt, die uren uitrekenen en weten dat weigeren mag.",
+        "Het verschil in pauzeregels tussen 16 en 17 jaar en 18 jaar en ouder kennen en weten waar je meldt (Nederlandse Arbeidsinspectie) en gratis advies krijgt (Juridisch Loket)."
+      ],
+      "curriculum_anchor_short": "LOB · Burgerschap · Mentoruur · Economie (arbeidsmarkt), vervolg op Je eerste bijbaan",
+      "curriculum": [
+        {
+          "kader": "LOB / burgerschap / economie",
+          "onderdeel": "LOB: werkexploratie, rechten en plichten als werknemer; burgerschap: inkomen uit werk; economie: arbeidsmarkt, zonder examenclaim",
+          "status": "voorstel"
+        }
+      ],
+      "nibud_leerdoelen": [],
+      "nibud_status": "n.v.t.",
+      "licence": "CC BY-NC-SA 4.0",
+      "cost": "Gratis",
+      "last_checked": "2026-11-19",
+      "valid_until": "2027-08-31",
+      "source_of_metadata": "factory/out/werk-rechten.json (lead, kamers, teacher.goal en teacher.audience)"
     }
   ]
 }

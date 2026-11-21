@@ -1,0 +1,32 @@
+{
+ "version": "74dca82eed58",
+ "lessonBase": "../",
+ "shell": [
+  "catalog.json",
+  "core/catalog.js",
+  "core/config.js",
+  "core/protocol.js",
+  "core/relay-core.js",
+  "core/resultcode.js",
+  "core/sw-register.js",
+  "core/transport.js",
+  "core/ui.css",
+  "docent/app.css",
+  "docent/app.js",
+  "docent/hulp.html",
+  "docent/index.html",
+  "docent/qr.js",
+  "icons/icon-192.png",
+  "icons/icon-512.png",
+  "icons/icon.svg",
+  "index.html",
+  "manifest.webmanifest",
+  "offline.html",
+  "speel/app.css",
+  "speel/app.js",
+  "speel/index.html"
+ ],
+ "lessons": [],
+ "optional": [],
+ "note": "lessons live at ../, outside the service worker scope: not precached"
+}

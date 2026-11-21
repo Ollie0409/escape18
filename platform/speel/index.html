@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="nl" data-page="speel">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self' data:; frame-src 'self'; connect-src 'self' ws: wss: https:; object-src 'none'; base-uri 'none'; form-action 'self'">
+<title>Meedoen · Escape 18</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="stylesheet" href="../core/ui.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body class="speel">
+<a class="skip" href="#main">Naar de inhoud</a>
+
+<div id="shell" class="shell">
+  <!-- Slim top bar, only while a lesson is shown -->
+  <div id="bar" class="bar" hidden>
+    <span id="bar-team" class="bar-team"><span id="bar-swatch" class="bar-swatch" aria-hidden="true"></span><span id="bar-team-txt" class="bar-team-txt"></span></span>
+    <span id="bar-timer" class="bar-timer" role="timer" aria-label="Lestijd" hidden><span id="bar-timer-icon" class="bar-timer-icon" aria-hidden="true"></span><span id="bar-timer-txt">--:--</span><span id="bar-timer-sr" class="sr"></span></span>
+    <span id="bar-conn" class="badge bar-conn" hidden></span>
+    <button id="bar-done" class="btn small bar-done" type="button" hidden>Klaar, toon mijn code</button>
+  </div>
+
+  <main id="main" class="main" tabindex="-1">
+    <!-- Code entry -->
+    <section id="s-join" class="screen wrap" hidden aria-labelledby="h-join">
+      <div class="brandline"><span class="mark" aria-hidden="true">18</span><b>Escape 18</b></div>
+      <h1 id="h-join" tabindex="-1">Doe mee met je klas</h1>
+      <p class="lead">Vul de klascode in die je docent laat zien.</p>
+      <form id="join-form" class="codeform card" action="./" method="get" novalidate>
+        <div class="field">
+          <label for="join-code">Klascode</label>
+          <input id="join-code" class="codeinput" name="klas" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="go" pattern="[A-HJ-NP-Z2-9]{5}" maxlength="9" required aria-describedby="join-hint join-err">
+          <p id="join-hint" class="hint">5 tekens, bijvoorbeeld KX7TB. Spaties mogen.</p>
+          <p id="join-err" class="err" role="alert" hidden></p>
+        </div>
+        <button class="btn big block" type="submit">Meedoen</button>
+      </form>
+      <p class="small muted">Geen account, geen namen. <a href="../docs/privacy.html">Privacy</a></p>
+      <p class="small"><a href="?offline=1">Geen internet? Speel zonder verbinding</a></p>
+    </section>
+
+    <!-- Connecting and lobby -->
+    <section id="s-wait" class="screen wrap" hidden aria-labelledby="h-wait">
+      <div class="brandline"><span class="mark" aria-hidden="true">18</span><b>Escape 18</b><span id="wait-code" class="muted small"></span></div>
+      <div id="wait-connecting" class="stack">
+        <h1 id="h-wait" tabindex="-1">Verbinden met je klas</h1>
+        <p class="lead"><span class="spinner" aria-hidden="true"></span>Even geduld.</p>
+      </div>
+      <div id="wait-team" class="teamcard card" hidden>
+        <p class="eyebrow">Jullie zijn</p>
+        <div class="teamrow"><span id="wait-swatch" class="team-swatch" aria-hidden="true"></span><p id="wait-label" class="team-label"></p></div>
+        <p id="wait-lesson" class="muted"></p>
+      </div>
+      <p id="wait-status" class="wait-status" role="status"></p>
+      <div id="wait-slow" class="note warn stack" hidden>
+        <p><b>Er komt geen verbinding.</b> Misschien blokkeert het schoolnetwerk de verbinding, of is je docent nog niet gestart.</p>
+        <div class="row">
+          <button id="btn-offline" class="btn" type="button">Doorgaan zonder verbinding</button>
+          <button id="btn-retry-slow" class="btn ghost" type="button">Opnieuw proberen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Errors -->
+    <section id="s-error" class="screen wrap" hidden aria-labelledby="h-error">
+      <div class="brandline"><span class="mark" aria-hidden="true">18</span><b>Escape 18</b></div>
+      <div class="note stop stack">
+        <h1 id="h-error" tabindex="-1" class="err-title"></h1>
+        <p id="error-text"></p>
+      </div>
+      <div class="row">
+        <button id="btn-retry" class="btn" type="button">Opnieuw proberen</button>
+        <a id="btn-other" class="btn ghost" href="./">Andere code invullen</a>
+      </div>
+    </section>
+
+    <!-- Offline lesson picker -->
+    <section id="s-pick" class="screen wrap" hidden aria-labelledby="h-pick">
+      <div class="brandline"><span class="mark" aria-hidden="true">18</span><b>Escape 18</b></div>
+      <h1 id="h-pick" tabindex="-1">Speel zonder verbinding</h1>
+      <p class="lead">Kies de les die je docent laat zien. Aan het eind krijg je een code. Die geef je aan je docent.</p>
+      <p id="pick-status" class="muted" role="status"></p>
+      <ul id="pick-list" class="picklist"></ul>
+      <p class="small"><a href="./">Toch met een klascode meedoen</a></p>
+    </section>
+
+    <!-- Lesson -->
+    <section id="s-play" class="screen play" hidden aria-label="Les">
+      <div id="frame-wrap" class="frame-wrap">
+        <iframe id="lesson" class="lesson" title="Les" referrerpolicy="no-referrer"></iframe>
+        <div id="o-pause" class="overlay" hidden>
+          <div class="overlay-card card" role="alertdialog" aria-modal="true" aria-labelledby="h-pause" aria-describedby="pause-text">
+            <span class="pause-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40"><rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor"/><rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor"/></svg></span>
+            <h2 id="h-pause" tabindex="-1">Je docent heeft gepauzeerd</h2>
+            <p id="pause-text" class="muted">Kijk naar voren. Zodra je docent verder gaat, kun je weer spelen.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- End of lesson and result code -->
+<div id="o-end" class="overlay overlay-full" hidden>
+  <div class="overlay-card card end-card" role="dialog" aria-modal="true" aria-labelledby="h-end">
+    <h2 id="h-end" tabindex="-1">De les is afgelopen</h2>
+    <p id="end-team" class="muted"></p>
+    <dl id="end-summary" class="summary"></dl>
+    <div id="end-code-box" class="stack" hidden>
+      <p class="code-instr"><b>Geef deze code aan je docent</b></p>
+      <p id="end-code" class="codebox result-code"></p>
+      <p id="end-code-note" class="small muted">Schrijf de code op of laat je scherm zien.</p>
+    </div>
+    <div class="row">
+      <button id="btn-show-code" class="btn ghost" type="button" hidden>Toon reservecode voor je docent</button>
+      <button id="btn-end-close" class="btn" type="button" hidden>Terug naar de les</button>
+    </div>
+  </div>
+</div>
+
+<p id="live" class="sr" aria-live="polite"></p>
+
+<script src="../core/config.js" defer></script>
+<script src="../core/protocol.js" defer></script>
+<script src="../core/relay-core.js" defer></script>
+<script src="../core/transport.js" defer></script>
+<script src="../core/resultcode.js" defer></script>
+<script src="../core/catalog.js" defer></script>
+<script src="../core/sw-register.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>

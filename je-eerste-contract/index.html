@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-dSJ/OpNFZ/OuYqvxS8aZuyIpjZ71b7eTyVF+ctUEVsg='; style-src 'sha256-heJ3jgY70JjFwsOYhOjM5LJBC1iGcw3A0U5bhduacTc=' 'sha256-4QXJUHvyS6EE4fSgPxyDgb/MwanDLlKqrgBLauerPdc='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-+C8RIdXP4S/8pOAomi3Qr9pnD714C8vgXOtvWKyX+pQ='; style-src 'sha256-heJ3jgY70JjFwsOYhOjM5LJBC1iGcw3A0U5bhduacTc=' 'sha256-4QXJUHvyS6EE4fSgPxyDgb/MwanDLlKqrgBLauerPdc='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Een contract op je eigen naam? Lees het aanbod, ken je bedenktijd en zeg op tijd op.">
 <meta name="e18-title" content="Je eerste contract">
@@ -898,7 +898,7 @@ window.E18_LESSON={"slug":"je-eerste-contract","title":"Je eerste contract","lea
       whereH: 'Waar en wie', where: 'Alleen Olivier Runge kan alle gegevens zien. De docent ziet alleen de samenvatting van de eigen klas. Olivier krijgt elke week een e-mail met aantallen, de moeilijkste vragen en de feedback van docenten. Hij gebruikt de gegevens om de lessen beter te maken, bijvoorbeeld om te zien welke vraag te moeilijk is.',
       queue: 'Wat nog niet verstuurd is, staat even in de browser van het apparaat (bijvoorbeeld als er geen internet is). Zodra het verstuurd is, wordt het daar gewist.',
       howLongH: 'Hoe lang', howLong: 'Alle gegevens worden uiterlijk op 31 januari 2027 verwijderd. Gaat het project door, dan uiterlijk op 31 augustus 2027.', contactH: 'Contact',
-      dpaH: 'Voor scholen', dpa: 'Escape 18 werkt niet in opdracht van je school en krijgt geen leerlinggegevens van de school: geen namen, geen accounts, geen leerlingnummers. Antwoorden worden bewaard met alleen een willekeurige klascode en een willekeurige code per tweetal. Escape 18 gaat daar zorgvuldig mee om, alsof het persoonsgegevens zijn. Omdat Escape 18 geen verwerker van de school is, past een verwerkersovereenkomst hier niet. Wil de privacy officer van je school dit controleren? Neem dan contact op met Olivier Runge via het adres hieronder.', contactMissing: 'Het contactadres volgt nog.'
+      dpaH: 'Voor scholen', dpa: 'Escape 18 werkt niet in opdracht van je school en krijgt geen leerlinggegevens van de school: geen namen, geen accounts, geen leerlingnummers. Antwoorden worden bewaard met alleen een willekeurige klascode en een willekeurige code per tweetal. Dat zijn gepseudonimiseerde gegevens. Volgens de AVG zijn dat persoonsgegevens, en zo behandelt Escape 18 ze ook. Omdat Escape 18 geen verwerker van de school is, past een verwerkersovereenkomst hier niet. Wil de privacy officer van je school dit controleren? Neem dan contact op met Olivier Runge via het adres hieronder.', contactMissing: 'Het contactadres volgt nog.'
     }
   };
   const en = {
@@ -1081,7 +1081,7 @@ window.E18_LESSON={"slug":"je-eerste-contract","title":"Je eerste contract","lea
       whereH: 'Where and who', where: 'Only Olivier Runge can see all data. The teacher only sees the summary of their own class. Olivier gets a weekly e-mail with counts, the hardest questions and teachers\' feedback. He uses the data to improve the lessons, for example to see which question is too hard.',
       queue: 'Anything not yet sent is kept for a short time in the browser of the device (for example when there is no internet). As soon as it is sent, it is deleted there.',
       howLongH: 'How long', howLong: 'All data is deleted by 31 January 2027 at the latest. If the project continues, by 31 August 2027 at the latest.', contactH: 'Contact',
-      dpaH: 'For schools', dpa: 'Escape 18 does not work on behalf of your school and receives no pupil data from the school: no names, no accounts, no pupil numbers. Answers are stored with only a random class code and a random code per pair. Escape 18 handles these with care, as if they were personal data. Because Escape 18 is not a processor (verwerker) for the school, a processing agreement (verwerkersovereenkomst) does not fit here. Does your school\'s privacy officer want to check this? Contact Olivier Runge at the address below.', contactMissing: 'The contact address will follow.'
+      dpaH: 'For schools', dpa: 'Escape 18 does not work on behalf of your school and receives no pupil data from the school: no names, no accounts, no pupil numbers. Answers are stored with only a random class code and a random code per pair. These are pseudonymised data. Under the GDPR they count as personal data, and Escape 18 treats them that way. Because Escape 18 is not a processor (verwerker) for the school, a processing agreement (verwerkersovereenkomst) does not fit here. Does your school\'s privacy officer want to check this? Contact Olivier Runge at the address below.', contactMissing: 'The contact address will follow.'
     }
   };
   const TABLE = { nl, en };
@@ -1585,6 +1585,16 @@ window.E18_LESSON={"slug":"je-eerste-contract","title":"Je eerste contract","lea
   const isSentence = x => /[.!?]["')]?$/.test(String(x).trim());
   const lowerFirst = x => { const w = String(x).split(/\s/)[0]; return /^[A-ZÀ-Ý][a-zà-ÿ]/.test(w) && !/[A-ZÀ-Ý0-9]/.test(w.slice(1)) && !midCaps().has(w) ? x.charAt(0).toLowerCase() + x.slice(1) : x; };
   const joinParts = ps => ps.length < 2 ? (ps[0] || '') : ps.some(isSentence) ? ps.map((x, i) => i < ps.length - 1 ? String(x).replace(/\.$/, '') : x).join('; ') : ps.map((x, i) => i ? lowerFirst(x) : x).join(t('and'));
+  // Answer order (quality review 19 Nov 2026): options appear in a shuffled order per pupil tab and question,
+  // so the right answer is not always in the same place. Seeded, so a reload in the same tab keeps the order.
+  // Q.keepOrder keeps the authored order. Answer ids, logging, answer keys and the paper version are unchanged.
+  const ORD_SEED = (() => { let v = ''; try { v = sessionStorage.getItem('e18-ord') || ''; } catch (e) { /* storage off */ } if (!v) { v = Math.random().toString(36).slice(2, 10); try { sessionStorage.setItem('e18-ord', v); } catch (e) { /* storage off */ } } return v; })();
+  const ordered = Q => {
+    if (!Q || Q.keepOrder || !Array.isArray(Q.options) || Q.options.length < 2) return (Q && Q.options) || [];
+    let h = 2166136261; for (const ch of ORD_SEED + ':' + Q.id) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; }
+    const r = () => { h = (h + 0x6D2B79F5) >>> 0; let x = h; x = Math.imul(x ^ (x >>> 15), x | 1); x ^= x + Math.imul(x ^ (x >>> 7), x | 61); return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
+    const out = Q.options.slice(); for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; } return out;
+  };
   const answerParts = (Q, v) => { const tx = id => (Q.options.find(o => o[0] === id) || [id, id])[1]; return [].concat(v).map(tx); };
   const answerLabel = (Q, v) => {
     if (Q.type === 'number') return withUnit(v, Q);
@@ -1642,7 +1652,7 @@ window.E18_LESSON={"slug":"je-eerste-contract","title":"Je eerste contract","lea
     const confRow = Q => phase !== 'end' ? '' : `<fieldset class="conf"><legend>${t('confQ')} <small>${t('confOpt')}</small></legend><div class="conf-opts">`
       + t('confs').map((x, i) => `<label class="opt conf-opt"><input type="radio" name="k-${esc(Q.id)}" value="${i + 1}" ${conf[Q.id] === i + 1 ? 'checked' : ''}><span>${esc(x)}</span></label>`).join('') + '</div></fieldset>';
     const body = qs.map((Q, i) => `<fieldset class="card"><legend>${i + 1}. ${esc(Q.prompt)}</legend><p class="opts-hint">${t('radioHint')}</p><div class="opts">`
-      + Q.options.map(([id, x]) => `<label class="opt"><input type="radio" name="c-${esc(Q.id)}" value="${esc(id)}" ${mine[Q.id] === id ? 'checked' : ''}><span>${esc(x)}</span></label>`).join('') + `</div>${confRow(Q)}</fieldset>`).join('');
+      + ordered(Q).map(([id, x]) => `<label class="opt"><input type="radio" name="c-${esc(Q.id)}" value="${esc(id)}" ${mine[Q.id] === id ? 'checked' : ''}><span>${esc(x)}</span></label>`).join('') + `</div>${confRow(Q)}</fieldset>`).join('');
     return `<header class="top">${brand()}</header>
       <section class="esc-a"><p class="eyebrow">${phase === 'start' ? t('checkStart') : t('checkEnd')}</p><h1 class="t2" tabindex="-1">${phase === 'start' ? t('checkStartH') : t('checkEndH')}</h1>
       <p class="lead">${phase === 'start' ? t('checkStartLead') : t(hasB() ? 'checkEndLeadB' : 'checkEndLead')}</p></section>
@@ -1677,9 +1687,9 @@ window.E18_LESSON={"slug":"je-eerste-contract","title":"Je eerste contract","lea
       const nudge = q.state === 'retry' ? `<div class="esc-nudge" id="nudge" tabindex="-1" role="alert"><p><b>${t('notGood')}</b> ${esc(Q.retry)}</p>${point ? `<button class="btn small ghost" data-act="show-line" data-id="${esc(point.id)}">${showBtn}</button>` : Q.pointNone ? `<p class="esc-src">${esc(Q.pointNone)}</p>` : ''}</div>` : '';
       const hint = q.hint ? `<p class="esc-hint" id="hint" tabindex="-1"><b>${t('hint')}</b> ${esc(Q.hint)}</p>` : `<div class="row"><button class="btn ghost" data-act="hint">${t('hintBtn')}</button></div>`;
       let ans = '';
-      if (Q.type === 'single') ans = `<div class="esc-cards" role="group" aria-label="${t('answers')}">` + Q.options.map(([id, x]) => { const tried = q.tried.includes(id);
+      if (Q.type === 'single') ans = `<div class="esc-cards" role="group" aria-label="${t('answers')}">` + ordered(Q).map(([id, x]) => { const tried = q.tried.includes(id);
         return `<button class="esc-card${tried ? ' tried' : ''}" data-act="pick" data-v="${esc(id)}" ${tried ? 'disabled' : ''}><span class="esc-card-t">${tried ? `<span class="sr">${t('tried')}</span>` : ''}${esc(x)}</span></button>`; }).join('') + '</div>';
-      if (Q.type === 'multi') ans = `<div class="esc-cards" role="group" aria-label="${t('answersMulti')}">` + Q.options.map(([id, x]) => `<button class="esc-card tog" data-act="tog" data-v="${esc(id)}" aria-pressed="${q.picked.includes(id)}"><span class="box" aria-hidden="true"></span><span class="esc-card-t">${esc(x)}</span></button>`).join('')
+      if (Q.type === 'multi') ans = `<div class="esc-cards" role="group" aria-label="${t('answersMulti')}">` + ordered(Q).map(([id, x]) => `<button class="esc-card tog" data-act="tog" data-v="${esc(id)}" aria-pressed="${q.picked.includes(id)}"><span class="box" aria-hidden="true"></span><span class="esc-card-t">${esc(x)}</span></button>`).join('')
         + `</div>${q.multiErr ? `<p class="err" role="alert">${t('multiErr')}</p>` : ''}<div class="row"><button class="btn esc-go" data-act="multi-ok">${t('check')}</button></div>`;
       if (Q.type === 'number') ans = `<form data-form="num" class="esc-num" novalidate><label for="num" class="h3">${t('yourAnswer')}${Q.unit && Q.unit !== '€' ? t('inUnit', esc(Q.unit)) : ''}</label><div class="esc-numrow">${Q.unit === '€' ? '<span aria-hidden="true">€</span>' : ''}<input id="num" inputmode="decimal" autocomplete="off" value="${esc(q.raw || '')}" ${q.numErr ? 'aria-invalid="true" aria-describedby="numerr"' : ''}><button class="btn esc-go" type="submit">${t('check')}</button></div>${q.numErr ? `<p class="err" id="numerr" role="alert">${t('numErr')}</p>` : ''}</form>`;
       // The nudge goes under the answers (sfmbo G4 E3): a wrong tap never moves the options down, so a second tap on the same spot lands on an option.

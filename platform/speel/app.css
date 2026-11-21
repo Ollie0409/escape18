@@ -1,0 +1,106 @@
+/* Escape 18 platform: pupil shell (speel/) and landing page. Builds on core/ui.css tokens. */
+
+/* ---------- layout ---------- */
+.speel .main:focus{outline:none}
+/* Headings get focus programmatically for screen readers; no halo for them */
+h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus,.main[tabindex="-1"]:focus{outline:none;box-shadow:none}
+.screen.wrap{max-width:640px;padding-top:max(20px,env(safe-area-inset-top,0px));padding-bottom:max(32px,env(safe-area-inset-bottom,0px))}
+.brandline{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.brandline b{font:800 16px/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
+.brandline .muted{margin-left:auto;font-family:var(--mono)}
+
+/* ---------- code field ---------- */
+.codeform{gap:16px}
+.codeinput{font:800 32px/1.1 var(--mono)!important;letter-spacing:.3em;text-transform:uppercase;text-align:center;padding:12px 8px 12px calc(8px + .3em)!important;min-height:64px!important}
+.codeinput::placeholder{color:var(--muted);letter-spacing:.3em}
+.err[hidden]{display:none}
+
+/* ---------- waiting / lobby ---------- */
+.teamcard{align-items:flex-start;border-top:6px solid var(--teal)}
+.teamrow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.team-swatch{display:inline-flex;flex:none;line-height:0}
+.team-label{font:800 clamp(34px,10vw,56px)/1.05 var(--display);letter-spacing:-.01em}
+.wait-status{font-size:20px;font-weight:700}
+.wait-status:empty{display:none}
+.swatch-edge{stroke:var(--ink)}
+.spinner{display:inline-block;width:18px;height:18px;margin-right:10px;vertical-align:-3px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--teal)}
+@media (prefers-reduced-motion: no-preference){
+  .spinner{animation:e18spin 1s linear infinite}
+  @keyframes e18spin{to{transform:rotate(360deg)}}
+}
+.err-title{font-size:clamp(24px,6vw,34px)}
+
+/* ---------- offline lesson picker ---------- */
+.picklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pick{justify-content:space-between!important;text-align:left!important;gap:12px;min-height:56px;font-size:17px}
+.pick-min{font-weight:600;font-size:14px;white-space:nowrap}
+
+/* ---------- play mode: slim bar + full-height lesson ---------- */
+body.is-playing{height:100vh;height:100dvh;overflow:hidden}
+body.is-playing .shell{height:100%;display:flex;flex-direction:column}
+body.is-playing .main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+.screen.play{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+.screen.play[hidden]{display:none}
+.bar{flex:none;display:flex;align-items:center;gap:8px;box-sizing:border-box;height:calc(44px + env(safe-area-inset-top,0px));
+  padding-top:env(safe-area-inset-top,0px);padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:max(8px,env(safe-area-inset-right,0px));
+  background:var(--panel);border-bottom:1px solid var(--line);font-size:15px;line-height:1.2;white-space:nowrap;overflow:hidden}
+.bar[hidden]{display:none}
+.bar-team{display:inline-flex;align-items:center;gap:6px;font-weight:800;flex:0 0 auto}
+.bar-swatch{display:inline-flex;line-height:0;flex:none}
+.bar-team-txt{overflow:hidden;text-overflow:ellipsis}
+.bar-timer{display:inline-flex;align-items:center;gap:4px;margin-left:auto;font:800 17px/1 var(--mono);font-variant-numeric:tabular-nums;padding:4px 8px;border-radius:var(--radius-s);background:var(--sunk);border:1.5px solid var(--line)}
+.bar-timer.low{background:var(--warn-soft);border-color:var(--warn)}
+.bar-timer[data-icon="pause"]{background:var(--warn-soft);border-color:var(--warn)}
+.bar-timer-icon{display:inline-flex;line-height:0}
+.bar-conn{flex:0 1 auto;min-width:0;overflow:hidden;padding:3px 8px}
+.bar-conn>span{overflow:hidden;text-overflow:ellipsis}
+.bar-timer[hidden]+.bar-conn{margin-left:auto}
+.bar-done{margin-left:auto;flex:none;min-height:36px;padding:6px 12px}
+.bar-conn~.bar-done{margin-left:0}
+.bar-conn[hidden]~.bar-done{margin-left:auto}
+/* the button keeps a 44px hit area while the bar stays slim */
+.bar-done{position:relative}
+.bar-done::after{content:"";position:absolute;inset:-4px 0}
+.frame-wrap{position:relative;flex:1 1 auto;min-height:0;padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);background:var(--bg)}
+.lesson{display:block;width:100%;height:100%;border:0;background:var(--bg)}
+.lesson:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
+
+@media (max-width:460px){ .bar-colour{display:none} }
+@media (max-width:420px){ .bar-timer[data-icon="clock"] .bar-timer-icon{display:none} .bar-conn{font-size:13px} }
+@media (max-width:380px){
+  .bar-more{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  .bar{gap:6px;font-size:14px}
+  .bar-timer{font-size:15px;padding:3px 6px}
+  .bar-done{font-size:14px;padding:6px 8px}
+}
+
+/* ---------- overlays ---------- */
+.overlay{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(8,20,24,.72);overflow:auto}
+.overlay[hidden]{display:none}
+.overlay-full{position:fixed;z-index:40;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));align-items:flex-start}
+.overlay-card{width:min(520px,100%);margin:auto;gap:14px}
+.pause-icon{color:var(--warn);line-height:0}
+.end-card{border-top:6px solid var(--teal)}
+.summary{margin:0;display:grid;gap:6px}
+.summary div{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.summary dt{color:var(--muted)}
+.summary dd{margin:0;font-weight:700}
+.code-instr{font-size:20px}
+.result-code{font-size:clamp(34px,11vw,56px)!important;letter-spacing:.12em!important;padding:.25em .2em .25em .32em!important;user-select:all}
+
+/* ---------- landing ---------- */
+.landing .hero{display:flex;flex-direction:column;gap:10px}
+.choices{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:stretch}
+.choice{gap:14px;border-top:6px solid var(--teal)}
+.choice.teacher{border-top-color:var(--sun)}
+.choice h2{font-size:clamp(26px,5vw,34px)}
+.choice .btn.big{margin-top:auto}
+.landing .foot{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center}
+.landing .foot a{display:inline-flex;align-items:center;min-height:44px}
+
+/* Forced colours: keep the swatch edge and overlays visible */
+@media (forced-colors: active){
+  .swatch-edge{stroke:CanvasText}
+  .overlay{background:Canvas}
+  .bar{border-bottom:2px solid CanvasText}
+}
