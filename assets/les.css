@@ -1,0 +1,21 @@
+/* Lesson detail pages (les/<slug>.html). Builds on e18.css tokens. */
+.crumb{margin:0 0 10px}.crumb a{color:var(--accent);font-weight:700}
+.page-hero .after{border-left:3px solid var(--e18-sun-500);padding-left:12px;max-width:62ch}
+.page-hero .links{margin-top:18px}
+.les-grid{display:grid;gap:32px;grid-template-columns:minmax(0,1fr)}
+.les-main{min-width:0;max-width:760px}
+.les-main h2{margin:36px 0 12px}.les-main h2:first-child{margin-top:0}
+.les-main .meta{font-size:var(--step-0)}
+.rooms{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:14px}
+.room{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--ink);padding:18px clamp(16px,2.4vw,24px);border-radius:var(--radius-0)}
+.room .kenmerk{margin:0 0 6px}.room h3{margin:0 0 8px;font-size:var(--step-1)}.room p{margin:0 0 8px}
+.goals{padding-left:1.2em;margin:0 0 12px}.goals li{margin:0 0 6px}
+.srcs{padding-left:1.2em;margin:0 0 12px;overflow-wrap:anywhere}.srcs li{margin:0 0 6px}
+.les-main .note{margin-top:28px}
+.les-side{display:grid;gap:18px;align-content:start;min-width:0}
+.les-side figure{margin:0}
+.les-side img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:var(--radius-1);background:var(--surface)}
+.les-side .shot-phone{max-width:240px}
+.les-side .shot-phone img{aspect-ratio:600/1000;object-fit:cover;object-position:top}
+.les-side figcaption{margin-top:6px}
+@media(min-width:1000px){.les-grid{grid-template-columns:minmax(0,1fr) 380px}.les-side{position:sticky;top:96px}}

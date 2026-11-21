@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ollie0409.github.io/escape18/sitemap.xml
