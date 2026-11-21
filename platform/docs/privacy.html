@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Escape
+18: privacy voor
+scholen</title><link rel="stylesheet" href="doc.css"></head><body><main><a class="back" href="../index.html">Terug naar Escape 18</a>
+<h1 id="escape-18-platform-privacynotitie-voor-scholen-dpia-lite">Escape
+18 platform: privacynotitie voor scholen (DPIA-lite)</h1>
+<p>Voor de privacy-coördinator of FG van een school en voor docenten.
+Versie: 19 november 2026. Dit is een prototype-notitie, geen juridisch
+advies.</p>
+<h2 id="1-samenvatting">1. Samenvatting</h2>
+<ol type="1">
+<li>Escape 18 geeft gratis klassenlessen voor leerlingen van 16 tot 18
+jaar (havo, vwo, mbo), gegeven door de eigen docent.</li>
+<li>Er zijn geen accounts, geen namen en geen vrije tekst van
+leerlingen. Teams krijgen een automatisch label, zoals "Team 3
+Oranje".</li>
+<li>De live voortgang staat alleen in het werkgeheugen van een relay
+(Cloudflare Durable Object, jurisdictie EU). Die wordt 10 minuten na de
+les gewist, uiterlijk na 12 uur.</li>
+<li>Anoniem onderzoeken (Google Sheet) gebeurt alleen als de docent dat
+zelf aanzet. Standaard staat dit uit.</li>
+<li>IP-adressen worden technisch verwerkt door de hostingpartijen.
+Escape 18 bewaart ze niet. Wij schatten het risico laag en een volledige
+DPIA niet nodig.</li>
+</ol>
+<h2 id="2-welke-gegevens-wel-en-niet">2. Welke gegevens wel en niet</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Gegeven</th>
+<th>Waar</th>
+<th>Hoe lang</th>
+<th>Waarom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Klascode (5 tekens), geldt één les</td>
+<td>Relay-geheugen; docent- en leerlingscherm</td>
+<td>Tot 10 min na einde les, uiterlijk 12 uur</td>
+<td>Leerlingen laten aansluiten</td>
+</tr>
+<tr class="even">
+<td>Teamlabel (Team 3 Oranje) en een willekeurige team-id</td>
+<td>Relay-geheugen; sessionStorage in de browser van het apparaat</td>
+<td>Zelfde als klascode; browser wist bij sluiten tabblad</td>
+<td>Docent kan team herkennen; verder spelen na storing</td>
+</tr>
+<tr class="odd">
+<td>Voortgang: kamer, aantal antwoorden, hints, scores, tijd, 1 tot 5
+beoordeling</td>
+<td>Relay-geheugen</td>
+<td>Zelfde als klascode</td>
+<td>Live overzicht voor de docent</td>
+</tr>
+<tr class="even">
+<td>Resultaatcode voor offline gebruik (alleen getallen over
+voortgang)</td>
+<td>Scherm van leerling; docent typt in</td>
+<td>Niet opgeslagen op een server</td>
+<td>Werken zonder verbinding</td>
+</tr>
+<tr class="odd">
+<td>Optioneel onderzoekslogboek (anoniem, alleen na opt-in docent)</td>
+<td>Bestaande Google Sheet van Escape 18</td>
+<td>Uiterlijk 31 januari 2027, bij voortzetting 31 augustus 2027 (<a
+href="https://ollie0409.github.io/escape18/privacy.html">huidige
+privacypagina</a>)</td>
+<td>Lessen verbeteren</td>
+</tr>
+<tr class="even">
+<td>IP-adres, apparaat, browser</td>
+<td>Alleen bij hostingpartijen (GitHub, Cloudflare, bij opt-in ook
+Google)</td>
+<td>Volgens hun eigen beleid</td>
+<td>Technisch nodig om een pagina te laden of verbinding te openen</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Niet verwerkt door Escape 18:</strong> namen, e-mailadressen,
+accounts, cookies, analytics, tekst die leerlingen typen, IP-adressen,
+apparaatgegevens. Dit is de ontwerpregel in de specificatie van het
+platform. Het is een plan: het prototype is nog niet in gebruik.</p>
+<p><strong>IP-adressen, eerlijk gezegd.</strong> Elke website ziet het
+IP-adres van wie een pagina opent. GitHub Pages (statische bestanden) en
+Cloudflare (relay) ontvangen dat adres dus technisch. Wij slaan het niet
+op en loggen geen berichten. Wat die partijen zelf bewaren, valt onder
+hun beleid; dat hebben wij niet getoetst.</p>
+<p><strong>Is dit herleidbaar?</strong> Binnen één klas kan de docent
+een teamlabel koppelen aan een tweetal in de ruimte, dus klascode,
+teamlabel en tijdstip kunnen samen naar een persoon wijzen. Daarom
+behandelen wij de live gegevens voorzichtig als mogelijk
+persoonsgegevens in de zin van de <a
+href="https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679">AVG</a>
+(art. 4 lid 1: ook indirect identificeerbaar telt). Het risico is laag,
+want: de docent kent de leerlingen toch al en ziet alleen zijn eigen
+klas; de gegevens zijn alleen lesvoortgang; ze verdwijnen kort na de
+les; buiten de klas is de combinatie niet te koppelen aan een naam of
+school.</p>
+<h2 id="3-rollen">3. Rollen</h2>
+<ul>
+<li><strong>Docent/school: verwerkingsverantwoordelijke</strong> voor
+het gebruik in de les. De school bepaalt of en hoe de les wordt
+ingezet.</li>
+<li><strong>Olivier Runge (Escape 18):
+verwerkingsverantwoordelijke</strong> voor het anonieme
+onderzoekslogboek en voor de werking van de relay. Escape 18 is een
+voortzetting van een studentenproject (Erasmus Universiteit Rotterdam),
+nog zonder stichting of bedrijf.</li>
+<li><strong>Hostingpartijen</strong> (GitHub, Cloudflare, Google):
+verwerkers of eigen verantwoordelijken voor hun technische logs, onder
+hun eigen voorwaarden.</li>
+</ul>
+<p><strong>Is een verwerkersovereenkomst nodig?</strong> Als de live
+gegevens persoonsgegevens zijn (zie boven), dan verwerkt Escape 18 ze
+namens de school en is een overeenkomst volgens <a
+href="https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679">art.
+28 AVG</a> in beginsel nodig. Onze inschatting: omdat de gegevens kort
+en minimaal zijn, kan een school dit licht regelen. Oordeel hierover is
+aan de school.</p>
+<p><strong>Privacyconvenant Onderwijs.</strong> Het <a
+href="https://www.privacyconvenant.nl">Convenant digitale
+onderwijsmiddelen en privacy</a> is nu versie 4.0, met een <a
+href="https://www.privacyconvenant.nl/downloads/">Model
+Verwerkersovereenkomst 4.0</a> (model-bijlagen 4.0.1) en een "Algemene
+verwerkersovereenkomst onderwijs 4.0.1" voor leveranciers die niet
+meedoen (volgens de downloadpagina, gecontroleerd op 19 november 2026).
+Escape 18 heeft dit convenant en de modelovereenkomst nog niet
+ondertekend. Dat is een open punt voor Olivier. Zie ook de uitleg van <a
+href="https://www.kennisnet.nl/app/uploads/Verwerkersovereenkomst-diensten-Kennisnet.pdf">Kennisnet</a>
+over verwerkersovereenkomsten.</p>
+<h2 id="4-dpia-lite">4. DPIA-lite</h2>
+<p><strong>Wanneer een volledige DPIA?</strong> Volgens <a
+href="https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679">art.
+35 AVG</a> bij een waarschijnlijk hoog risico. De Autoriteit
+Persoonsgegevens publiceerde een <a
+href="https://zoek.officielebekendmakingen.nl/stcrt-2019-64418.pdf">lijst
+met verplichte gevallen</a> (Staatscourant 2019), zoals grootschalige
+gezondheidsgegevens, locatiegegevens, camera's, en profilering waaronder
+het beoordelen van prestaties van leerlingen (zie ook <a
+href="https://www.dirkzwager.nl/kennis/artikelen/definitieve-nederlandse-lijst-verwerkingen-waarbij-dpia-gegevensbeschermingseffectbeoordeling-verplicht-is-gepubliceerd">samenvatting
+Dirkzwager</a>). Escape 18 verwerkt geen gezondheids-, locatie- of
+camerabeelden en maakt geen leerlingprofielen of beoordelingen met
+gevolgen. Leerlingen zijn wel een kwetsbare groep; dat telt mee, maar
+met korte bewaartermijn en zonder identiteit is een hoog risico niet
+waarschijnlijk. Dit is onze inschatting, niet getoetst door de AP of een
+jurist. De AP-pagina zelf kon ik niet openen; de lijst is gelezen via de
+Staatscourant en een samenvatting.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Risico</th>
+<th>Kans</th>
+<th>Impact</th>
+<th>Maatregel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Herleidbaarheid via teamlabel</td>
+<td>Middel (binnen klas)</td>
+<td>Laag</td>
+<td>Alleen voortgang; alleen docent van die klas ziet het; wissen binnen
+10 min na les</td>
+</tr>
+<tr class="even">
+<td>Onbedoeld typen van namen</td>
+<td>Zeer laag</td>
+<td>Laag</td>
+<td>Er zijn geen vrije tekstvelden voor leerlingen</td>
+</tr>
+<tr class="odd">
+<td>Doorgifte buiten de EER</td>
+<td>Middel</td>
+<td>Laag</td>
+<td>GitHub Pages (VS): alleen statische bestanden, geen leerlingdata.
+Cloudflare: opslag in jurisdictie EU (ingesteld in het ontwerp). Niet
+geverifieerd: edge-verwerking kan wereldwijd plaatsvinden, zodat
+IP-adressen buiten de EER kunnen langskomen. Dit is aangenomen, niet
+getest</td>
+</tr>
+<tr class="even">
+<td>Schoolnetwerk blokkeert verbinding</td>
+<td>Middel</td>
+<td>Geen privacy-impact</td>
+<td>Offline-modus met resultaatcode, zonder verbinding; papieren
+versie</td>
+</tr>
+<tr class="odd">
+<td>Datalek bij de relay</td>
+<td>Laag</td>
+<td>Laag</td>
+<td>Data minimaal en kortstondig; geen namen; geen opslag van berichten;
+klascode geldt één les</td>
+</tr>
+<tr class="even">
+<td>Onderzoekslogboek</td>
+<td>Laag</td>
+<td>Laag</td>
+<td>Opt-in per docent, standaard uit; anoniem; bestaande whitelist in de
+Sheet; wisdata 31 jan 2027 (31 aug 2027 bij voortzetting)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-rechten-van-betrokkenen">5. Rechten van betrokkenen</h2>
+<p>Inzage, correctie en verwijdering (<a
+href="https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679">art.
+15 tot 17 AVG</a>) werken lastig als er niets identificeerbaars is
+opgeslagen: Escape 18 kan niet zien wie bij een teamlabel hoort. <a
+href="https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:32016R0679">Art.
+11 AVG</a> staat dit toe. Praktisch: live gegevens verdwijnen vanzelf na
+de les, en een docent kan de klas eerder beëindigen. Voor het
+onderzoekslogboek kan een docent vragen om verwijdering van een
+klascode; de leerling hoeft dan alleen de klascode te noemen. Verzoeken
+gaan via de school of direct naar het contactadres.</p>
+<h2 id="6-checklist-voor-de-school">6. Checklist voor de school</h2>
+<ol type="1">
+<li>Besluit of de school de les als verwerking via de docent registreert
+(verwerkingsregister).</li>
+<li>Beoordeel of een (lichte) verwerkersovereenkomst met Escape 18 nodig
+is.</li>
+<li>Laat de docent bewust kiezen voor wel of geen onderzoekslogboek;
+standaard is uit.</li>
+<li>Vertel leerlingen dat zij geen naam of persoonlijke gegevens hoeven
+in te vullen.</li>
+<li>Controleer of het schoolnetwerk de relay toelaat, of gebruik de
+offline-modus.</li>
+<li>Informeer leerlingen en ouders waar de school dat gebruikelijk
+vindt.</li>
+<li>Vraag Escape 18 om bevestiging van de actuele privacypagina voor
+gebruik.</li>
+</ol>
+<p><strong>Contact:</strong> Olivier Runge, <a
+href="mailto:olivierrunge@gmail.com">olivierrunge@gmail.com</a></p>
+<h2 id="7-status">7. Status</h2>
+<p>Prototype, nog niet in gebruik genomen en door geen jurist
+beoordeeld. Open punten voor Olivier: (a) Privacyconvenant en Model
+Verwerkersovereenkomst 4.0 nog niet ondertekend; (b) de huidige
+privacypagina zegt dat geen verwerkersovereenkomst nodig is en moet
+worden bijgewerkt voor het platform; (c) hosting in EU en edge-gedrag
+van Cloudflare controleren; (d) juridische toets.</p>
+</main></body></html>

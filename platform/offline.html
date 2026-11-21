@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#036b66">
+<title>Je bent offline | Escape 18</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="core/ui.css">
+<style>
+/* Minimal fallback styles in case core/ui.css is not cached */
+:root{--bg:#f3f6f5;--panel:#fff;--ink:#10262f;--muted:#52666d;--line:#d0dcd9;--teal:#036b66}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1d22;--panel:#16272d;--ink:#e8f1f0;--muted:#a9bcc0;--line:#2c4249;--teal:#6fd0c8}}
+body{margin:0;background:var(--bg);color:var(--ink);font:1.125rem/1.55 'Atkinson Hyperlegible',system-ui,-apple-system,'Segoe UI',sans-serif}
+main{max-width:40rem;margin:0 auto;padding:1.5rem 1rem}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1.25rem}
+a.btn{display:inline-block;min-height:44px;box-sizing:border-box;padding:.6rem 1.1rem;margin:.25rem .5rem .25rem 0;border-radius:10px;background:var(--teal);color:#fff;text-decoration:none;font-weight:700}
+@media(prefers-color-scheme:dark){a.btn{color:#0f1d22}}
+a:focus-visible{outline:3px solid #f2b43c;outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<h1>Je bent offline</h1>
+<div class="card">
+<p>Er is geen internetverbinding. Dit werkt nog wel:</p>
+<ul>
+<li>Lessen die je eerder op dit apparaat hebt geopend.</li>
+<li>Resultaatcodes: aan het eind van een les krijg je een code. De docent kan die later invullen.</li>
+</ul>
+<p>Live meekijken door de docent werkt pas weer als je weer online bent.</p>
+<p><a class="btn" href="docent/index.html">Naar docent</a> <a class="btn" href="speel/index.html">Naar meedoen</a></p>
+</div>
+</main>
+</body>
+</html>

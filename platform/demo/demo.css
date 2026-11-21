@@ -1,0 +1,33 @@
+:root{--bg:#f3f6f5;--panel:#fff;--ink:#10262f;--muted:#52666d;--line:#d0dcd9;--teal:#036b66;--teal-soft:#d9efec;--sun:#f2b43c;--warn:#9a5b00;--stop:#a3313a}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1c21;--panel:#172a31;--ink:#e8f1f0;--muted:#a6bbbf;--line:#2d444c;--teal:#5cc9c1;--teal-soft:#16393a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 'Atkinson Hyperlegible',system-ui,-apple-system,'Segoe UI',sans-serif}
+.top{max-width:1500px;margin:0 auto;padding:16px 20px 8px}
+h1{font-size:1.5rem;margin:0 0 4px}
+h2{font-size:1.05rem;margin:0 0 8px}
+.lead{margin:0 0 12px;color:var(--muted);max-width:80ch}
+.ctl{display:flex;flex-wrap:wrap;gap:12px;align-items:end}
+.ctl label{max-width:100%;display:flex;flex-direction:column;font-size:.85rem;color:var(--muted);gap:2px}
+select,input,button{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
+input{width:6em}
+.ctl select{max-width:100%}
+button.primary{background:var(--teal);color:#fff;border-color:var(--teal);font-weight:700;padding:6px 20px;cursor:pointer}
+@media (prefers-color-scheme:dark){button.primary{color:#06201f}}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.status{color:var(--muted);align-self:center}
+.note{margin:10px 0 0;padding:8px 12px;background:var(--teal-soft);border-radius:8px;font-size:.9rem}
+.stage{max-width:1500px;margin:0 auto;padding:8px 20px 24px;display:flex;gap:20px;align-items:flex-start}
+.stage[hidden]{display:none}
+.teacher{flex:0 0 60%;min-width:0}
+.pupil{flex:1 1 0;min-width:0}
+.frame-wrap{border:2px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+#teacher{width:100%;height:760px;border:0;display:block}
+.phone-box{width:100%;position:relative;overflow:hidden;height:760px}
+.phone{width:390px;height:760px;border:10px solid #1b2a30;border-radius:36px;overflow:hidden;background:#fff;transform-origin:top center;position:absolute;left:50%;top:0;margin-left:-195px}
+#pupil{width:100%;height:100%;border:0;display:block}
+@media (max-width:900px){
+  .stage{flex-direction:column}
+  .teacher,.pupil{flex:none;width:100%}
+  #teacher{height:620px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}

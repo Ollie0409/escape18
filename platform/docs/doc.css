@@ -1,0 +1,9 @@
+:root{color-scheme:light dark;--bg:#f3f6f5;--panel:#fff;--ink:#10262f;--muted:#52666d;--line:#d0dcd9;--teal:#036b66}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1d22;--panel:#132a31;--ink:#e6f0ee;--muted:#a8bcb8;--line:#2b464d;--teal:#5fd1c6}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 'Atkinson Hyperlegible',system-ui,-apple-system,'Segoe UI',sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px 20px 64px}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.1}h2{margin-top:2em}
+a{color:var(--teal)}a:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+table{border-collapse:collapse;width:100%;font-size:15px;table-layout:fixed}th,td{overflow-wrap:anywhere;border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--panel)}
+pre,code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px}pre{background:var(--panel);padding:12px;overflow-x:auto;border:1px solid var(--line)}
+.back{display:inline-block;margin-bottom:16px}

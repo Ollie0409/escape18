@@ -1,0 +1,111 @@
+/* Teacher dashboard styles (on top of core/ui.css). */
+.between{justify-content:space-between}
+.tight{gap:4px}
+.h3{font-family:var(--display);font-size:18px;font-weight:700;line-height:1.2}
+.label{font-weight:700}
+
+main{display:flex;flex-direction:column;gap:22px}
+
+/* Lesson cards */
+.lesson-card{border-top:6px solid var(--teal)}
+.lesson-card h2{font-size:21px}
+.lesson-card .meta{display:flex;flex-wrap:wrap;gap:8px}
+.lesson-card .actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:10px;padding-top:6px}
+.options .check b{font-weight:700}
+details.privacy summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:700;color:var(--teal)}
+details.privacy[open] summary{margin-bottom:6px}
+
+/* Join block */
+.join{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+.join-code{display:flex;flex-direction:column;gap:10px;min-width:0}
+.join-qr svg,.pj-qr svg{display:block;width:clamp(140px,18vw,220px);height:auto;border-radius:8px;forced-color-adjust:none;background:#fff}
+.codebox{font-size:clamp(40px,10vw,104px)}
+@media (max-width:640px){
+  .join{grid-template-columns:1fr}
+  .join-qr{justify-self:start}
+}
+
+/* Lobby */
+.lobby-teams{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.lobby-teams li{display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border:1.5px solid var(--line);border-radius:999px;background:var(--panel);font-weight:700}
+.lobby-teams li.off{color:var(--muted);border-style:dashed}
+.swatch{width:30px;height:30px;border-radius:50%;flex:none;border:2px solid var(--ink);overflow:hidden;display:block}
+.swatch svg{width:100%;height:100%;display:block}
+.minutes{gap:10px}
+.stepper{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.min-val{font:700 22px/1 var(--mono);min-width:5.5ch;text-align:center;font-variant-numeric:tabular-nums}
+
+/* Timer */
+.timer-card{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;background:var(--ink);color:var(--bg);border:0;box-shadow:inset 0 -6px 0 var(--sun)}
+.timer-card .label{color:var(--bg)}
+.clock{font:700 clamp(56px,9vw,120px)/1 var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.clock.low{color:var(--sun)}
+.timer-card .btn.ghost{color:var(--bg);border-color:var(--bg);background:transparent}
+.timer-card :focus-visible{outline-color:var(--sun);box-shadow:0 0 0 6px var(--bg)}
+.timer-btns .btn{min-width:96px}
+
+/* Summary */
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px}
+.summary .stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px}
+.summary .stat b{display:block;font:700 26px/1.15 var(--display)}
+.summary .stat span{color:var(--muted);font-size:14px}
+
+/* Team grid */
+.team-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:14px}
+.team{background:var(--panel);border:1px solid var(--line);border-left:8px solid var(--tc,var(--teal));border-radius:var(--radius);padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.team.is-off{opacity:.8;border-left-style:dashed}
+.team.is-done{background:var(--ok-soft)}
+.team-head{display:flex;align-items:center;gap:10px}
+.team-head h3{font-size:19px;flex:1;min-width:0}
+.team-head h3 small{display:block;font:600 13px/1.3 var(--body);color:var(--muted)}
+.team .badges{display:flex;flex-wrap:wrap;gap:6px}
+.team dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0;font-size:15px}
+.team dt{color:var(--muted)}
+.team dd{margin:0;font-weight:700;font-variant-numeric:tabular-nums}
+.segs{display:flex;gap:4px;height:14px}
+.segs span{flex:1;border-radius:4px;background:var(--sunk);border:1.5px solid var(--line)}
+.segs span.done{background:var(--teal);border-color:var(--teal)}
+.segs span.cur{background:repeating-linear-gradient(135deg,var(--teal-soft) 0 4px,var(--panel) 4px 8px);border-color:var(--teal)}
+.prog-text{font-size:14px;font-weight:700}
+
+/* Projector overlay */
+.projector{position:fixed;inset:0;z-index:40;background:var(--bg);color:var(--ink);overflow:auto}
+.pj-inner{min-height:100%;display:flex;flex-direction:column;padding:clamp(12px,3vw,40px);gap:clamp(12px,3vh,32px)}
+.pj-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.pj-title{font:800 clamp(22px,3vw,40px)/1.1 var(--display)}
+.pj-body{flex:1;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(16px,4vw,60px);align-items:center}
+.pj-join{display:flex;flex-direction:column;gap:16px;align-items:flex-start;min-width:0}
+.pj-url{font:700 clamp(18px,2.4vw,34px)/1.2 var(--mono);overflow-wrap:anywhere}
+.pj-code{font:800 clamp(56px,14vw,220px)/1 var(--mono);letter-spacing:.16em;background:var(--panel);border:4px dashed var(--line);border-radius:20px;padding:.12em .1em .12em .26em;white-space:nowrap}
+.pj-qr svg{width:clamp(160px,24vh,320px)}
+.pj-status{display:flex;flex-direction:column;gap:16px;min-width:0}
+.pj-clock{font:700 clamp(72px,14vw,220px)/1 var(--mono);font-variant-numeric:tabular-nums}
+.pj-state{font:700 clamp(20px,2.6vw,36px)/1.2 var(--display)}
+.pj-bar{height:clamp(22px,4vh,44px);border-radius:999px;background:var(--sunk);border:2px solid var(--line);overflow:hidden}
+.pj-bar span{display:block;height:100%;width:0;background:repeating-linear-gradient(135deg,var(--teal) 0 14px,#0a8a83 14px 28px)}
+.pj-bartext{font:700 clamp(18px,2.2vw,30px)/1.3 var(--body)}
+@media (max-width:820px){.pj-body{grid-template-columns:1fr}}
+@media (prefers-reduced-motion: no-preference){.pj-bar span{transition:width .6s ease}}
+
+/* Offline form */
+.code-row{flex-wrap:nowrap}
+.code-row input{font:700 22px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;max-width:15ch}
+@media (max-width:380px){.code-row{flex-wrap:wrap}}
+
+/* Results table */
+.table .swatch{width:22px;height:22px;display:inline-block;vertical-align:middle;margin-right:8px}
+.table th[scope="row"]{white-space:nowrap;background:transparent}
+.row-del{min-height:44px}
+
+.check.inline{padding:0}
+
+@media print{
+  @page{margin:14mm}
+  .view:not(#vClass):not(#vOffline),#lobby,.join,.timer-card,#teamGrid,#gridEmpty,.projector,dialog,.skip,#live{display:none!important}
+  #vOffline .card.sunk,#offlineWhy{display:none!important}
+  .summary .stat{border-color:#999}
+  .table-wrap{border:0;overflow:visible}
+  .table th{background:#eee}
+  .table th,.table td{border-bottom:1px solid #999;padding:5px 8px}
+  body,.wrap{padding:0}
+}

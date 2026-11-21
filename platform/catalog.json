@@ -1,0 +1,825 @@
+{
+ "generated": "2026-11-21T12:54:23.150Z",
+ "lessons": [
+  {
+   "slug": "eerste-maand",
+   "title": "Je eerste maand als 18-jarige",
+   "lead": "Loonstrook nakijken, brief van de zorgverzekeraar lezen, nepbericht herkennen en op tijd aanmelden.",
+   "minutes": 26,
+   "product": "escape18-eerste-maand",
+   "rooms": [
+    {
+     "id": "brief",
+     "title": "De brief en je DigiD",
+     "questions": [
+      "actie",
+      "datum",
+      "digid",
+      "premie"
+     ]
+    },
+    {
+     "id": "loon",
+     "title": "Je loonstrook",
+     "questions": [
+      "dienst",
+      "bruto",
+      "vakantie",
+      "netto"
+     ]
+    },
+    {
+     "id": "sms",
+     "title": "Een verdacht berichtje",
+     "questions": [
+      "signalen",
+      "doen",
+      "melden"
+     ]
+    },
+    {
+     "id": "aanmeld",
+     "title": "Aanmelden",
+     "questions": [
+      "fixus",
+      "open",
+      "mila"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../eerste-maand/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "verzekerd",
+   "title": "Verzekerd na je 18e",
+   "lead": "Wat moet je verzekeren, wat kies je zelf en wat betaalt je polis? Reken met eigen risico en meld schade goed.",
+   "minutes": 26,
+   "product": "escape18-verzekerd",
+   "rooms": [
+    {
+     "id": "moet",
+     "title": "Moet of mag?",
+     "questions": [
+      "verplicht",
+      "wa",
+      "inboedel"
+     ]
+    },
+    {
+     "id": "polis",
+     "title": "Valt het onder de polis?",
+     "questions": [
+      "betaalt",
+      "daan",
+      "scooter"
+     ]
+    },
+    {
+     "id": "risico",
+     "title": "Eigen risico rekenen",
+     "questions": [
+      "wadlicht",
+      "vrijwillig",
+      "verwacht"
+     ]
+    },
+    {
+     "id": "melden",
+     "title": "Schade melden",
+     "questions": [
+      "termijn",
+      "bewijs",
+      "eerlijk"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../verzekerd/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "eerste-bijbaan",
+   "title": "Je eerste bijbaan",
+   "lead": "Je eerste bijbaan: je contract lezen, je uurloon nakijken, je rooster checken en je loonheffingskorting goed regelen.",
+   "minutes": 27,
+   "product": "escape18-eerste-bijbaan",
+   "rooms": [
+    {
+     "id": "contract",
+     "title": "Je contract",
+     "questions": [
+      "proeftijd",
+      "telaat",
+      "afgezegd"
+     ]
+    },
+    {
+     "id": "uurloon",
+     "title": "Je uurloon",
+     "questions": [
+      "minimum",
+      "klopt",
+      "eerst",
+      "melden"
+     ]
+    },
+    {
+     "id": "rooster",
+     "title": "Je rooster",
+     "questions": [
+      "dienst",
+      "schooldag",
+      "pauze"
+     ]
+    },
+    {
+     "id": "belasting",
+     "title": "Belasting",
+     "questions": [
+      "korting",
+      "rij",
+      "terug",
+      "jaar"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../eerste-bijbaan/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "op-kamers",
+   "title": "Op kamers",
+   "lead": "Een kamer huren: een nepadvertentie herkennen, je huurcontract lezen, je inschrijven bij de gemeente en nagaan of je huurtoeslag krijgt.",
+   "minutes": 27,
+   "product": "escape18-op-kamers",
+   "rooms": [
+    {
+     "id": "advertentie",
+     "title": "De advertentie",
+     "questions": [
+      "signalen",
+      "betalen",
+      "melden"
+     ]
+    },
+    {
+     "id": "huurcontract",
+     "title": "Het huurcontract",
+     "questions": [
+      "totaal",
+      "borg",
+      "terug"
+     ]
+    },
+    {
+     "id": "gemeente",
+     "title": "Inschrijven bij de gemeente",
+     "questions": [
+      "gemeente",
+      "datum",
+      "duo"
+     ]
+    },
+    {
+     "id": "huurtoeslag",
+     "title": "Huurtoeslag?",
+     "questions": [
+      "kamer",
+      "zelfstandig",
+      "uitzondering"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../op-kamers/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "studiefinanciering",
+   "title": "Studiefinanciering",
+   "lead": "Studiefinanciering aanvragen bij DUO, thuis of op kamers wonen, extra geld of lenen, en wat je later terugbetaalt.",
+   "minutes": 26,
+   "product": "escape18-studiefinanciering",
+   "rooms": [
+    {
+     "id": "aanvragen",
+     "title": "Aanvragen",
+     "questions": [
+      "waar",
+      "reizen",
+      "soorten"
+     ]
+    },
+    {
+     "id": "thuis-uit",
+     "title": "Thuis of uit?",
+     "questions": [
+      "uitbedrag",
+      "verschil",
+      "wanneer"
+     ]
+    },
+    {
+     "id": "extra-geld",
+     "title": "Extra geld of lenen?",
+     "questions": [
+      "ouders",
+      "hoogstens",
+      "lening"
+     ]
+    },
+    {
+     "id": "gift",
+     "title": "Gift of terugbetalen?",
+     "questions": [
+      "gift",
+      "mila",
+      "termijn"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../studiefinanciering/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "route-18",
+   "title": "Route 18",
+   "lead": "Je route na school: welk diploma waarheen leidt, tot wanneer je je aanmeldt en welke dag je gaat meelopen.",
+   "minutes": 26,
+   "product": "escape18-route-18",
+   "rooms": [
+    {
+     "id": "kaart",
+     "title": "De routekaart",
+     "questions": [
+      "havo",
+      "vwo",
+      "propedeuse"
+     ]
+    },
+    {
+     "id": "deadlines",
+     "title": "De deadlines",
+     "questions": [
+      "fixus",
+      "lina",
+      "laat"
+     ]
+    },
+    {
+     "id": "eerstejaar",
+     "title": "Het eerste jaar",
+     "questions": [
+      "bsa",
+      "lina1feb",
+      "ravi"
+     ]
+    },
+    {
+     "id": "volgendestap",
+     "title": "Je volgende stap",
+     "questions": [
+      "soort",
+      "dag",
+      "aanmelden"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../route-18/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "belasting-terug",
+   "title": "Geld terug van de Belastingdienst",
+   "lead": "Krijg je geld terug van je bijbaan? Weet of je moet of mag, lees je jaaropgaven, check je aangifte en log veilig in.",
+   "minutes": 26,
+   "product": "escape18-belasting-terug",
+   "rooms": [
+    {
+     "id": "moet",
+     "title": "Moet of mag?",
+     "questions": [
+      "jesse",
+      "datum",
+      "yara"
+     ]
+    },
+    {
+     "id": "jaaropgaven",
+     "title": "Twee jaaropgaven",
+     "questions": [
+      "totaal",
+      "waarom",
+      "dubbel"
+     ]
+    },
+    {
+     "id": "aangifte",
+     "title": "Klopt je aangifte?",
+     "questions": [
+      "fout",
+      "waar",
+      "iban"
+     ]
+    },
+    {
+     "id": "veilig",
+     "title": "Veilig inloggen en je geld",
+     "questions": [
+      "echt",
+      "zelf",
+      "bericht"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../belasting-terug/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "eerste-bijbaan-mbo",
+   "title": "Je eerste baan (mbo)",
+   "lead": "Leerbaan, stage of bijbaan: je loon nakijken, je rooster checken en een tweede baan goed regelen.",
+   "minutes": 22,
+   "product": "escape18-eerste-bijbaan-mbo",
+   "rooms": [
+    {
+     "id": "leren",
+     "title": "Leren en werken",
+     "questions": [
+      "loon",
+      "schoenen",
+      "erkend"
+     ]
+    },
+    {
+     "id": "loon",
+     "title": "Je loon",
+     "questions": [
+      "minimum",
+      "klopt",
+      "melden"
+     ]
+    },
+    {
+     "id": "rooster",
+     "title": "Je rooster",
+     "questions": [
+      "nacht",
+      "schooldag",
+      "nacht18"
+     ]
+    },
+    {
+     "id": "bijbaan",
+     "title": "Een bijbaan erbij",
+     "questions": [
+      "telaat",
+      "drieuur",
+      "korting"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../eerste-bijbaan-mbo/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "rekening-blijft-liggen",
+   "title": "De rekening die blijft liggen",
+   "lead": "Een rekening laten liggen? Lees de brieven, vind de deadline en weet je volgende stap.",
+   "minutes": 26,
+   "product": "escape18-rekening-blijft-liggen",
+   "rooms": [
+    {
+     "id": "later",
+     "title": "Later betalen",
+     "questions": [
+      "wie",
+      "datum",
+      "eerst"
+     ]
+    },
+    {
+     "id": "brieven",
+     "title": "Herinnering of 14-dagenbrief?",
+     "questions": [
+      "welke",
+      "termijn",
+      "kosten"
+     ]
+    },
+    {
+     "id": "bkr",
+     "title": "Wat is BKR?",
+     "questions": [
+      "waarom",
+      "wanneer",
+      "beslist"
+     ]
+    },
+    {
+     "id": "hulp",
+     "title": "Incasso, deurwaarder en hulp",
+     "questions": [
+      "beslag",
+      "regeling",
+      "gratis"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../rekening-blijft-liggen/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "studiefinanciering-mbo",
+   "title": "Studiefinanciering in het mbo",
+   "lead": "Bijna 18 in de bol: wanneer begint je studiefinanciering, en wat krijg je? Doe je bbl? Dan lees je in kamer 1 wat voor jou geldt.",
+   "minutes": 26,
+   "product": "escape18-studiefinanciering-mbo",
+   "rooms": [
+    {
+     "id": "bijna18",
+     "title": "Bijna 18",
+     "questions": [
+      "nu",
+      "start",
+      "bbl"
+     ]
+    },
+    {
+     "id": "geld",
+     "title": "Je eerste geld",
+     "questions": [
+      "basis",
+      "extra",
+      "lesgeld"
+     ]
+    },
+    {
+     "id": "gift",
+     "title": "Gift of lening?",
+     "questions": [
+      "diploma",
+      "niveau2",
+      "ruben"
+     ]
+    },
+    {
+     "id": "stoppen",
+     "title": "Stoppen of wisselen",
+     "questions": [
+      "reizen",
+      "eerstejaar",
+      "switch"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../studiefinanciering-mbo/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "je-eerste-stem",
+   "title": "Je eerste stem",
+   "lead": "Hoe werkt stemmen? Leer wie mag stemmen, wat je meeneemt en hoe je het biljet invult.",
+   "minutes": 26,
+   "product": "escape18-je-eerste-stem",
+   "rooms": [
+    {
+     "id": "mag",
+     "title": "Mag ik al stemmen?",
+     "questions": [
+      "lina",
+      "sanne",
+      "thuis"
+     ]
+    },
+    {
+     "id": "pas",
+     "title": "Stempas en ID",
+     "questions": [
+      "idkaart",
+      "kwijt",
+      "waar"
+     ]
+    },
+    {
+     "id": "volmacht",
+     "title": "Iemand anders laten stemmen",
+     "questions": [
+      "ans",
+      "ronselen",
+      "kiezerspas"
+     ]
+    },
+    {
+     "id": "hokje",
+     "title": "In het stemhokje",
+     "questions": [
+      "biljet",
+      "dijk",
+      "stemhulp"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../je-eerste-stem/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "zorgpremie-achterstand",
+   "title": "Zorgpremie niet betaald",
+   "lead": "Vanaf je 18e betaal je zelf zorgpremie. Wat gebeurt er als je die niet betaalt? En hoe kom je eruit?",
+   "minutes": 26,
+   "product": "escape18-zorgpremie-achterstand",
+   "rooms": [
+    {
+     "id": "eerste-premie",
+     "title": "De eerste premie",
+     "questions": [
+      "start",
+      "permaand",
+      "toeslag"
+     ]
+    },
+    {
+     "id": "twee-maanden",
+     "title": "Twee maanden achter",
+     "questions": [
+      "regeling",
+      "huisarts",
+      "tandarts"
+     ]
+    },
+    {
+     "id": "zes-maanden",
+     "title": "Zes maanden achter: het CAK",
+     "questions": [
+      "wie",
+      "inhouding",
+      "schuld"
+     ]
+    },
+    {
+     "id": "eruit",
+     "title": "Eruit komen",
+     "questions": [
+      "stoppen",
+      "stap",
+      "maanden"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../zorgpremie-achterstand/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "lenen-en-rood-staan",
+   "title": "Rood staan en lenen",
+   "lead": "Rood staan of een lening? Reken de kosten uit, vergelijk het JKP en weet wat je kunt doen.",
+   "minutes": 26,
+   "product": "escape18-lenen-en-rood-staan",
+   "rooms": [
+    {
+     "id": "rood",
+     "title": "Rood staan",
+     "questions": [
+      "lenen",
+      "rente",
+      "saldo"
+     ]
+    },
+    {
+     "id": "vergelijken",
+     "title": "Een lening vergelijken",
+     "questions": [
+      "kosten",
+      "goedkoop",
+      "zin"
+     ]
+    },
+    {
+     "id": "check",
+     "title": "Kredietcheck en BKR",
+     "questions": [
+      "waarom",
+      "huis",
+      "eind"
+     ]
+    },
+    {
+     "id": "lukt",
+     "title": "Wat als het niet lukt",
+     "questions": [
+      "eerst",
+      "hersteld",
+      "gratis"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../lenen-en-rood-staan/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "huurder-rechten",
+   "title": "Huren: borg, huurprijs en huurtoeslag",
+   "lead": "Je huurt al. Check je borg, je huurprijs en je servicekosten, en vraag huurtoeslag op tijd aan.",
+   "minutes": 26,
+   "product": "escape18-huurder-rechten",
+   "rooms": [
+    {
+     "id": "borg",
+     "title": "De borg terug",
+     "questions": [
+      "slijtage",
+      "terug",
+      "termijn"
+     ]
+    },
+    {
+     "id": "punten",
+     "title": "Is de huur te hoog?",
+     "questions": [
+      "soort",
+      "teveel",
+      "wie"
+     ]
+    },
+    {
+     "id": "kosten",
+     "title": "Huurverhoging en servicekosten",
+     "questions": [
+      "maximum",
+      "terugservice",
+      "uiterlijk"
+     ]
+    },
+    {
+     "id": "toeslag",
+     "title": "Huurtoeslag in 2027",
+     "questions": [
+      "jesse",
+      "aanvragen",
+      "baan"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../huurder-rechten/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "toeslag-terugbetalen",
+   "title": "Je eerste belastingjaar: toeslag en aangifte",
+   "lead": "Zorgtoeslag is een voorschot. Geef wijzigingen door, reken het verschil uit en herken nepberichten.",
+   "minutes": 26,
+   "product": "escape18-toeslag-terugbetalen",
+   "rooms": [
+    {
+     "id": "voorschot",
+     "title": "Een toeslag is een voorschot",
+     "questions": [
+      "wat",
+      "jaar",
+      "basis"
+     ]
+    },
+    {
+     "id": "verandert",
+     "title": "Inkomen verandert",
+     "questions": [
+      "nieuw",
+      "waar",
+      "wachten"
+     ]
+    },
+    {
+     "id": "definitief",
+     "title": "De definitieve berekening",
+     "questions": [
+      "terug",
+      "bron",
+      "regeling"
+     ]
+    },
+    {
+     "id": "hulp",
+     "title": "Hulp en nepberichten",
+     "questions": [
+      "echt",
+      "post",
+      "hulp"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../toeslag-terugbetalen/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "studieschuld",
+   "title": "DUO: lenen en later terugbetalen",
+   "lead": "Wat kost lenen bij DUO? Lees je overzicht, reken de rente uit en zie hoe terugbetalen werkt.",
+   "minutes": 26,
+   "product": "escape18-studieschuld",
+   "rooms": [
+    {
+     "id": "overzicht",
+     "title": "Wat staat er op je overzicht?",
+     "questions": [
+      "zeker",
+      "rentenu",
+      "waar"
+     ]
+    },
+    {
+     "id": "rente",
+     "title": "Rente: de prijs van lenen",
+     "questions": [
+      "perjaar",
+      "vast",
+      "groeit"
+     ]
+    },
+    {
+     "id": "terugbetalen",
+     "title": "Terugbetalen",
+     "questions": [
+      "aanloop",
+      "maand",
+      "einde"
+     ]
+    },
+    {
+     "id": "later",
+     "title": "Je studieschuld later",
+     "questions": [
+      "huis",
+      "extra",
+      "nep"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../studieschuld/docent.pdf",
+   "status": "live"
+  },
+  {
+   "slug": "werk-rechten",
+   "title": "Je rechten op je werk",
+   "lead": "Ziek, vakantie, oproepwerk en pauze. Ken je rechten op je werk en weet waar je hulp vraagt.",
+   "minutes": 26,
+   "product": "escape18-werk-rechten",
+   "rooms": [
+    {
+     "id": "ziek",
+     "title": "Ziek",
+     "questions": [
+      "ziekmelden",
+      "procent",
+      "vakantiedag"
+     ]
+    },
+    {
+     "id": "vakantie",
+     "title": "Vakantie",
+     "questions": [
+      "uren",
+      "vervallen",
+      "vakgeld"
+     ]
+    },
+    {
+     "id": "oproep",
+     "title": "Oproepkracht",
+     "questions": [
+      "gemiddeld",
+      "geenaanbod",
+      "weigeren"
+     ]
+    },
+    {
+     "id": "hulp",
+     "title": "Pauze en hulp",
+     "questions": [
+      "pauze",
+      "inspectie",
+      "advies"
+     ]
+    }
+   ],
+   "checkMax": 4,
+   "teacherPdf": "../werk-rechten/docent.pdf",
+   "status": "live"
+  }
+ ]
+}

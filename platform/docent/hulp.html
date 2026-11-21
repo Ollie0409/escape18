@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>Hulp en ICT-checklist | Escape 18 voor docenten</title>
+<link rel="stylesheet" href="../core/ui.css">
+<style>
+.hulp{display:flex;flex-direction:column;gap:18px}
+.hulp h2{font-size:clamp(20px,2.6vw,24px)}
+.hulp ol,.hulp ul{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px}
+.hulp .steps{list-style:none;padding:0;counter-reset:s;gap:10px}
+.hulp .steps>li{counter-increment:s;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start}
+.hulp .steps>li::before{content:counter(s);width:34px;height:34px;border-radius:50%;background:var(--teal);color:var(--teal-ink);display:grid;place-items:center;font:800 16px/1 var(--display)}
+.hulp .cols{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.hulp dl{margin:0;display:flex;flex-direction:column;gap:12px}
+.hulp dt{font-weight:700}
+.hulp dd{margin:2px 0 0}
+.hulp code,.hulp .mono{font-family:var(--mono);font-weight:700}
+.hulp .actions{display:flex;flex-wrap:wrap;gap:10px}
+.hulp .toc{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0;list-style:none}
+.hulp .toc a{display:inline-flex;align-items:center;min-height:44px}
+.pagebreak{display:none}
+@media print{
+  @page{size:A4;margin:10mm}
+  body{font-size:9.5pt;line-height:1.3;background:#fff;color:#000}
+  .wrap{max-width:none;padding:0;gap:8px}
+  .hulp{gap:8px}
+  h1{font-size:17pt}
+  .hulp h2{font-size:12pt}
+  .hulp ol,.hulp ul,.hulp dl{gap:3px}
+  .hulp .steps{gap:5px}
+  .table th,.table td{padding:3px 8px;font-size:9pt}
+  .lead{font-size:11pt;color:#000}
+  .card{padding:6px 9px;gap:3px;break-inside:avoid;background:#fff;border-color:#999}
+  .note{padding:6px 10px;background:#fff;border:1px solid #999;border-left:4px solid #000}
+  .hulp .steps>li::before{background:#fff;color:#000;border:2px solid #000}
+  .hulp .cols{grid-template-columns:1fr 1fr}
+  a{color:#000}
+  .hulp a[href^="../"]::after{content:" (" attr(href) ")";font-size:9pt}
+  .toc,.top{display:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Naar de inhoud</a>
+<div class="wrap">
+  <header class="top no-print">
+    <a class="brand" href="../index.html">
+      <span class="mark" aria-hidden="true">18</span>
+      <span><b>Escape 18</b><small>Docent</small></span>
+    </a>
+    <div class="row">
+      <a class="btn ghost" href="index.html">Terug naar het dashboard</a>
+      <button type="button" class="btn ghost" id="btnPrintHelp">Print deze pagina</button>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" class="hulp">
+    <div class="stack">
+      <p class="eyebrow">Snelle handleiding</p>
+      <h1>Een escape-les geven in 5 stappen</h1>
+      <p class="lead">Voor mentoren en LOB-docenten. Je hebt geen hulp van het Escape 18-team nodig. De les duurt 45 minuten; bij drie lessen is er ook een plan van ongeveer 30 minuten.</p>
+    </div>
+
+    <nav class="no-print" aria-label="Op deze pagina">
+      <ul class="toc">
+        <li><a href="#nodig">Wat je nodig hebt</a></li>
+        <li><a href="#start">Zo start je</a></li>
+        <li><a href="#leerlingen">Wat leerlingen zien</a></li>
+        <li><a href="#offline">Haperend internet</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#ict">ICT-checklist</a></li>
+        <li><a href="#faq">Veelgestelde vragen</a></li>
+      </ul>
+    </nav>
+
+    <section class="card" id="nodig" aria-labelledby="h-nodig">
+      <h2 id="h-nodig">1. Wat je nodig hebt</h2>
+      <ul>
+        <li>Een digibord of beamer, om de klassencode en de QR-code te laten zien.</li>
+        <li>Een laptop of Chromebook per tweetal. Een telefoon kan ook, maar alleen als je school telefoons in de klas toestaat.</li>
+        <li>45 minuten; bij drie lessen is er ook een plan van ongeveer 30 minuten. Je kunt de speeltijd instellen tussen 5 en 90 minuten.</li>
+        <li>Het docentenblad van de les die je kiest. Je vindt het bij de les op het dashboard.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="start" aria-labelledby="h-start">
+      <h2 id="h-start">2. Zo start je, in 5 stappen</h2>
+      <p><strong>In deze testversie staat live meekijken nog uit.</strong> Het dashboard opent dan meteen met resultaatcodes: leerlingen spelen de les op hun eigen telefoon of Chromebook en laten aan het eind een code zien, die jij intypt (zie deel 4). De stappen hieronder gelden zodra live meekijken aanstaat.</p>
+      <ol class="steps">
+        <li><div><b>Kies een les.</b> Open het dashboard en klik bij de les die je wilt geven op de knop om te starten. Wil je anonieme resultaten delen voor onderzoek? Vink dat dan zelf aan. Het staat standaard uit.</div></li>
+        <li><div><b>Start de klas.</b> Je krijgt een klassencode van 5 tekens en een QR-code. Die gelden alleen voor deze les.</div></li>
+        <li><div><b>Zet de code op het bord.</b> Klik op <b>Projectorweergave</b>. Code, link en QR-code staan dan groot op het scherm.</div></li>
+        <li><div><b>Leerlingen doen mee.</b> Ze scannen de QR-code of typen de code in. In de wachtruimte zie je de teams verschijnen. Stel hier eventueel de speeltijd bij met <b>-5</b> of <b>+5</b>.</div></li>
+        <li><div><b>Start de les en houd het overzicht.</b> Klik op <b>Start de les</b>. Je ziet de resterende tijd en de voortgang per team.
+          <ul>
+            <li><b>Pauze</b> zet de klok voor alle teams stil. Daarna ga je verder met dezelfde knop.</li>
+            <li><b>+5 min</b> en <b>-5 min</b> passen de tijd aan.</li>
+            <li>Vink <b>Alleen teams die vastzitten</b> aan om te zien welk team 4 minuten geen voortgang heeft. Loop er dan heen.</li>
+            <li>Klik aan het eind op <b>Les afronden</b>. Alle teams zien dan het eindscherm.</li>
+            <li>Download eerst de resultaten met <b>Download CSV</b>, <b>Kopieer tabel</b> of <b>Print</b>.</li>
+          </ul></div></li>
+      </ol>
+    </section>
+
+    <section class="card" id="leerlingen" aria-labelledby="h-leerlingen">
+      <h2 id="h-leerlingen">3. Wat leerlingen zien</h2>
+      <ul>
+        <li>Een tweetal krijgt automatisch een teamnaam met kleur, zoals <b>Team 3 Oranje</b>. Zeg erbij welk team bij wie hoort, dan weet jij wie je moet helpen.</li>
+        <li>Er is geen account en er zijn geen namen. Leerlingen typen alleen de klassencode.</li>
+        <li>Boven in beeld staat de klassenklok. Bij pauze en einde zien ze een duidelijk scherm.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="offline" aria-labelledby="h-offline">
+      <h2 id="h-offline">4. Als het internet hapert of de verbinding geblokkeerd is</h2>
+      <ul>
+        <li><b>Even haperen:</b> de les draait gewoon door op het apparaat. Leerlingen zien een klein bericht dat hun voortgang wordt bewaard en verstuurd zodra de verbinding terug is.</li>
+        <li><b>Geen verbinding met de klassenserver:</b> kies op het dashboard bij de les voor <b>Zonder internet</b>. Leerlingen openen de link die je dan ziet en spelen los. Je ziet dan geen live overzicht.</li>
+        <li><b>Resultaatcodes:</b> aan het eind tonen leerlingen een code van 8 tekens, zoals <span class="mono">ABCD-EFGH</span>. Jij typt die in bij <b>Resultaatcode</b> en klikt op <b>Toevoegen</b>. Je krijgt dezelfde resultatentabel en CSV.</li>
+        <li><b>Alvast voorbereiden:</b> klik thuis op <b>Maak klaar voor offline</b>. Deze computer bewaart dan alle lessen.</li>
+        <li><b>Helemaal geen apparaten:</b> gebruik de papieren versie van de les via het docentenblad. Je vindt de link bij de les en in het offline-scherm.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="privacy" aria-labelledby="h-privacy">
+      <h2 id="h-privacy">5. Privacy in 4 regels</h2>
+      <ol>
+        <li>Er zijn geen namen en geen accounts. Teams heten Team 1, Team 2 en zo verder.</li>
+        <li>Leerlingen typen geen vrije tekst. Er komen dus ook geen persoonlijke verhalen in het systeem.</li>
+        <li>De live gegevens worden 10 minuten na de les gewist, en uiterlijk na 12 uur.</li>
+        <li>Onderzoek gebeurt alleen als jij dat zelf aanvinkt. Dan gaan alleen antwoorden en tijden, zonder namen, naar Escape 18.</li>
+      </ol>
+      <p><a href="../docs/privacy.html">Lees de volledige privacynotitie voor scholen</a></p>
+    </section>
+
+    <section class="card" id="ict" aria-labelledby="h-ict">
+      <h2 id="h-ict">6. Checklist voor de ICT-afdeling</h2>
+      <p>Geef dit blok door aan de systeembeheerder.</p>
+      <table class="table">
+        <caption class="sr">Welke adressen bereikbaar moeten zijn</caption>
+        <thead><tr><th scope="col">Wat</th><th scope="col">Adres</th><th scope="col">Wanneer</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">De website zelf</th><td>Het adres op <span class="mono">github.io</span> waar Escape 18 staat</td><td>Altijd</td></tr>
+          <tr><th scope="row">Live meekijken (relay)</th><td>Het relay-adres op <span class="mono">workers.dev</span> of een eigen domein, via WebSockets op poort 443</td><td>Als live meekijken aanstaat</td></tr>
+        </tbody>
+      </table>
+      <ul>
+        <li>Deelt de docent resultaten met Escape 18, dan moet ook script.google.com bereikbaar zijn. Verder geen andere adressen, geen poorten behalve 443.</li>
+        <li>Er is geen installatie en er zijn geen accounts nodig. Het werkt in de browser van telefoon of Chromebook.</li>
+        <li>Is de relay geblokkeerd? Dan werkt de les nog steeds, zonder live overzicht. Zie onderdeel 4.</li>
+        <li>Er worden geen cookies gebruikt en er is geen analytics. Alleen als de docent delen aanzet, gaan antwoorden naar een Google Sheet van Escape 18.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="faq" aria-labelledby="h-faq">
+      <h2 id="h-faq">7. Veelgestelde vragen</h2>
+      <dl>
+        <div><dt>Wat als een tweetal de pagina sluit?</dt>
+          <dd>Laat ze de link of QR-code opnieuw openen en de klassencode invullen. Bij verversen speelt het tweetal meestal verder. Is het tabblad gesloten, dan kan het tweetal een nieuw teamnummer krijgen en opnieuw beginnen.</dd></div>
+        <div><dt>Kan ik halverwege pauzeren?</dt>
+          <dd>Ja. Klik op <b>Pauze</b>. De klok staat dan stil voor alle teams. Klik daarna op dezelfde knop om verder te gaan.</dd></div>
+        <div><dt>Zie ik namen?</dt>
+          <dd>Nee. Je ziet alleen teamnamen met kleur, zoals Team 3 Oranje, en scores. Jij weet zelf welk tweetal welk team is.</dd></div>
+        <div><dt>Werkt het op Chromebook en iPhone?</dt>
+          <dd>Ja. Het werkt in de gewone browser. Je hoeft niets te installeren.</dd></div>
+        <div><dt>Hoe lang duurt het?</dt>
+          <dd>Reken op 45 minuten; bij drie lessen is er ook een plan van ongeveer 30 minuten. Je stelt de speeltijd zelf in, van 5 tot 90 minuten.</dd></div>
+        <div><dt>Wat als een leerling geen telefoon heeft?</dt>
+          <dd>Laat die leerling in een tweetal meedoen. Heeft niemand een apparaat, gebruik dan de papieren versie via het docentenblad.</dd></div>
+      </dl>
+    </section>
+
+    <div class="actions no-print">
+      <a class="btn" href="index.html">Naar het dashboard</a>
+      <a class="btn ghost" href="../docs/privacy.html">Privacynotitie voor scholen</a>
+    </div>
+  </main>
+</div>
+<script>
+document.getElementById('btnPrintHelp').addEventListener('click',function(){window.print();});
+</script>
+</body>
+</html>

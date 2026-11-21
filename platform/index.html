@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="nl" data-page="landing">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+<title>Escape 18 · Lessen over geld en regelzaken</title>
+<meta name="description" content="Escape-lessen voor 16 tot 18 jaar over geld en regelzaken. Leerlingen spelen in tweetallen, zonder account en zonder namen.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="core/ui.css">
+<link rel="stylesheet" href="speel/app.css">
+</head>
+<body class="landing">
+<a class="skip" href="#main">Naar de inhoud</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./"><span class="mark" aria-hidden="true">18</span><span><b>Escape 18</b><small>Klaar voor later</small></span></a>
+  </header>
+
+  <main id="main" class="stack" tabindex="-1">
+    <div class="hero">
+      <h1>Escape 18 in de klas</h1>
+      <p class="lead">Escape-lessen over geld en regelzaken voor 16 tot 18 jaar. Leerlingen spelen met z'n tweeën op een telefoon of Chromebook.</p>
+    </div>
+
+    <div class="choices">
+      <section class="card choice" aria-labelledby="h-pupil">
+        <h2 id="h-pupil">Ik doe mee</h2>
+        <p>Vul de klascode in die je docent laat zien.</p>
+        <form id="join-form" class="stack" action="speel/" method="get" novalidate>
+          <div class="field">
+            <label for="join-code">Klascode</label>
+            <input id="join-code" class="codeinput" name="klas" type="text" inputmode="text" autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="go" pattern="[A-HJ-NP-Z2-9]{5}" maxlength="9" required aria-describedby="join-hint join-err">
+            <p id="join-hint" class="hint">5 tekens, bijvoorbeeld KX7TB. Spaties mogen.</p>
+            <p id="join-err" class="err" role="alert" hidden></p>
+          </div>
+          <button class="btn big block" type="submit">Meedoen</button>
+        </form>
+        <p class="small muted">Geen account, geen namen.</p>
+      </section>
+
+      <section class="card choice teacher" aria-labelledby="h-teacher">
+        <h2 id="h-teacher">Ik ben docent</h2>
+        <p>Kies een les, start de klas met een code en volg live hoe ver elk team is. Aan het eind krijg je de resultaten als tabel.</p>
+        <a class="btn big block sun" href="docent/">Naar het docentenscherm</a>
+      </section>
+    </div>
+
+    <p class="foot small">
+      <span>Geen account, geen namen, geen cookies.</span>
+      <a href="docs/privacy.html">Privacy voor scholen</a>
+      <a href="speel/?offline=1">Spelen zonder internet</a>
+    </p>
+  </main>
+</div>
+<script src="speel/app.js" defer></script>
+</body>
+</html>

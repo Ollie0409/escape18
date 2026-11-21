@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Escape 18">
+  <rect width="512" height="512" rx="96" fill="#036b66"/>
+  <rect x="150" y="96" width="212" height="320" rx="14" fill="#d9efec"/>
+  <rect x="178" y="124" width="156" height="264" rx="8" fill="#036b66"/>
+  <circle cx="306" cy="256" r="16" fill="#f2b43c"/>
+  <text x="256" y="215" font-family="system-ui,Arial,sans-serif" font-size="72" font-weight="700" fill="#fff" text-anchor="middle">18</text>
+</svg>

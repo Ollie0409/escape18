@@ -1,0 +1,428 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Escape
+18 platform:
+architecture</title><link rel="stylesheet" href="doc.css"></head><body><main><a class="back" href="../index.html">Terug naar Escape 18</a>
+<h1 id="escape-18-platform-architecture-and-hosting-costs">Escape 18
+platform: architecture and hosting costs</h1>
+<p>Status: prototype, nothing deployed. Limits below were checked on the
+official pages on 19 Nov 2026. Free tiers change, so re-check before
+going live.</p>
+<h2 id="1-summary-and-components">1. Summary and components</h2>
+<p>The platform is one static web app (teacher dashboard, pupil shell,
+landing page) that runs the existing Escape 18 lessons unchanged inside
+a same-origin iframe. A small bridge script
+(<code>lessons/config.js</code>) catches the events the lesson engine
+already sends and passes them to the pupil shell with
+<code>postMessage</code>. The shell sends them to a realtime class relay
+(a Cloudflare Worker plus one SQLite-backed Durable Object per class, EU
+jurisdiction, WebSocket Hibernation), which feeds the teacher's live
+view. Research logging to the existing Google Sheet stays optional and
+off by default. A service worker caches the app so pupils can still
+play, and get a result code, when the relay is unreachable. No accounts,
+names, cookies or free text.</p>
+<pre class="mermaid"><code>flowchart LR
+  subgraph Browser_pupil[Pupil device]
+    SW[Service worker + cache]
+    SH[Pupil shell speel/]
+    LI[Lesson iframe, unchanged]
+    BR[Bridge config.js]
+    LI --&gt; BR --&gt;|postMessage events| SH
+    SW -.serves offline.-&gt; SH
+  end
+  subgraph Browser_teacher[Teacher device]
+    TD[Dashboard docent/]
+  end
+  ST[(Static host: GitHub Pages)]
+  RL[Relay: Worker + Durable Object, EU]
+  RS[(Optional research log: Apps Script + Sheet)]
+  ST --&gt;|HTML, JS, lessons| SH
+  ST --&gt; TD
+  SH &lt;--&gt;|WebSocket frames| RL
+  TD &lt;--&gt;|WebSocket + POST /api/class| RL
+  BR -.only if teacher ticks research.-&gt; RS</code></pre>
+<h2 id="2-data-flow-per-lesson">2. Data flow per lesson</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>What travels</th>
+<th>Where</th>
+<th>Stored</th>
+<th>For how long</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Teacher creates class</td>
+<td>lesson slug, minutes</td>
+<td>Teacher to Worker (HTTPS POST)</td>
+<td>class code, teacher key, timer</td>
+<td>Deleted 10 min after "ended", hard stop 12 h</td>
+</tr>
+<tr class="even">
+<td>Pupil joins</td>
+<td>class code, random team id (10 chars)</td>
+<td>Pupil to relay (WebSocket)</td>
+<td>team id, auto label "Team 3 Blauw"</td>
+<td>Same as class</td>
+</tr>
+<tr class="odd">
+<td>Play</td>
+<td>batches of engine events (answers, rooms, hints, check scores,
+feedback 1-5), no text</td>
+<td>Pupil to relay, relay to teacher</td>
+<td>Per-team counters only (TeamState), not the raw frames</td>
+<td>Same as class</td>
+</tr>
+<tr class="even">
+<td>Timer</td>
+<td>timer state</td>
+<td>Teacher to relay to pupils</td>
+<td>In class state</td>
+<td>Same as class</td>
+</tr>
+<tr class="odd">
+<td>End</td>
+<td>result summary</td>
+<td>Teacher dashboard</td>
+<td>In the teacher's browser (CSV, print)</td>
+<td>Teacher decides</td>
+</tr>
+<tr class="even">
+<td>Offline</td>
+<td>result code XXXX-XXXX</td>
+<td>Pupil reads it out, teacher types it in</td>
+<td>Nowhere (derived from play)</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>Research (optional)</td>
+<td>the lesson's usual anonymous events</td>
+<td>Pupil browser to Apps Script</td>
+<td>Google Sheet</td>
+<td>Per existing privacy page (delete by 31 Jan 2027)</td>
+</tr>
+</tbody>
+</table>
+<p>The relay stores no IP address, user agent or frame log. Static files
+on GitHub Pages hold no personal data.</p>
+<h2 id="3-hosting-options-and-free-tier-limits-checked-19-nov-2026">3.
+Hosting options and free-tier limits (checked 19 Nov 2026)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Item</th>
+<th>Limit</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Workers Free: requests</td>
+<td>100,000 per day, reset 00:00 UTC</td>
+<td><a
+href="https://developers.cloudflare.com/workers/platform/limits/">https://developers.cloudflare.com/workers/platform/limits/</a></td>
+</tr>
+<tr class="even">
+<td>Workers Free: CPU</td>
+<td>10 ms per request (waiting on I/O not counted)</td>
+<td>same</td>
+</tr>
+<tr class="odd">
+<td>Workers Paid</td>
+<td>$5 per month minimum; 10 M requests/month included, then $0.30 per
+M; 30 M CPU ms included</td>
+<td><a
+href="https://developers.cloudflare.com/workers/platform/pricing/">https://developers.cloudflare.com/workers/platform/pricing/</a></td>
+</tr>
+<tr class="even">
+<td>Durable Objects Free: plan</td>
+<td>Only SQLite-backed objects on Free</td>
+<td><a
+href="https://developers.cloudflare.com/durable-objects/platform/pricing/">https://developers.cloudflare.com/durable-objects/platform/pricing/</a></td>
+</tr>
+<tr class="odd">
+<td>DO Free: requests</td>
+<td>100,000 per day; each new WebSocket connection counts as 1
+request</td>
+<td>same</td>
+</tr>
+<tr class="even">
+<td>DO Free: WebSocket messages</td>
+<td>Incoming messages billed 20:1 (100 messages = 5 requests); outgoing
+messages and protocol pings free. Still current.</td>
+<td>same</td>
+</tr>
+<tr class="odd">
+<td>DO Free: duration</td>
+<td>13,000 GB-s per day</td>
+<td>same</td>
+</tr>
+<tr class="even">
+<td>DO Free: SQLite rows</td>
+<td>5 M read per day, 100,000 written per day</td>
+<td>same</td>
+</tr>
+<tr class="odd">
+<td>DO Free: storage</td>
+<td>5 GB total</td>
+<td>same</td>
+</tr>
+<tr class="even">
+<td>DO jurisdiction <code>eu</code></td>
+<td>Available via <code>.jurisdiction("eu")</code>; page states no plan
+restriction (whether Free accounts can use it is not stated explicitly:
+unverified in practice, test at deploy)</td>
+<td><a
+href="https://developers.cloudflare.com/durable-objects/reference/data-location/">https://developers.cloudflare.com/durable-objects/reference/data-location/</a></td>
+</tr>
+<tr class="odd">
+<td>Cloudflare Pages Free</td>
+<td>500 builds/month, 20,000 files/site, 25 MiB per file. Bandwidth: not
+stated on the limits page (unverified)</td>
+<td><a
+href="https://developers.cloudflare.com/pages/platform/limits/">https://developers.cloudflare.com/pages/platform/limits/</a></td>
+</tr>
+<tr class="even">
+<td>GitHub Pages</td>
+<td>Site max 1 GB; soft bandwidth 100 GB/month; soft 10 builds/hour. Not
+allowed as free hosting for online businesses or SaaS; fine for a free
+non-commercial school project, but keep it that way. US-based host</td>
+<td><a
+href="https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits">https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits</a></td>
+</tr>
+<tr class="odd">
+<td>Apps Script (gmail.com)</td>
+<td>URL Fetch 20,000/day; 30 simultaneous executions per user; 1,000 per
+script; 6 min per execution; triggers 90 min/day. Web app executions per
+day: not found on the quota page (unverified)</td>
+<td><a
+href="https://developers.google.com/apps-script/guides/services/quotas">https://developers.google.com/apps-script/guides/services/quotas</a></td>
+</tr>
+<tr class="even">
+<td>Alt: Supabase Free (Realtime)</td>
+<td>200 concurrent connections, 100 messages/s, 2 M messages/month, 500
+MB DB; project pauses after 1 week of inactivity; EU regions exist
+(Ireland, Paris, Frankfurt). Pro from $25/month</td>
+<td><a
+href="https://supabase.com/docs/guides/realtime/limits">https://supabase.com/docs/guides/realtime/limits</a>
+, <a
+href="https://supabase.com/pricing">https://supabase.com/pricing</a> ,
+<a
+href="https://supabase.com/docs/guides/platform/regions">https://supabase.com/docs/guides/platform/regions</a></td>
+</tr>
+<tr class="odd">
+<td>Alt: Firebase Spark (RTDB)</td>
+<td>100 simultaneous connections, 1 GB stored, 10 GB/month download.
+europe-west1 availability: unverified (page links to a separate
+locations page I did not reach)</td>
+<td><a
+href="https://firebase.google.com/pricing">https://firebase.google.com/pricing</a></td>
+</tr>
+</tbody>
+</table>
+<p>Choice: Cloudflare Worker + Durable Object for the relay (hibernating
+WebSockets, no pausing, EU jurisdiction). Supabase is the fallback; its
+200-connection cap is ~12 classes at once and the 1-week pause would
+break a school that uses it once a month. Firebase's 100 connections is
+~6 classes.</p>
+<h2 id="4-capacity-estimate">4. Capacity estimate</h2>
+<p>Assumptions: 1 class = 15 pairs (15 pupil devices) + 1 teacher = 16
+sockets. ~40 pupil frames per pair per lesson (batch about every 15 s
+plus room ends). ~1 teacher update per pupil frame. Each socket
+reconnects twice on average (flaky school wifi). Batches of 15 s are
+what the SPEC allows; relay coalesces teacher updates to max 2/s.</p>
+<p><strong>Per class</strong></p>
+<ul>
+<li>Incoming pupil frames: 15 x 40 = 600. Add 15 hello frames, ~15
+timer/state frames from the teacher, ~20 pings: about 650 incoming.</li>
+<li>DO requests: 650 / 20 = 33 (message billing) + 16 connections + 30
+reconnects = about 80.</li>
+<li>Worker requests: 1 create-class POST + 16 upgrades + 30 reconnects =
+about 47, call it 50.</li>
+<li>Outgoing frames (acks 600 + teacher updates 600 + timer broadcasts):
+about 1,300, free.</li>
+<li>SQLite rows written: one upsert per pupil frame = 600, plus class
+and team rows ~50: about 650. Rows read: small (well under 5 M).</li>
+<li>Duration: with hibernation, active time is short bursts. Assume 50
+ms per frame: 650 x 0.05 s x 0.128 GB = about 4 GB-s (estimate). Without
+hibernation, a 45 min lesson holds the object in memory: 2,700 s x 0.128
+GB = about 346 GB-s per class.</li>
+</ul>
+<p><strong>Per school day, 50 classes</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Resource</th>
+<th>Use</th>
+<th>Free limit</th>
+<th>Headroom</th>
+<th>Max classes/day at limit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Worker requests</td>
+<td>2,500</td>
+<td>100,000</td>
+<td>40x</td>
+<td>~2,000</td>
+</tr>
+<tr class="even">
+<td>DO requests</td>
+<td>4,000</td>
+<td>100,000</td>
+<td>25x</td>
+<td>~1,250</td>
+</tr>
+<tr class="odd">
+<td>DO rows written (naive upsert per frame)</td>
+<td>32,500</td>
+<td>100,000</td>
+<td>3x</td>
+<td>~150</td>
+</tr>
+<tr class="even">
+<td>DO duration with hibernation</td>
+<td>~200 GB-s</td>
+<td>13,000</td>
+<td>65x</td>
+<td>~3,000</td>
+</tr>
+<tr class="odd">
+<td>DO duration without hibernation</td>
+<td>~17,300 GB-s</td>
+<td>13,000</td>
+<td>none</td>
+<td>~37</td>
+</tr>
+</tbody>
+</table>
+<p>Findings: the binding limit is rows written, not requests. Fix is
+cheap: keep TeamState in memory and write to SQLite only on room change,
+join, end and every 30 s (about 10 to 15 writes per team, ~200 rows per
+class), giving ~500 classes/day. Hibernation is mandatory, not an
+optimisation. Whether index writes count as extra rows is unverified;
+leave 2x margin.</p>
+<p>Research log (only when ticked): ~30 events per pair per lesson,
+batched about every 15 s, so about 1 POST/s per class and 1 to 2
+concurrent executions per class. The 30-simultaneous limit allows
+roughly 15 research classes at the same moment. Fine for a pilot.</p>
+<p>A pilot (5 schools, 10 classes on a busy day) uses about 1% of the
+free limits.</p>
+<h2 id="5-costs">5. Costs</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Item</th>
+<th>Pilot</th>
+<th>When paid is needed</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GitHub Pages (static)</td>
+<td>EUR 0</td>
+<td>Never at this size</td>
+<td>EUR 0</td>
+</tr>
+<tr class="even">
+<td>Cloudflare Worker + DO (EU)</td>
+<td>EUR 0</td>
+<td>Above ~150 classes/day with naive writes, ~500 after the write fix,
+or if a daily cap is hit (writes then fail)</td>
+<td>Workers Paid $5/month (covers DO too; DO then 1 M requests/month
+included, $0.15 per extra M)</td>
+</tr>
+<tr class="odd">
+<td>Apps Script + Sheet</td>
+<td>EUR 0</td>
+<td>Not expected</td>
+<td>EUR 0</td>
+</tr>
+<tr class="even">
+<td>Domain name (optional)</td>
+<td>EUR 0</td>
+<td>Only if schools block *.workers.dev or github.io; also looks more
+trustworthy</td>
+<td>about EUR 10 to 15 per year</td>
+</tr>
+<tr class="odd">
+<td>Supabase Pro (fallback only)</td>
+<td>EUR 0</td>
+<td>If relay moves there and exceeds 200 connections</td>
+<td>from $25/month</td>
+</tr>
+</tbody>
+</table>
+<p>Nothing needs paying now.</p>
+<h2 id="6-risks-and-mitigations">6. Risks and mitigations</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Risk</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>School firewalls block WebSockets or <code>*.workers.dev</code></td>
+<td>Offline level 2: result codes typed into the dashboard; teacher can
+test the relay before the lesson (join check on dashboard). Idea, not
+built: HTTP long-polling fallback with the same frames. A custom domain
+(EUR 10-15/yr) on the Worker avoids <code>workers.dev</code> blocklists.
+Paper version as level 3</td>
+</tr>
+<tr class="even">
+<td>Vendor lock-in</td>
+<td><code>core/relay-core.js</code> is pure JS with no I/O;
+<code>relay/dev-server.mjs</code> already runs it on Node. Port to
+Supabase or any Node host by swapping the thin adapter</td>
+</tr>
+<tr class="odd">
+<td>Free-tier changes or daily cap hit</td>
+<td>Counters stay small; write-coalescing; one-line move to Workers Paid
+($5/month); re-check limits each term</td>
+</tr>
+<tr class="even">
+<td>Durable Object hits daily cap mid-lesson</td>
+<td>Pupils keep playing (lesson is local); frames queue and resend;
+result codes remain</td>
+</tr>
+<tr class="odd">
+<td>GitHub Pages is US-hosted</td>
+<td>Only static files; no personal data stored or sent there; relay and
+its data are EU jurisdiction. Keep the project non-commercial per GitHub
+terms</td>
+</tr>
+<tr class="even">
+<td>EU jurisdiction not available on a Free account</td>
+<td>Check at deploy with a test namespace; if refused, use Workers Paid
+($5) or note it in the privacy text</td>
+</tr>
+<tr class="odd">
+<td>Abuse of open class creation</td>
+<td>Random 5-char codes, max 60 teams, 12 h expiry, rate limit per IP in
+the Worker (not stored)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-what-olivier-needs-to-do-to-go-live">7. What Olivier needs to
+do to go live</h2>
+<p>All steps need Olivier unless stated.</p>
+<ol type="1">
+<li>Create a Cloudflare account with a project email, enable Workers
+(free). Needs him: account and any payment details (none required on
+Free).</li>
+<li>Approve the relay deployment (<code>wrangler deploy</code>) and
+confirm the <code>eu</code> jurisdiction works on the Free plan.</li>
+<li>Approve publishing the platform bundle to GitHub Pages (his repo)
+and the relay URL in <code>core/config.js</code>.</li>
+<li>Decide on the optional domain (about EUR 10-15/yr): spending, his
+approval.</li>
+<li>Approve the Dutch privacy note
+(<code>docs/PRIVACY-DPIA-lite.md</code>) before any school sees it.</li>
+<li>Run one test class on a real school network before a pilot; he or a
+team member must attend.</li>
+</ol>
+</main></body></html>
