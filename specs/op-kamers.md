@@ -9,7 +9,7 @@ Format as ESC-MAAND (src/escaperun.js): four rooms in date order, 3 questions pe
 Fiction line (shown once at the start):
 "Alles is verzonnen: de mensen, bedrijven, adressen, bedragen, berichten en contracten. De regels zijn echt; bij elke uitleg staat de bron."
 
-Fictional on purpose: the city Zeestad (as in ESC-MAAND), KamerVinder Zeestad, verhuurder "Mark", Woonhuis Zeestad BV, Lindelaan 8, Havenstraat 12, the friends Daan, Sem and Noor, the bank account (ES00 0000 ...). Every rent amount is invented.
+Fictional on purpose: the city Zeestad (as in ESC-MAAND), Zeestad Kamers, verhuurder "Mark", Woonhuis Zeestad BV, Lindelaan 8, Havenstraat 12, the friends Daan, Sem and Noor, the bank account (ES00 0000 ...). Every rent amount is invented.
 
 Story time: summer 2027, the summer before the pupil starts studying in Zeestad (havo 5 / vwo 6 pupils of 2026/27 start in September 2027, as in ESC-MAAND room 4). The pupil is 18 in the story ("Je bent inmiddels 18 jaar.", room 1 intro), so signing a lease alone fits the story.
 
@@ -26,10 +26,10 @@ Code: **2824** (teacher screen: show it only inside the closed Antwoordblad, not
 
 ## Kamer 1. De advertentie (maandag 14 juni 2027)
 
-**Intro:** "Je bent inmiddels 18 jaar. Je zoekt een kamer in Zeestad voor september. Op KamerVinder Zeestad zie je een leuke kamer. Je stuurt de verhuurder een bericht."
+**Intro:** "Je bent inmiddels 18 jaar. Je zoekt een kamer in Zeestad voor september. Op Zeestad Kamers zie je een leuke kamer. Je stuurt de verhuurder een bericht."
 
 ### Document 1a: advertentie (type: list, id: advert)
-Title: "KamerVinder Zeestad: Kamer Havenstraat 12"
+Title: "Zeestad Kamers: Kamer Havenstraat 12"
 - a1 "Kamer van 14 m² in Zeestad-Centrum"
 - a2 "Huur: € 495 per maand, inclusief servicekosten"
 - a3 "Vrij vanaf 1 september 2027"
