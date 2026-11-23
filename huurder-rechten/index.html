@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-vQJhNPFLNe1LUdp41gIyWWibJ+D+m/3AEP6RzkLazq4='; style-src 'sha256-heJ3jgY70JjFwsOYhOjM5LJBC1iGcw3A0U5bhduacTc=' 'sha256-4QXJUHvyS6EE4fSgPxyDgb/MwanDLlKqrgBLauerPdc='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-B3bP3q5Y9QVAZ45DUhMmrBVhxh/W79yNdA9bgQR8bj4='; style-src 'sha256-heJ3jgY70JjFwsOYhOjM5LJBC1iGcw3A0U5bhduacTc=' 'sha256-4QXJUHvyS6EE4fSgPxyDgb/MwanDLlKqrgBLauerPdc='; font-src data:; img-src data:; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Je huurt al. Check je borg, je huurprijs en je servicekosten, en vraag huurtoeslag op tijd aan.">
 <meta name="e18-title" content="Huren: borg, huurprijs en huurtoeslag">
@@ -826,7 +826,7 @@ window.E18_LESSON={"slug":"huurder-rechten","title":"Huren: borg, huurprijs en h
       studiekeuze: 'Een studie of opleiding kiezen', studiefinanciering: 'Studiefinanciering en DUO', wonen: 'Op kamers: huren en huurtoeslag', werk: 'Je eerste baan en je loonstrook' },
     // teacher kit: Klaar in 15 minuten, Probleem?, Projectiemodus, Lesverslag, timer at 00:00
     tOver: 'Tijd is om: stop de escape.',
-    qsH: 'Klaar in 15 minuten', qsLead: 'Vijf stappen om de les voor te bereiden. De bereidingstijd loopt mee, zodat je hem in het lesverslag kunt zetten.',
+    qsH: 'Klaar in 15 minuten', qsLead: 'Vijf stappen om de les voor te bereiden. De bereidingstijd loopt mee. Je ziet hem terug in het lesverslag op dit scherm.',
     qsLocal: 'De bereidingstijd blijft alleen op dit scherm. Er wordt niets bewaard of verstuurd.', qsTimeK: 'Bereidingstijd', qsStart: 'Start', qsPause: 'Pauze', qsGo: 'Verder', qsReset: 'Opnieuw',
     qsStep: n => `Stap ${n}`, qsStatus: (a, b) => `${a} van ${b} stappen klaar.`, qsFin: m => `Klaar. Voorbereiding: ${m} ${m === 1 ? 'minuut' : 'minuten'}.`, qsOpenPupil: 'Open het leerlingscherm', qsToProj: 'Naar de Projectiemodus',
     qsSteps: [['plan', 'Lees het lesplan en de kern per kamer', 'Het lesplan staat hieronder. Bij Nabespreken per kamer staat per kamer de kern. Daarmee leid je het gesprek na de stop.'],
@@ -1396,7 +1396,7 @@ window.E18_LESSON={"slug":"huurder-rechten","title":"Huren: borg, huurprijs en h
   }
   const withUnit = (n, Q) => Q.unit === '€' ? '€ ' + fmtNum(n) : fmtNum(n) + (Q.unit ? ' ' + Q.unit : '');
   function parseNum(raw) {
-    let s = String(raw || '').replace(/€|euro|\s/gi, '');
+    let s = String(raw || '').replace(/€|euro|\s/gi, '').replace(/[,.]-+$/, ''); // "€ 820,-" is 820 (examiner 19 Nov 2026)
     if (!s) return null;
     if (lang === 'en' && /^-?\d{1,3}(,\d{3})+(\.\d+)?$/.test(s)) s = s.replace(/,/g, ''); // English: 1,410 is one thousand four hundred ten
     else if (s.includes(',') && s.includes('.')) s = s.replace(/\./g, '').replace(',', '.');

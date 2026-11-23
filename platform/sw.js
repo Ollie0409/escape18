@@ -1,5 +1,5 @@
 /* Escape 18 platform service worker. All paths are relative to the SW location (bundle root). */
-const BUILD = '74dca82eed58'; // stamped by tools/precache.mjs so a new build changes this file
+const BUILD = '648da854bcad'; // stamped by tools/precache.mjs so a new build changes this file
 const LESSON_BASE = '../'; // stamped by tools/precache.mjs: lesson folder relative to the platform root ('../' on the live site)
 const ROOT = new URL('./', self.location).href;
 const LESSONS = new URL(LESSON_BASE, ROOT).href;
